@@ -177,19 +177,23 @@ function handleTabClick(event, iframeId, loadingSrc, triggerSrc) {
         clickCount = 1;  // Reset the count if a different tab is clicked
     }
 
+
     if (clickCount === 2) {
+
         // Reload the iframe only on the second consecutive click
         iframe.src = loadingSrc;  // Load the loading.html first
         setTimeout(() => {
             iframe.src = triggerSrc;  // Load the actual content after 0.5 seconds
         }, 500);  // 500ms delay
         clickCount = 0;  // Reset the click count after the reload
+        activeIframeId = iframeId; // Set the active iframe ID
+
     } else if (activeIframeId && lastClickedTab === event.currentTarget) {
+
         iframe.src = iframe.src;  // Reload the iframe if the same tab is clicked again
         activeIframeId = iframeId; // Set the active iframe ID
-    } else {
-        // Load the target page if there's no active iframe or the iframe is reloading
-        loadWithDelay(event, iframeId, loadingSrc, triggerSrc);
+
+
     }
 
     // Update the last clicked tab
