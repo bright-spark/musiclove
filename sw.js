@@ -18,11 +18,11 @@ function isRejectable(url) {
 
 self.addEventListener('install', function(event) {
   event.waitUntil(preLoad());
-  console.log('[fm.theradio.serviceworker] Service Worker Initialized');
+  console.log('[com.thorium.serviceworker] Service Worker Initialized');
 });
 
 var preLoad = function(){
-  console.log('[fm.theradio.serviceworker] Service Worker Installation');
+  console.log('[com.thorium.serviceworker] Service Worker Installation');
   return caches.open(generalCacheName)
   .then(function(cache) {
     return cache.addAll(preloadList);
@@ -30,19 +30,19 @@ var preLoad = function(){
 }
 
 self.addEventListener('activate', function(event) {
-  console.log('[fm.theradio.serviceworker] service worker activated');
+  console.log('[com.thorium.serviceworker] service worker activated');
 });
 
 self.addEventListener('fetch', function(event) {
   if (isRejectable(event.request.url)) {
-    console.log('[fm.theradio.serviceworker] request rejected ' + event.request.url);
+    console.log('[com.thorium.serviceworker] request rejected ' + event.request.url);
     return;
   }
   
   event.respondWith(
     checkResponse(event.request)
     .catch(function() {
-      console.log('[fm.theradio.serviceworker] file returned from cache: ' + event.request.url);
+      console.log('[com.thorium.serviceworker] file returned from cache: ' + event.request.url);
       return returnFromCache(event.request);
     })
   );
@@ -56,10 +56,10 @@ var checkResponse = function(request){
     fetch(request)
     .then(function(response){
       if(response.status !== 404) {
-        console.log('[fm.theradio.serviceworker] Response Status ' + response.status + ": " + request.url);
+        console.log('[com.thorium.serviceworker] Response Status ' + response.status + ": " + request.url);
         fulfill(response);
       } else {
-        console.log("[fm.theradio.serviceworker] reject response for url " + request.url);
+        console.log("[com.thorium.serviceworker] reject response for url " + request.url);
         reject();
       }
     }, reject);
@@ -72,13 +72,13 @@ var addToCache = function(request, cacheName) {
       return fetch(request)
         .then(function(response) {
           if (response.ok) {
-            console.log('[fm.theradio.serviceworker] file added to cache ' + request.url);
+            console.log('[com.thorium.serviceworker] file added to cache ' + request.url);
             return cache.put(request, response);
           }
         });
     });
   } catch(err) {
-    console.log('[fm.theradio.serviceworker] error ' + err.message);
+    console.log('[com.thorium.serviceworker] error ' + err.message);
   }  
 };
 
@@ -88,10 +88,10 @@ var returnFromCache = function(request) {
       return cache.match(request)
         .then(function(matching) {
           if (!matching || matching.status === 404) {
-            console.log("[fm.theradio.serviceworker] offline page");
+            console.log("[com.thorium.serviceworker] offline page");
             return cache.match('offline.html');
           } else {
-            console.log("[fm.theradio.serviceworker] cache returned " + request.url);
+            console.log("[com.thorium.serviceworker] cache returned " + request.url);
             return matching;
           }
         });

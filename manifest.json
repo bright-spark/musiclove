@@ -1,12 +1,12 @@
 {
-  "short_name": "theradio.fm",
-  "name": "theradio.fm family edition",
+  "short_name": "theradio.plus",
+  "name": "theradio.plus family edition",
   "start_url": "./?utm_source=web_app_manifest",
   "display": "standalone",
   "orientation": "portrait",
   "theme_color": "#000000",
   "background_color": "#000000",
-  "description": "Welcome to theradio.fm, your one-stop-shop for endless entertainment and socializing! Our free mobile app and website are designed to provide a hassle-free, anonymous experience for users of all ages. With no login required, you can jump right in and start enjoying our curated playlists, live radio, and interactive chat features. Stay up-to-date with the latest tweets and social activity from your favorite artists and radio hosts, or challenge your friends to one of our many games available on the app. We even offer a handy app directory, so you can easily discover new apps and features without having to navigate through a sea of ads and interruptions. At theradio.fm, we're committed to providing a fun and engaging experience without compromising your privacy or inundating you with ads. So, what are you waiting for? Download the app and start exploring all the exciting features that await you!",
+  "description": "Welcome to theradio.plus, your one-stop-shop for endless entertainment and socializing! Our free mobile app and website are designed to provide a hassle-free, anonymous experience for users of all ages. With no login required, you can jump right in and start enjoying our curated playlists, live radio, and interactive chat features. Stay up-to-date with the latest tweets and social activity from your favorite artists and radio hosts, or challenge your friends to one of our many games available on the app. We even offer a handy app directory, so you can easily discover new apps and features without having to navigate through a sea of ads and interruptions. At theradio.plus, we're committed to providing a fun and engaging experience without compromising your privacy or inundating you with ads. So, what are you waiting for? Download the app and start exploring all the exciting features that await you!",
   "dir": "ltr",
   "lang": "en",
   "icons": [
@@ -23,7 +23,7 @@
         "purpose": "maskable"
     }
   ],
-  "scope": "\"scope\": \"https://theradio.fm\"",
+  "scope": "\"scope\": \"https://theradio.plus\"",
   "display_override": ["window-controls-overlay"],
   "categories": [
     "entertainment",
@@ -32,7 +32,7 @@
     "music",
     "social"
   ],
-  "id": "theradio.fm",
+  "id": "theradio.plus",
   "iarc_rating_id": "ed0c886e-c701-4d6c-b028-181314668e8d",
   "prefer_related_applications": false,
   "related_applications": [
@@ -60,12 +60,12 @@
   "shortcuts": [
     {
       "name": "about",
-      "url": "https://theradio.fm/pages/cover/index.html",
-      "description": "About theradio.fm"
+      "url": "https://theradio.plus/pages/cover/index.html",
+      "description": "About theradio.plus"
     },
     {
       "name": "privacy",
-      "url": "https://theradio.fm/pages/privacy/index.html",
+      "url": "https://theradio.plus/pages/privacy/index.html",
       "description": "Privacy Policy"
     }
   ],

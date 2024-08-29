@@ -1,8 +1,8 @@
 /*!
- * theradiofm Initialization for framework7 projects
+ * Thorium Initialization for framework7 projects
  * Version 3.2.0 november, 2021
  * framework7 v6.x (https://framework7.io) MIT Licensed
- * Copyright 2018-2021 theradiofm builder, All Rights Reserved.
+ * Copyright 2018-2021 Thorium builder, All Rights Reserved.
 */
 const kDebugMessagesLevel= 1;
 const kHybridAppsLog = true;
@@ -10,7 +10,7 @@ const kAutoUpdate=false;
 const kShowPreloader=true;
 const kLocalRoot = "http://localhost:8080/theradio/";
 const kMediaRoot = './db/dbassets/';
-const kRemoteHost="https://theradio.fm/";
+const kRemoteHost="https://theradio.plus/";
 const kTimeOut =6000;
 const kCrossDomain =true;
 const kAuthMode =0;
@@ -63,22 +63,22 @@ const kEmailSent="A Message has been sent to your email address";
 
 /*-- dbExpress API --*/
 const kApiRoot="db/webservices/";
-const kAuthManagerApi="theradiofm.auth.signin.php";
-const kGetDataApi="theradiofm.data.get.php";
-const kSetDataApi="theradiofm.data.set.php";
-const kRegisterApi ="theradiofm.auth.register.php";
-const kSetProfileApi ="theradiofm.auth.set.php";
-const kGetProfileApi ="theradiofm.auth.get.php";
-const kSetShoppingCartQtyApi ="theradiofm.cart.qty.php";
-const kGetShoppingCartApi ="theradiofm.cart.get.php";
-const kSetShoppingCartApi ="theradiofm.cart.set.php";
-const kSetOrderApi ="theradiofm.order.set.php";
-const kSignOutApi ="theradiofm.auth.signout.php";
-const kDeleteDataApi ="theradiofm.data.delete.php";
-const kClearShoppingCartApi ="theradiofm.cart.clear.php";
-const kgetChatMessages="theradiofm.chat.get.php";
-const ksetChatMessages="theradiofm.chat.set.php"; 
-const kresetPassword="theradiofm.auth.resetpassword.php";
+const kAuthManagerApi="thorium.auth.signin.php";
+const kGetDataApi="thorium.data.get.php";
+const kSetDataApi="thorium.data.set.php";
+const kRegisterApi ="thorium.auth.register.php";
+const kSetProfileApi ="thorium.auth.set.php";
+const kGetProfileApi ="thorium.auth.get.php";
+const kSetShoppingCartQtyApi ="thorium.cart.qty.php";
+const kGetShoppingCartApi ="thorium.cart.get.php";
+const kSetShoppingCartApi ="thorium.cart.set.php";
+const kSetOrderApi ="thorium.order.set.php";
+const kSignOutApi ="thorium.auth.signout.php";
+const kDeleteDataApi ="thorium.data.delete.php";
+const kClearShoppingCartApi ="thorium.cart.clear.php";
+const kgetChatMessages="thorium.chat.get.php";
+const ksetChatMessages="thorium.chat.set.php"; 
+const kresetPassword="thorium.auth.resetpassword.php";
 
 const kTextEditorButtons=[
     ['bold', 'italic', 'underline', 'strikeThrough'],
