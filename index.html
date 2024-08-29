@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="google" content="notranslate" />
     <meta name="author" content="Martin Myburgh" />
-    <meta name="copyright" content="Apache License 2.0" />
+    <meta name="copyright" content="The MIT License (MIT)" />
     <meta name="keywords"
         content="Audio, Music, Video, Playlist, Streaming, Online, Best, Popular, Deezer, Spotify, YouTubeMusic, YouTube, Playlist, Free, PWA, Apple, Android, iOS, Windows, Podcast, Vibescout, Event, Social" />
     <meta name="subject" content="Music Love Quest" />
@@ -54,6 +54,7 @@
     <link rel="manifest" href="manifest.json" />
     <link href="splashscreens/iphone5_splash.png" rel="apple-touch-startup-image" />
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/framework7-icons.css" />
     <link rel="stylesheet" href="css/framework7-bundle.min.css" />
     <link rel="stylesheet" href="css/thorium.min.css" />
     <link rel="stylesheet" href="css/pages/index.css?r=20230701" />
@@ -62,22 +63,15 @@
 </head>
 
 <body class="theme-dark color-theme-red">
-    <noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MX8F37WQ" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
-    <div id="app" class="framework7-root app">
-              
-        <div id="view-main" class="view view-main view-init safe-areas" data-url="/">
 
-        <div id="page" class="page" data-name="index">
-                                  
-        <div class="panel-backdrop"></div>
-        
+    <div class="hidden-focus-element" tabindex="0"></div>
+
+    <div id="app" class="framework7-root app">
         <div id="view-main" class="view view-main view-init safe-areas" data-url="/">
-            
+        <div id="page" class="page" data-name="index">
+        <div class="panel-backdrop"></div>     
+        <div id="view-main" class="view view-main view-init safe-areas" data-url="/">
             <div id="page" class="page" data-name="index">
-                
-                <!--<div id="navbar-o-1004" class="navbar"></div>-->
                 <div class="status--bar"></div>
                 <div class="indicator--bar"></div>
                 <div id="toolbar-o-1010" class="toolbar toolbar-bottom tabbar tabbar-labels">
@@ -85,41 +79,24 @@
                         <a id="o-1012" href="#tab-1" class="tab-link">
                                     <i id="o-1013" class="icon f7-icons ios-only">play</i>
                                     <i id="o-1014" class="icon icon-fill f7-icons ios-only">play</i>
-                                    <i id="o-1015" class="icon f7-icons md-only">play</i>
-                                    
+                                    <i id="o-1015" class="icon f7-icons md-only">play</i>                                 
                                 </a>
                                 <a id="o-1017" href="#tab-2" class="tab-link">
                                     <i id="o-1018" class="icon f7-icons ios-only">play_rectangle</i>
                                     <i id="o-1019" class="icon icon-fill f7-icons ios-only">play_rectangle</i>
-                                    <i id="o-1020" class="icon f7-icons md-only">play_rectangle</i>
-                                    
+                                    <i id="o-1020" class="icon f7-icons md-only">play_rectangle</i>                                
                                 </a>
                                 <a id="o-1022" href="#tab-3" class="tab-link">
                                     <i id="o-1023" class="icon f7-icons ios-only">rectangle_stack_person_crop</i>
                                     <i id="o-1024" class="icon icon-fill f7-icons ios-only">rectangle_stack_person_crop</i>
-                                    <i id="o-1025" class="icon f7-icons md-only">rectangle_stack_person_crop</i>
-                                    
+                                    <i id="o-1025" class="icon f7-icons md-only">rectangle_stack_person_crop</i>                                 
                                 </a>
                                 <a id="o-1027" href="#tab-4" class="tab-link">
                                     <i id="o-1028" class="icon f7-icons ios-only">rocket</i>
                                     <i id="o-1029"
                                         class="icon icon-fill f7-icons ios-only">rocket</i>
-                                    <i id="o-1030" class="icon f7-icons md-only">rocket</i>
-                                    
+                                    <i id="o-1030" class="icon f7-icons md-only">rocket</i>                                
                                 </a>
-                                <!--<a id="o-1032" href="#tab-5" class="tab-link">
-                                    <i id="o-1033" class="icon f7-icons ios-only">mic</i>
-                                    <i id="o-1034" class="icon icon-fill f7-icons ios-only">mic</i>
-                                    <i id="o-1035" class="icon f7-icons md-only">mic</i>
-                                    
-                                </a>
-                                <a id="o-1037" href="#tab-6" class="tab-link">
-                                    <i id="o-1038" class="icon f7-icons ios-only">square_fill_line_vertical_square</i>
-                                    <i id="o-1039"
-                                        class="icon icon-fill f7-icons ios-only">square_fill_line_vertical_square</i>
-                                    <i id="o-1040" class="icon f7-icons md-only">square_fill_line_vertical_square</i>
-                                    
-                                </a>-->
                     </div>
                 </div>
                 
@@ -149,16 +126,6 @@
                             <iframe title="tab-4" id="iframe-1044" src="pages/gamesnacks.html" loading="lazy" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
-                    <div id="tab-5" class="page-content tab">
-                        <div id="div-1045" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
-                            <iframe title="tab-5" id="iframe-1045" src="pages/loading.html" loading="lazy" class="embed-responsive-item"></iframe>
-                        </div>
-                    </div>
-                    <div id="tab-6" class="page-content tab">
-                        <div id="div-1046" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
-                            <iframe title="tab-6" id="iframe-1046" src="pages/loading.html" loading="lazy" class="embed-responsive-item"></iframe>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -166,47 +133,40 @@
 
 
     <script type="text/javascript" src="js/service-worker-register.js"></script>
+    <script src="js/framework/framework7.min.js"></script>
     <script src="js/framework/framework7-bundle.min.js"></script>
     <script src="js/thorium.config.js"></script>
     <script src="js/plugins/thorium.core.min.js"></script>
-    <script>
-        thoriumCorePlugin.appLoaded();
+    <script src="js/plugins/thorium.core.plugin.min.js"></script>
+    <script src="js/plugins/thorium.core.plugin.app.min.js"></script>
+    <script src="js/plugins/thorium.core.plugin.app.loaded.min.js"></script>
 
-    // Track the active iframe ID
-    let activeIframeId = null;
+<script>
+     
+thoriumCorePlugin.appLoaded();
 
-    // Function to load loading.html and then the target page after a 0.5-second delay
-    function loadWithDelay(event, iframeId, loadingSrc, targetSrc) {
-        const iframe = document.getElementById(iframeId);
-        if (iframe.src.includes(loadingSrc)) {
-            iframe.src = loadingSrc;
-            setTimeout(() => {
-                iframe.src = targetSrc;  // Load the actual content after 0.5 seconds
-            }, 500); 
-            activeIframeId = iframeId; // Set the active iframe ID
-        } else if (lastClickedTab === event.currentTarget) {
-            iframe.src = iframe.src,  // Load the actual content after 0.5 seconds
-            activeIframeId = iframeId; // Set the active iframe ID
-        }
-        lastClickedTab = event.currentTarget;
+// Track the active iframe ID
+let activeIframeId = null;
+
+// Function to load loading.html and then the target page after a 0.5-second delay
+function loadWithDelay(event, iframeId, loadingSrc, targetSrc) {
+    const iframe = document.getElementById(iframeId);
+    if (iframe.src.includes(loadingSrc)) {
+        return;  // Do nothing if the iframe is already loading
     }
+    iframe.src = loadingSrc;
 
-    window.addEventListener('popstate', function(event) {
-        event.preventDefault(); // Cancel the default browser action for popstate
+    setTimeout(() => {
+        iframe.src = targetSrc;  // Load the actual content after 0.5 seconds
+    }, 500);
 
-        // Check if there's an active iframe and ensure it's not reloading
-        if (activeIframeId) {
-            const iframe = document.getElementById(activeIframeId);
-            if (iframe && !iframe.src.includes('loading.html')) {
-                // Prevent reloading the iframe by not resetting the src attribute
-                // You may include any other logic if necessary
-                return;
-            }
-        }
-    });
+    activeIframeId = iframeId; // Set the active iframe ID
+}
 
-    let lastClickedTab = null;
-let clickCount = 0;
+window.addEventListener('popstate', function(event) {
+    event.preventDefault(); // Cancel the default browser action for popstate
+    window.history.pushState(null, null, window.location.href); // Keep the URL unchanged
+});
 
 function handleTabClick(event, iframeId, loadingSrc, triggerSrc) {
     const iframe = document.getElementById(iframeId);
@@ -222,42 +182,45 @@ function handleTabClick(event, iframeId, loadingSrc, triggerSrc) {
         iframe.src = loadingSrc;  // Load the loading.html first
         setTimeout(() => {
             iframe.src = triggerSrc;  // Load the actual content after 0.5 seconds
-        }, 1);  // 500ms delay
+        }, 500);  // 500ms delay
         clickCount = 0;  // Reset the click count after the reload
+    } else if (activeIframeId && lastClickedTab === event.currentTarget) {
+        iframe.src = iframe.src;  // Reload the iframe if the same tab is clicked again
+        activeIframeId = iframeId; // Set the active iframe ID
+    } else {
+        // Load the target page if there's no active iframe or the iframe is reloading
+        loadWithDelay(event, iframeId, loadingSrc, triggerSrc);
     }
 
     // Update the last clicked tab
     lastClickedTab = event.currentTarget;
 }
 
+let lastClickedTab = null;
+let clickCount = 0;
 
+const tabLinks = [
+    { id: 'o-1012', iframeId: 'iframe-1041', loadingSrc: 'pages/loading.html', triggerSrc: 'pages/radios.html' },
+    { id: 'o-1017', iframeId: 'iframe-1042', loadingSrc: 'pages/loading.html', triggerSrc: 'pages/yt.html' },
+    { id: 'o-1022', iframeId: 'iframe-1043', loadingSrc: 'pages/loading.html', triggerSrc: 'pages/fluid.html' },
+    { id: 'o-1027', iframeId: 'iframe-1044', loadingSrc: 'pages/loading.html', triggerSrc: 'pages/gamesnacks.html' },
+];
 
-
-    const tabLinks = [
-                //{ id: 'o-1012', iframeId: 'iframe-1040', loadingSrc: 'pages/loading.html', triggerSrc: 'pages/cover/index.html' },
-                { id: 'o-1012', iframeId: 'iframe-1041', loadingSrc: 'pages/loading.html', triggerSrc: 'pages/radios.html' },
-                { id: 'o-1017', iframeId: 'iframe-1042', loadingSrc: 'pages/loading.html', triggerSrc: 'pages/yt.html' },
-                { id: 'o-1022', iframeId: 'iframe-1043', loadingSrc: 'pages/loading.html', triggerSrc: 'pages/fluid.html' },
-                { id: 'o-1027', iframeId: 'iframe-1044', loadingSrc: 'pages/loading.html', triggerSrc: 'pages/gamesnacks.html' },
-                { id: 'o-1032', iframeId: 'iframe-1045', loadingSrc: 'pages/loading.html', triggerSrc: 'pages/gamesnacks.html' },
-                { id: 'o-1037', iframeId: 'iframe-1046', loadingSrc: 'pages/loading.html', triggerSrc: 'pages/gamesnacks.html' },
-    ];
-
-    tabLinks.forEach(tab => {
-        document.getElementById(tab.id).addEventListener('click', event => {
-            loadWithDelay(event, tab.iframeId, tab.loadingSrc, tab.triggerSrc);
-        });
+tabLinks.forEach(tab => {
+    document.getElementById(tab.id).addEventListener('click', event => {
+        handleTabClick(event, tab.iframeId, tab.loadingSrc, tab.triggerSrc);
     });
+});
 
-    document.querySelectorAll('.hidden-focus-element').forEach(element => {
-        element.setAttribute('tabindex', '-1');
-    });
+document.querySelectorAll('.hidden-focus-element').forEach(element => {
+    element.setAttribute('tabindex', '-1');
+});
 
-    document.querySelectorAll('.tab-link').forEach(element => {
-        element.setAttribute('tabindex', '0');
-    });
-       
-    </script>
+document.querySelectorAll('.tab-link').forEach(element => {
+    element.setAttribute('tabindex', '0');
+});
+   
+</script>
+
 </body>
-
 </html>

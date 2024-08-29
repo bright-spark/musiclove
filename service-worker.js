@@ -2,6 +2,9 @@
  * Generic Service Worker for Thorium projects
  * Version 3.4 january, 2022
  * Copyright 2018-2022 Nymphide Lab.
+ * https://www.nymphidelab.com
+ * MIT License
+ * See the file LICENSE for details.
 */
 
 const origin=self.location.origin;
