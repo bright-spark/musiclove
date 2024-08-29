@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Loader</title>
+    <style>
+        /* Make the iframe take up the full page */
+        html, body {
+            margin: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- iFrame to load the selected URL -->
+    <iframe id="gameFrame"></iframe>
+
+    <script>
+        // Function to select and load a random URL
+        function loadRandomUrl() {
+            // Step 1: Define the URL Array
+            const urls = [
+                'https://gameprohub.com/games/BallFall/',
+                'https://gameprohub.com/games/BalloonsCreator/',
+                'https://gameprohub.com/games/BoxSize/',
+                'https://gameprohub.com/games/BridgeDown/',
+                'https://gameprohub.com/games/CircleCollector/',
+                'https://gameprohub.com/games/CirclePlatform/',
+                'https://gameprohub.com/games/ColoredWater/',
+                'https://gameprohub.com/games/ColorPlates/',
+                'https://gameprohub.com/games/DotShot/',
+                'https://gameprohub.com/games/FallingBabble/',
+                'https://gameprohub.com/games/FIGURES/',
+                'https://gameprohub.com/games/FilledGlass/',
+                'https://gameprohub.com/games/FilledGlass2/',
+                'https://gameprohub.com/games/FlatJumper2/',
+                'https://gameprohub.com/games/GemsShot/',
+                'https://gameprohub.com/games/GolfPin/',
+                'https://gameprohub.com/games/GreenPrickle/',
+                'https://gameprohub.com/games/HappyFilledGlass/',
+                'https://gameprohub.com/games/JumpingBall/',
+                'https://gameprohub.com/games/KickColor/',
+                'https://gameprohub.com/games/MazeControl/',
+                'https://gameprohub.com/games/MonsterDestroyer/',
+                'https://gameprohub.com/games/MoveThePin/',
+                'https://gameprohub.com/games/OneDot/',
+                'https://gameprohub.com/games/PhysicsBox/',
+                'https://gameprohub.com/games/PlatformDestroyer/',
+                'https://gameprohub.com/games/PongBall/',
+                'https://gameprohub.com/games/RedRope/',
+                'https://gameprohub.com/games/RetroSquare/',
+                'https://gameprohub.com/games/RotatingCube/',
+                'https://gameprohub.com/games/RouteDigger/',
+                'https://gameprohub.com/games/RouteDigger2/',
+                'https://gameprohub.com/games/SideDefence/',
+                'https://gameprohub.com/games/SlideBall/',
+                'https://gameprohub.com/games/SlipBlocks/',
+                'https://gameprohub.com/games/SmallArcher/',
+                'https://gameprohub.com/games/SplashColor/',
+                'https://gameprohub.com/games/TargetsAttack/',
+                'https://gameprohub.com/games/ThreeArcade/',
+                'https://gameprohub.com/games/TimeTouch/',
+                'https://gameprohub.com/games/WayDawn/',
+                'https://gameprohub.com/games/WhiteDot/',
+                'https://gameprohub.com/games/YellowDot/'
+            ];
+
+            // Step 2: Retrieve selected URLs from localStorage
+            let selectedUrls = JSON.parse(localStorage.getItem('selectedUrls')) || [];
+
+            // Step 3: Filter URLs to remove already selected ones
+            const availableUrls = urls.filter(url => !selectedUrls.includes(url));
+
+            let selectedUrl = "";
+
+            if (availableUrls.length > 0) {
+                // Step 4: Randomly select a URL from the remaining ones
+                const randomIndex = Math.floor(Math.random() * availableUrls.length);
+                selectedUrl = availableUrls[randomIndex];
+
+                // Step 5: Update localStorage with the new selected URL
+                selectedUrls.push(selectedUrl);
+                localStorage.setItem('selectedUrls', JSON.stringify(selectedUrls));
+
+                console.log(`Selected URL: ${selectedUrl}`);
+            } else {
+                // Step 6: Handle reset logic if all URLs have been selected
+                console.log("All URLs have been selected. Resetting selection process.");
+                localStorage.removeItem('selectedUrls');
+                selectedUrls = []; // Resetting selectedUrls for the next cycle
+            }
+
+            // Step 7: Load the selected URL into the iframe
+            if (selectedUrl) {
+                document.getElementById('gameFrame').src = selectedUrl;
+            }
+        }
+
+        // Execute the function to load a random URL on page load
+        loadRandomUrl();
+    </script>
+</body>
+</html>
