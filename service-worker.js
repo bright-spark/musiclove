@@ -10,7 +10,7 @@
 const origin=self.location.origin;
 const skipAllExternalUrl=true;
 const blacklist=["https://firestore.googleapis.com","version.json",".php","%7B%7Binstimage%7D%7D"];
-const preloadList=['./','./offline.html', './index.html', './manifest.webmanifest']
+const preloadList=['./','./offline.html', './index.html', './manifest.json', './favicon.ico', './assets/css/style.css', './assets/js/main.js', './assets/js/jquery-3.6.0.min.js', './assets/js/jquery-ui 1.12.1.min.js', './assets/js/jquery-ui.min.css', './assets/js/jquery-ui.structure.min.css', './assets/js/jquery-ui.theme.min.css', './assets/js/jquery-ui-timepicker-addon.min.js', './assets/js/jquery-ui-timepicker-addon.min.css',]
 
 function isRejectable(url) {
   if ((skipAllExternalUrl == true) && (url.indexOf(origin) == -1)) {
