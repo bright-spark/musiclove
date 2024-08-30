@@ -64,7 +64,7 @@ async function play() {
   
 
 const videoElement = document.getElementById('playlistiframe');
-videoElement.addEventListener('play', wakey);
+videoElement.addEventListener('play', play);
 videoElement.addEventListener('pause', play);
 videoElement.addEventListener('ended', play);
 
