@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3N30L1SNST"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
-    gtag('config', 'G-3N30L1SNST');
-  </script>
   <title>theradio.plus</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0">
