@@ -196,10 +196,10 @@ function handleTabClick(event, iframeId, loadingSrc, triggerSrc) {
     if (clickCount === 2) {
 
         // Reload the iframe only on the second consecutive click
-        //iframe.src = loadingSrc;  // Load the loading.html first
-        //setTimeout(() => {
-        //    iframe.src = triggerSrc;  // Load the actual content after 0.5 seconds
-        //}, 500);  // 500ms delay
+        iframe.src = loadingSrc;  // Load the loading.html first
+        setTimeout(() => {
+            iframe.src = triggerSrc;  // Load the actual content after 0.5 seconds
+        }, 500);  // 500ms delay
         clickCount = 0;  // Reset the click count after the reload
         activeIframeId = iframeId; // Set the active iframe ID
 
