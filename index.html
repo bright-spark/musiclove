@@ -161,46 +161,5 @@
         });
     </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Initialize a click counter for each tab with -1
-            let clickCounters = {
-                tab1: 0,
-                tab2: 0,
-                tab3: 0,
-                tab4: 0
-            };
-    
-            // Function to handle tab click
-            function handleTabClick(event) {
-                // Get the tab ID from the clicked link
-                const tabId = event.currentTarget.getAttribute('href').replace('#tab-', '');
-                
-                // Initialize counter to 0 if it is -1, otherwise increment it
-                if (clickCounters[`tab${tabId}`] > -1) {
-                    clickCounters[`tab${tabId}`]++;
-                }
-    
-                // Check if the tab should be reloaded
-                if (clickCounters[`tab${tabId}`] % 2 === 1) {
-                    reloadTab(tabId);
-                }
-            }
-    
-            // Function to reload a tab's content
-            function reloadTab(tabId) {
-                const iframe = document.querySelector(`#iframe-104${tabId}`);
-                if (iframe) {
-                    iframe.src = iframe.src; // Reload the iframe by resetting the src
-                }
-            }
-    
-            // Attach the click event listeners to the tab links
-            document.querySelectorAll('.tab-link').forEach(link => {
-                link.addEventListener('click', handleTabClick);
-            });
-        });
-    </script>
-
 </body>
 </html>
