@@ -1,53 +1,65 @@
-<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 
+  <meta charset="utf-8">
+  <title>YouTube Red</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="YouTube Red Pop">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="HandheldFriendly" content="true">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/custom.css">
+  <style>
+    html, body, iframe {
+      margin: 0;
+      padding: 0;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      height: 100%;
+      z-index: 2147483647; /* Maximum z-index value */
+      position: fixed;
+    }
 
-    <meta charset="utf-8">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="theradio.fm">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="mobile-web-app-capable" content="yes">
-
-    <meta name="HandheldFriendly" content="true">
-    <meta name="MobileOptimized" content="400">
-    <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0">
-
-    <title>YouTube Play</title>
-
-    <!--display:block;  overflow:hidden; top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; z-index:999999;-->
-
-    <style>
-        html,
-        body,
-        iframe {
-            margin: 0;
-            padding: 0;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            height: 100vh;
-            z-index: 999999;
-        }
-
-        iframe {
-            overflow: hidden;
-            display: block;
-            width: 100%;
-            border: none;
-        }
-    </style>
-
-
-
+    iframe {
+      overflow: hidden;
+      display: block;
+      width: 100%;
+      border: none;
+    }
+  </style>
 </head>
-
 <body>
-    <iframe title="flexi-flux" src="https://bio.to/selector" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+  <iframe title="YouTube video player" id="playlistiframe" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  
+  <script>
+    "use strict";
+  
+    const playlists = [
+      "PLPmdCGqzDq0Omc-BAk9lPEzhqeEdXfKVX",
+    ];
+
+    function getNextPlaylist() {
+      const currentIndex = parseInt(localStorage.getItem('currentIndex') || '-1', 10);
+      const nextIndex = currentIndex === -1 ? Math.floor(Math.random() * playlists.length) : (currentIndex + 1) % playlists.length;
+      localStorage.setItem('currentIndex', nextIndex);
+      return playlists[nextIndex];
+    }
+
+    function loadPlaylist() {
+      const nextPlaylist = getNextPlaylist();
+      document.getElementById('playlistiframe').src = `https://youtube.com/embed/playlist?list=${nextPlaylist}&start_radio=1&controls=0&showinfo=0&modestbranding=1&autoplay=1&enablejsapi=1`;
+    }
+
+    window.addEventListener('load', loadPlaylist);
+    
+  </script>
+  <script src="../default.js"></script>
 </body>
 </html>
