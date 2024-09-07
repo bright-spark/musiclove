@@ -161,5 +161,29 @@
         });
     </script>
 
+    <script>
+        // JavaScript to reload tabs on every second consecutive click
+        const tabs = document.querySelectorAll('.tab-link');
+        const clickCounts = {};
+
+        tabs.forEach(tab => {
+            const tabId = tab.getAttribute('href');
+            clickCounts[tabId] = 0;
+
+            tab.addEventListener('click', function () {
+                clickCounts[tabId]++;
+                
+                if (clickCounts[tabId] % 2 === 0) {
+                    // Find the iframe inside the tab and reload its src
+                    const iframe = document.querySelector(`${tabId} iframe`);
+                    if (iframe) {
+                        const src = iframe.getAttribute('src');
+                        iframe.setAttribute('src', src); // Reload iframe
+                    }
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>
