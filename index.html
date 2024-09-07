@@ -165,15 +165,18 @@
         // JavaScript to reload tabs on every second consecutive click
         const tabs = document.querySelectorAll('.tab-link');
         const clickCounts = {};
-
+        const lastTab = "";
         tabs.forEach(tab => {
+            const lastTab = tab.getAttribute('href'); 
             const tabId = tab.getAttribute('href');
             clickCounts[tabId] = 0;
 
             tab.addEventListener('click', function () {
-                clickCounts[tabId]++;
+                     
+                if lastTab === tabId { clickCounts[tabId]++; }
+                    else { clickCounts[tabId]=0; };
                 
-                if (clickCounts[tabId] % 2 === 0) {
+                if (clickCounts[tabId] % 1 === 0) {
                     // Find the iframe inside the tab and reload its src
                     const iframe = document.querySelector(`${tabId} iframe`);
                     if (iframe) {
