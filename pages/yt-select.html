@@ -27,24 +27,22 @@
       return playlists[nextIndex]; // Return the next playlist to be loaded
     }
 
+    function startPlaylist() {
+      const nextPlaylist = getNextPlaylist();
+      const ytPlayer = document.getElementById('playlistiframe');
+      ytPlayer.src = `https://youtube.com/embed/?list=${nextPlaylist}&index=1&controls=0&autoplay=0`;
+    }
+
     function loadPlaylist() {
       const nextPlaylist = getNextPlaylist();
       const ytPlayer = document.getElementById('playlistiframe');
-      ytPlayer.src = `https://youtube.com/embed/?list=${nextPlaylist}&index=1&controls=0`;
+      ytPlayer.src = `https://youtube.com/embed/?list=${nextPlaylist}&index=1&controls=0&autoplay=1`;
     }
 
-    document.addEventListener('DOMContentLoaded', function () {
-        loadPlaylist();
-    });
+    document.addEventListener('DOMContentLoaded', startPlaylist); // page load
 
-    // Ensure the playlist is loaded on window load
-    window.addEventListener('load', function() {
-      const ytPlayer = document.getElementById('playlistiframe');
-      ytPlayer.src = ytPlayer.src + '&autoplay=1'; // Autoplay the video
-    });
-
+    window.addEventListener('load', loadPlaylist); // window load
     
-
   </script>
 
 </body>
