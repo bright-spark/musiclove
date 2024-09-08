@@ -35,109 +35,81 @@
 </head>
 <body>
 
-  <iframe title="YouTube video player" id="playlistiframe" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe title="YouTube video player" id="playlistiframe" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
+    src="https://www.youtube.com/embed/videoseries?list=PLPmdCGqzDq0Omc-BAk9lPEzhqeEdXfKVX&enablejsapi=1&controls=1">
+  </iframe>
   
   <script>
     "use strict";
 
-    let wakeLock = null;
-    let player = null;
+    let player;
+    let currentVideoTitle = '';
 
-    const playlists = [
-      "PLPmdCGqzDq0Omc-BAk9lPEzhqeEdXfKVX",
-      "PLuWIxgNYqm0kV69z-SJHDwAuebGmIhbp6",
-      "PLuWIxgNYqm0kQhpwU7JBbol71vOvXYJ3J",
-      "PLuWIxgNYqm0mQd_Z6eYbNa8Riyjl0znGC",
-      "PLuWIxgNYqm0nwE0Ysm1wnhuVwyOcdWfL-",
-      "PLuWIxgNYqm0nBsE2hckbEwuFouYA2nULw",
-      "PLuWIxgNYqm0mnK9qtr-fwRpKHvHoZyz2c",
-      "PLuWIxgNYqm0lOshsXRm9YEll-tbvQAYa2",
-      "PLuWIxgNYqm0n2iz-4exj1Ydebl0V3D-6N",
-      "PLuWIxgNYqm0lTsmQBVDeOTM63og_pLAdx",
-      "PLuWIxgNYqm0mJXPXGOIWc1N72Qs0Tez_E",
-      "PLuWIxgNYqm0lJH4UKIFrZnyfjpnRGsxdr",
-      "PLuWIxgNYqm0lXxPLZ9hBT9M46m53H5GES",
-      "PLuWIxgNYqm0nzjr_Xc8CYrEZtOVmlHFZk",
-      "PLuWIxgNYqm0lwRXD3Sqe2_ZryiljuW-L9",
-      "PLuWIxgNYqm0ketpCdUpLK4zjreYpDlLoE",
-      "PLuWIxgNYqm0lp_fJjhRiT8p0h32gmkTOB",
-      "PLuWIxgNYqm0lnbXjnFF3bdEBbRHkr-R3k",
-    ];
-
-    function getNextPlaylist() {
-      const currentIndex = parseInt(localStorage.getItem('currentIndex') || '-1', 10);
-      const nextIndex = currentIndex === -1 ? Math.floor(Math.random() * playlists.length) : (currentIndex + 1) % playlists.length;
-      localStorage.setItem('currentIndex', nextIndex);
-      return playlists[nextIndex];
-    }
-
-    async function requestWakeLock() {
-      try {
-        wakeLock = await navigator.wakeLock.request('screen');
-        wakeLock.addEventListener('release', () => {
-          console.log('Wake Lock was released');
-        });
-        console.log('Wake Lock is active');
-      } catch (err) {
-        console.error(`${err.name}, ${err.message}`);
-      }
-
-      // Force play when wake lock is requested
-      if (player) {
-        player.playVideo();
-      }
-    }
-
-    function loadPlaylist() {
-      const nextPlaylist = getNextPlaylist();
-      const iframe = document.getElementById('playlistiframe');
-      iframe.src = `https://youtube.com/embed/playlist?list=${nextPlaylist}&start_radio=1&controls=0&showinfo=0&modestbranding=1&enablejsapi=1`;
-
-      // YouTube IFrame API ready
-      iframe.onload = () => {
-        player = new YT.Player('playlistiframe', {
-          events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-          }
-        });
-      };
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('playlistiframe', {
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+      });
     }
 
     function onPlayerReady(event) {
-      player = event.target;
-      // Force play as soon as player is ready
-      player.playVideo();
+      // Fetch initial video data when the player is ready
+      updateVideoMetadata();
     }
 
     function onPlayerStateChange(event) {
-      const state = event.data;
-      
-      // If video is paused or stopped, force play again
-      if (state === YT.PlayerState.PAUSED || state === YT.PlayerState.ENDED) {
-        player.playVideo();
-      }
-
-      // Load next playlist when current video ends
-      if (state === YT.PlayerState.ENDED) {
-        loadPlaylist();
+      // Update metadata when video changes
+      if (event.data === YT.PlayerState.PLAYING) {
+        updateVideoMetadata();
       }
     }
 
-    window.addEventListener('load', () => {
-      requestWakeLock();
-      loadPlaylist();
-    });
+    function updateVideoMetadata() {
+      const videoData = player.getVideoData();
+      currentVideoTitle = videoData.title;
 
-    // Reapply the wake lock when the tab becomes visible again
-    document.addEventListener('visibilitychange', () => {
-      if (wakeLock !== null && document.visibilityState === 'visible') {
-        requestWakeLock();
+      // Fetch video ID for possible thumbnail or artwork
+      const videoId = videoData.video_id;
+      const artworkUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+
+      // Update MediaSession metadata
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: videoData.title,
+          artist: 'YouTube Artist',
+          album: 'YouTube Playlist',
+          artwork: [
+            { src: artworkUrl, sizes: '96x96', type: 'image/jpeg' },
+            { src: artworkUrl, sizes: '128x128', type: 'image/jpeg' },
+            { src: artworkUrl, sizes: '192x192', type: 'image/jpeg' },
+            { src: artworkUrl, sizes: '256x256', type: 'image/jpeg' },
+            { src: artworkUrl, sizes: '512x512', type: 'image/jpeg' }
+          ]
+        });
+
+        // Set action handlers for lock screen controls
+        navigator.mediaSession.setActionHandler('play', function() {
+          player.playVideo();
+        });
+
+        navigator.mediaSession.setActionHandler('pause', function() {
+          player.pauseVideo();
+        });
       }
-    });
-  </script>
+    }
 
-  <script src="https://www.youtube.com/iframe_api"></script>
+    // Load the YouTube IFrame API
+    function loadYouTubeAPI() {
+      const tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
+
+    window.addEventListener('load', loadYouTubeAPI);
+  </script>
 
 </body>
 </html>
