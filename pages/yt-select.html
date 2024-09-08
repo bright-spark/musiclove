@@ -6,21 +6,37 @@
   <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body>
-  <!-- iframe with adjusted playlist parameters to start at the first track -->
-  <iframe id="ytPlayer" src="https://www.youtube.com/embed/?list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&index=1&controls=0&autoplay=0" 
+
+  <iframe id="playlistiframe" 
     title="YouTube Video Player" frameborder="0" 
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
   </iframe>
 
-  <script src="wakey.js"></script>
   <script>
-    // Optional JS logic for ensuring it always plays track 1
-    window.onload = function() {
-      const ytPlayer = document.getElementById('ytPlayer');
-      // Reload the player with the index pointing to the first track
-      ytPlayer.src = "https://www.youtube.com/embed/?list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&index=1&controls=0&autoplay=1";
-    };
+    "use strict";
+  
+    const playlists = [
+      "RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs",
+    ];
+
+    function getNextPlaylist() {
+      const currentIndex = parseInt(localStorage.getItem('currentIndex') || '-1', 10);
+      const nextIndex = currentIndex === -1 ? Math.floor(Math.random() * playlists.length) : (currentIndex + 1) % playlists.length;
+      localStorage.setItem('currentIndex', nextIndex);
+      return playlists[nextIndex];
+    }
+
+    function loadPlaylist() {
+      const nextPlaylist = getNextPlaylist();
+      document.getElementById('playlistiframe').src = `https://youtube.com/embed/?list=${nextPlaylist}&index=1&controls=0&autoplay=0`;
+      document.getElementById('playlistiframe').src = `https://youtube.com/embed/?list=${nextPlaylist}&index=1&controls=0&autoplay=1`;
+    }
+
+    window.addEventListener('load', loadPlaylist);
+    
   </script>
+  <script src="wakey.js"></script>
+
 </body>
 </html>
