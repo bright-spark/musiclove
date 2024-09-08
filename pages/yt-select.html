@@ -6,29 +6,62 @@
   <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body>
-  <iframe title="YouTube video player" id="playlistiframe" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe title="YouTube video player" id="playlistiframe" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" 
+          allowfullscreen rel="noopener"></iframe>
+  
   <script>
     "use strict";
   
+    // Correctly formatted playlist URLs
     const playlists = [
-      "PLPmdCGqzDq0Omc-BAk9lPEzhqeEdXfKVX",
+      "list=PLuWIxgNYqm0lp_fJjhRiT8p0h32gmkTOB&si=L6m67YbUel0LtD75",
+      "list=PLuWIxgNYqm0kV69z-SJHDwAuebGmIhbp6&si=Sl8-oo5nWvOFKcBp",
+      "list=PLuWIxgNYqm0ketpCdUpLK4zjreYpDlLoE&si=bi0Y6HBqUjfJpRrw"
     ];
-  
+
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
     function getNextPlaylist() {
-      const currentIndex = parseInt(localStorage.getItem('currentIndex') || '-1', 10);
-      const nextIndex = currentIndex === -1 ? Math.floor(Math.random() * playlists.length) : (currentIndex + 1) % playlists.length;
+      let playedPlaylists = JSON.parse(localStorage.getItem('playedPlaylists') || '[]');
+      let currentIndex = parseInt(localStorage.getItem('currentIndex') || '-1', 10);
+
+      // Reset and shuffle if all playlists are played
+      if (playedPlaylists.length === playlists.length) {
+        playedPlaylists = [];
+        shuffleArray(playlists);
+      }
+
+      // Select a random playlist, making sure it's not the same as the last one played
+      let nextIndex;
+      do {
+        nextIndex = Math.floor(Math.random() * playlists.length);
+      } while (playedPlaylists.includes(nextIndex) || nextIndex === currentIndex);
+
+      // Update localStorage
+      playedPlaylists.push(nextIndex);
+      localStorage.setItem('playedPlaylists', JSON.stringify(playedPlaylists));
       localStorage.setItem('currentIndex', nextIndex);
+
       return playlists[nextIndex];
     }
-  
+
     function loadPlaylist() {
       const nextPlaylist = getNextPlaylist();
-      document.getElementById('playlistiframe').src = `https://youtube.com/embed/playlist?list=${nextPlaylist}&start_radio=1&controls=0&showinfo=0&modestbranding=1&autoplay=1&enablejsapi=1`;
+      const playlistUrl = `https://www.youtube.com/embed/videoseries?${nextPlaylist}&start_radio=1&controls=0&showinfo=0&modestbranding=1&autoplay=1&enablejsapi=1`;
+      document.getElementById('playlistiframe').src = playlistUrl;
     }
-  
+
     window.addEventListener('load', loadPlaylist);
-    
   </script>
+
+  <!-- Ensure wakey.js exists and is correctly linked -->
   <script src="wakey.js"></script>
 </body>
 </html>
