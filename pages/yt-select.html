@@ -31,15 +31,16 @@
 
     function loadPlaylist() {
       const nextPlaylist = getNextPlaylist();
-      document.getElementById('playlistiframe').src = `https://youtube.com/embed/?list=${nextPlaylist}&index=1&controls=0&autoplay=0`;
-      
+      document.getElementById('playlistiframe').src = `https://youtube.com/embed/?list=${nextPlaylist}&index=1&controls=0`; 
     }
 
     window.addEventListener('load', loadPlaylist);
     
     window.onload = function() {
-        document.getElementById('playlistiframe').src = `https://youtube.com/embed/?list=${nextPlaylist}&index=1&controls=0&autoplay=1`;
+      const ytPlayer = document.getElementById('playlistiframe');
+      ytPlayer.src = ytPlayer.src + "&autoplay=1";
     };
+
   </script>
 
 
