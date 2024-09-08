@@ -11,8 +11,8 @@
     "use strict";
   
     const playlists = [
-      //"PLPmdCGqzDq0Omc-BAk9lPEzhqeEdXfKVX",
-      "nPvoPIYVXkM?si=Q_IvU0hz_yw5jNSL",
+      "PLPmdCGqzDq0Omc-BAk9lPEzhqeEdXfKVX",
+      "nPvoPIYVXkM",
     ];
   
     function getNextPlaylist() {
@@ -24,7 +24,7 @@
   
     function loadPlaylist() {
       const nextPlaylist = getNextPlaylist();
-      document.getElementById('playlistiframe').src = `https://www.youtube.com/embed/${nextPlaylist}&start_radio=1&controls=0&showinfo=0&modestbranding=1&autoplay=1&enablejsapi=1`;
+      document.getElementById('playlistiframe').src = `https://www.youtube.com/embed/videoseries?list=${nextPlaylist}&si=Q_IvU0hz_yw5jNSL&start_radio=1&controls=0&showinfo=0&modestbranding=1&autoplay=1&enablejsapi=1`;
     }
   
     window.addEventListener('load', loadPlaylist);
