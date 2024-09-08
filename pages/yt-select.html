@@ -7,12 +7,12 @@
 </head>
 <body>
 
-  <iframe id="playlistiframe" src="https://www.youtube.com/embed/qMxX-QOV9tI?si=fdAgfazvsS4zpcxa&controls=0" title="YouTube Video Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe id="playlistiframe" src=`https://youtube.com/embed/?list=${nextPlaylist}&index=1&controls=0&autoplay=1`; title="YouTube Video Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
   <script src="wakey.js"></script>
 
   <script>
-    
+
     "use strict";
   
     const playlists = [
@@ -30,11 +30,16 @@
     function loadPlaylist() {
       const nextPlaylist = getNextPlaylist();
       const ytPlayer = document.getElementById('playlistiframe');
-      ytPlayer.src = `https://youtube.com/embed/?list=${nextPlaylist}&index=1&controls=0&autoplay=1`;
+      ytPlayer.src = `https://youtube.com/embed/?list=${nextPlaylist}&index=1&controls=0`;
     }
 
     // Ensure the playlist is loaded on window load
     window.addEventListener('load', loadPlaylist);
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const ytPlayer = document.getElementById('playlistiframe');
+        ytPlayer.src = ytPlayer.src + '&autoplay=1'; // Autoplay the video
+    });
 
   </script>
 
