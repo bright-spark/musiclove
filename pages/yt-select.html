@@ -107,8 +107,18 @@
 
     function onPlayerReady(event) {
       const player = event.target;
-      // Autoplay the video as soon as it's ready
+      // Attempt to force play as soon as player is ready
       player.playVideo();
+
+      // Retry forcing play if not successful in case of autoplay restrictions
+      const retryPlay = setInterval(() => {
+        const state = player.getPlayerState();
+        if (state !== YT.PlayerState.PLAYING) {
+          player.playVideo();
+        } else {
+          clearInterval(retryPlay); // Stop retrying once the video starts playing
+        }
+      }, 1000); // Retry every second
     }
 
     function onPlayerStateChange(event) {
