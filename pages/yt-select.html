@@ -107,8 +107,8 @@
 
     function onPlayerReady(event) {
       const player = event.target;
-      // Enable autoplay after the video starts
-      player.setOption('autoplay', 1);
+      // Autoplay the video as soon as it's ready
+      player.playVideo();
     }
 
     function onPlayerStateChange(event) {
