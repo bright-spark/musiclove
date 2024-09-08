@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
   <meta charset="utf-8">
   <title>YouTube Red</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -22,7 +21,7 @@
       bottom: 0;
       right: 0;
       height: 100%;
-      z-index: 2147483647; /* Maximum z-index value */
+      z-index: 2147483647;
       position: fixed;
     }
 
@@ -40,26 +39,28 @@
   
   <script>
     "use strict";
-  
+
+    let wakeLock = null;
+
     const playlists = [
       "PLPmdCGqzDq0Omc-BAk9lPEzhqeEdXfKVX",
       "PLuWIxgNYqm0kV69z-SJHDwAuebGmIhbp6",
-			"PLuWIxgNYqm0kQhpwU7JBbol71vOvXYJ3J",
-			"PLuWIxgNYqm0mQd_Z6eYbNa8Riyjl0znGC",
-			"PLuWIxgNYqm0nwE0Ysm1wnhuVwyOcdWfL-",
-			"PLuWIxgNYqm0nBsE2hckbEwuFouYA2nULw",
-			"PLuWIxgNYqm0mnK9qtr-fwRpKHvHoZyz2c",
-			"PLuWIxgNYqm0lOshsXRm9YEll-tbvQAYa2",
-			"PLuWIxgNYqm0n2iz-4exj1Ydebl0V3D-6N",
-			"PLuWIxgNYqm0lTsmQBVDeOTM63og_pLAdx",
-			"PLuWIxgNYqm0mJXPXGOIWc1N72Qs0Tez_E",
-			"PLuWIxgNYqm0lJH4UKIFrZnyfjpnRGsxdr",
-			"PLuWIxgNYqm0lXxPLZ9hBT9M46m53H5GES",
-			"PLuWIxgNYqm0nzjr_Xc8CYrEZtOVmlHFZk",
-			"PLuWIxgNYqm0lwRXD3Sqe2_ZryiljuW-L9",
-			"PLuWIxgNYqm0ketpCdUpLK4zjreYpDlLoE",
-			"PLuWIxgNYqm0lp_fJjhRiT8p0h32gmkTOB",
-			"PLuWIxgNYqm0lnbXjnFF3bdEBbRHkr-R3k",
+      "PLuWIxgNYqm0kQhpwU7JBbol71vOvXYJ3J",
+      "PLuWIxgNYqm0mQd_Z6eYbNa8Riyjl0znGC",
+      "PLuWIxgNYqm0nwE0Ysm1wnhuVwyOcdWfL-",
+      "PLuWIxgNYqm0nBsE2hckbEwuFouYA2nULw",
+      "PLuWIxgNYqm0mnK9qtr-fwRpKHvHoZyz2c",
+      "PLuWIxgNYqm0lOshsXRm9YEll-tbvQAYa2",
+      "PLuWIxgNYqm0n2iz-4exj1Ydebl0V3D-6N",
+      "PLuWIxgNYqm0lTsmQBVDeOTM63og_pLAdx",
+      "PLuWIxgNYqm0mJXPXGOIWc1N72Qs0Tez_E",
+      "PLuWIxgNYqm0lJH4UKIFrZnyfjpnRGsxdr",
+      "PLuWIxgNYqm0lXxPLZ9hBT9M46m53H5GES",
+      "PLuWIxgNYqm0nzjr_Xc8CYrEZtOVmlHFZk",
+      "PLuWIxgNYqm0lwRXD3Sqe2_ZryiljuW-L9",
+      "PLuWIxgNYqm0ketpCdUpLK4zjreYpDlLoE",
+      "PLuWIxgNYqm0lp_fJjhRiT8p0h32gmkTOB",
+      "PLuWIxgNYqm0lnbXjnFF3bdEBbRHkr-R3k",
     ];
 
     function shuffleArray(array) {
@@ -76,38 +77,55 @@
       return playlists[nextIndex];
     }
 
-    function getNextPlaylist1() {
-      let playedPlaylists = JSON.parse(localStorage.getItem('playedPlaylists') || '[]');
-      let currentIndex = parseInt(localStorage.getItem('currentIndex') || '-1', 10);
-
-      // Reset and shuffle if all playlists are played
-      if (playedPlaylists.length === playlists.length) {
-        playedPlaylists = [];
-        shuffleArray(playlists);
+    async function requestWakeLock() {
+      try {
+        wakeLock = await navigator.wakeLock.request('screen');
+        wakeLock.addEventListener('release', () => {
+          console.log('Wake Lock was released');
+        });
+        console.log('Wake Lock is active');
+      } catch (err) {
+        console.error(`${err.name}, ${err.message}`);
       }
-
-      // Select a random playlist, making sure it's not the same as the last one played
-      let nextIndex;
-      do {
-        nextIndex = Math.floor(Math.random() * playlists.length);
-      } while (playedPlaylists.includes(nextIndex) || nextIndex === currentIndex);
-
-      // Update localStorage
-      playedPlaylists.push(nextIndex);
-      localStorage.setItem('playedPlaylists', JSON.stringify(playedPlaylists));
-      localStorage.setItem('currentIndex', nextIndex);
-
-      return playlists[nextIndex];
     }
 
     function loadPlaylist() {
       const nextPlaylist = getNextPlaylist();
-      document.getElementById('playlistiframe').src = `https://youtube.com/embed/playlist?list=${nextPlaylist}&start_radio=1&controls=0&showinfo=0&modestbranding=1&autoplay=0&enablejsapi=1`;
+      const iframe = document.getElementById('playlistiframe');
+      iframe.src = `https://youtube.com/embed/playlist?list=${nextPlaylist}&start_radio=1&controls=0&showinfo=0&modestbranding=1&autoplay=0&enablejsapi=1`;
+
+      // Listen for when the iframe is ready to interact with
+      iframe.onload = () => {
+        const player = new YT.Player('playlistiframe', {
+          events: {
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      };
     }
 
-    window.addEventListener('load', loadPlaylist);
-    
+    function onPlayerStateChange(event) {
+      if (event.data === YT.PlayerState.ENDED) {
+        // If video ends, load the next playlist
+        loadPlaylist();
+      }
+    }
+
+    window.addEventListener('load', () => {
+      requestWakeLock();
+      loadPlaylist();
+    });
+
+    // Reapply the wake lock when the tab becomes visible again
+    document.addEventListener('visibilitychange', () => {
+      if (wakeLock !== null && document.visibilityState === 'visible') {
+        requestWakeLock();
+      }
+    });
   </script>
-  <script src="wakey.js"></script>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <!--script src="wakey.js"></script-->
+
 </body>
 </html>
