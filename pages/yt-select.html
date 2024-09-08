@@ -13,6 +13,8 @@
     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
   </iframe>
 
+  <script src="wakey.js"></script>
+
   <script>
     "use strict";
   
@@ -30,13 +32,16 @@
     function loadPlaylist() {
       const nextPlaylist = getNextPlaylist();
       document.getElementById('playlistiframe').src = `https://youtube.com/embed/?list=${nextPlaylist}&index=1&controls=0&autoplay=0`;
-      document.getElementById('playlistiframe').src = `https://youtube.com/embed/?list=${nextPlaylist}&index=1&controls=0&autoplay=1`;
+      
     }
 
     window.addEventListener('load', loadPlaylist);
     
+    window.onload = function() {
+        document.getElementById('playlistiframe').src = `https://youtube.com/embed/?list=${nextPlaylist}&index=1&controls=0&autoplay=1`;
+    };
   </script>
-  <script src="wakey.js"></script>
+
 
 </body>
 </html>
