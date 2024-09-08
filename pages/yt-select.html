@@ -16,9 +16,48 @@
   
     // Correctly formatted playlist URLs
     const playlists = [
-      "list=PLuWIxgNYqm0lp_fJjhRiT8p0h32gmkTOB&si=L6m67YbUel0LtD75",
-      "list=PLuWIxgNYqm0kV69z-SJHDwAuebGmIhbp6&si=Sl8-oo5nWvOFKcBp",
-      "list=PLuWIxgNYqm0ketpCdUpLK4zjreYpDlLoE&si=bi0Y6HBqUjfJpRrw"
+      //"PLuWIxgNYqm0lp_fJjhRiT8p0h32gmkTOB&si=L6m67YbUel0LtD75",
+      //"PLuWIxgNYqm0kV69z-SJHDwAuebGmIhbp6&si=Sl8-oo5nWvOFKcBp",
+      //"PLuWIxgNYqm0ketpCdUpLK4zjreYpDlLoE&si=bi0Y6HBqUjfJpRrw",
+      "RDCLAK5uy_k8QSlZPzi4R3781ftLrAKefTJJ6x7JrVA",
+      "RDCLAK5uy_lBUKRTgi9-X5hfuH4O0kg_msD5Mxap3iE",
+      "RDCLAK5uy_m2516Cz955UxQM4DgjKPrKeGwAcQ6wj3Q",
+      "RDCLAK5uy_nHl3QTEJsWnqZQU8pzNrBudfrbzr_kLCg",
+      "RDCLAK5uy_lb6CVU6S4uVugLVNTU9WhqfaomWAgnho4",
+      "RDCLAK5uy_mfdqvCAl8wodlx2P2_Ai2gNkiRDAufkkI",
+      "RDCLAK5uy_l7u7RCjtiI_I3m5EgnI-V9yWAgx0RNy1E",
+      "RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs",
+      "RDCLAK5uy_nE25QmHW2mSEyfGan1RwORJyb0MzZqOpI",
+      "RDCLAK5uy_nBQm8_YpP--R6zU8p3dypKm1QKqzWY6qU",
+      "RDCLAK5uy_kWiJXUNLZM9EyS3GBGznl1ku8_cOos97U",
+      "RDCLAK5uy_k8M88-3MJRUSCbipYWLH5socYNhDI06Sc",
+      "RDCLAK5uy_k-4bBZpMA00LtvrMiVcRNr0caz135-Ydw",
+      "RDCLAK5uy_n7IwbsDhxuCUi5B8YPrv-E8kd6Tej5ujY",
+      "RDCLAK5uy_nfs_t4FUu00E5ED6lveEBBX1VMYe1mFjk",
+      "RDCLAK5uy_l2zLaMIWOqWSePvTSmt49GcuR8460ZR10",
+      "RDCLAK5uy_mVQsicmiGWIirrcMMQO4g7QL3BQKuKCSM",
+      "RDCLAK5uy_n3VXlgOKj6OxuN3TpKEnVBX4qia-_2c1k",
+      "RDCLAK5uy_mYCOXz3Q9Ah8DEgyhLbqT8Vh4LXftRqOo",
+      "RDCLAK5uy_k6PkYWus1Mt-aKrbb0Ne8SkA2BgAk1Yy4",
+      "RDCLAK5uy_nfs_t4FUu00E5ED6lveEBBX1VMYe1mFjk",
+      "RDCLAK5uy_mSpTnu0yGFc7ogsk3y6tzNnLPonqB17AY",
+      "RDCLAK5uy_kumKEaPpcfaAOpnEdpjtp4jyLoiqZdRnU",
+      "RDCLAK5uy_kW-moSFMAFOKAIVYn9IDrZKWEJA3cP9UU",
+      "RDTMAK5uy_kset8DisdE7LSD4TNjEVvrKRTmG7a56sY",
+      "RDTMAK5uy_nGQKSMIkpr4o9VI_2i56pkGliD6FQRo50",
+      "RDTMAK5uy_lz2owBgwWf1mjzyn_NbxzMViQzIg8IAIg",
+      "RDTMAK5uy_k5UUl0lmrrfrjMpsT0CoMpdcBz1ruAO1k",
+      "RDTMAK5uy_nTsa0Irmcu2li2-qHBoZxtrpG9HuC3k_Q",
+      "RDTMAK5uy_lfZhS7zmIcmUhsKtkWylKzc0EN0LW90-s",
+      "RDTMAK5uy_k78ni6Y4fyyl0r2eiKkBEICh9Q5wJdfXk",
+      "RDTMAK5uy_lfhhWWw9v71CPrR7MRMHgZzbH6Vku9iJc",
+      "RDCLAK5uy_k0VPfkdR4V7l0uxvwyKg9agejYRB7lwpg",
+      "RDCLAK5uy_ll4D8yhbz6dYK6YjLF5p0MJHX4J-hgGJw",
+      "RDCLAK5uy_nx7nHsos6LRHpPq2q2f_bKkT8eALsikiI",
+      "RDCLAK5uy_ktv79aJ_zAi049KdFWFaAZEfgnm5jNZpk",
+      "RDCLAK5uy_lCGog0UBu12SKF5-k40zaahnUcYedxdIk",
+      "RDCLAK5uy_m4PlsftW0w4vkLArkk2nt3vITURqCbGZE",
+      "RDCLAK5uy_k5DxhF_vXgbHHoaQ_d2hRBlY11Qgr3xpY"
     ];
 
     function shuffleArray(array) {
@@ -54,7 +93,7 @@
 
     function loadPlaylist() {
       const nextPlaylist = getNextPlaylist();
-      const playlistUrl = `https://www.youtube.com/embed/videoseries?${nextPlaylist}&start_radio=1&controls=0&showinfo=0&modestbranding=1&autoplay=1&enablejsapi=1`;
+      const playlistUrl = `https://www.youtube.com/embed/videoseries?list=${nextPlaylist}&start_radio=1&controls=0&showinfo=0&modestbranding=1&autoplay=1&enablejsapi=1`;
       document.getElementById('playlistiframe').src = playlistUrl;
     }
 
