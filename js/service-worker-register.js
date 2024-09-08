@@ -13,7 +13,6 @@ if (('serviceWorker' in navigator) && (window.location.protocol != "file:")) {
     console.log('Thorium Service worker found');
   } else {
     navigator.serviceWorker.register('service-worker.js', {
-    //navigator.serviceWorker.register('sw-workbox.js', {
       scope: './'
     }).then(function (reg) {
       console.log('Thorium Service worker registered for scope:' + reg.scope);
