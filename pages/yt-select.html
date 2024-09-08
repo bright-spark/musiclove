@@ -62,7 +62,38 @@
 			"PLuWIxgNYqm0lnbXjnFF3bdEBbRHkr-R3k",
     ];
 
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
     function getNextPlaylist() {
+      let playedPlaylists = JSON.parse(localStorage.getItem('playedPlaylists') || '[]');
+      let currentIndex = parseInt(localStorage.getItem('currentIndex') || '-1', 10);
+
+      // Reset and shuffle if all playlists are played
+      if (playedPlaylists.length === playlists.length) {
+        playedPlaylists = [];
+        shuffleArray(playlists);
+      }
+
+      // Select a random playlist, making sure it's not the same as the last one played
+      let nextIndex;
+      do {
+        nextIndex = Math.floor(Math.random() * playlists.length);
+      } while (playedPlaylists.includes(nextIndex) || nextIndex === currentIndex);
+
+      // Update localStorage
+      playedPlaylists.push(nextIndex);
+      localStorage.setItem('playedPlaylists', JSON.stringify(playedPlaylists));
+      localStorage.setItem('currentIndex', nextIndex);
+
+      return playlists[nextIndex];
+    }
+
+    function getNextPlaylist1() {
       const currentIndex = parseInt(localStorage.getItem('currentIndex') || '-1', 10);
       const nextIndex = currentIndex === -1 ? Math.floor(Math.random() * playlists.length) : (currentIndex + 1) % playlists.length;
       localStorage.setItem('currentIndex', nextIndex);
