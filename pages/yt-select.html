@@ -28,16 +28,18 @@
     }
 
     function startPlaylist() {
-      const nextPlaylist = getNextPlaylist();
+      
       const ytPlayer = document.getElementById('playlistiframe');
       ytPlayer.src = `https://youtube.com/embed/?list=${nextPlaylist}&index=1&controls=0&autoplay=0`;
     }
 
     function loadPlaylist() {
-      const nextPlaylist = getNextPlaylist();
+      
       const ytPlayer = document.getElementById('playlistiframe');
       ytPlayer.src = `https://youtube.com/embed/?list=${nextPlaylist}&index=1&controls=0&autoplay=1`;
     }
+    
+    const nextPlaylist = getNextPlaylist();
 
     document.addEventListener('DOMContentLoaded', startPlaylist); // page load
 
