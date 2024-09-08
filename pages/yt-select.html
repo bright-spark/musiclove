@@ -6,9 +6,21 @@
   <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body>
-  <iframe src="https://www.youtube.com/embed?v=4QIZE708gJ4&list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&index=2&controls=0&autoplay=1" title="YouTube Video Player" frameborder="0" 
+  <!-- iframe with adjusted playlist parameters to start at the first track -->
+  <iframe id="ytPlayer" src="https://www.youtube.com/embed/?list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&index=2&controls=0&autoplay=1" 
+    title="YouTube Video Player" frameborder="0" 
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+  </iframe>
+
   <script src="wakey.js"></script>
+  <script>
+    // Optional JS logic for ensuring it always plays track 1
+    window.onload = function() {
+      const ytPlayer = document.getElementById('ytPlayer');
+      // Reload the player with the index pointing to the first track
+      ytPlayer.src = "https://www.youtube.com/embed/?list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&index=1&autoplay=1";
+    };
+  </script>
 </body>
 </html>
