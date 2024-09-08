@@ -41,6 +41,7 @@
     "use strict";
 
     let wakeLock = null;
+    let player = null;
 
     const playlists = [
       "PLPmdCGqzDq0Omc-BAk9lPEzhqeEdXfKVX",
@@ -87,6 +88,11 @@
       } catch (err) {
         console.error(`${err.name}, ${err.message}`);
       }
+
+      // Force play when wake lock is requested
+      if (player) {
+        player.playVideo();
+      }
     }
 
     function loadPlaylist() {
@@ -96,7 +102,7 @@
 
       // YouTube IFrame API ready
       iframe.onload = () => {
-        const player = new YT.Player('playlistiframe', {
+        player = new YT.Player('playlistiframe', {
           events: {
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
@@ -106,24 +112,21 @@
     }
 
     function onPlayerReady(event) {
-      const player = event.target;
-      // Attempt to force play as soon as player is ready
+      player = event.target;
+      // Force play as soon as player is ready
       player.playVideo();
-
-      // Retry forcing play if not successful in case of autoplay restrictions
-      const retryPlay = setInterval(() => {
-        const state = player.getPlayerState();
-        if (state !== YT.PlayerState.PLAYING) {
-          player.playVideo();
-        } else {
-          clearInterval(retryPlay); // Stop retrying once the video starts playing
-        }
-      }, 1000); // Retry every second
     }
 
     function onPlayerStateChange(event) {
-      if (event.data === YT.PlayerState.ENDED) {
-        // Load the next playlist when the current video ends
+      const state = event.data;
+      
+      // If video is paused or stopped, force play again
+      if (state === YT.PlayerState.PAUSED || state === YT.PlayerState.ENDED) {
+        player.playVideo();
+      }
+
+      // Load next playlist when current video ends
+      if (state === YT.PlayerState.ENDED) {
         loadPlaylist();
       }
     }
