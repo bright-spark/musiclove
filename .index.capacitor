@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-  <title>theradio.plus</title>
+  <title>Music Love</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0">
   <meta name="Format-detection" content="telephone=no">
@@ -21,167 +21,128 @@
 </head>
 
 <body class="theme-dark color-theme-red">
-  <div id="app" class="framework7-root">
-    <div class="panel-backdrop"></div>
 
-    <div id="view-main" class="view view-main view-init safe-areas" data-url="/">
-      <div id="page" class="page" data-name="index">
-        <div id="navbar-o-1004" class="navbar">
-          <div id="navbg-o-1005" class="navbar-bg"></div>
-          <div id="navbar-inner-o-1006" class="navbar-inner">
-            <div id="left-o-1007" class="left">
-              <div id="playlist" style="display: none">
-                <a href="#" class="back link" onclick="document.getElementById('iframe-1042').src='//yt.theradio.plus/play/rnd/'">
-                  <i class="icon f7-icons">arrow_2_squarepath</i>
-                  <span>Playlist</span>
-                </a>
-              </div>
-              <div id="backbtn" style="display: none">
-                <a href="#" class="back link"
-                  onclick="document.getElementById('iframe-1046').src='pages/nav/index.html'">
-                  <i class="icon f7-icons">arrowshape_turn_up_left</i>
-                  <span>Back</span>
-                </a>
-              </div>
-            </div>
-            <div id="title-o-1008" class="title"></div>
-            <div id="right-o-1009" class="right"></div>
-          </div>
-        </div>
+    <div class="hidden-focus-element" tabindex="0"></div>
 
-        <div id="toolbar-o-1010" class="toolbar toolbar-bottom tabbar tabbar-labels">
-          <div id="o-1011" class="toolbar-inner">
-            <a id="o-1012" href="#tab-1" class="tab-link"
-              onclick="document.getElementById('backbtn').style.display = 'none';document.getElementById('playlist').style.display = 'none';">
-              <i id="o-1013" class="icon f7-icons ios-only">
-                playpause_fill
-              </i>
-              <i id="o-1014" class="icon icon-fill f7-icons ios-only">
-                playpause_fill
-              </i>
-              <i id="o-1015" class="icon f7-icons md-only">
-                playpause_fill
-              </i>
-              <span id="o-1016" class="tabbar-label">Radio</span>
-            </a>
-            <a id="o-1017" href="#tab-2" class="tab-link"
-              onclick="document.getElementById('backbtn').style.display = 'none';document.getElementById('playlist').style.display = 'block';">
-              <i id="o-1018" class="icon f7-icons ios-only">
-                tv_music_note
-              </i>
-              <i id="o-1019" class="icon icon-fill f7-icons ios-only">
-                tv_music_note
-              </i>
-              <i id="o-1020" class="icon f7-icons md-only"> tv_music_note </i>
-              <span id="o-1021" class="tabbar-label">Video</span>
-            </a>
-            <a id="o-1022" href="#tab-3" class="tab-link"
-              onclick="document.getElementById('backbtn').style.display = 'none';document.getElementById('playlist').style.display = 'none';">
-              <i id="o-1023" class="icon f7-icons ios-only"> headphones </i>
-              <i id="o-1024" class="icon icon-fill f7-icons ios-only">
-                headphones
-              </i>
-              <i id="o-1025" class="icon f7-icons md-only"> headphones </i>
-              <span id="o-1026" class="tabbar-label">Lofi</span>
-            </a>
-            <a id="o-1027" href="#tab-4" class="tab-link"
-              onclick="document.getElementById('backbtn').style.display = 'none';document.getElementById('playlist').style.display = 'none';">
-              <i id="o-1028" class="icon f7-icons ios-only"> music_mic </i>
-              <i id="o-1029" class="icon icon-fill f7-icons ios-only">
-                music_mic
-              </i>
-              <i id="o-1030" class="icon f7-icons md-only"> music_mic </i>
-              <span id="o-1031" class="tabbar-label">Poke</span>
-            </a>
-            <a id="o-1032" href="#tab-5" class="tab-link"
-              onclick="document.getElementById('backbtn').style.display = 'none';document.getElementById('playlist').style.display = 'none';">
-              <i id="o-1033" class="icon f7-icons ios-only">
-                bubble_left_bubble_right
-              </i>
-              <i id="o-1034" class="icon icon-fill f7-icons ios-only">
-                bubble_left_bubble_right
-              </i>
-              <i id="o-1035" class="icon f7-icons md-only">
-                bubble_left_bubble_right
-              </i>
-              <span id="o-1036" class="tabbar-label">SparX</span>
-            </a>
-            <a id="o-1037" href="#tab-6" class="tab-link"
-              onclick="document.getElementById('backbtn').style.display = 'block';document.getElementById('playlist').style.display = 'none';">
-              <i id="o-1038" class="icon f7-icons ios-only">
-                music_note_list
-              </i>
-              <i id="o-1039" class="icon icon-fill f7-icons ios-only">
-                music_note_list
-              </i>
-              <i id="o-1040" class="icon f7-icons md-only">
-                music_note_list
-              </i>
-              <span id="o-1041" class="tabbar-label">More</span>
-            </a>
-          </div>
-        </div>
+    <div id="app" class="framework7-root app">
+        <div class="panel-backdrop"></div>     
+        <div id="view-main" class="view view-main view-init safe-areas" data-url="/">
+            <div id="page" class="page" data-name="index">
+                <div class="status--bar"></div>
+                <div class="indicator--bar"></div>
+                <div id="toolbar-o-1010" class="toolbar toolbar-bottom tabbar tabbar-labels">
+                    <div id="o-1011" class="toolbar-inner">
+                        <a id="o-1012" href="#tab-1" class="tab-link">
+                            <i id="o-1013" class="icon f7-icons ios-only">play</i>
+                            <i id="o-1014" class="icon icon-fill f7-icons ios-only">play</i>
+                            <i id="o-1015" class="icon f7-icons md-only">play</i>                                 
+                        </a>
+                        <a id="o-1017" href="#tab-2" class="tab-link">
+                            <i id="o-1018" class="icon f7-icons ios-only">play_rectangle</i>
+                            <i id="o-1019" class="icon icon-fill f7-icons ios-only">play_rectangle</i>
+                            <i id="o-1020" class="icon f7-icons md-only">play_rectangle</i>                                
+                        </a>
+                        <a id="o-1022" href="#tab-3" class="tab-link">
+                            <i id="o-1023" class="icon f7-icons ios-only">rectangle_stack_person_crop</i>
+                            <i id="o-1024" class="icon icon-fill f7-icons ios-only">rectangle_stack_person_crop</i>
+                            <i id="o-1025" class="icon f7-icons md-only">rectangle_stack_person_crop</i>                                 
+                        </a>
+                        <a id="o-1027" href="#tab-4" class="tab-link">
+                            <i id="o-1028" class="icon f7-icons ios-only">rocket</i>
+                            <i id="o-1029"
+                                class="icon icon-fill f7-icons ios-only">rocket</i>
+                            <i id="o-1030" class="icon f7-icons md-only">rocket</i>                                
+                        </a>
+                    </div>
+                </div>
+                
+                <div id="tabs-o-2010" class="tabs">
 
-        <div id="tabs-o-2010" class="tabs">
-          <div id="tab-0" class="page-content tab tab-active">
-            <div id="div-1040" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
-              <iframe title="tab-0" id="iframe-1040" src="pages/cover/index.html"
-                class="embed-responsive-item"></iframe>
+                    <div id="tab-0" class="page-content tab tab-active">
+                        <div id="div-1040" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
+                            <iframe title="tab-0" id="iframe-1040" src="pages/cover/index.html" loading="eager" class="embed-responsive-item"></iframe>
+                        </div>
+                    </div>
+
+                    <div id="tab-1" class="page-content tab">
+                        <div id="div-1041" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
+                            <iframe title="tab-1" id="iframe-1041" src="pages/radios.html" loading="lazy" class="embed-responsive-item"></iframe>
+                        </div>
+                    </div>
+
+                    <div id="tab-2" class="page-content tab">
+                        <div id="div-1042" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
+                            <iframe title="tab-2" id="iframe-1042" src="pages/yt-select.html" loading="lazy" class="embed-responsive-item"></iframe>
+                        </div>
+                    </div>
+
+                    <div id="tab-3" class="page-content tab">
+                        <div id="div-1043" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
+                            <iframe title="tab-3" id="iframe-1043" src="pages/fluid.html" loading="lazy" class="embed-responsive-item"></iframe>
+                        </div>
+                    </div>
+
+                    <div id="tab-4" class="page-content tab">
+                        <div id="div-1044" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
+                            <iframe title="tab-4" id="iframe-1044" src="pages/gamesnacks.html" loading="lazy" class="embed-responsive-item"></iframe>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-          </div>
-          <div id="tab-1" class="page-content tab">
-            <div id="div-1041" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
-              <iframe title="tab-1" id="iframe-1041" src="pages/radios.html" loading="eager"
-                class="embed-responsive-item"></iframe>
-            </div>
-          </div>
-          <div id="tab-2" class="page-content tab">
-            <div id="div-1042" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
-              <iframe title="tab-2" id="iframe-1042" src="https://yt.theradio.plus/play/rnd/" loading="eager" 
-                allow="web-share; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                class="embed-responsive-item"></iframe>
-            </div>
-          </div>
-          <div id="tab-3" class="page-content tab">
-            <div id="div-1043" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
-              <iframe title="tab-3" id="iframe-1043" src="pages/ludotune.html"
-                class="embed-responsive-item"></iframe>
-            </div>
-          </div>
-          <div id="tab-4" class="page-content tab">
-            <div id="div-1044" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
-              <iframe title="tab-4" id="iframe-1044" src="https://poketube.fun/app/" loading="eager"
-                allow="web-share; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                class="embed-responsive-item"></iframe>
-            </div>
-          </div>
-          <div id="tab-5" class="page-content tab">
-            <div id="div-1045" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
-              <iframe title="tab-5" id="iframe-1045" src="pages/sparx.html" loading="eager" scrolling="yes"
-                class="embed-responsive-item"></iframe>
-            </div>
-          </div>
-          <div id="tab-6" class="page-content tab back">
-            <div id="div-1046" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
-              <iframe title="tab-6" id="iframe-1046" src="pages/dash.html"
-                class="embed-responsive-item"></iframe>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 
-  <script async type="text/javascript" src="js/service-worker-register.js"></script>
-  <script defer type="text/javascript" src="js/framework/framework7-bundle.min.js"></script>
-  <script defer type="text/javascript" src="js/thorium.config.js"></script>
-  <script defer type="text/javascript" src="js/plugins/thorium.core.min.js"></script>
+    <script type="text/javascript" src="js/service-worker-register.js"></script>
+    <script type="text/javascript" src="js/framework/framework7-bundle.min.js"></script>
+    <script type="text/javascript" src="js/thorium.config.js"></script>
+    <script type="text/javascript" src="js/plugins/thorium.core.min.js"></script>
+    <script type="text/javascript" src="js/custom.js" ></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof thoriumCorePlugin !== 'undefined') {
+                thoriumCorePlugin.appLoaded();
+            }
+        });
+    </script>
 
-  <script defer> thoriumCorePlugin.appLoaded(); </script>
+    <script>
+        // JavaScript to reload tabs on every second consecutive click
+        const tabs = document.querySelectorAll('.tab-link');
+        const clickCounts = {};
+        let lastTab = "";  // Declare lastTab globally to track between clicks
+    
+        tabs.forEach(tab => {
+            const tabId = tab.getAttribute('href');
+            clickCounts[tabId] = 0; // Initialize click count for each tab
+    
+            tab.addEventListener('click', function (e) {
+                e.preventDefault();  // Prevent default link behavior if necessary
+    
+                // Check if the current tab was the last clicked tab
+                if (lastTab === tabId) {
+                    clickCounts[tabId]++;
+                } else {
+                    clickCounts[tabId] = 1; // Reset count if a different tab is clicked
+                }
+    
+                // Set lastTab to the current tab
+                lastTab = tabId;
+    
+                // Reload the tab's iframe on every second click
+                if (clickCounts[tabId] % 2 === 0) {
+                    // Find the iframe inside the tab and reload its src
+                    const iframe = document.querySelector(`${tabId} iframe`);
+                    if (iframe) {
+                        const src = iframe.getAttribute('src');
+                        iframe.setAttribute('src', src); // Reload iframe
+                    }
+                }
+            });
+        });
+    </script>
 
-  <!-- Cloudflare Web Analytics -->
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{'token': '1d72129f17774389b5ee52fac2f64cfc'}"></script><!-- End Cloudflare Web Analytics -->
 
 </body>
-
 </html>

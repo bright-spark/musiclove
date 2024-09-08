@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no, viewport-fit=cover">
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="HandheldFriendly" content="true" />
-    <meta name="MobileOptimized" content="400" />
+    <meta name="MobileOptimized" content="380" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="google" content="notranslate" />
     <meta name="author" content="Martin Myburgh" />
@@ -41,18 +41,28 @@
     <meta name="apple-mobile-web-app-title" content="Music Love" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     
-    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
-    <link rel="apple-touch-icon" sizes="512x512" href="./icons/apple-touch-icon-512x512.png" />
-    
-    <link rel="manifest" href="manifest.json" />
-    
-    <link href="splashscreens/iphone5_splash.png" rel="apple-touch-startup-image" />
-    <link href="splashscreens/iphone6_splash.png" rel="apple-touch-startup-image" />
-    <link href="splashscreens/iphoneplus_splash.png" rel="apple-touch-startup-image" />
-    <link href="splashscreens/iphonex_splash.png" rel="apple-touch-startup-image" />
-    <link href="splashscreens/ipad_splash.png" rel="apple-touch-startup-image" />
-    <link href="splashscreens/ipadpro1_splash.png" rel="apple-touch-startup-image" />
-    <link href="splashscreens/ipadpro2_splash.png" rel="apple-touch-startup-image" />
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="16x16" href="./icons/apple-touch-icon-16x16.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="./icons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="./icons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./icons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./icons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./icons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./icons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./icons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./icons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon-180x180.png">
+
+    <link rel="manifest" href="manifest.json">
+  
+    <link href="splashscreens/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphoneplus_splash.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphonex_splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/ipad_splash.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/ipadpro1_splash.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+  
 
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/framework7-bundle.min.css">
@@ -61,8 +71,6 @@
     <link rel="stylesheet" href="css/pages/index.css?r=70992">
     <link rel="stylesheet" href="css/classes.css">
     <link rel="stylesheet" href="css/custom.css">
-
-    <script defer data-domain="theradio.fm" src="https://plausible.io/js/script.js"></script>
     
 </head>
 
@@ -118,7 +126,7 @@
 
                     <div id="tab-2" class="page-content tab">
                         <div id="div-1042" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
-                            <iframe title="tab-2" id="iframe-1042" src="pages/yt-select.html" loading="eager" class="embed-responsive-item"></iframe>
+                            <iframe title="tab-2" id="iframe-1042" src="pages/yt-select.html" loading="lazy" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
 
