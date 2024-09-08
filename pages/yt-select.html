@@ -70,6 +70,13 @@
     }
 
     function getNextPlaylist() {
+      const currentIndex = parseInt(localStorage.getItem('currentIndex') || '-1', 10);
+      const nextIndex = currentIndex === -1 ? Math.floor(Math.random() * playlists.length) : (currentIndex + 1) % playlists.length;
+      localStorage.setItem('currentIndex', nextIndex);
+      return playlists[nextIndex];
+    }
+
+    function getNextPlaylist1() {
       let playedPlaylists = JSON.parse(localStorage.getItem('playedPlaylists') || '[]');
       let currentIndex = parseInt(localStorage.getItem('currentIndex') || '-1', 10);
 
@@ -93,16 +100,9 @@
       return playlists[nextIndex];
     }
 
-    function getNextPlaylist1() {
-      const currentIndex = parseInt(localStorage.getItem('currentIndex') || '-1', 10);
-      const nextIndex = currentIndex === -1 ? Math.floor(Math.random() * playlists.length) : (currentIndex + 1) % playlists.length;
-      localStorage.setItem('currentIndex', nextIndex);
-      return playlists[nextIndex];
-    }
-
     function loadPlaylist() {
-      const nextPlaylist = getNextPlaylist1();
-      document.getElementById('playlistiframe').src = `https://youtube.com/embed/playlist?list=${nextPlaylist}&start_radio=1&controls=0&showinfo=0&modestbranding=1&autoplay=1&enablejsapi=1`;
+      const nextPlaylist = getNextPlaylist();
+      document.getElementById('playlistiframe').src = `https://youtube.com/embed/playlist?list=${nextPlaylist}&start_radio=1&controls=0&showinfo=0&modestbranding=1&index=1&autoplay=1&enablejsapi=1`;
     }
 
     window.addEventListener('load', loadPlaylist);
