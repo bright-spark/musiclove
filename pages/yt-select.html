@@ -11,8 +11,8 @@
     "use strict";
   
     const playlists = [
-      "PLPmdCGqzDq0Omc-BAk9lPEzhqeEdXfKVX&si=Q_IvU0hz_yw5jNSL",
-      "nPvoPIYVXkM&si=Q_IvU0hz_yw5jNSL",
+      "si=Sl8-oo5nWvOFKcBp&list=PLuWIxgNYqm0kV69z-SJHDwAuebGmIhbp6",
+      "si=bi0Y6HBqUjfJpRrw&list=PLuWIxgNYqm0ketpCdUpLK4zjreYpDlLoE",
     ];
   
     function getNextPlaylist() {
@@ -24,7 +24,7 @@
   
     function loadPlaylist() {
       const nextPlaylist = getNextPlaylist();
-      document.getElementById('playlistiframe').src = `https://www.youtube.com/embed/videoseries?list=${nextPlaylist}&start_radio=1&controls=0&showinfo=0&modestbranding=1&autoplay=1&enablejsapi=1`;
+      document.getElementById('playlistiframe').src = `https://www.youtube.com/embed/videoseries?${nextPlaylist}&start_radio=1&controls=0&showinfo=0&modestbranding=1&autoplay=1&enablejsapi=1`;
     }
   
     window.addEventListener('load', loadPlaylist);
