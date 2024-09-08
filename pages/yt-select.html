@@ -33,13 +33,17 @@
       ytPlayer.src = `https://youtube.com/embed/?list=${nextPlaylist}&index=1&controls=0`;
     }
 
-    // Ensure the playlist is loaded on window load
-    window.addEventListener('load', loadPlaylist);
-
     document.addEventListener('DOMContentLoaded', function () {
-        const ytPlayer = document.getElementById('playlistiframe');
-        ytPlayer.src = ytPlayer.src + '&autoplay=1'; // Autoplay the video
+        loadPlaylist();
     });
+
+    // Ensure the playlist is loaded on window load
+    window.addEventListener('load', function() {
+      const ytPlayer = document.getElementById('playlistiframe');
+      ytPlayer.src = ytPlayer.src + '&autoplay=1'; // Autoplay the video
+    });
+
+    
 
   </script>
 
