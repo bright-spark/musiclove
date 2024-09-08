@@ -102,7 +102,7 @@
 
     function loadPlaylist() {
       const nextPlaylist = getNextPlaylist();
-      document.getElementById('playlistiframe').src = `https://youtube.com/embed/?list=${nextPlaylist}&start_radio=1&controls=0&showinfo=0&modestbranding=1&index=2&autoplay=1&enablejsapi=1`;
+      document.getElementById('playlistiframe').src = `https://youtube.com/embed/videoseries?list=${nextPlaylist}&start_radio=1&controls=0&showinfo=0&modestbranding=1&index=2&autoplay=1&enablejsapi=1`;
     }
 
     window.addEventListener('load', loadPlaylist);
