@@ -94,19 +94,26 @@
       const iframe = document.getElementById('playlistiframe');
       iframe.src = `https://youtube.com/embed/playlist?list=${nextPlaylist}&start_radio=1&controls=0&showinfo=0&modestbranding=1&autoplay=0&enablejsapi=1`;
 
-      // Listen for when the iframe is ready to interact with
+      // YouTube IFrame API ready
       iframe.onload = () => {
         const player = new YT.Player('playlistiframe', {
           events: {
+            'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
           }
         });
       };
     }
 
+    function onPlayerReady(event) {
+      const player = event.target;
+      // Enable autoplay after the video starts
+      player.setOption('autoplay', 1);
+    }
+
     function onPlayerStateChange(event) {
       if (event.data === YT.PlayerState.ENDED) {
-        // If video ends, load the next playlist
+        // Load the next playlist when the current video ends
         loadPlaylist();
       }
     }
@@ -125,7 +132,6 @@
   </script>
 
   <script src="https://www.youtube.com/iframe_api"></script>
-  <!--script src="wakey.js"></script-->
 
 </body>
 </html>
