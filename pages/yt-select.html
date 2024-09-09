@@ -6,43 +6,17 @@
   <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body>
-
-  <iframe id="playlistiframe" title="YouTube Video Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
+  <iframe id="ytPlayer" src="https://www.youtube.com/embed/4QIZE708gJ4?list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&index=1&controls=0&autoplay=0" 
+    title="YouTube Video Player" frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+  </iframe>
   <script src="wakey.js"></script>
-
   <script>
-
-    "use strict";
-  
-    const playlists = [
-      "RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs", // Add more playlist IDs if needed
-    ];
-
-    const nextPlaylist = getNextPlaylist();
-
-    function getNextPlaylist() {
-      const currentIndex = parseInt(localStorage.getItem('currentIndex') || '-1', 10);
-      // Randomize the first one or go sequentially after
-      const nextIndex = currentIndex === -1 ? Math.floor(Math.random() * playlists.length) : (currentIndex + 1) % playlists.length;
-      localStorage.setItem('currentIndex', nextIndex); // Save index for future sessions
-      return playlists[nextIndex]; // Return the next playlist to be loaded
-    }
-
-    function authPlaylist() {
-      document.getElementById('playlistiframe').src = `https://youtube.com/embed/?list=${nextPlaylist}&index=1&controls=0&autoplay=0`;
-      loadPlaylist();
-    }
-
-    function loadPlaylist() {
-      document.getElementById('playlistiframe').src = `https://youtube.com/embed/?list=${nextPlaylist}&index=1&controls=0&autoplay=1`;
-    }
-    
-    document.addEventListener('DOMContentLoaded', authPlaylist); // page load
-
-    //window.addEventListener('load', authPlaylist); // window load
-    
+    window.onload = function() {
+      const ytPlayer = document.getElementById('ytPlayer');
+      ytPlayer.src = "https://www.youtube.com/embed/4QIZE708gJ4?list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&index=1&controls=0&autoplay=1";
+    };
   </script>
-
 </body>
 </html>
