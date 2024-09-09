@@ -30,14 +30,12 @@
     }
 
     function authPlaylist() {
-      
-      const ytPlayer = document.getElementById('playlistiframe');
-      ytPlayer.src = `https://youtube.com/embed/?list=${nextPlaylist}&index=1&controls=0&autoplay=0`;
+      document.getElementById('playlistiframe').src = `https://youtube.com/embed/?list=${nextPlaylist}&index=1&controls=0&autoplay=0`;
       loadPlaylist();
     }
 
     function loadPlaylist() {
-      ytPlayer.src = `https://youtube.com/embed/?list=${nextPlaylist}&index=1&controls=0&autoplay=1`;
+      document.getElementById('playlistiframe').src = `https://youtube.com/embed/?list=${nextPlaylist}&index=1&controls=0&autoplay=1`;
     }
     
     //document.addEventListener('DOMContentLoaded', startPlaylist); // page load
