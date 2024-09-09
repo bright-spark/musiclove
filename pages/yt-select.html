@@ -19,6 +19,8 @@
       "RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs", // Add more playlist IDs if needed
     ];
 
+    const nextPlaylist = getNextPlaylist();
+
     function getNextPlaylist() {
       const currentIndex = parseInt(localStorage.getItem('currentIndex') || '-1', 10);
       // Randomize the first one or go sequentially after
@@ -28,7 +30,7 @@
     }
 
     function authPlaylist() {
-      const nextPlaylist = getNextPlaylist();
+      
       const ytPlayer = document.getElementById('playlistiframe');
       ytPlayer.src = `https://youtube.com/embed/?list=${nextPlaylist}&index=1&controls=0&autoplay=0`;
       loadPlaylist();
