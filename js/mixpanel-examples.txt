@@ -97,3 +97,37 @@ mixpanel.init("d8e183c46e74ad470aeb003fc8af30e6", {
     });
 </script>
 
+<script type="text/javascript" src="js/mixpanel.js" ></script>
+
+    <!--script type="text/javascript" src="js/mixpanel-config.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-identify.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-track.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-alias.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-register.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-set.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-set-once.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-increment.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-append.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-union.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-track-charge.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-clear-charges.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-delete-user.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-remove.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-unset.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-get-group.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-register.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-register-once.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-alias.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-unregister.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-identify.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-name-tag.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-set-config.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-reset.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-opt-in-tracking.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-opt-out-tracking.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-has-opted-in-tracking.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-has-opted-out-tracking.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-clear-opt-in-out-tracking.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-start-batch-senders.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-people.js" ></script-->
