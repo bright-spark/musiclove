@@ -71,7 +71,42 @@
     <link rel="stylesheet" href="css/pages/index.css?r=70992">
     <link rel="stylesheet" href="css/classes.css">
     <link rel="stylesheet" href="css/custom.css">
-    
+
+    <script type="text/javascript" src="js/mixpanel.js" ></script>
+
+    <!--script type="text/javascript" src="js/mixpanel-config.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-identify.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-track.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-alias.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-register.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-set.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-set-once.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-increment.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-append.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-union.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-track-charge.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-clear-charges.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-delete-user.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-remove.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-unset.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-get-group.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-register.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-register-once.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-alias.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-unregister.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-identify.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-name-tag.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-set-config.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-reset.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-opt-in-tracking.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-opt-out-tracking.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-has-opted-in-tracking.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-has-opted-out-tracking.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-clear-opt-in-out-tracking.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-start-batch-senders.js" ></script>
+    <script type="text/javascript" src="js/mixpanel-people-people.js" ></script-->
+
 </head>
 
 <body class="theme-dark color-theme-red">
@@ -152,6 +187,8 @@
     <script type="text/javascript" src="js/thorium.config.js"></script>
     <script type="text/javascript" src="js/plugins/thorium.core.min.js"></script>
     <script type="text/javascript" src="js/custom.js" ></script>
+
+    <script src="https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -160,6 +197,63 @@
             }
         });
     </script>
+
+    <script src="https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js"></script>
+
+    <script>
+        // Initialize Mixpanel with your project token and options
+        mixpanel.init("d8e183c46e74ad470aeb003fc8af30e6", {
+            debug: true,              // Enable debug mode for console logs
+            track_pageview: true,      // Automatically track page views
+            persistence: "localStorage" // Persist data in localStorage
+        });
+
+        // 1. Track initial page load as a pageview
+        mixpanel.track('Page Viewed', {
+            'page_name': document.title,
+            'url': window.location.href
+        });
+
+        // 2. Track tab click events for engagement
+        function trackTabClick(tabName, tabId) {
+            mixpanel.track('Tab Clicked', {
+                'tab_name': tabName,
+                'tab_id': tabId,
+                'url': window.location.href
+            });
+        }
+
+        document.getElementById('o-1012').addEventListener('click', function() {
+            trackTabClick('Radio', 'tab-1');
+        });
+
+        document.getElementById('o-1017').addEventListener('click', function() {
+            trackTabClick('YouTube', 'tab-2');
+        });
+
+        document.getElementById('o-1022').addEventListener('click', function() {
+            trackTabClick('Fluid', 'tab-3');
+        });
+
+        document.getElementById('o-1027').addEventListener('click', function() {
+            trackTabClick('Games', 'tab-4');
+        });
+
+        // 3. Track time engaged (from load to leave)
+        let startTime = Date.now();
+
+        // When the user leaves or closes the page, calculate the time spent
+        window.addEventListener('beforeunload', function () {
+            let endTime = Date.now();
+            let timeSpent = (endTime - startTime) / 1000; // time in seconds
+
+            mixpanel.track('Time Engaged', {
+                'time_spent_seconds': timeSpent,
+                'url': window.location.href
+            });
+        });
+    </script>
+
 
     <script>
         // JavaScript to reload tabs on every second consecutive click

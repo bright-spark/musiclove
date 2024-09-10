@@ -1,0 +1,99 @@
+import mixpanel from "mixpanel-browser";
+
+mixpanel.init("d8e183c46e74ad470aeb003fc8af30e6", {
+  debug: true,
+  track_pageview: true,
+  persistence: "localStorage",
+});
+
+
+<script src="https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js"></script>
+
+
+<script>
+    // Initialize Mixpanel with your project token and options
+    mixpanel.init("d8e183c46e74ad470aeb003fc8af30e6", {
+        debug: true,              // Enable debug mode for console logs
+        track_pageview: true,      // Automatically track page views
+        persistence: "localStorage" // Persist data in localStorage
+    });
+
+    // Track a custom event
+    mixpanel.track('Custom Event Name', {
+        property1: 'value1',
+        property2: 'value2'
+    });
+
+    // Identify a user (optional)
+    mixpanel.identify('USER_ID');
+
+    // Set user properties (optional)
+    mixpanel.people.set({
+        '$name': 'John Doe',       // User's name
+        '$email': 'john@example.com' // User's email
+    });
+
+    // Example: Track button click event
+    document.getElementById('myButton').addEventListener('click', function() {
+        mixpanel.track('Button Clicked', {
+            'button_name': 'myButton'
+        });
+    });
+</script>
+
+<script src="https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js"></script>
+
+<script>
+    // Initialize Mixpanel with your project token and options
+    mixpanel.init("d8e183c46e74ad470aeb003fc8af30e6", {
+        debug: true,              // Enable debug mode for console logs
+        track_pageview: true,      // Automatically track page views
+        persistence: "localStorage" // Persist data in localStorage
+    });
+
+    // 1. Track initial page load as a pageview
+    mixpanel.track('Page Viewed', {
+        'page_name': document.title,
+        'url': window.location.href
+    });
+
+    // 2. Track tab click events for engagement
+    function trackTabClick(tabName, tabId) {
+        mixpanel.track('Tab Clicked', {
+            'tab_name': tabName,
+            'tab_id': tabId,
+            'url': window.location.href
+        });
+    }
+
+    document.getElementById('o-1012').addEventListener('click', function() {
+        trackTabClick('Radio', 'tab-1');
+    });
+
+    document.getElementById('o-1017').addEventListener('click', function() {
+        trackTabClick('YouTube', 'tab-2');
+    });
+
+    document.getElementById('o-1022').addEventListener('click', function() {
+        trackTabClick('Fluid', 'tab-3');
+    });
+
+    document.getElementById('o-1027').addEventListener('click', function() {
+        trackTabClick('Games', 'tab-4');
+    });
+
+    // 3. Track time engaged (from load to leave)
+    let startTime = Date.now();
+
+    // When the user leaves or closes the page, calculate the time spent
+    window.addEventListener('beforeunload', function () {
+        let endTime = Date.now();
+        let timeSpent = (endTime - startTime) / 1000; // time in seconds
+
+        mixpanel.track('Time Engaged', {
+            'time_spent_seconds': timeSpent,
+            'url': window.location.href
+        });
+    });
+</script>
+
