@@ -221,30 +221,32 @@
 
 
     <script>
-        // JavaScript to reload tabs on every second consecutive click
+        // JavaScript to reload tabs on every click after refresh until navigating to another tab
         const tabs = document.querySelectorAll('.tab-link');
         const clickCounts = {};
         let lastTab = "";  // Declare lastTab globally to track between clicks
-    
+        let initialLoad = true; // Flag for initial load to trigger reload on every click after refresh
+        
         tabs.forEach(tab => {
             const tabId = tab.getAttribute('href');
             clickCounts[tabId] = 0; // Initialize click count for each tab
-    
+
             tab.addEventListener('click', function (e) {
                 e.preventDefault();  // Prevent default link behavior if necessary
-    
+
                 // Check if the current tab was the last clicked tab
                 if (lastTab === tabId) {
                     clickCounts[tabId]++;
                 } else {
                     clickCounts[tabId] = 1; // Reset count if a different tab is clicked
+                    initialLoad = false; // If a new tab is selected, stop initial reloading behavior
                 }
-    
+
                 // Set lastTab to the current tab
                 lastTab = tabId;
-    
-                // Reload the tab's iframe on every second click
-                if (clickCounts[tabId] % 2 === 0) {
+
+                // Reload the tab's iframe on every click after refresh or every second click
+                if (initialLoad || clickCounts[tabId] % 2 === 0) {
                     // Find the iframe inside the tab and reload its src
                     const iframe = document.querySelector(`${tabId} iframe`);
                     if (iframe) {
@@ -255,6 +257,7 @@
             });
         });
     </script>
+
 
 
 </body>
