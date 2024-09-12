@@ -1,42 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Playlist Selector</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS for Dark Theme -->
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="utf-8" />
+    <title>Music Love</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="MobileOptimized" content="380" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="google" content="notranslate" />
+    <meta name="author" content="Martin Myburgh" />
+    <meta name="copyright" content="The MIT License (MIT)" />
+    <meta name="keywords"
+        content="Audio, Music, Video, Playlist, Streaming, Online, Best, Popular, Deezer, Spotify, YouTubeMusic, YouTube, Playlist, Free, PWA, Apple, Android, iOS, Windows, Podcast, Vibescout, Event, Social" />
+    <meta name="subject" content="Music Love Quest" />
+    <meta name="description"
+        content="Music Love, your hub for unlimited entertainment. Our free app offers a seamless and anonymous experience for users of all ages. With no login required, you can instantly enjoy our handpicked popular playlists and the best South African live radio. Keep up with your favorite artists and radio hosts, or challenge your friends to our exciting games. With Music Love, we prioritize your privacy and strive to offer a fun and engaging experience without the hassle of so many ads and interruptions. So why wait? Click on the link now and enjoy all the fun features that await you!" />
+    <meta property="og:url" content="https://theradio.fm" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Music Love Quest" />
+    <meta property="og:description" content="From unlikely friends to lovers for life!" />
+    <meta property="og:image" content="https://theradio.fm/icons/apple-touch-icon.png" />
+    <meta property="og:site_name" content="Music Love" />
+
+    <link rel="icon" href="favicon.ico" />
+    <link rel="icon" type="image/png" sizes="512x512" href="./icons/apple-touch-icon-512x512.png" />
+
+    <meta name="theme-color" content="#1e1e1e" />
+
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="msapplication-TileColor" content="#254b4d" />
+    <meta name="msapplication-TileImage" content="./icons/apple-touch-icon-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="./icons/apple-touch-icon-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="./icons/apple-touch-icon-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="./icons/apple-touch-icon-150x150.png" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="musiclove>youtubeplus" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="16x16" href="./icons/apple-touch-icon-16x16.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="./icons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="./icons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./icons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./icons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./icons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./icons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./icons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./icons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon-180x180.png">
+
+    <link rel="manifest" href="/manifest.json">
+  
+    <link href="/splashscreens/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <link href="/splashscreens/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <link href="/splashscreens/iphoneplus_splash.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+    <link href="/splashscreens/iphonex_splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+    <link href="/splashscreens/ipad_splash.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <link href="/splashscreens/ipadpro1_splash.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <link href="/splashscreens/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+  
+    <!-- Tailwind CSS and DaisyUI -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            plugins: [daisyui],
+            daisyui: {
+                themes: ["dark"], // Set dark theme globally
+            },
+        }
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <style>
+        .selected {
+            width: 10rem; /* w-40 in Tailwind */
+        }
+        .unselected {
+            width: 6rem; /* w-24 in Tailwind */
+        }
+    </style>
 </head>
-<body class="bg-black text-light">
-    <div class="container mt-5">
+<body class="bg-black text-white">
+    <div class="container mx-auto mt-10">
         <!-- Bio Section -->
-        <div class="row justify-content-center">
-            <div class="col-md-8 text-center">
-                <div class="card bg-dark text-light p-3">
-                    <img id="profile-image" src="" class="rounded-circle mx-auto" alt="Profile Image" width="150" height="150">
+        <div class="flex justify-center">
+            <div class="card w-full md:w-2/3 bg-neutral text-neutral-content shadow-lg">
+                <div class="card-body items-center text-center">
+                    <img id="profile-image" src="" class="rounded-full" alt="Profile Image" width="150" height="150">
                 </div>
             </div>
         </div>
 
         <!-- Navigation Buttons -->
-        <div class="row mt-4">
-            <div class="col text-center">
-                <button class="btn btn-outline-danger mx-2" id="btn-0"></button>
-                <button class="btn btn-outline-danger mx-2" id="btn-1"></button>
-                <button class="btn btn-outline-danger mx-2" id="btn-2"></button>
-                <button class="btn btn-outline-danger mx-2" id="btn-3"></button>
-                
-            </div>
+        <div class="flex justify-center mt-8">
+            <button class="btn btn-outline border-[#ff4d4d] text-[#ff4d4d] hover:bg-[#ff4d4d] hover:text-black mx-2 unselected" id="btn-0" onclick="selectButton(0)">Button 1</button>
+            <button class="btn btn-outline border-[#ff4d4d] text-[#ff4d4d] hover:bg-[#ff4d4d] hover:text-black mx-2 unselected" id="btn-1" onclick="selectButton(1)">Button 2</button>
+            <button class="btn btn-outline border-[#ff4d4d] text-[#ff4d4d] hover:bg-[#ff4d4d] hover:text-black mx-2 unselected" id="btn-2" onclick="selectButton(2)">Button 3</button>
+            <button class="btn btn-outline border-[#ff4d4d] text-[#ff4d4d] hover:bg-[#ff4d4d] hover:text-black mx-2 unselected" id="btn-3" onclick="selectButton(3)">Button 4</button>
         </div>
 
-        <!-- Content Section with YouTube Embed -->
-        <div class="row mt-4">
-            <div class="col text-center mx-auto ratio ratio-16x9 d-flex flex-column justify-content-center align-items-center rounded mx-auto overflow-hidden video-container">
-                <div id="content-section" class="bg-dark ratio ratio-16x9 d-flex flex-column justify-content-center align-items-center picture-in-picture w-100 h-100 text-light mx-auto overflow-hidden" allow="picture-in-picture allowfullscreen">
+        <!-- Content Section with Responsive YouTube Embed -->
+        <div class="flex justify-center mt-8">
+            <div class="w-full md:w-2/3 rounded-lg overflow-hidden">
+                <div class="relative" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
                     <iframe id="youtube-player"
-                        width="100%" height="100%"
+                        class="absolute top-0 left-0 w-full h-full"
                         src="https://www.youtube.com/embed/"
                         title="YouTube Video Player" 
                         frameborder="0" 
@@ -48,17 +119,13 @@
         </div>
 
         <!-- Footer Section -->
-        <div class="row mt-4">
-            <div class="col text-center">
-                <p class="text-muted">&copy; 2024 YouTube Plus. All rights reserved.</p>
-            </div>
+        <div class="text-center mt-8">
+            <p class="text-gray-400">&copy; 2024 YouTube Plus. All rights reserved.</p>
         </div>
-
     </div>
 
-    <!-- Bootstrap JS (for responsive components) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JavaScript -->
+    <!-- JavaScript -->
     <script src="script.js"></script>
+
 </body>
 </html>

@@ -81,3 +81,36 @@ document.addEventListener('DOMContentLoaded', () => {
     loadBio();  // Load the bio section and first playlist on initial page load
     setupNavButtons();  // Set up navigation buttons for playlists
 });
+
+function selectButton(selectedId) {
+    // Get all buttons
+    const buttons = document.querySelectorAll('button[id^="btn-"]');
+
+    // Loop through buttons and adjust size based on selection
+    buttons.forEach((button, index) => {
+        if (index === selectedId) {
+            button.classList.remove('unselected');
+            button.classList.add('selected');
+        } else {
+            button.classList.remove('selected');
+            button.classList.add('unselected');
+        }
+    });
+}
+
+// Initialize the first button as selected on page load
+window.onload = () => {
+    selectButton(0); // Button 1 is selected by default
+};
+
+// Set up service worker
+// Register the service worker
+/*if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, function(error) {
+            console.log('ServiceWorker registration failed: ', error);
+        });
+    });
+}*/
