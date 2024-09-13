@@ -40,6 +40,20 @@
     <!-- Tailwind CSS (DaisyUI removed) -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <script src="script.js"></script>
+
+    <script>    
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#ff4d4d',
+                    },
+                },
+            },
+        }   
+    </script>
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
@@ -79,7 +93,7 @@
             .unselected {
                 width: 4.5rem;
                 padding: 0.25rem 0.5rem;
-                font-size: 0.625rem;
+                font-size: 0.775rem;
             }
         }
 
@@ -132,16 +146,13 @@
         <!-- Footer Section -->
         <footer class="flex flex-col items-center mt-8 text-sm text-white bg-[#121212] p-4">
             <div class="space-y-2">
-                <p>Powered with ❤️ by 
+                <p>Powered by ❤️ and 
                     <a href="https://youtube.com/@theradiostream" class="text-[#ff4d4d] hover:text-[#ff4d4d]">YouTube</a>
                 </p>
             </div>
         </footer>
     </div>
-
-    <!-- JavaScript -->
     <script src="script.js"></script>
-
 </body>
 
 </html>
