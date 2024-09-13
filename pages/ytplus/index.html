@@ -37,6 +37,12 @@
 
     <link rel="manifest" href="/manifest.json">
 
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
     <!-- Tailwind CSS (DaisyUI removed) -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -54,9 +60,7 @@
         }   
     </script>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
+    <!-- Custom Styles -->
     <style>
         html, body {
             background-color: #121212;
@@ -111,12 +115,12 @@
 </head>
 
 <body class="text-white">
-    <div class="container mx-auto mt-10 px-4 w-full h-full bg-[#121212] text-black font-sans font-light text-sm">
+    <div class="container mx-auto mt-10 px-4 w-full h-full bg-[#121212] text-white font-sans font-light text-sm">
         <!-- Bio Section -->
         <div class="flex justify-center">
             <div class="w-full md:w-1/2 bg-[#121212] rounded-lg overflow-hidden mt-8">
                 <div class="text-center mb-4 p-4 bg-[#121212] rounded flex justify-center items-center gap-4 flex-col md:flex-row">
-                    <img id="profile-image" src="" class="rounded-full" alt="Profile Image of Music Love" width="150" height="150">
+                    <img id="profile-image" src="" class="rounded-full" alt="Profile Image of Music Love" width="150" height="150" loading="lazy">
                 </div>
             </div>
         </div>
@@ -136,6 +140,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Navigation Buttons -->
         <div class="flex justify-center mt-8">
             <button class="border-[#ff4d4d] text-[#ff4d4d] hover:bg-[#ff4d4d] hover:text-black mx-2 selected" id="btn-0" onclick="selectButton(0)">Button 1</button>
@@ -143,6 +148,7 @@
             <button class="border-[#ff4d4d] text-[#ff4d4d] hover:bg-[#ff4d4d] hover:text-black mx-2 unselected" id="btn-2" onclick="selectButton(2)">Button 3</button>
             <button class="border-[#ff4d4d] text-[#ff4d4d] hover:bg-[#ff4d4d] hover:text-black mx-2 unselected" id="btn-3" onclick="selectButton(3)">Button 4</button>
         </div>
+
         <!-- Footer Section -->
         <footer class="flex flex-col items-center mt-8 text-sm text-white bg-[#121212] p-4">
             <div class="space-y-2">
@@ -152,7 +158,23 @@
             </div>
         </footer>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js') // Ensure the path is correct
+                .then(registration => {
+                console.log('Service Worker registered with scope:', registration.scope);
+                })
+                .catch(error => {
+                console.error('Service Worker registration failed:', error);
+                });
+            });
+        }
+    </script>  
+
+    <!-- Deferred JavaScript -->
+    <script src="/js/script.js" defer></script>
 </body>
 
 </html>
