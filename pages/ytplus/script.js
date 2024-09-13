@@ -63,7 +63,7 @@ function loadPlaylist(index) {
     if (isMobile()) {
         setTimeout(() => {
             youtubePlayer.src = playlist.auto;
-        }, 1000);  // Delay allows non-autoplay to load briefly before switching to autoplay
+        }, 500);  // Delay allows non-autoplay to load briefly before switching to autoplay
     }
 }
 
