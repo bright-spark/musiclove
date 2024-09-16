@@ -6,7 +6,7 @@ const data = {
         description:
           "YouTube Plus is a curated playlist collection of the best music videos on YouTube. Enjoy the latest hits and dance tracks from around the world.",
         image:
-          "https://store-images.s-microsoft.com/image/apps.32119.13849106443982885.cfa0ad6e-c759-430b-9f8d-e49be201e898.82443491-35dd-48c1-9b39-caa39119cd39"
+          "profile.png"
       },
       playlists: [
         {
