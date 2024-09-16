@@ -104,12 +104,6 @@ const data = {
     mixpanel.track(eventType, eventData);
   }
   
-  // Make page visible after load
-  window.addEventListener("load", function () {
-    // When the page is fully loaded, make the text visible and allow scrolling
-    document.documentElement.classList.add("loaded");
-  });
-  
   // Initialize the page
   document.addEventListener("DOMContentLoaded", () => {
     loadBio();

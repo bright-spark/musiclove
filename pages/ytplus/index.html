@@ -63,11 +63,15 @@
 
   </div>
 
-  <!-- JavaScript (deferred for loading after page) -->
   <script>
-    
+      // Make page visible after load
+      window.addEventListener("load", function () {
+          // When the page is fully loaded, make the text visible and allow scrolling
+          document.documentElement.classList.add("loaded");
+      });
   </script>
   <script src="script.js"></script>
+  
 </body>
 
 </html>
