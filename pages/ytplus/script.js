@@ -103,12 +103,19 @@ const data = {
   function trackEvent(eventType, eventData) {
     mixpanel.track(eventType, eventData);
   }
+
+  // Make page visible after load
+  window.addEventListener("load", function () {
+    // When the page is fully loaded, make the text visible and allow scrolling
+    //document.documentElement.classList.add("loaded");
+  });
   
   // Initialize the page
   document.addEventListener("DOMContentLoaded", () => {
     loadBio();
     setupNavButtons();
     selectButton(0);
+    document.documentElement.classList.add("loaded");
     trackEvent("Page View", { Page: "Home" });
     console.log("Page initialized");
   });
