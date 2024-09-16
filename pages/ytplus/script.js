@@ -1,56 +1,56 @@
 // JSON data
 const data = {
     bio: {
-      name: "John Doe",
-      title: "Playlist Curator",
-      description:
-        "YouTube Plus is a curated playlist of the best music videos on YouTube. Enjoy the latest hits and dance tracks from around the world.",
-      image:
-        "https://store-images.s-microsoft.com/image/apps.32119.13849106443982885.cfa0ad6e-c759-430b-9f8d-e49be201e898.82443491-35dd-48c1-9b39-caa39119cd39"
-    },
-    playlists: [
-      {
-        title: "Hits",
-        description: "Top US Tracks on YouTube.",
-        url:
-          "https://www.youtube.com/embed/?4QIZE708gJ4&list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&controls=0",
-        auto:
-          "https://www.youtube.com/embed/?4QIZE708gJ4&list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&controls=0&autoplay=1"
+        name: "John Doe",
+        title: "Playlist Curator",
+        description:
+          "YouTube Plus is a curated playlist collection of the best music videos on YouTube. Enjoy the latest hits and dance tracks from around the world.",
+        image:
+          "https://store-images.s-microsoft.com/image/apps.32119.13849106443982885.cfa0ad6e-c759-430b-9f8d-e49be201e898.82443491-35dd-48c1-9b39-caa39119cd39"
       },
-      {
-        title: "Club",
-        description: "Fresh Dance & Club Tracks on YouTube.",
-        url:
-          "https://www.youtube.com/embed/?evJ6gX1lp2o&list=RDCLAK5uy_nhf3h98yS3LCk_bVNQu6GjWG7ARvMaiFQ&controls=0",
-        auto:
-          "https://www.youtube.com/embed/?evJ6gX1lp2o&list=RDCLAK5uy_nhf3h98yS3LCk_bVNQu6GjWG7ARvMaiFQ&controls=0&autoplay=1"
-      },
-      {
-        title: "Pop",
-        description: "Pop Gold Tracks on YouTube.",
-        url:
-          "https://www.youtube.com/embed/?v=hLQl3WQQoQ0&list=RDCLAK5uy_nHSqCJjDrW9HBhCNdF6tWPdnOMngOv0wA&controls=0",
-        auto:
-          "https://www.youtube.com/embed/?v=hLQl3WQQoQ0&list=RDCLAK5uy_nHSqCJjDrW9HBhCNdF6tWPdnOMngOv0wA&controls=0&autoplay=1"
-      },
-      {
-        title: "Ballads",
-        description: "Soft Rock Ballads on YouTube.",
-        url:
-          "https://www.youtube.com/embed/?v=r3Pr1_v7hsw&list=RDCLAK5uy_nyKVppE-RpLkeCcwLct4rvN9e8AAsS_qw&controls=0",
-        auto:
-          "https://www.youtube.com/embed/?v=r3Pr1_v7hsw&list=RDCLAK5uy_nyKVppE-RpLkeCcwLct4rvN9e8AAsS_qw&controls=0&autoplay=1"
-      },
-      {
-        title: "Dance",
-        description: "Today's Dance Tracks on YouTube.",
-        url:
-          "https://www.youtube.com/embed/?ouEl3qTLc0M&list=RDCLAK5uy_kLWIr9gv1XLlPbaDS965-Db4TrBoUTxQ8&controls=0",
-        auto:
-          "https://www.youtube.com/embed/?ouEl3qTLc0M&list=RDCLAK5uy_kLWIr9gv1XLlPbaDS965-Db4TrBoUTxQ8&controls=0&autoplay=1"
-      }
-    ]
-  };
+      playlists: [
+        {
+          title: "Hits",
+          description: "Top US Tracks on YouTube.",
+          url:
+            "https://www.youtube.com/embed/?4QIZE708gJ4&list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&controls=0",
+          auto:
+            "https://www.youtube.com/embed/?4QIZE708gJ4&list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&controls=0&autoplay=1"
+        },
+        {
+          title: "Pop",
+          description: "Pop Gold Tracks on YouTube.",
+          url:
+            "https://www.youtube.com/embed/?v=hLQl3WQQoQ0&list=RDCLAK5uy_nHSqCJjDrW9HBhCNdF6tWPdnOMngOv0wA&controls=0",
+          auto:
+            "https://www.youtube.com/embed/?v=hLQl3WQQoQ0&list=RDCLAK5uy_nHSqCJjDrW9HBhCNdF6tWPdnOMngOv0wA&controls=0&autoplay=1"
+        },
+        {
+          title: "Dance",
+          description: "Today's Dance Tracks on YouTube.",
+          url:
+            "https://www.youtube.com/embed/?ouEl3qTLc0M&list=RDCLAK5uy_kLWIr9gv1XLlPbaDS965-Db4TrBoUTxQ8&controls=0",
+          auto:
+            "https://www.youtube.com/embed/?ouEl3qTLc0M&list=RDCLAK5uy_kLWIr9gv1XLlPbaDS965-Db4TrBoUTxQ8&controls=0&autoplay=1"
+        },
+        {
+          title: "Club",
+          description: "Fresh Dance & Club Tracks on YouTube.",
+          url:
+            "https://www.youtube.com/embed/?evJ6gX1lp2o&list=RDCLAK5uy_nhf3h98yS3LCk_bVNQu6GjWG7ARvMaiFQ&controls=0",
+          auto:
+            "https://www.youtube.com/embed/?evJ6gX1lp2o&list=RDCLAK5uy_nhf3h98yS3LCk_bVNQu6GjWG7ARvMaiFQ&controls=0&autoplay=1"
+        },
+        {
+          title: "Ballads",
+          description: "Soft Rock Ballads on YouTube.",
+          url:
+            "https://www.youtube.com/embed/?v=r3Pr1_v7hsw&list=RDCLAK5uy_nyKVppE-RpLkeCcwLct4rvN9e8AAsS_qw&controls=0",
+          auto:
+            "https://www.youtube.com/embed/?v=r3Pr1_v7hsw&list=RDCLAK5uy_nyKVppE-RpLkeCcwLct4rvN9e8AAsS_qw&controls=0&autoplay=1"
+        },
+      ]
+    };
   
   // Function to check if the device is iOS or Android
   function isMobile() {
