@@ -4,153 +4,145 @@
 <head>
     <meta charset="utf-8" />
     <title>Music Love</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="HandheldFriendly" content="true" />
-    <meta name="MobileOptimized" content="380" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="google" content="notranslate" />
     <meta name="author" content="Martin Myburgh" />
-    <meta name="copyright" content="The MIT License (MIT)" />
-    <meta name="keywords" content="Audio, Music, Video, Playlist, Streaming, Online, Best, Popular, Deezer, Spotify, YouTubeMusic, YouTube, Playlist, Free, PWA, Apple, Android, iOS, Windows, Podcast, Vibescout, Event, Social" />
-    <meta name="subject" content="Music Love Quest" />
-    <meta name="description" content="Music Love, your hub for unlimited entertainment. Our free app offers a seamless and anonymous experience for users of all ages. With no login required, you can instantly enjoy our handpicked popular playlists and the best South African live radio. Keep up with your favorite artists and radio hosts, or challenge your friends to our exciting games. With Music Love, we prioritize your privacy and strive to offer a fun and engaging experience without the hassle of so many ads and interruptions. So why wait? Click on the link now and enjoy all the fun features that await you!" />
-    <meta property="og:url" content="https://theradio.fm" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Music Love Quest" />
-    <meta property="og:description" content="From unlikely friends to lovers for life!" />
-    <meta property="og:image" content="https://theradio.fm/icons/apple-touch-icon.png" />
-    <meta property="og:site_name" content="Music Love" />
+    <meta name="description" content="Music Love, your hub for unlimited entertainment." />
 
+    <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
 
-    <meta name="theme-color" content="#1e1e1e" />
-    <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="msapplication-TileColor" content="#254b4d" />
-    <meta name="msapplication-TileImage" content="./icons/apple-touch-icon-144x144.png" />
-
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="musiclove>youtubeplus" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-    <link rel="manifest" href="/manifest.json">
-
-    <!-- Tailwind CSS (DaisyUI removed) -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com" defer></script>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
         html, body {
-            background-color: #000000;
+            background-color: #000;
             height: 100%;
             margin: 0;
             font-family: 'Roboto', sans-serif;
+            color: transparent;
         }
-        .selected {
+
+        /* Buttons */
+        .button {
             width: 9rem;
-            background-color: rgba(255, 0, 0, 0.1);
-            border: 1px solid #ff4d4d;
-            font-weight: bold;
             padding: 0.5rem 1rem;
             font-size: 0.875rem;
+            font-weight: bold;
             border-radius: 0.5rem;
+            border: 1px solid #000000;
+            color: #ff4d4d;
+            background-color: transparent;
             margin-right: 0.5rem;
             cursor: pointer;
-            transition: background-color 0.3s ease-in-out;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
-        .unselected {
-            width: 4rem;
-            padding: 0.5rem 1rem;
-            font-size: 0.75rem;
-            border-radius: 0.5rem;
-            margin-right: 0.5rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease-in-out;
+
+        .button:hover {
+            background-color: rgba(255, 0, 0, 0.7);
+            color: black;
+        }
+
+        .selected {
+            background-color: rgba(255, 0, 0, 0.3);
+            border: 1px solid #ff4d4d;
+            transform: scale(1.3); /* Slightly larger */
+         
         }
 
         @media (max-width: 640px) {
-            .selected {
+            .button {
                 width: 7rem;
-            }
-            .unselected {
-                width: 4.5rem;
                 padding: 0.25rem 0.5rem;
-                font-size: 0.625rem;
+                font-size: 0.75rem;
             }
         }
 
         @media (min-width: 768px) {
-            .selected {
+            .button {
                 width: 10rem;
             }
-            .unselected {
-                width: 5rem;
-                padding: 0.75rem 1.5rem;
-                font-size: 0.875rem;
-            }
+        }
+
+        /* YouTube Embed */
+        .youtube-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+
+        .youtube-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #101010;
+            padding: 1rem;
+            text-align: center;
+            color: #fff;
+            font-size: 0.875rem;
+        }
+
+        footer p {
+            margin: 0;
         }
     </style>
 </head>
 
-<body class="text-white">
-    <div class="container mx-auto mt-2 px-2 w-full h-full bg-[#000000] text-black font-sans font-light text-sm">
+<body>
+    <!-- Container -->
+    <div class="container mx-auto mt-2 px-4 w-full h-full bg-[#000000] text-white font-sans font-light text-sm">
+        
         <!-- Bio Section -->
         <div class="flex justify-center">
-            <div class="w-full md:w-1/2 bg-[#000000] rounded-lg overflow-hidden mt-8">
+            <div class="w-full md:w-1/2 bg-[#000000] rounded-lg overflow-hidden mt-8 text-center">
                 <div class="text-center mb-0 mt-4 bg-[#000000] rounded flex justify-center items-center gap-1 flex-col md:flex-row">
-                    <img id="profile-image" src="" class="rounded-full" alt="Profile Image of Music Love" width="150" height="150">
+                    <img id="profile-image" src="profile.png" class="rounded-full" alt="Profile Image of Music Love" width="150" height="150">
                     <div>
                         <div class="text-2xl mt-2 mb-1">
-                            <a class="text-[#ff4d4d] hover:text-white" href="https://youtube.com/@theradiostream" target="_blank" rel="noopener noreferrer">mo͞ozik</a>  
+                            <a class="text-[#ff4d4d] hover:text-white" href="https://youtube.com/@theradiostream" target="_blank" rel="noopener noreferrer">mo͞ozik</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Content Section with Responsive YouTube Embed -->
+        <!-- YouTube Embed Section -->
         <div class="flex justify-center mt-8">
             <div class="w-full md:w-2/3 rounded-lg overflow-hidden">
-                <div class="relative" style="padding-top: 56.25%;">
-                    <iframe id="youtube-player"
-                        class="absolute top-0 left-0 w-full h-full"
-                        src="https://www.youtube.com/embed/"
-                        title="YouTube Video Player" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        allowfullscreen>
-                    </iframe>
+                <div class="youtube-container">
+                    <iframe id="youtube-player" class="youtube-iframe" src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                        title="YouTube Video Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
 
-        <!-- Navigation Buttons -->
+        <!-- Buttons Section -->
         <div class="flex justify-center mt-8">
-            <button class="border-[#ff4d4d] text-[#ff4d4d] hover:bg-[#ff4d4d] hover:text-black mx-2 selected" id="btn-0" onclick="selectButton(0)">Button 1</button>
-            <button class="border-[#ff4d4d] text-[#ff4d4d] hover:bg-[#ff4d4d] hover:text-black mx-2 unselected" id="btn-1" onclick="selectButton(1)">Button 2</button>
-            <button class="border-[#ff4d4d] text-[#ff4d4d] hover:bg-[#ff4d4d] hover:text-black mx-2 unselected" id="btn-2" onclick="selectButton(2)">Button 3</button>
-            <button class="border-[#ff4d4d] text-[#ff4d4d] hover:bg-[#ff4d4d] hover:text-black mx-2 unselected" id="btn-3" onclick="selectButton(3)">Button 4</button>
+            <button class="button selected" id="btn-0" onclick="selectButton(0)">Button 1</button>
+            <button class="button" id="btn-1" onclick="selectButton(1)">Button 2</button>
+            <button class="button" id="btn-2" onclick="selectButton(2)">Button 3</button>
+            <button class="button" id="btn-3" onclick="selectButton(3)">Button 4</button>
         </div>
 
-        <!-- Footer Section -->
-        <footer class="flex flex-col space-y-0 mt-8 items-center text-sm text-white bg-[#101010] p-4 rounded w-full text-center">
-            <div class="space-y-2">
-                <p>   
-                Made with ❤️ in South Africa
-                </p>
-            </div>
+        <!-- Footer -->
+        <footer class="mt-8">
+            <p>Made with ❤️ in South Africa</p>
         </footer>
 
     </div>
 
-    <!-- JavaScript -->
-    <script src="script.js"></script>
-
-
+    <!-- JavaScript (deferred for loading after page) -->
+    <script defer src="script.js"></script>
 
 </body>
 
