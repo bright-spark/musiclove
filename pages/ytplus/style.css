@@ -1,144 +1,100 @@
-/* Global Styles */
-html, body {
-    background-color: #000;
-    height: 100%;
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-    color: white;
+/* Initially hide the entire page */
+html,
+body {
+  visibility: hidden;
+  /* Hide content until JS loads */
+  background-color: #000;
+  height: 100%;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  color: transparent;
+  /* Hidden text initially */
+  overflow: hidden;
+  /* Prevents scroll before content is ready */
 }
 
-/* Container */
-.container {
-    width: 100%;
-    height: 100%;
-    padding: 0 1rem;
-    background-color: #000000;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* Once the DOM and JS are fully loaded, make content visible */
+.loaded body {
+  visibility: visible;
+  /* Show the content */
+  color: white;
+  overflow: auto;
+  /* Re-enable scroll after loading */
 }
 
-/* Bio Section */
-.bio-section {
-    width: 100%;
-    margin-top: 2rem;
-    display: flex;
-    justify-content: center;
-}
-
-.bio-content {
-    width: 100%;
-    max-width: 50%;
-    background-color: #000000;
-    border-radius: 0.5rem;
-    text-align: center;
-}
-
-.bio-inner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    flex-direction: column;
-}
-
-.profile-image {
-    border-radius: 50%;
-}
-
-.bio-title {
-    font-size: 2rem;
-    margin: 0.5rem 0;
-}
-
-.bio-link {
-    color: #ff4d4d;
-    text-decoration: none;
-}
-
-.bio-link:hover {
-    color: white;
-}
-
-/* YouTube Section */
-.youtube-section {
-    width: 100%;
-    max-width: 66%;
-    margin-top: 2rem;
-}
-
-.youtube-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-}
-
-.youtube-iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-/* Button Section */
-.button-section {
-    margin-top: 2rem;
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
+/* Buttons */
 .button {
-    width: 9rem;
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-    font-weight: bold;
-    border-radius: 0.5rem;
-    border: 1px solid transparent;
-    color: #ff4d4d;
-    background-color: transparent;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
+  width: 9rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: normal;
+  border-radius: 0.5rem;
+  border: 1px solid #000000;
+  color: #ff4d4d;
+  background-color: transparent;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .button:hover {
-    background-color: #ff4d4d;
-    color: black;
+  background-color: rgba(255, 0, 0, 0.7);
+  color: black;
 }
 
 .selected {
-    background-color: rgba(255, 0, 0, 0.5);
-    border: 1px solid #ff4d4d;
-    transform: scale(1.2); /* Slightly larger */
+  background-color: rgba(255, 0, 0, 0.3);
+  border: 1px solid #ff4d4d;
+  transform: scale(1.0);
+  /* Slightly larger */
 }
 
-/* Media Queries */
+@media (max-width: 480px) {
+  .button {
+    width: 6rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
+}
+
 @media (max-width: 640px) {
-    .button {
-        width: 7rem;
-        padding: 0.25rem 0.5rem;
-        font-size: 0.75rem;
-    }
+  .button {
+    width: 7rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
 }
 
 @media (min-width: 768px) {
-    .button {
-        width: 10rem;
-    }
+  .button {
+    width: 10rem;
+  }
+}
+
+/* YouTube Embed */
+.youtube-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+
+.youtube-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 /* Footer */
-.footer {
-    background-color: #101010;
-    padding: 1rem;
-    text-align: center;
-    color: #fff;
-    font-size: 0.875rem;
-    margin-top: 2rem;
+footer {
+  background-color: #101010;
+  padding: 1rem;
+  text-align: center;
+  color: #fff;
+  font-size: 0.875rem;
 }
 
-.footer p {
-    margin: 0;
+footer p {
+  margin: 0;
 }
