@@ -42,7 +42,7 @@
             width: 9rem;
             padding: 0.5rem 1rem;
             font-size: 0.875rem;
-            font-weight: bold;
+            font-weight: normal;
             border-radius: 0.5rem;
             border: 1px solid #000000;
             color: #ff4d4d;
@@ -58,6 +58,12 @@
         }
 
         .selected {
+            background-color: rgba(255, 0, 0, 0.3);
+            border: 1px solid #ff4d4d;
+            transform: scale(1.3); /* Slightly larger */
+        }
+
+        .selected.button:hover {
             background-color: rgba(255, 0, 0, 0.3);
             border: 1px solid #ff4d4d;
             transform: scale(1.3); /* Slightly larger */
