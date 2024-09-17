@@ -43,7 +43,7 @@ body {
 }
 
 .selected {
-  background-color: rgba(255, 0, 0, 0.3);
+  background-color: rgba(255, 0, 0, 0.21);
   border: 1px solid #f6161c;
   transform: scale(1.3);
 }
