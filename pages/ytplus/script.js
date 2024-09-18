@@ -120,7 +120,7 @@ document.addEventListener("load", () => {
 window.addEventListener("DOMContentLoaded", function () {
   // When the page is fully loaded, make the text visible and allow scrolling
   document.documentElement.classList.add("loaded");
-});
+})
 
 loadBio(); // Load the bio content
 setupNavButtons(); // Set up the navigation buttons
@@ -134,34 +134,35 @@ function openYouTube() {
   setTimeout(function() {
       window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
   }, 1000); // Adjust the delay if necessary
-};
+}
 
 // Function to handle opening the external link
 function openExternalLink() {
-// Frame bust if the page is inside an iframe
-if (window.top !== window.self) {
-  window.top.location = window.location.href;
-};  
-  // Attempt to open the YouTube app
-    // Try to open the YouTube app
-    window.location.href = 'youtube://www.youtube.com/watch?v=dQw4w9WgXcQ';
-    
-    // Fallback to the browser if the app is not installed
-    setTimeout(function() {
-        window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
-    }, 1000);  // Adjust delay if necessary
-};
+  
+  // Frame bust if the page is inside an iframe
+  if (window.top !== window.self) {
+    window.top.location = window.location.href;
+  };
+
+  // Try to open the YouTube app
+  window.location.href = 'youtube://www.youtube.com/watch?v=dQw4w9WgXcQ';
+  
+  // Fallback to the browser if the app is not installed
+  setTimeout(function() {
+      window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+  }, 1000);  // Adjust delay if necessary
+}
 
 function openYouTubeInFullScreen() {
   window.open('https://www.youtube.com/@theradiostream', 'YouTubeWindow', 'fullscreen=yes,noopener,noreferrer');    
-};
+}
 function openYouTubeMaximized() {
   window.open('https://www.youtube.com/@theradiostream', 'YouTubeWindow', `width=${screen.width},height=${screen.height},noopener,noreferrer`);
-};  
+}
 
 function openYouTubePopOut() {
   window.open('https://www.youtube.com/@theradiostream', 'YouTubeWindow', 'width=800,height=600,noopener,noreferrer');
-};
+}
 
 function openYouTubePopUnder() {
   let newWindow = window.open('https://www.youtube.com/@theradiostream', 'YouTubeWindow', 'width=800,height=600,noopener,noreferrer');
@@ -171,4 +172,4 @@ function openYouTubePopUnder() {
           window.focus();
       }, 500); // 500ms delay before refocusing on the current window
   }
-};
+}
