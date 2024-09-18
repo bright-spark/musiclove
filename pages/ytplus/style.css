@@ -177,6 +177,10 @@ body {
 .container {
   max-width: 1200px;
   margin: 10 auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* Spacer to push footer to bottom if content is less */
