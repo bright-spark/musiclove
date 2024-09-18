@@ -100,12 +100,12 @@ function selectButton(selectedId) {
 }
 
 // Open YouTube external link
-function openYouTube() {
+function buster() {
 
   // Frame bust if the page is inside an iframe
-  /*if (window.top !== window.self) {
+  if (window.top !== window.self) {
     window.top.location = window.location.href;
-  };*/
+  };
 
   window.location.href = 'youtube://www.youtube.com/@theradiostream';
   
@@ -113,6 +113,32 @@ function openYouTube() {
   setTimeout(function() {
     window.location.href = 'https://www.youtube.com/@theradiostream';
   }, 1000); // Delay adjusted for smoother transition
+}
+
+function openYouTubePopUnder() {
+  let newWindow = window.open('https://www.youtube.com/@theradiostream', 'YouTubeWindow', 'width=800,height=600,noopener,noreferrer');
+  if (newWindow) {
+      // After a short delay, return focus to the original window to simulate a pop-under.
+      setTimeout(function() {
+          window.focus();
+      }, 500); // 500ms delay before refocusing on the current window
+  }
+}
+
+function openYouTubePopOut() {
+  window.open('https://www.youtube.com/@theradiostream', 'YouTubeWindow', 'width=800,height=600,noopener,noreferrer');
+}
+
+function openYouTubeMaximized() {
+  window.open('https://www.youtube.com/@theradiostream', 'YouTubeWindow', `width=${screen.width},height=${screen.height},noopener,noreferrer`);
+}
+
+function openYouTubeInFullScreen() {
+  window.open('https://www.youtube.com/@theradiostream', 'YouTubeWindow', 'fullscreen=yes,noopener,noreferrer');
+}
+
+function openYouTubeInNewWindow() {
+  window.open('https://www.youtube.com/@theradiostream', 'YouTubeWindow', 'width=800,height=600,noopener,noreferrer');
 }
 
 // Track various events
