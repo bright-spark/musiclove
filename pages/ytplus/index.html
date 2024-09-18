@@ -65,6 +65,7 @@
     </footer>
 
     <div class="flex text-center px-4 pb-4">
+        <button class="button" onclick="openYouTube()">Open YouTube</button>
         <button class="button" onclick="openYouTubeInFullScreen()">Open YouTube (Full)</button>
         <button class="button" onclick="openYouTubeMaximized()">Open YouTube (Max)</button>
         <button class="button" onclick="openYouTubePopOut()">Open YouTube (Pop-out)</button>
@@ -79,6 +80,18 @@
   </div>
 
   <script>
+
+  function openYouTube() {
+      // Attempt to open the YouTube app
+      window.location.href = 'youtube://www.youtube.com/watch?v=dQw4w9WgXcQ';
+      
+      // Fallback to opening YouTube in the browser after a short delay if app is not installed
+      setTimeout(function() {
+          window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+      }, 1000); // Adjust the delay if necessary
+  }}
+
+
     function openYouTubeInFullScreen() {
       window.open('https://www.youtube.com/@theradiostream', 'YouTubeWindow', 'fullscreen=yes,noopener,noreferrer');    
     };
