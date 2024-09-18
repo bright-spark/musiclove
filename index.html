@@ -73,67 +73,75 @@
     <link rel="stylesheet" href="css/custom.css">
 
     <script>
-        // Define an event listener for the iframe to handle link clicks
-        function setupIframeListener() {
-            const iframe = document.getElementById("contentFrame");
-            iframe.contentWindow.document.addEventListener("click", function(event) {
-                let target = event.target;
+        function setupContentFrameListener() {
+            const contentFrame = document.getElementById("contentFrame");
 
-                // Check if it's a YouTube link
-                if (target.tagName === "A" && target.href.includes("youtube.com")) {
-                    event.preventDefault(); // Prevent the default link behavior
-                    handleYouTubeLink(target.href);
-                }
-            });
-        }
-
-        // Function to pop out the YouTube link, open in the app, then return scope
-        function handleYouTubeLink(youtubeUrl) {
-            // Open the YouTube app or browser
-            openYouTubeLink(youtubeUrl);
-
-            // Return focus to the iframe (preserve content)
-            returnToIframe();
-        }
-
-        // Function to open YouTube link in app or browser
-        function openYouTubeLink(youtubeUrl) {
-            // Try opening in YouTube App (if available)
-            const youtubeAppUrl = "vnd.youtube://" + youtubeUrl.split('watch?v=')[1];
-            window.location.href = youtubeAppUrl;
-
-            // If the app fails to open, it will fallback to the default browser
-            setTimeout(() => {
-                window.location.href = youtubeUrl; // Opens in default browser
-            }, 1000); // Timeout to handle if the app isn't available
-        }
-
-        // Function to return to the iframe and maintain content
-        function returnToIframe() {
-            const iframe = document.getElementById("iframe-1042");
-
-            // Use `postMessage()` to notify the iframe to focus
-            iframe.contentWindow.postMessage("focusIframe", "*");
-
-            // If necessary, preserve iframe state using sessionStorage or localStorage
-            iframe.onload = function() {
-                // Preserving iframe content (this depends on what needs to be preserved)
-                const iframeContent = sessionStorage.getItem("iframeContent");
-                if (iframeContent) {
-                    iframe.contentWindow.document.body.innerHTML = iframeContent;
-                }
+            // When content frame is fully loaded, setup its iframe listener
+            contentFrame.onload = function() {
+                // Listen for YouTube iframe events inside contentFrame
+                setupYouTubeIframeListener(contentFrame);
             };
         }
 
-        // Store iframe content before popping out the YouTube link
-        function preserveIframeContent() {
-            const iframe = document.getElementById("iframe-1042");
+        // Set up listener for YouTube iframe events within contentFrame
+        function setupYouTubeIframeListener(contentFrame) {
+            // Grab the inner YouTube iframe
+            const youtubeIframe = contentFrame.contentWindow.document.querySelector("iframe[src*='youtube.com']");
+
+            if (youtubeIframe) {
+                // Monitor fullscreen events from the YouTube iframe
+                youtubeIframe.addEventListener("fullscreenchange", function() {
+                    console.log("YouTube iframe is entering or exiting fullscreen");
+                });
+
+                // Optional: You can add other event listeners for the YouTube iframe
+
+                // Intercept popout links inside YouTube iframe (optional)
+                youtubeIframe.contentWindow.document.addEventListener("click", function(event) {
+                    let target = event.target;
+
+                    // Check if it's a YouTube link
+                    if (target.tagName === "A" && target.href.includes("youtube.com")) {
+                        event.preventDefault(); // Prevent default YouTube link behavior
+                        handleYouTubeLink(target.href); // Custom handling
+                    }
+                });
+            }
+        }
+
+        // Handle YouTube link popout (same as before)
+        function handleYouTubeLink(youtubeUrl) {
+            openYouTubeLink(youtubeUrl);
+            returnToIframe(); // Handle return to iframe content
+        }
+
+        function openYouTubeLink(youtubeUrl) {
+            const youtubeAppUrl = "vnd.youtube://" + youtubeUrl.split('watch?v=')[1];
+            window.location.href = youtubeAppUrl;
+
+            setTimeout(() => {
+                window.location.href = youtubeUrl;
+            }, 1000); // Fallback to browser
+        }
+
+        function returnToIframe() {
+            const contentFrame = document.getElementById("contentFrame");
+
+            // Preserve iframe state
+            preserveIframeContent(contentFrame);
+
+            // Use postMessage() to signal return to the iframe
+            contentFrame.contentWindow.postMessage("focusIframe", "*");
+        }
+
+        // Store content of iframe for restoring later
+        function preserveIframeContent(iframe) {
             const content = iframe.contentWindow.document.body.innerHTML;
             sessionStorage.setItem("iframeContent", content);
         }
 
         window.onload = function() {
-            setupIframeListener();
+            setupContentFrameListener();
         };
     </script>
 
@@ -216,7 +224,7 @@
 
                     <div id="tab-2" class="page-content tab">
                         <div id="div-1042" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
-                            <iframe title="tab-2" id="iframe-1042" src="pages/ytplus/index.html" loading="eager" class="embed-responsive-item"></iframe>
+                            <iframe title="tab-2" id="iframe-1042 contentFrame" src="pages/ytplus/index.html" loading="eager" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
 
