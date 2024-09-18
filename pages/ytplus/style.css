@@ -76,6 +76,9 @@ body {
   position: relative;
   padding-bottom: 56.25%;
   height: 0;
+  overflow: hidden;
+  border: none;
+  background-color: #00000077;
 }
 
 .youtube-iframe {
@@ -85,11 +88,24 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
+  border: none;
 }
 
 /* Spacer to push footer to bottom if content is less */
 .flex-grow {
   flex-grow: 1;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  border: none;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+body::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari, and Opera */
 }
 
 /* With Love */ 
