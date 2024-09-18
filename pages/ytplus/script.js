@@ -101,11 +101,11 @@ function selectButton(selectedId) {
 
 // Open YouTube external link
 function openYouTube() {
-  
+
   // Frame bust if the page is inside an iframe
-  if (window.top !== window.self) {
+  /*if (window.top !== window.self) {
     window.top.location = window.location.href;
-  };
+  };*/
 
   window.location.href = 'youtube://www.youtube.com/@theradiostream';
   
