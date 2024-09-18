@@ -104,18 +104,24 @@ function trackEvent(eventType, eventData) {
   mixpanel.track(eventType, eventData);
 }
 
-// Make page visible after load
-window.addEventListener("load", function () {
-  // When the page is fully loaded, make the text visible and allow scrolling
-  //document.documentElement.classList.add("loaded");
-});
+// Track click events
+function trackClickEvent(eventType, eventData) {
+  mixpanel.track(eventType, eventData);
+  trackEvent(eventType, eventData);
+}
 
 // Initialize the page
-document.addEventListener("DOMContentLoaded", () => {
-  loadBio();
-  setupNavButtons();
-  selectButton(0);
-  document.documentElement.classList.add("loaded");
+document.addEventListener("load", () => {
   trackEvent("Page View", { Page: "Home" });
   console.log("Page initialized");
 });
+
+// Make page visible after load
+window.addEventListener("DOMContentLoaded", function () {
+  // When the page is fully loaded, make the text visible and allow scrolling
+  document.documentElement.classList.add("loaded");
+});
+
+loadBio(); // Load the bio content
+setupNavButtons(); // Set up the navigation buttons
+selectButton(0); // Select the first button by default
