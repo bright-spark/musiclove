@@ -115,6 +115,16 @@ function buster() {
   }, 1000); // Delay adjusted for smoother transition
 }
 
+function openYouTube() {
+
+  window.location.href = 'youtube://www.youtube.com/@theradiostream';
+  
+  // Fallback to opening YouTube in the browser
+  setTimeout(function() {
+    window.location.href = 'https://www.youtube.com/@theradiostream';
+  }, 1000); // Delay adjusted for smoother transition
+}
+
 function openYouTubePopUnder() {
   let newWindow = window.open('https://www.youtube.com/@theradiostream', 'YouTubeWindow', 'width=800,height=600,noopener,noreferrer');
   if (newWindow) {
