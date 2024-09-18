@@ -176,7 +176,8 @@ body {
 
 .container {
   max-width: 1200px;
-  margin: 0 auto;
+  max-height: 90%;
+  margin: 10 auto;
 }
 
 /* Spacer to push footer to bottom if content is less */
