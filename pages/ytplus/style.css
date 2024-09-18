@@ -38,12 +38,12 @@ body {
 }
 
 .button:hover {
-  background-color: transparent;
-  color: black;
+  background-color:#ff000885;
+  color: #f6161c;
 }
 
 .selected {
-  background-color: rgba(255, 0, 0, 0.45);
+
   border: 1px solid #f6161c;
   transform: scale(1.3);
   color:#f6161c;
