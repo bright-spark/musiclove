@@ -99,6 +99,16 @@ function selectButton(selectedId) {
   });
 }
 
+// Open YouTube external link
+function openYouTube() {
+  window.location.href = 'youtube://www.youtube.com/@theradiostream';
+  
+  // Fallback to opening YouTube in the browser
+  setTimeout(function() {
+    window.location.href = 'https://www.youtube.com/@theradiostream';
+  }, 1000); // Delay adjusted for smoother transition
+}
+
 // Track various events
 function trackEvent(eventType, eventData) {
   mixpanel.track(eventType, eventData);
@@ -106,8 +116,8 @@ function trackEvent(eventType, eventData) {
 
 // Make page visible after load
 window.addEventListener("load", function () {
-  // When the page is fully loaded, make the text visible and allow scrolling
-  //document.documentElement.classList.add("loaded");
+  trackEvent("Page View", { Page: "Home" });
+  console.log("Page initialized");
 });
 
 // Initialize the page
@@ -116,6 +126,4 @@ document.addEventListener("DOMContentLoaded", () => {
   setupNavButtons();
   selectButton(0);
   document.documentElement.classList.add("loaded");
-  trackEvent("Page View", { Page: "Home" });
-  console.log("Page initialized");
 });
