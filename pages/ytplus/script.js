@@ -107,7 +107,7 @@ const data = {
   // Make page visible after load
   window.addEventListener("load", function () {
     // When the page is fully loaded, make the text visible and allow scrolling
-    //document.documentElement.classList.add("loaded");
+    document.documentElement.classList.add("loaded");
   });
   
   // Initialize the page
@@ -115,7 +115,7 @@ const data = {
     loadBio();
     setupNavButtons();
     selectButton(0);
-    document.documentElement.classList.add("loaded");
+    //document.documentElement.classList.add("loaded");
     trackEvent("Page View", { Page: "Home" });
     console.log("Page initialized");
   });

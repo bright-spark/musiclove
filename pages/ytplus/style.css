@@ -1,10 +1,10 @@
 /* Initially hide the entire page */
 html,
 body {
-  /*visibility: hidden;*/
-  height: 100%;
+  visibility: hidden;
+  height: 80vh;
   /* Hide content until JS loads */
-  background-color: black;
+  background-color: #000000;
   margin: 0;
   font-family: 'Roboto', sans-serif;
   color: transparent;
@@ -18,7 +18,7 @@ body {
   visibility: visible;
   /* Show the content */
   color: white;
-  /*overflow: auto;*/
+  overflow: auto;
   /* Re-enable scroll after loading */
 }
 
@@ -91,7 +91,8 @@ body {
 footer {
   background-color: #101010;
   padding: 1rem;
-  text-align: center;;
+  text-align: center;
+  color: #fff;
   font-size: 0.875rem;
 }
 
