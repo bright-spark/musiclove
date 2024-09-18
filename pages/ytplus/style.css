@@ -117,84 +117,32 @@ body {
   color: #fff;
 } 
 
-.mt-4 .mb-4 {  
+.mt-4 {  
   margin-top: 1rem;
 }
 
-.mt-8 .mb-8 {
+.mt-8 {
   margin-top: 2rem;
 }
 
-.mt-10 .mb-10{
+.mt-10 {
   margin-top: 2.5rem;
 }
 
-.mt-12 .mb-12{
+.mt-12 {
   margin-top: 3rem;
 } 
 
-.mt-16 .mb-16 {  
+.mt-16 {  
   margin-top: 4rem; 
 }
 
-.mt-20 .mb-20 {
+.mt-20 {
   margin-top: 5rem;
 }
 
-.mt-24 .mb-24 {  
+.mt-24 {  
   margin-top: 6rem;
-}
-
-.mt-32 .mb-32 {
-  margin-top: 8rem;
-}
-
-.mt-40 .mb-40 {
-  margin-top: 10rem;
-}
-
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto; 
-}
-
-.p-4 {
-  padding: 1rem;
-}
-
-.p-8 {
-  padding: 2rem;
-}
-
-.p-12 {
-  padding: 3rem;
-} 
-
-.p-16 { 
-  padding: 4rem;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Spacer to push footer to bottom if content is less */
-.flex-grow {
-  flex-grow: 1;
-} 
-
-/* Media Queries */
-@media (max-width: 768px) {
-  .container {
-    max-width: 90%;
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    max-width: 90%;
-  }
 }
 
 /* Footer */
