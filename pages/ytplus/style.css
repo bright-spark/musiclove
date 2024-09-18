@@ -18,7 +18,7 @@ body {
   visibility: visible;
   /* Show the content */
   color: white;
-  overflow: hidden;
+  overflow: auto;
   /* Re-enable scroll after loading */
 }
 
