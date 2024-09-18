@@ -18,7 +18,7 @@ body {
   visibility: visible;
   /* Show the content */
   color: white;
-  overflow: auto;
+  overflow: hidden;
   /* Re-enable scroll after loading */
 }
 
@@ -176,7 +176,6 @@ body {
 
 .container {
   max-width: 1200px;
-  max-height: 100%;
   margin: 10 auto;
 }
 
