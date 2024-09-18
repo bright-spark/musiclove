@@ -2,7 +2,7 @@
 html,
 body {
   visibility: hidden;
-  height: 80vh;
+  height: 95%;
   /* Hide content until JS loads */
   background-color: #000000;
   margin: 0;
