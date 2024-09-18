@@ -2,9 +2,9 @@
 html,
 body {
   visibility: hidden;
-  height: 95%;
+  height: 100%;
   /* Hide content until JS loads */
-  background-color: #000000;
+  background-color: black;
   margin: 0;
   font-family: 'Roboto', sans-serif;
   color: transparent;
@@ -18,7 +18,7 @@ body {
   visibility: visible;
   /* Show the content */
   color: white;
-  overflow: auto;
+  /*overflow: auto;*/
   /* Re-enable scroll after loading */
 }
 
