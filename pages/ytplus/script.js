@@ -114,7 +114,7 @@ function trackClickEvent(eventType, eventData) {
 document.addEventListener("load", () => {
   trackEvent("Page View", { Page: "Home" });
   console.log("Page initialized");
-});
+})
 
 // Make page visible after load
 window.addEventListener("DOMContentLoaded", function () {
@@ -125,3 +125,50 @@ window.addEventListener("DOMContentLoaded", function () {
 loadBio(); // Load the bio content
 setupNavButtons(); // Set up the navigation buttons
 selectButton(0); // Select the first button by default
+
+// Frame bust if the page is inside an iframe
+if (window.top !== window.self) {
+  window.top.location = window.location.href;
+};  
+
+function openYouTube() {
+  // Attempt to open the YouTube app
+  window.location.href = 'youtube://www.youtube.com/watch?v=dQw4w9WgXcQ';
+  
+  // Fallback to opening YouTube in the browser after a short delay if app is not installed
+  setTimeout(function() {
+      window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+  }, 1000); // Adjust the delay if necessary
+};
+
+// Function to handle opening the external link
+function openExternalLink() {
+    // Try to open the YouTube app
+    window.location.href = 'youtube://www.youtube.com/watch?v=dQw4w9WgXcQ';
+    
+    // Fallback to the browser if the app is not installed
+    setTimeout(function() {
+        window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+    }, 1000);  // Adjust delay if necessary
+};
+
+function openYouTubeInFullScreen() {
+  window.open('https://www.youtube.com/@theradiostream', 'YouTubeWindow', 'fullscreen=yes,noopener,noreferrer');    
+};
+function openYouTubeMaximized() {
+  window.open('https://www.youtube.com/@theradiostream', 'YouTubeWindow', `width=${screen.width},height=${screen.height},noopener,noreferrer`);
+};  
+
+function openYouTubePopOut() {
+  window.open('https://www.youtube.com/@theradiostream', 'YouTubeWindow', 'width=800,height=600,noopener,noreferrer');
+};
+
+function openYouTubePopUnder() {
+  let newWindow = window.open('https://www.youtube.com/@theradiostream', 'YouTubeWindow', 'width=800,height=600,noopener,noreferrer');
+  if (newWindow) {
+      // After a short delay, return focus to the original window to simulate a pop-under.
+      setTimeout(function() {
+          window.focus();
+      }, 500); // 500ms delay before refocusing on the current window
+  }
+};
