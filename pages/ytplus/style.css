@@ -3,8 +3,7 @@ html,
 body {
   visibility: hidden;
   /* Hide content until JS loads */
-  background-color: #000;
-  height: 100%;
+  background-color: #000000;
   margin: 0;
   font-family: 'Roboto', sans-serif;
   color: transparent;
