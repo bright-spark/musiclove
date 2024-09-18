@@ -7,7 +7,9 @@ body {
   height: 100%;
   margin: 0;
   font-family: 'Roboto', sans-serif;
+  /* Prevents content from flashing when JS loads */ 
   color: transparent;
+  /* Prevents scroll before content is ready */
   /* Hidden text initially */
   overflow: hidden;
   /* Prevents scroll before content is ready */
@@ -18,7 +20,7 @@ body {
   visibility: visible;
   /* Show the content */
   color: white;
-  overflow: auto;
+  /*overflow: auto;*/
   /* Re-enable scroll after loading */
 }
 
