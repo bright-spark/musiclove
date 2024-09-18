@@ -1,56 +1,44 @@
 // JSON data
 const data = {
   bio: {
-      name: "John Doe",
-      title: "Playlist Curator",
-      description:
-        "YouTube Plus is a curated playlist collection of the best music videos on YouTube. Enjoy the latest hits and dance tracks from around the world.",
-      image:
-        "profile.png"
+    name: "John Doe",
+    title: "Playlist Curator",
+    description: "YouTube Plus is a curated playlist collection of the best music videos on YouTube. Enjoy the latest hits and dance tracks from around the world.",
+    image: "profile.png"
+  },
+  playlists: [
+    {
+      title: "Hits",
+      description: "Top US Tracks on YouTube.",
+      url: "https://www.youtube.com/embed/4QIZE708gJ4?list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&controls=0",
+      auto: "https://www.youtube.com/embed/4QIZE708gJ4?list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&controls=0&autoplay=1"
     },
-    playlists: [
-      {
-        title: "Hits",
-        description: "Top US Tracks on YouTube.",
-        url:
-          "https://www.youtube.com/embed/?4QIZE708gJ4&list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&controls=0",
-        auto:
-          "https://www.youtube.com/embed/?4QIZE708gJ4&list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&controls=0&autoplay=1"
-      },
-      {
-        title: "Pop",
-        description: "Pop Gold Tracks on YouTube.",
-        url:
-          "https://www.youtube.com/embed/?v=hLQl3WQQoQ0&list=RDCLAK5uy_nHSqCJjDrW9HBhCNdF6tWPdnOMngOv0wA&controls=0",
-        auto:
-          "https://www.youtube.com/embed/?v=hLQl3WQQoQ0&list=RDCLAK5uy_nHSqCJjDrW9HBhCNdF6tWPdnOMngOv0wA&controls=0&autoplay=1"
-      },
-      {
-        title: "Dance",
-        description: "Today's Dance Tracks on YouTube.",
-        url:
-          "https://www.youtube.com/embed/?ouEl3qTLc0M&list=RDCLAK5uy_kLWIr9gv1XLlPbaDS965-Db4TrBoUTxQ8&controls=0",
-        auto:
-          "https://www.youtube.com/embed/?ouEl3qTLc0M&list=RDCLAK5uy_kLWIr9gv1XLlPbaDS965-Db4TrBoUTxQ8&controls=0&autoplay=1"
-      },
-      {
-        title: "Club",
-        description: "Fresh Dance & Club Tracks on YouTube.",
-        url:
-          "https://www.youtube.com/embed/?evJ6gX1lp2o&list=RDCLAK5uy_nhf3h98yS3LCk_bVNQu6GjWG7ARvMaiFQ&controls=0",
-        auto:
-          "https://www.youtube.com/embed/?evJ6gX1lp2o&list=RDCLAK5uy_nhf3h98yS3LCk_bVNQu6GjWG7ARvMaiFQ&controls=0&autoplay=1"
-      },
-      {
-        title: "Ballads",
-        description: "Soft Rock Ballads on YouTube.",
-        url:
-          "https://www.youtube.com/embed/?v=r3Pr1_v7hsw&list=RDCLAK5uy_nyKVppE-RpLkeCcwLct4rvN9e8AAsS_qw&controls=0",
-        auto:
-          "https://www.youtube.com/embed/?v=r3Pr1_v7hsw&list=RDCLAK5uy_nyKVppE-RpLkeCcwLct4rvN9e8AAsS_qw&controls=0&autoplay=1"
-      },
-    ]
-  };
+    {
+      title: "Pop",
+      description: "Pop Gold Tracks on YouTube.",
+      url: "https://www.youtube.com/embed/hLQl3WQQoQ0?list=RDCLAK5uy_nHSqCJjDrW9HBhCNdF6tWPdnOMngOv0wA&controls=0",
+      auto: "https://www.youtube.com/embed/hLQl3WQQoQ0?list=RDCLAK5uy_nHSqCJjDrW9HBhCNdF6tWPdnOMngOv0wA&controls=0&autoplay=1"
+    },
+    {
+      title: "Dance",
+      description: "Today's Dance Tracks on YouTube.",
+      url: "https://www.youtube.com/embed/ouEl3qTLc0M?list=RDCLAK5uy_kLWIr9gv1XLlPbaDS965-Db4TrBoUTxQ8&controls=0",
+      auto: "https://www.youtube.com/embed/ouEl3qTLc0M?list=RDCLAK5uy_kLWIr9gv1XLlPbaDS965-Db4TrBoUTxQ8&controls=0&autoplay=1"
+    },
+    {
+      title: "Club",
+      description: "Fresh Dance & Club Tracks on YouTube.",
+      url: "https://www.youtube.com/embed/evJ6gX1lp2o?list=RDCLAK5uy_nhf3h98yS3LCk_bVNQu6GjWG7ARvMaiFQ&controls=0",
+      auto: "https://www.youtube.com/embed/evJ6gX1lp2o?list=RDCLAK5uy_nhf3h98yS3LCk_bVNQu6GjWG7ARvMaiFQ&controls=0&autoplay=1"
+    },
+    {
+      title: "Ballads",
+      description: "Soft Rock Ballads on YouTube.",
+      url: "https://www.youtube.com/embed/r3Pr1_v7hsw?list=RDCLAK5uy_nyKVppE-RpLkeCcwLct4rvN9e8AAsS_qw&controls=0",
+      auto: "https://www.youtube.com/embed/r3Pr1_v7hsw?list=RDCLAK5uy_nyKVppE-RpLkeCcwLct4rvN9e8AAsS_qw&controls=0&autoplay=1"
+    }
+  ]
+};
 
 // Function to check if the device is iOS or Android
 function isMobile() {
@@ -75,7 +63,7 @@ function loadPlaylist(index) {
   if (isMobile()) {
     setTimeout(() => {
       youtubePlayer.src = playlist.auto;
-    }, 5); // Delay allows non-autoplay to load briefly before switching to autoplay
+    }, 200); // Increased delay for better UX
   }
 }
 
@@ -104,72 +92,31 @@ function trackEvent(eventType, eventData) {
   mixpanel.track(eventType, eventData);
 }
 
-// Track click events
+// Track click events (refactored)
 function trackClickEvent(eventType, eventData) {
-  mixpanel.track(eventType, eventData);
   trackEvent(eventType, eventData);
 }
 
 // Initialize the page
-document.addEventListener("load", () => {
+window.addEventListener("load", () => {
   trackEvent("Page View", { Page: "Home" });
   console.log("Page initialized");
 })
 
-// Make page visible after load
+// Make page visible after load and initialize functions
 window.addEventListener("DOMContentLoaded", function () {
-  // When the page is fully loaded, make the text visible and allow scrolling
   document.documentElement.classList.add("loaded");
-})
+  loadBio(); // Load the bio content
+  setupNavButtons(); // Set up the navigation buttons
+  selectButton(0); // Select the first button by default
+});
 
-loadBio(); // Load the bio content
-setupNavButtons(); // Set up the navigation buttons
-selectButton(0); // Select the first button by default
-
+// Open YouTube external link
 function openYouTube() {
-  // Attempt to open the YouTube app
   window.location.href = 'youtube://www.youtube.com/watch?v=dQw4w9WgXcQ';
   
-  // Fallback to opening YouTube in the browser after a short delay if app is not installed
+  // Fallback to opening YouTube in the browser
   setTimeout(function() {
-      window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
-  }, 1000); // Adjust the delay if necessary
-}
-
-// Function to handle opening the external link
-function openExternalLink() {
-  
-  // Frame bust if the page is inside an iframe
-  if (window.top !== window.self) {
-    window.top.location = window.location.href;
-  };
-
-  // Try to open the YouTube app
-  window.location.href = 'youtube://www.youtube.com/watch?v=dQw4w9WgXcQ';
-  
-  // Fallback to the browser if the app is not installed
-  setTimeout(function() {
-      window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
-  }, 1000);  // Adjust delay if necessary
-}
-
-function openYouTubeInFullScreen() {
-  window.open('https://www.youtube.com/@theradiostream', 'YouTubeWindow', 'fullscreen=yes,noopener,noreferrer');    
-}
-function openYouTubeMaximized() {
-  window.open('https://www.youtube.com/@theradiostream', 'YouTubeWindow', `width=${screen.width},height=${screen.height},noopener,noreferrer`);
-}
-
-function openYouTubePopOut() {
-  window.open('https://www.youtube.com/@theradiostream', 'YouTubeWindow', 'width=800,height=600,noopener,noreferrer');
-}
-
-function openYouTubePopUnder() {
-  let newWindow = window.open('https://www.youtube.com/@theradiostream', 'YouTubeWindow', 'width=800,height=600,noopener,noreferrer');
-  if (newWindow) {
-      // After a short delay, return focus to the original window to simulate a pop-under.
-      setTimeout(function() {
-          window.focus();
-      }, 500); // 500ms delay before refocusing on the current window
-  }
+    window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+  }, 1000); // Delay adjusted for smoother transition
 }
