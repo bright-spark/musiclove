@@ -114,7 +114,7 @@ function trackClickEvent(eventType, eventData) {
 window.addEventListener("load", () => {
   trackEvent("Page View", { Page: "Home" });
   console.log("Page initialized");
-})
+});
 
 // Make page visible after load
 window.addEventListener("DOMContentLoaded", function () {
@@ -123,4 +123,5 @@ window.addEventListener("DOMContentLoaded", function () {
   selectButton(0); // Select the first button by default
   // When the page is fully loaded, make the text visible and allow scrolling
   document.documentElement.classList.add("loaded");
-})
+});
+
