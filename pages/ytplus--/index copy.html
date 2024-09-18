@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Music Love</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Martin Myburgh" />
+  <meta name="description" content="Music Love, your hub for unlimited entertainment." />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com" defer></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+  <!-- Container -->
+  <div class="container mx-auto mt-8 px-4 bg-[#000000] text-white font-sans font-light text-sm">
+
+    <!-- Bio Section -->
+    <div class="flex justify-center mt-8 mb-0 mx-auto bg-[#000000] items-center gap-1 flex-col md:flex-row">
+      <div class="w-full md:w-1/2 bg-[#000000] rounded-lg overflow-hidden mx-auto text-center">
+        <div class="text-center mb-0 mx-auto bg-[#000000] rounded flex justify-center items-center gap-1 flex-col md:flex-row">
+          <img id="profile-image" class="rounded-full" alt="Profile Image of Music Love" width="130" height="130">
+          </div>
+            <div class="text-2xl mt-2 mb-0">
+              <a class="text-[#f6161c] hover:text-white" href="https://youtube.com/@theradiostream" target="_blank" rel="noopener noreferrer">mo͞ozik</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- YouTube Embed Section -->
+    <div class="flex justify-center mt-4 mb-0 mx-auto bg-[#000000] items-center gap-1 flex-col md:flex-row">
+      <div class="w-full md:w-2/3 rounded-lg overflow-hidden">
+        <div class="youtube-container">
+          <iframe id="youtube-player" class="youtube-iframe" src="https://www.youtube.com/embed/" title="YouTube Video Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Buttons Section -->
+    <div class="flex justify-center mt-4 gap-2 px-4">
+      <button class="button selected" id="btn-0" onclick="selectButton(0)">Button 1</button>
+      <button class="button" id="btn-1" onclick="selectButton(1)">Button 2</button>
+      <button class="button" id="btn-2" onclick="selectButton(2)">Button 3</button>
+      <button class="button" id="btn-3" onclick="selectButton(3)">Button 4</button>
+      <button class="button" id="btn-4" onclick="selectButton(4)">Button 5</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-10 text-center rounded-lg flex justify-center items-center gap-1 flex-col md:flex-row">
+      <p class="text-xs sm:text-xl sm:text-xl text-white-500">Made with ❤️ in South Africa</p>
+      <p class="text-xs sm:text-xl sm:text-xl text-gray-500">© 2024 Music Love. All rights reserved.</p>
+    </footer>
+
+  </div>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+
+</body>
+
+</html>
