@@ -126,11 +126,6 @@ loadBio(); // Load the bio content
 setupNavButtons(); // Set up the navigation buttons
 selectButton(0); // Select the first button by default
 
-// Frame bust if the page is inside an iframe
-if (window.top !== window.self) {
-  window.top.location = window.location.href;
-};  
-
 function openYouTube() {
   // Attempt to open the YouTube app
   window.location.href = 'youtube://www.youtube.com/watch?v=dQw4w9WgXcQ';
@@ -143,6 +138,11 @@ function openYouTube() {
 
 // Function to handle opening the external link
 function openExternalLink() {
+// Frame bust if the page is inside an iframe
+if (window.top !== window.self) {
+  window.top.location = window.location.href;
+};  
+  // Attempt to open the YouTube app
     // Try to open the YouTube app
     window.location.href = 'youtube://www.youtube.com/watch?v=dQw4w9WgXcQ';
     
