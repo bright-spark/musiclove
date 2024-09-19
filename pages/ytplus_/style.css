@@ -1,0 +1,235 @@
+/* Initially hide the entire page */
+html,
+body {
+  visibility: hidden;
+  /* Hide content until JS loads */
+  background-color: #000;
+  height: 100%;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  color: transparent;
+  /* Hidden text initially */
+  overflow: hidden;
+  /* Prevents scroll before content is ready */
+}
+
+/* Once the DOM and JS are fully loaded, make content visible */
+.loaded body {
+  visibility: visible;
+  /* Show the content */
+  color: white;
+  overflow: auto;
+  /* Re-enable scroll after loading */
+}
+
+/* Buttons */
+.button {
+  width: 9rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: normal;
+  border-radius: 0.5rem;
+  border: 1px solid #000000;
+  color: #f6161c;
+  background-color: transparent;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button:hover {
+  background-color:#000000;
+  color: #f6161c;
+}
+
+.selected {
+
+  border: 1px solid #f6161c;
+  transform: scale(1.3);
+  color:#f6161c;
+}
+
+@media (max-width: 480px) {
+  .button {
+    width: 6rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .button {
+    width: 7rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .button {
+    width: 10rem;
+  }
+}
+
+/* YouTube Embed */
+.youtube-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border: none;
+  background-color: #00000077;
+}
+
+.youtube-iframe {
+  visibility: visible;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Spacer to push footer to bottom if content is less */
+.flex-grow {
+  flex-grow: 1;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  border: none;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+body::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari, and Opera */
+}
+
+/* With Love */ 
+.text-center {
+  text-align: center;
+}
+
+.text-gray-500 {  
+  color: #6b7280;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+} 
+
+.text-xl {  
+  font-size: 1.25rem;
+}
+
+.text-ytplus {
+  color: #f6161c;
+} 
+
+.text-white {
+  color: #fff;
+} 
+
+.mt-0 .mb-0 {  
+  margin-top: 0%;
+}
+
+.mt-4 .mb-4 {  
+  margin-top: 1rem;
+}
+
+.mt-8 .mb-8 {
+  margin-top: 2rem;
+}
+
+.mt-10 .mb-10{
+  margin-top: 2.5rem;
+}
+
+.mt-12 .mb-12{
+  margin-top: 3rem;
+} 
+
+.mt-16 .mb-16 {  
+  margin-top: 4rem; 
+}
+
+.mt-20 .mb-20 {
+  margin-top: 5rem;
+}
+
+.mt-24 .mb-24 {  
+  margin-top: 6rem;
+}
+
+.mt-32 .mb-32 {
+  margin-top: 8rem;
+}
+
+.mt-40 .mb-40 {
+  margin-top: 10rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto; 
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.p-8 {
+  padding: 2rem;
+}
+
+.p-12 {
+  padding: 3rem;
+} 
+
+.p-16 { 
+  padding: 4rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 10 auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Spacer to push footer to bottom if content is less */
+.flex-grow {
+  flex-grow: 1;
+} 
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .container {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    max-width: 90%;
+  }
+}
+
+/* Footer */
+footer {
+  background-color: #101010;
+  padding: 1rem;
+  text-align: center;
+  color: #fff;
+  font-size: 0.875rem;
+}
+
+footer p {
+  margin: 0;
+}

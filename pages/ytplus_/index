@@ -26,31 +26,31 @@
 
 <body>
   <!-- Container -->
-  <div class="container mx-auto px-4 w-full h-full text-white font-sans font-light text-xs">
+  <div class="container mx-auto mt-4 px-4 w-full h-full font-sans font-light text-sm">
 
     <!-- Bio Section -->
     <div class="flex justify-center">
-      <div class="w-full md:w-1/2 rounded-lg mt-0 text-center">
-        <div class="text-center mb-0 mt-2 rounded flex justify-center items-center gap-1 flex-col md:flex-row">
-          <img id="profile-image" class="rounded-full" alt="Profile Image of Music Love" width="130" height="150">
+      <div class="w-full md:w-1/2 text-center">
+        <div class="text-center mt-2 flex justify-center items-center gap-1 flex-col md:flex-row">
+          <img id="profile-image" class="rounded-full" alt="Profile Image of Music Love" width="140" height="140">
         </div>
-        <div class="text-2xl mt-2 mb-0">
-          <a class="hover:text-white-500 text-ytplus" href="https://youtube.com/@theradiostream" target="_blank" rel="noopener noreferrer">mo͞ozik</a>
+        <div class="text-3xl mt-2">
+          <p>mo͞o<a class="hover:text-white-500 text-ytplus" href="https://youtube.com/@theradiostream" target="_blank" rel="noopener noreferrer">zik</a></p>
         </div>  
       </div>
     </div>
 
     <!-- YouTube Embed Section -->
-    <div class="flex justify-center mt-4">
+    <div class="flex justify-center mt-10">
       <div class="w-full md:w-2/3 rounded-lg overflow-hidden">
-        <div class="youtube-container">
-          <iframe id="youtube-player" class="youtube-iframe" src="https://www.youtube.com/embed/" title="YouTube Video Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <div class="youtube-container accelerometer autoplay clipboard-write encrypted-media gyroscope picture-in-picture web-share">
+          <iframe title="youtube-iframe" id="youtube-player" class="youtube-iframe" frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
     </div>
 
     <!-- Buttons Section -->
-    <div class="flex mt-5 gap-2 px-4">
+    <div class="flex justify-center mt-8 gap-2 px-4">
       <button class="button selected" id="btn-0" onclick="selectButton(0)">Button 1</button>
       <button class="button" id="btn-1" onclick="selectButton(1)">Button 2</button>
       <button class="button" id="btn-2" onclick="selectButton(2)">Button 3</button>
@@ -62,13 +62,14 @@
     <div class="flex-grow"></div>
 
     <!-- Footer -->
-    <footer class="flex justify-center items-center flex-col md:flex-row mt-10 text-center px-4 pb-8 pt-8 gap-1 rounded-lg" onclick="openYouTube();">
+  
+    <footer class="mt-10 text-center px-4 pb-8 pt-8 gap-1 rounded-lg">
       <p>Powered by <a class="text-ytplus hover:text-white" href="https://youtube.com/@theradiostream" target="_blank" rel="noopener noreferrer">mo͞ozik</a></p>
     </footer>
-
+  
     <!-- With Love -->
-    <div class="flex justify-center items-center flex-col md:flex-row mt-4 text-center px-4 pb-4" onclick="openYouTube();">
-      <p class="text-xs sm:text-sm text-gray-500">Made with music ❤️ from South Africa</p>
+    <div class="mt-4 mb-10 text-center">
+      <p class="text-sm sm:text-sm text-gray-500">Made with music <a class="text-ytplus hover:text-white" href="https://youtube.com/@theradiostream" target="_blank" rel="noopener noreferrer">❤️</a> from South Africa</p>
     </div>
     
   </div>
