@@ -23,19 +23,14 @@
   <style>
     /* Ensure the body and html don't overflow the viewport */
     html, body {
-      visibility: hidden;
       background-color: #000;
       height: 100%;
       margin: 0;
       font-family: 'Roboto', sans-serif;
-      color: transparent;
-      overflow: hidden;
     }
 
     .loaded body {
       visibility: visible;
-      color: white;
-      overflow: hidden; /* Prevent any body overflow */
     }
 
     /* Buttons */
@@ -76,10 +71,9 @@
       position: relative;
     }
 
-    /* Arrow Styling */
+    /* Arrow Styling - Removed borders and increased triangle size */
     .arrow {
       background: transparent;
-      border: 2px solid red;
       padding: 0.5rem;
       cursor: pointer;
       transition: background-color 0.3s ease;
@@ -92,10 +86,11 @@
       background-color: rgba(255, 0, 0, 0.1);
     }
 
+    /* Increase the size of the arrow icons by 2px */
     .arrow svg {
       fill: red;
-      width: 1.5rem;
-      height: 1.5rem;
+      width: 1.7rem; /* Increased from 1.5rem */
+      height: 1.7rem; /* Increased from 1.5rem */
     }
 
     .arrow-container {
@@ -156,8 +151,8 @@
       }
 
       .arrow svg {
-        width: 1.2rem;
-        height: 1.2rem;
+        width: 1.4rem; /* Increased by 2px */
+        height: 1.4rem; /* Increased by 2px */
       }
     }
 
@@ -170,8 +165,8 @@
       }
 
       .arrow svg {
-        width: 1rem;
-        height: 1rem;
+        width: 1.2rem; /* Increased by 2px */
+        height: 1.2rem; /* Increased by 2px */
       }
     }
   </style>
@@ -310,6 +305,21 @@
       });
 
       selectButton(0); // Select the first button on load
+
+      // Center the first button in the scroller
+      centerButton(0);
+    }
+
+    // Function to center a button in the button container
+    function centerButton(index) {
+      const buttonContainer = document.getElementById("button-container");
+      const button = document.getElementById(`btn-${index}`);
+      const containerWidth = buttonContainer.offsetWidth;
+      const buttonLeft = button.offsetLeft;
+      const buttonWidth = button.offsetWidth;
+
+      // Scroll to center the button
+      buttonContainer.scrollLeft = buttonLeft - (containerWidth / 2) + (buttonWidth / 2);
     }
 
     // Function to create a button with attached event listener
@@ -321,6 +331,7 @@
       button.onclick = () => {
         loadPlaylist(index);
         selectButton(index);
+        centerButton(index); // Center the button when clicked
       };
       return button;
     }
