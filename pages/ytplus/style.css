@@ -18,8 +18,7 @@ body {
   visibility: visible;
   /* Show the content */
   color: white;
-  overflow: hidden;
-  overflow: -moz-hidden-unscrollable;
+  overflow: auto;
   /* Re-enable scroll after loading */
 }
 
