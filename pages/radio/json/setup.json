@@ -17,7 +17,7 @@
     "outerRay": 130,
     "innerRay": 120,
     "outerPadding":30,
-    "innerPadding":20,
+    "innerPadding":30,
     "sectorPadding":2.5,
     "trackColor":"#111111",
     "loadedColor": "#222222",
