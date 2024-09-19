@@ -69,11 +69,11 @@
     .button-container {
       display: flex;
       flex-wrap: nowrap;
-      overflow-x: scroll;
+      overflow-x: auto;
       scroll-behavior: smooth;
       -ms-overflow-style: none;
       scrollbar-width: none;
-      max-width: calc(5 * 9rem);  /* Ensure only 5 buttons (9rem each) are visible */
+      max-width: 100%;  /* Make the container responsive */
     }
 
     /* Hide scrollbar for Chrome, Safari, and Opera */
@@ -297,7 +297,7 @@
     function scrollLeft() {
       const container = document.querySelector(".button-container");
       container.scrollBy({
-        left: -9 * 16, // Scroll to the left by 9rem (1 button width)
+        left: -144, // Scroll to the left by 144px (9rem)
         behavior: 'smooth'
       });
     }
@@ -306,7 +306,7 @@
     function scrollRight() {
       const container = document.querySelector(".button-container");
       container.scrollBy({
-        left: 9 * 16, // Scroll to the right by 9rem (1 button width)
+        left: 144, // Scroll to the right by 144px (9rem)
         behavior: 'smooth'
       });
     }
