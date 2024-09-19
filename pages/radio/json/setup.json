@@ -16,7 +16,7 @@
     "height": 800,
     "outerRay": 130,
     "innerRay": 120,
-    "outerPadding":50,
+    "outerPadding":20,
     "innerPadding":20,
     "sectorPadding":2.5,
     "trackColor":"#111111",
