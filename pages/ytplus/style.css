@@ -2,24 +2,23 @@
 html,
 body {
   visibility: hidden;
-  /* Hide content until JS loads */
   background-color: #000;
+  width: 100%;
   height: 100%;
   margin: 0;
   font-family: 'Roboto', sans-serif;
   color: transparent;
-  /* Hidden text initially */
   overflow: hidden;
-  /* Prevents scroll before content is ready */
+  border: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Once the DOM and JS are fully loaded, make content visible */
 .loaded body {
   visibility: visible;
-  /* Show the content */
   color: white;
-  overflow: auto;
-  /* Re-enable scroll after loading */
+  overflow: hidden;
 }
 
 /* Buttons */
@@ -94,14 +93,6 @@ body {
 /* Spacer to push footer to bottom if content is less */
 .flex-grow {
   flex-grow: 1;
-}
-
-body {
-  width: 100%;
-  height: 100%;
-  border: none;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
 }
 
 body::-webkit-scrollbar {
