@@ -21,19 +21,23 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
-    /* Ensure the body and html don't overflow the viewport */
     html, body {
+      visibility: hidden;
       background-color: #000;
       height: 100%;
       margin: 0;
       font-family: 'Roboto', sans-serif;
+      color: transparent;
+      overflow: hidden;
     }
 
     .loaded body {
-      visibility: visible;
+      visibility: visible !important; /* Ensure visibility */
+      color: white !important;        /* Set the correct text color */
+      background-color: #000;         /* Restore the background */
+      overflow: auto;                 /* Allow scrolling, if needed */
     }
 
-    /* Buttons */
     .button {
       width: 9rem;
       padding: 0.5rem 1rem;
@@ -54,24 +58,21 @@
       color: #f6161c;
     }
 
-    /* Selected button style (adjusting text size, not scaling the entire button) */
     .selected {
       font-size: 1.3rem;
       border: 1px solid #f6161c;
     }
 
-    /* Scrollable Button Row */
     .button-container {
       display: flex;
       flex-wrap: nowrap;
-      overflow-x: hidden; /* No horizontal scrollbar */
-      overflow-y: hidden; /* Hide vertical overflow */
+      overflow-x: hidden;
+      overflow-y: hidden;
       scroll-behavior: smooth;
       max-width: 100%;
       position: relative;
     }
 
-    /* Arrow Styling - Removed borders and increased triangle size */
     .arrow {
       background: transparent;
       padding: 0.5rem;
@@ -86,11 +87,10 @@
       background-color: rgba(255, 0, 0, 0.1);
     }
 
-    /* Increase the size of the arrow icons by 2px */
     .arrow svg {
       fill: red;
-      width: 1.7rem; /* Increased from 1.5rem */
-      height: 1.7rem; /* Increased from 1.5rem */
+      width: 1.7rem;
+      height: 1.7rem;
     }
 
     .arrow-container {
@@ -98,10 +98,9 @@
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      overflow: hidden; /* Prevents arrow container overflow */
+      overflow: hidden;
     }
 
-    /* Other CSS from the original code */
     .youtube-container {
       position: relative;
       padding-bottom: 56.25%;
@@ -124,7 +123,7 @@
       padding: 1rem;
       text-align: center;
       color: #fff;
-      overflow: hidden; /* Prevents footer overflow */
+      overflow: hidden;
     }
 
     footer a {
@@ -132,9 +131,7 @@
       text-decoration: none;
     }
 
-    /* Media Queries for Responsiveness */
     @media (max-width: 1024px) {
-      /* Buttons for medium-sized screens (tablets) */
       .button {
         width: 7rem;
         padding: 0.4rem 0.8rem;
@@ -143,7 +140,6 @@
     }
 
     @media (max-width: 768px) {
-      /* Buttons for smaller screens (small tablets/phones) */
       .button {
         width: 6rem;
         padding: 0.3rem 0.6rem;
@@ -151,13 +147,12 @@
       }
 
       .arrow svg {
-        width: 1.4rem; /* Increased by 2px */
-        height: 1.4rem; /* Increased by 2px */
+        width: 1.4rem;
+        height: 1.4rem;
       }
     }
 
     @media (max-width: 480px) {
-      /* Buttons for mobile screens */
       .button {
         width: 5rem;
         padding: 0.25rem 0.5rem;
@@ -165,8 +160,8 @@
       }
 
       .arrow svg {
-        width: 1.2rem; /* Increased by 2px */
-        height: 1.2rem; /* Increased by 2px */
+        width: 1.2rem;
+        height: 1.2rem;
       }
     }
   </style>
@@ -174,7 +169,6 @@
 </head>
 
 <body>
-  <!-- Container -->
   <div class="container mx-auto mt-4 px-4 w-full h-full font-sans font-light text-sm">
 
     <!-- Bio Section -->
@@ -216,7 +210,6 @@
       </button>
     </div>
 
-    <!-- Spacer to push footer to bottom -->
     <div class="flex-grow"></div>
 
     <!-- Footer -->
@@ -232,54 +225,60 @@
 
   <!-- JavaScript -->
   <script>
-    // JSON data for bio and playlists
     const data = {
       bio: {
         name: "John Doe",
         title: "Playlist Curator",
-        description: "YouTube Plus is a curated playlist collection of the best music videos on YouTube.",
-        image: "profile.png"
+        description:
+          "YouTube Plus is a curated playlist collection of the best music videos on YouTube. Enjoy the latest hits and dance tracks from around the world.",
+        image:
+          "profile.png"
       },
       playlists: [
         {
           title: "Hits",
-          url: "https://www.youtube.com/embed/4QIZE708gJ4?controls=0",
-          auto: "https://www.youtube.com/embed/4QIZE708gJ4?controls=0&autoplay=1"
+          description: "Top US Tracks on YouTube.",
+          url:
+            "https://www.youtube.com/embed/?4QIZE708gJ4&list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&controls=0",
+          auto:
+            "https://www.youtube.com/embed/?4QIZE708gJ4&list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&controls=0&autoplay=1"
         },
         {
           title: "Pop",
-          url: "https://www.youtube.com/embed/hLQl3WQQoQ0?controls=0",
-          auto: "https://www.youtube.com/embed/hLQl3WQQoQ0?controls=0&autoplay=1"
+          description: "Pop Gold Tracks on YouTube.",
+          url:
+            "https://www.youtube.com/embed/?v=hLQl3WQQoQ0&list=RDCLAK5uy_nHSqCJjDrW9HBhCNdF6tWPdnOMngOv0wA&controls=0",
+          auto:
+            "https://www.youtube.com/embed/?v=hLQl3WQQoQ0&list=RDCLAK5uy_nHSqCJjDrW9HBhCNdF6tWPdnOMngOv0wA&controls=0&autoplay=1"
         },
         {
           title: "Dance",
-          url: "https://www.youtube.com/embed/ouEl3qTLc0M?controls=0",
-          auto: "https://www.youtube.com/embed/ouEl3qTLc0M?controls=0&autoplay=1"
+          description: "Today's Dance Tracks on YouTube.",
+          url:
+            "https://www.youtube.com/embed/?ouEl3qTLc0M&list=RDCLAK5uy_kLWIr9gv1XLlPbaDS965-Db4TrBoUTxQ8&controls=0",
+          auto:
+            "https://www.youtube.com/embed/?ouEl3qTLc0M&list=RDCLAK5uy_kLWIr9gv1XLlPbaDS965-Db4TrBoUTxQ8&controls=0&autoplay=1"
         },
         {
           title: "Club",
-          url: "https://www.youtube.com/embed/evJ6gX1lp2o?controls=0",
-          auto: "https://www.youtube.com/embed/evJ6gX1lp2o?controls=0&autoplay=1"
+          description: "Fresh Dance & Club Tracks on YouTube.",
+          url:
+            "https://www.youtube.com/embed/?evJ6gX1lp2o&list=RDCLAK5uy_nhf3h98yS3LCk_bVNQu6GjWG7ARvMaiFQ&controls=0",
+          auto:
+            "https://www.youtube.com/embed/?evJ6gX1lp2o&list=RDCLAK5uy_nhf3h98yS3LCk_bVNQu6GjWG7ARvMaiFQ&controls=0&autoplay=1"
         },
         {
           title: "Ballads",
-          url: "https://www.youtube.com/embed/r3Pr1_v7hsw?controls=0",
-          auto: "https://www.youtube.com/embed/r3Pr1_v7hsw?controls=0&autoplay=1"
+          description: "Soft Rock Ballads on YouTube.",
+          url:
+            "https://www.youtube.com/embed/?v=r3Pr1_v7hsw&list=RDCLAK5uy_nyKVppE-RpLkeCcwLct4rvN9e8AAsS_qw&controls=0",
+          auto:
+            "https://www.youtube.com/embed/?v=r3Pr1_v7hsw&list=RDCLAK5uy_nyKVppE-RpLkeCcwLct4rvN9e8AAsS_qw&controls=0&autoplay=1"
         },
-        {
-          title: "Chill",
-          url: "https://www.youtube.com/embed/LnIU32wdbNc?controls=0",
-          auto: "https://www.youtube.com/embed/LnIU32wdbNc?controls=0&autoplay=1"
-        },
-        {
-          title: "Classics",
-          url: "https://www.youtube.com/embed/5NV6Rdv1a3I?controls=0",
-          auto: "https://www.youtube.com/embed/5NV6Rdv1a3I?controls=0&autoplay=1"
-        }
       ]
     };
 
-    let buttonWidth = 144; // Default button width in pixels (9rem = 144px)
+    let buttonWidth = 144; // Default button width in pixels
 
     // Calculate the button width dynamically based on the actual rendered size
     function calculateButtonWidth() {
@@ -289,13 +288,11 @@
       }
     }
 
-    // Load bio content
     function loadBio() {
       document.getElementById("profile-image").src = data.bio.image;
       document.getElementById("youtube-player").src = data.playlists[0].url;
     }
 
-    // Dynamically load buttons from the playlists array
     function loadButtons() {
       const buttonContainer = document.querySelector(".button-container");
 
@@ -305,12 +302,9 @@
       });
 
       selectButton(0); // Select the first button on load
-
-      // Center the first button in the scroller
-      centerButton(0);
+      centerButton(0); // Center the first button
     }
 
-    // Function to center a button in the button container
     function centerButton(index) {
       const buttonContainer = document.getElementById("button-container");
       const button = document.getElementById(`btn-${index}`);
@@ -322,7 +316,6 @@
       buttonContainer.scrollLeft = buttonLeft - (containerWidth / 2) + (buttonWidth / 2);
     }
 
-    // Function to create a button with attached event listener
     function createButton(playlist, index) {
       const button = document.createElement("button");
       button.classList.add("button");
@@ -336,61 +329,75 @@
       return button;
     }
 
-    // Function to load playlist content (preroll normal followed by auto)
     function loadPlaylist(index) {
       const youtubePlayer = document.getElementById("youtube-player");
       youtubePlayer.src = data.playlists[index].url;
 
-      // Switch to autoplay URL after 5ms
       setTimeout(() => {
         youtubePlayer.src = data.playlists[index].auto;
       }, 5);
     }
 
-    // Function to handle button selection state
     function selectButton(selectedId) {
-      document.querySelectorAll('.button').forEach((button, index) => {
-        button.classList.toggle("selected", index === selectedId);
+      document.querySelectorAll('.button').forEach((button) => {
+        const buttonId = button.id.split('-')[1];
+        button.classList.toggle("selected", buttonId == selectedId);
       });
     }
 
-    // Scroll the button container to the left and dynamically manage buttons
     function scrollLeft() {
       const container = document.getElementById('button-container');
       const firstButton = container.firstElementChild;
 
-      // Move the first button to the end immediately
       container.appendChild(firstButton);
-
-      // Adjust the scroll position to maintain smoothness
       container.scrollLeft += buttonWidth;
     }
 
-    // Scroll the button container to the right and dynamically manage buttons
     function scrollRight() {
       const container = document.getElementById('button-container');
       const lastButton = container.lastElementChild;
 
-      // Move the last button to the beginning immediately
       container.prepend(lastButton);
-
-      // Adjust the scroll position to maintain smoothness
       container.scrollLeft -= buttonWidth;
     }
 
-    // Add event listeners for left and right arrow buttons
+    // Touch handling for touch-sensitive scrolling
+    let isTouching = false;
+    let startX = 0;
+    let touchScrollLeft = 0;
+
+    function handleTouchStart(event) {
+      isTouching = true;
+      startX = event.touches[0].pageX;
+      touchScrollLeft = document.getElementById('button-container').scrollLeft;
+    }
+
+    function handleTouchMove(event) {
+      if (!isTouching) return;
+      const touchX = event.touches[0].pageX;
+      const walk = (touchX - startX) * 1.5;
+      document.getElementById('button-container').scrollLeft = touchScrollLeft - walk;
+    }
+
+    function handleTouchEnd() {
+      isTouching = false;
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
       loadBio();
       loadButtons();
-      calculateButtonWidth(); // Calculate initial button width
+      calculateButtonWidth();
       document.documentElement.classList.add("loaded");
 
-      // Attach scroll events to the arrow buttons
       document.getElementById('left-arrow').addEventListener('click', scrollLeft);
       document.getElementById('right-arrow').addEventListener('click', scrollRight);
 
-      // Recalculate button width on window resize for responsive behavior
       window.addEventListener('resize', calculateButtonWidth);
+
+      const buttonContainer = document.getElementById('button-container');
+      buttonContainer.addEventListener('touchstart', handleTouchStart);
+      buttonContainer.addEventListener('touchmove', handleTouchMove);
+      buttonContainer.addEventListener('touchend', handleTouchEnd);
     });
   </script>
 
