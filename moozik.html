@@ -373,13 +373,34 @@
       return button;
     }
 
-    function loadPlaylist(index) {
+    /*function loadPlaylist(index) {
       const youtubePlayer = document.getElementById("youtube-player");
       youtubePlayer.src = data.playlists[index].url;
 
       setTimeout(() => {
         youtubePlayer.src = data.playlists[index].auto;
-      }, 1000);
+      }, 5);
+    }*/
+
+    // Function to check if the device is iOS or Android
+    function isMobile() {
+      return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    }
+
+    // Function to load playlist content and update YouTube player
+    function loadPlaylist(index) {
+      const playlist = data.playlists[index];
+      const youtubePlayer = document.getElementById("youtube-player");
+
+      // Load non-autoplay version first
+      youtubePlayer.src = playlist.url;
+
+      // For iOS and Android, after a short delay, switch to autoplay version
+      if (isMobile()) {
+        setTimeout(() => {
+          youtubePlayer.src = playlist.auto;
+        }, 5); // Delay allows non-autoplay to load briefly before switching to autoplay
+      }
     }
 
     function selectButton(selectedId) {
