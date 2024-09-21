@@ -45,7 +45,7 @@
       margin: 0;
       font-family: 'Roboto', sans-serif;
       color: white;
-      overflow: hidden; /* Prevent body overflow */
+      overflow: hidden; /* If you still want to prevent body overflow */
     }
 
     /* Buttons */
@@ -84,7 +84,6 @@
       scroll-behavior: smooth;
       max-width: 100%;
       position: relative;
-      transition: transform 0.5s ease; /* Smooth slide effect */
     }
 
     /* Arrow Styling */
@@ -148,6 +147,11 @@
       text-decoration: none;
     }
 
+    .text-ytplus {
+      color: #f6161c;
+      text-decoration: none;
+    }
+
     /* Media Queries for Responsiveness */
     @media (max-width: 1024px) {
       /* Buttons for medium-sized screens (tablets) */
@@ -207,10 +211,10 @@
     <div class="flex justify-center">
       <div class="w-full md:w-1/2 text-center">
         <div class="text-center mt-2 flex justify-center items-center gap-1 flex-col md:flex-row">
-          <img id="profile-image" class="rounded-full" alt="Profile Image of Music Love" width="140" height="140" loading="lazy">
+          <img id="profile-image" class="rounded-full" alt="Profile Image of Music Love" width="140" height="140">
         </div>
         <div class="text-3xl mt-2">
-          <p>mo͞o<a class="hover:text-white-500 text-ytplus" href="https://youtube.com/@theradiostream" target="_blank" rel="noopener noreferrer">zik</a></p>
+          <p>mo͞o<a class="text-ytplus hover:text-white" href="https://youtube.com/@theradiostream" target="_blank" rel="noopener noreferrer">zik</a></p>
         </div>
       </div>
     </div>
@@ -219,7 +223,7 @@
     <div class="flex justify-center mt-10">
       <div class="w-full md:w-2/3 rounded-lg overflow-hidden">
         <div class="youtube-container">
-          <iframe title="youtube-iframe" id="youtube-player" class="youtube-iframe" frameborder="0" allowfullscreen loading="lazy"></iframe>
+          <iframe title="youtube-iframe" id="youtube-player" class="youtube-iframe" frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
     </div>
@@ -227,7 +231,7 @@
     <!-- Button Navigation with Arrows -->
     <div class="arrow-container mt-8">
       <!-- Left Arrow -->
-      <button class="arrow" id="left-arrow" aria-label="Scroll Left">
+      <button class="arrow" id="left-arrow">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
       </button>
 
@@ -237,7 +241,7 @@
       </div>
 
       <!-- Right Arrow -->
-      <button class="arrow" id="right-arrow" aria-label="Scroll Right">
+      <button class="arrow" id="right-arrow">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
       </button>
     </div>
@@ -305,21 +309,12 @@
       ]
     };
 
-    let buttonWidth = 0; // Initialize as 0
+    let buttonWidth = 144; // Default button width in pixels (9rem = 144px)
 
     // Variables for touch handling
     let touchStartX = 0;
     let touchEndX = 0;
     const swipeThreshold = 50; // Minimum distance for a swipe to be registered
-
-    // Flag to prevent multiple scrolls at the same time
-    let isScrolling = false;
-
-    // Currently selected button index
-    let currentSelectedIndex = 0;
-
-    // Active data array after rearrangement
-    let activeDataArray = [];
 
     // Calculate the button width dynamically based on the actual rendered size
     function calculateButtonWidth() {
@@ -328,7 +323,6 @@
         const style = getComputedStyle(button);
         const marginRight = parseFloat(style.marginRight);
         buttonWidth = button.offsetWidth + marginRight;
-        console.log("Calculated buttonWidth:", buttonWidth);
       }
     }
 
@@ -345,7 +339,7 @@
       };
       img.onerror = () => {
         // Fallback image if the specified image fails to load
-        profileImage.src = 'profile.png';
+        profileImage.src = 'default-profile.png';
       };
 
       youtubePlayer.src = data.playlists[0].url;
@@ -354,79 +348,28 @@
     // Dynamically load buttons from the playlists array
     function loadButtons() {
       const buttonContainer = document.querySelector(".button-container");
-      const totalButtons = data.playlists.length;
-      const midIndex = Math.floor(totalButtons / 2); // Centering logic
 
-      // Rearrange the playlists array to center the first button
-      activeDataArray = rearrangePlaylists(data.playlists, midIndex);
-
-      // Verify that all playlists are included after rearrangement
-      if (activeDataArray.length !== data.playlists.length) {
-        console.error("Error: Playlist rearrangement resulted in data loss.");
-        return;
-      }
-
-      // Render the buttons
-      renderButtons();
-
-      // Calculate button width after buttons are added
-      // Delay to ensure buttons are rendered
-      setTimeout(() => {
-        calculateButtonWidth();
-
-        // Set initial centering after button width is calculated
-        setInitialPaddingAndCenter();
-      }, 100);
-    }
-
-    // Function to rearrange playlists to center the first button
-    function rearrangePlaylists(playlists, midIndex) {
-      const total = playlists.length;
-      const shift = midIndex; // Shift by midIndex to center the first button
-      const rearranged = [];
-
-      for (let i = 0; i < total; i++) {
-        const index = (i + shift) % total;
-        rearranged.push(playlists[index]);
-      }
-
-      console.log("Original Playlists:", playlists.map(p => p.title));
-      console.log("Rearranged Playlists:", rearranged.map(p => p.title));
-
-      return rearranged;
-    }
-
-    // Function to render buttons based on activeDataArray
-    function renderButtons() {
-      const buttonContainer = document.getElementById("button-container");
-      // Clear existing buttons
-      buttonContainer.innerHTML = '';
-
-      activeDataArray.forEach((playlist, index) => {
+      data.playlists.forEach((playlist, index) => {
         const button = createButton(playlist, index);
         buttonContainer.appendChild(button);
       });
 
-      selectButton(currentSelectedIndex); // Highlight the initially selected button
+      selectButton(0); // Select the first button on load
+
+      // Center the first button in the scroller
+      centerButton(0);
     }
 
-    // Function to set initial padding and center the first button
-    function setInitialPaddingAndCenter() {
+    // Function to center a button in the button container
+    function centerButton(index) {
       const buttonContainer = document.getElementById("button-container");
-      const firstButton = document.getElementById(`btn-${currentSelectedIndex}`);
-      if (!firstButton) return;
+      const button = document.getElementById(`btn-${index}`);
+      const containerWidth = buttonContainer.offsetWidth;
+      const buttonLeft = button.offsetLeft;
+      const buttonWidthCurrent = button.offsetWidth;
 
-      const containerWidth = buttonContainer.clientWidth;
-      const padding = (containerWidth / 2) - (buttonWidth / 2);
-      // Set padding-left and padding-right
-      buttonContainer.style.paddingLeft = `${padding}px`;
-      buttonContainer.style.paddingRight = `${padding}px`;
-
-      // Scroll to the first button
-      buttonContainer.scrollTo({
-        left: padding,
-        behavior: 'smooth'
-      });
+      // Scroll to center the button
+      buttonContainer.scrollLeft = buttonLeft - (containerWidth / 2) + (buttonWidthCurrent / 2);
     }
 
     // Function to create a button with attached event listener
@@ -436,9 +379,9 @@
       button.textContent = playlist.title;
       button.id = `btn-${index}`;
       button.onclick = () => {
-        if (currentSelectedIndex === index) return; // If already selected, do nothing
         loadPlaylist(index);
-        shiftButtonsToCenter(index);
+        selectButton(index);
+        centerButton(index); // Center the button when clicked
       };
       return button;
     }
@@ -446,133 +389,44 @@
     // Function to load playlist content (preroll normal followed by auto)
     function loadPlaylist(index) {
       const youtubePlayer = document.getElementById("youtube-player");
-      youtubePlayer.src = activeDataArray[index].url;
+      youtubePlayer.src = data.playlists[index].url;
 
       // Switch to autoplay URL after 5ms
       setTimeout(() => {
-        youtubePlayer.src = activeDataArray[index].auto;
+        youtubePlayer.src = data.playlists[index].auto;
       }, 5);
     }
 
     // Function to handle button selection state
     function selectButton(selectedId) {
       document.querySelectorAll('.button').forEach((button) => {
-        const buttonId = parseInt(button.id.split('-')[1], 10); // Get the numeric part of the button ID
-        button.classList.toggle("selected", buttonId === selectedId); // Compare with the selectedId
+        const buttonId = button.id.split('-')[1]; // Get the numeric part of the button ID
+        button.classList.toggle("selected", buttonId == selectedId); // Compare with the selectedId
       });
-    }
-
-    // Function to shift buttons to center the selected button
-    function shiftButtonsToCenter(selectedIndex) {
-      if (isScrolling) return;
-      isScrolling = true;
-
-      // Calculate the number of shifts needed to bring selectedIndex to the center
-      const centerIndex = Math.floor(activeDataArray.length / 2);
-      const difference = selectedIndex - centerIndex;
-
-      if (difference === 0) {
-        // Already centered
-        isScrolling = false;
-        return;
-      }
-
-      // Determine direction and perform shifts
-      if (difference > 0) {
-        // Need to scroll right
-        for (let i = 0; i < difference; i++) {
-          scrollRight();
-        }
-      } else {
-        // Need to scroll left
-        for (let i = 0; i < Math.abs(difference); i++) {
-          scrollLeft();
-        }
-      }
-
-      // Update selection after scrolling
-      setTimeout(() => {
-        selectButton(centerIndex);
-        currentSelectedIndex = centerIndex;
-        isScrolling = false;
-      }, 500 * Math.abs(difference)); // Ensure timeout matches the number of scrolls
     }
 
     // Scroll the button container to the left and dynamically manage buttons
     function scrollLeft() {
-      if (isScrolling) return;
-      isScrolling = true;
-
       const container = document.getElementById('button-container');
       const firstButton = container.firstElementChild;
-      if (!firstButton) {
-        isScrolling = false;
-        return;
-      }
 
-      // Animate the scroll
-      container.style.transform = `translateX(-${buttonWidth}px)`;
+      // Move the first button to the end immediately
+      container.appendChild(firstButton);
 
-      // After animation, reset transform and move the first button to the end
-      setTimeout(() => {
-        container.style.transition = 'none';
-        container.style.transform = 'translateX(0)';
-        container.appendChild(firstButton);
-
-        // Update activeDataArray
-        const movedButton = activeDataArray.shift();
-        activeDataArray.push(movedButton);
-
-        // Re-render buttons to maintain order
-        renderButtons();
-
-        // Force reflow to apply the changes
-        void container.offsetWidth;
-
-        // Re-enable transition
-        container.style.transition = 'transform 0.5s ease';
-
-        isScrolling = false;
-      }, 500); // Match the transition duration
+      // Adjust the scroll position to maintain smoothness
+      container.scrollLeft += buttonWidth;
     }
 
     // Scroll the button container to the right and dynamically manage buttons
     function scrollRight() {
-      if (isScrolling) return;
-      isScrolling = true;
-
       const container = document.getElementById('button-container');
       const lastButton = container.lastElementChild;
-      if (!lastButton) {
-        isScrolling = false;
-        return;
-      }
 
-      // Move the last button to the beginning before animating
+      // Move the last button to the beginning immediately
       container.prepend(lastButton);
 
-      // Set transform to translateX negative to show the new first button
-      container.style.transition = 'none';
-      container.style.transform = `translateX(-${buttonWidth}px)`;
-
-      // Force reflow to apply the transform
-      void container.offsetWidth;
-
-      // Animate to slide back to original position
-      container.style.transition = 'transform 0.5s ease';
-      container.style.transform = 'translateX(0)';
-
-      // After animation, update activeDataArray
-      setTimeout(() => {
-        // Update activeDataArray
-        const movedButton = activeDataArray.pop();
-        activeDataArray.unshift(movedButton);
-
-        // Re-render buttons to maintain order
-        renderButtons();
-
-        isScrolling = false;
-      }, 500); // Match the transition duration
+      // Adjust the scroll position to maintain smoothness
+      container.scrollLeft -= buttonWidth;
     }
 
     // Function to handle touch start
@@ -604,62 +458,38 @@
 
     // Add event listeners for left and right arrow buttons
     function addArrowEventListeners() {
-      const leftArrow = document.getElementById('left-arrow');
-      const rightArrow = document.getElementById('right-arrow');
-
-      if (leftArrow) {
-        leftArrow.addEventListener('click', scrollLeft);
-      }
-
-      if (rightArrow) {
-        rightArrow.addEventListener('click', scrollRight);
-      }
+      document.getElementById('left-arrow').addEventListener('click', scrollLeft);
+      document.getElementById('right-arrow').addEventListener('click', scrollRight);
     }
 
     // Add touch event listeners to the button container
     function addTouchEventListeners() {
       const buttonContainer = document.getElementById('button-container');
-      if (buttonContainer) {
-        buttonContainer.addEventListener('touchstart', handleTouchStart, false);
-        buttonContainer.addEventListener('touchmove', handleTouchMove, false);
-        buttonContainer.addEventListener('touchend', handleTouchEnd, false);
-      }
+      buttonContainer.addEventListener('touchstart', handleTouchStart, false);
+      buttonContainer.addEventListener('touchmove', handleTouchMove, false);
+      buttonContainer.addEventListener('touchend', handleTouchEnd, false);
     }
 
     // Initialize all functionalities after DOM content is loaded
     document.addEventListener("DOMContentLoaded", () => {
       loadBio();
       loadButtons();
+      calculateButtonWidth(); // Calculate initial button width
+
       addArrowEventListeners();
       addTouchEventListeners();
 
       // Recalculate button width on window resize for responsive behavior
-      window.addEventListener('resize', () => {
-        calculateButtonWidth();
+      window.addEventListener('resize', calculateButtonWidth);
 
-        const buttonContainer = document.getElementById("button-container");
-        const containerWidth = buttonContainer.clientWidth;
-        const padding = (containerWidth / 2) - (buttonWidth / 2);
-        buttonContainer.style.paddingLeft = `${padding}px`;
-        buttonContainer.style.paddingRight = `${padding}px`;
-
-        // Re-center the first button after resize to ensure visibility
-        buttonContainer.scrollTo({
-          left: padding,
-          behavior: 'smooth'
-        });
-      });
-
-      // Hide the loading spinner after all elements are rendered
-      window.onload = () => {
+      // Hide the loading spinner after a slight delay to ensure all elements are rendered
+      // Adjust the timeout as necessary
+      setTimeout(() => {
         const spinner = document.getElementById('loading-spinner');
         if (spinner) {
           spinner.classList.add('hidden');
         }
-
-        // Ensure initial centering after all resources are loaded
-        setInitialPaddingAndCenter();
-      };
+      }, 300); // 300ms delay
     });
   </script>
 
