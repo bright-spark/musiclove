@@ -54,7 +54,7 @@
 
     function loadPlaylist() {
       const nextPlaylist = getNextPlaylist();
-      document.getElementById('playlistiframe').src = `https://youtube.com/embed/playlist/list=${nextPlaylist}&controls=0&start_radio=1&rel=0&showinfo=0&modestbranding=1&autoplay=1&enablejsapi=1`;
+      document.getElementById('playlistiframe').src = `https://youtube.com/embed/playlist?list=${nextPlaylist}&controls=0&start_radio=1&rel=0&showinfo=0&modestbranding=1&autoplay=1&enablejsapi=1`;
     }
 
     window.addEventListener('load', loadPlaylist);
