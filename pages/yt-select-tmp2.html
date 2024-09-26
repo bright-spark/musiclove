@@ -181,7 +181,7 @@
 
     function loadPlaylist() {
       const nextPlaylist = getNextPlaylist();
-      //const playlistUrl = `https://youtube.com/embed/playlist?list=${nextPlaylist}&index=2&controls=0&start_radio=1&rel=0&showinfo=0&modestbranding=1&enablejsapi=1`;
+      //const playlistUrl = `https://youtube.com/embed/playlist/?list=${nextPlaylist}&index=2&controls=0&start_radio=1&rel=0&showinfo=0&modestbranding=1&enablejsapi=1`;
       const playlistUrl = `https://youtube.com/embed/videoseries?list=${nextPlaylist}&autostart=1&controls=0&start_radio=1&rel=0&showinfo=0&modestbranding=1&enablejsapi=1`;
       document.getElementById('playlistiframe').src = playlistUrl;
     }
