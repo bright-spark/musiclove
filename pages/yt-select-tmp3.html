@@ -91,7 +91,7 @@
     function loadPlaylist() {
       const nextPlaylist = getNextPlaylist();
       const iframe = document.getElementById('playlistiframe');
-      iframe.src = `https://youtube.com/embed/playlist?list=${nextPlaylist}&controls=0&start_radio=1&rel=0&showinfo=0&modestbranding=1&enablejsapi=1`;
+      iframe.src = `https://youtube.com/embed/playlist?list=${nextPlaylist}&controls=0&rel=0&showinfo=0&modestbranding=1&enablejsapi=1`;
 
       // YouTube IFrame API ready
       iframe.onload = () => {
