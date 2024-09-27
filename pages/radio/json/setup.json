@@ -45,7 +45,7 @@
     {"title":"HeartFM", "author":"South Africa","media":"https://iceant.antfarm.co.za/HeartFM.mp3", "type":"audio/mpeg", "live":true, "liveDuration":3},
     {"title":"Radio 2000", "author":"South Africa","media":"https://25493.live.streamtheworld.com/RADIO2000AAC.aac", "type":"audio/aac", "live":true, "liveDuration":3},
     {"title":"JacarandaFM", "author":"South Africa","media":"https://live.jacarandafm.com/jacarandahigh.mp3", "type":"audio/aac", "live":true, "liveDuration":3},
-    {"title":"947", "author":"South Africa","media":"https://25643.live.streamtheworld.com/FM947_192AAC/HLS/18cb4a70-aeba-4607-b4f2-3fe4b7ebd1ad/0/playlist.m3u8", "type":"audio/aac", "live":true, "liveDuration":3},
+    {"title":"947", "author":"South Africa","media":"https://25643.live.streamtheworld.com/FM947_192AAC.aac", "type":"audio/aac", "live":true, "liveDuration":3},
     {"title":"5FM", "author":"South Africa","media":"https://25483.live.streamtheworld.com/5FMAAC.aac", "type":"audio/aac", "live":true, "liveDuration":3},
     {"title":"MetroFM", "author":"South Africa","media":"https://25483.live.streamtheworld.com/METROFMAAC.aac", "type":"audio/aac", "live":true, "liveDuration":3},
     {"title":"YFM", "author":"South Africa","media":"https://streaming.fabrik.fm/yfm/echocast/audio/index.m3u8", "type":"audio/aac", "live":true, "liveDuration":3},
