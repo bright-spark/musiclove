@@ -91,7 +91,7 @@ const kCache="default"; //default, no-cache, reload, force-cache, only-if-cached
 const kCredentials="same-origin"; //include, same-origin, omit
 const kContenttype="application/json"; //application/json, application/x-www-form-urlencoded ...
 const kRedirect="follow"; //manual, follow, error
-const kReferrerpolicy="no-referrer"; //no-referrer, no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+const kReferrerpolicy="strict-origin-when-cross-origin"; //no-referrer, no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
 const kAuthorization=""; //'Authorization': 'Basic xxxxx'
 
 
@@ -119,7 +119,7 @@ if (document.location.search.indexOf('theme=') >= 0) {
 }
 var app = new Framework7({
     "version": "1.2.7",
-    "id": "plus.theradio",
+    "id": "fm.theradio",
     "root": "#app",
     "theme": theme,
     "autoDarkTheme": false,
