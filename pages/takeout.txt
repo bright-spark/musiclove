@@ -1,0 +1,112 @@
+<script>
+        function setupContentFrameListener() {
+            const contentFrame = document.getElementById("contentFrame");
+
+            // When content frame is fully loaded, setup its iframe listener
+            contentFrame.onload = function() {
+                // Listen for YouTube iframe events inside contentFrame
+                setupYouTubeIframeListener(contentFrame);
+            };
+        }
+
+        // Set up listener for YouTube iframe events within contentFrame
+        function setupYouTubeIframeListener(contentFrame) {
+            // Grab the inner YouTube iframe
+            const youtubeIframe = contentFrame.contentWindow.document.querySelector("iframe[src*='youtube.com']");
+
+            if (youtubeIframe) {
+                // Monitor fullscreen events from the YouTube iframe
+                youtubeIframe.addEventListener("fullscreenchange", function() {
+                    console.log("YouTube iframe is entering or exiting fullscreen");
+                });
+
+                // Optional: You can add other event listeners for the YouTube iframe
+
+                // Intercept popout links inside YouTube iframe (optional)
+                youtubeIframe.contentWindow.document.addEventListener("click", function(event) {
+                    let target = event.target;
+
+                    // Check if it's a YouTube link
+                    if (target.tagName === "A" && target.href.includes("youtube.com")) {
+                        event.preventDefault(); // Prevent default YouTube link behavior
+                        handleYouTubeLink(target.href); // Custom handling
+                    }
+                });
+            }
+        }
+
+        // Handle YouTube link popout (same as before)
+        function handleYouTubeLink(youtubeUrl) {
+            openYouTubeLink(youtubeUrl);
+            returnToIframe(); // Handle return to iframe content
+        }
+
+        function openYouTubeLink(youtubeUrl) {
+            const youtubeAppUrl = "vnd.youtube://" + youtubeUrl.split('watch?v=')[1];
+            window.location.href = youtubeAppUrl;
+
+            setTimeout(() => {
+                window.location.href = youtubeUrl;
+            }, 1000); // Fallback to browser
+        }
+
+        function returnToIframe() {
+            const contentFrame = document.getElementById("contentFrame");
+
+            // Preserve iframe state
+            preserveIframeContent(contentFrame);
+
+            // Use postMessage() to signal return to the iframe
+            contentFrame.contentWindow.postMessage("focusIframe", "*");
+        }
+
+        // Store content of iframe for restoring later
+        function preserveIframeContent(iframe) {
+            const content = iframe.contentWindow.document.body.innerHTML;
+            sessionStorage.setItem("iframeContent", content);
+        }
+
+        window.onload = function() {
+            setupContentFrameListener();
+        };
+    </script>
+
+
+
+<script>
+        // JavaScript to reload tabs on every click after refresh until navigating to another tab
+        const tabs = document.querySelectorAll('.tab-link');
+        const clickCounts = {};
+        let lastTab = "";  // Declare lastTab globally to track between clicks
+        let initialLoad = true; // Flag for initial load to trigger reload on every click after refresh
+        
+        tabs.forEach(tab => {
+            const tabId = tab.getAttribute('href');
+            clickCounts[tabId] = 0; // Initialize click count for each tab
+
+            tab.addEventListener('click', function (e) {
+                e.preventDefault();  // Prevent default link behavior if necessary
+
+                // Check if the current tab was the last clicked tab
+                if (lastTab === tabId) {
+                    clickCounts[tabId]++;
+                } else {
+                    clickCounts[tabId] = 1; // Reset count if a different tab is clicked
+                    initialLoad = false; // If a new tab is selected, stop initial reloading behavior
+                }
+
+                // Set lastTab to the current tab
+                lastTab = tabId;
+
+                // Reload the tab's iframe on every click after refresh or every second click
+                if (initialLoad || clickCounts[tabId] % 2 === 0) {
+                    // Find the iframe inside the tab and reload its src
+                    const iframe = document.querySelector(`${tabId} iframe`);
+                    if (iframe) {
+                        const src = iframe.getAttribute('src');
+                        iframe.setAttribute('src', src); // Reload iframe
+                    }
+                }
+            });
+        });
+    </script>
