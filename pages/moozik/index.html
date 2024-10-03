@@ -490,6 +490,7 @@
 
         // For iOS and Android, after a short delay, switch to autoplay version
         if (isMobile()) {
+          return
           setTimeout(() => {
             youtubePlayer.src = playlist.auto;
           }, 50); // Delay allows non-autoplay to load briefly before switching to autoplay
