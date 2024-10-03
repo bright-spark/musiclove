@@ -494,6 +494,8 @@
             youtubePlayer.src = playlist.auto;
           }, 50); // Delay allows non-autoplay to load briefly before switching to autoplay
         }
+
+        document.getElementById("youtube-player").disablePictureInPicture = true;
       }
 
       function selectButton(selectedId) {
