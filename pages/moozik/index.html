@@ -28,7 +28,7 @@
         margin: 0;
         font-family: "Roboto", sans-serif;
         color: white;
-        overflow: hidden; /* Prevent body overflow */
+        overflow: scroll; /* Prevent body overflow */
       }
 
       /* Loading Spinner Styles */
@@ -60,7 +60,7 @@
         font-weight: normal;
         border-radius: 0.4rem;
         border: 1px solid transparent;
-        color: #f6161c;
+        color: #ffffff;
         background-color: transparent;
         margin-right: 0.5rem;
         cursor: pointer;
@@ -74,8 +74,10 @@
       }
 
       .selected {
-        font-size: 1.3rem;
-        border: 1px solid #f6161c;
+        font-size: 1rem;
+        font-weight: bolder;
+        color: #f6161d;
+        border: 2px solid #f6161c;
       }
 
       .button-container {
@@ -90,7 +92,7 @@
 
       .arrow {
         background: transparent;
-        padding: 0.5rem;
+        padding: 0.9rem;
         cursor: pointer;
         transition: background-color 0.3s ease;
         display: flex;
@@ -104,8 +106,8 @@
 
       .arrow svg {
         fill: red;
-        width: 1.7rem;
-        height: 1.7rem;
+        width: 1.9rem;
+        height: 1.9rem;
       }
 
       .arrow-container {
