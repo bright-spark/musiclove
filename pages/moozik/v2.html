@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Music Love</title>
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no, viewport-fit=cover"
+    />
+    <meta name="author" content="Martin Myburgh" />
+    <meta
+      name="description"
+      content="Music Love, your hub for unlimited entertainment."
+    />
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./icons/apple-touch-icon.png"
+    />
+    <!-- Tailwind CSS -->
+    <link href="tailwind_theme/tailwind.css" rel="stylesheet" type="text/css" />
+    <style>
+      /* Ensure body is visible by default */
+      body {
+        background-color: #000;
+        margin: 0;
+        font-family: "Roboto", sans-serif;
+        color: white;
+        overflow: hidden; /* Prevent body overflow */
+      }
+
+      /* Loading Spinner Styles */
+      .loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+
+      .loading.hidden {
+        display: none;
+      }
+
+      .container {
+        background-color: #000;
+      }
+
+      .button {
+        width: 9rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        font-weight: normal;
+        border-radius: 0.4rem;
+        border: 1px solid transparent;
+        color: #f6161c;
+        background-color: transparent;
+        margin-right: 0.5rem;
+        cursor: pointer;
+        transition: font-size 0.3s ease, color 0.3s ease, border 0.3s ease;
+        flex: 0 0 auto;
+      }
+
+      .button:hover {
+        background-color: #000000;
+        color: #f6161c;
+      }
+
+      .selected {
+        font-size: 1.3rem;
+        border: 1px solid #f6161c;
+      }
+
+      .button-container {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        scroll-behavior: smooth;
+        max-width: 100%;
+        position: relative;
+      }
+
+      .arrow {
+        background: transparent;
+        padding: 0.5rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .arrow:hover {
+        background-color: rgba(255, 0, 0, 0.1);
+      }
+
+      .arrow svg {
+        fill: red;
+        width: 1.7rem;
+        height: 1.7rem;
+      }
+
+      .arrow-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .youtube-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+        background-color: #00000077;
+      }
+
+      .youtube-iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      footer {
+        background-color: #101010;
+        padding: 1rem;
+        text-align: center;
+        color: #fff;
+        overflow: hidden;
+      }
+
+      footer a {
+        color: #f6161c;
+        text-decoration: none;
+      }
+
+      .text-ytplus {
+        color: #f6161c;
+        text-decoration: none;
+      }
+
+      @media (max-width: 1024px) {
+        .button {
+          width: 7rem;
+          padding: 0.4rem 0.8rem;
+          font-size: 0.9rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .button {
+          width: 6rem;
+          padding: 0.3rem 0.6rem;
+          font-size: 0.8rem;
+        }
+
+        .arrow svg {
+          width: 1.4rem;
+          height: 1.4rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .button {
+          width: 5rem;
+          padding: 0.25rem 0.5rem;
+          font-size: 0.7rem;
+        }
+
+        .arrow svg {
+          width: 1.2rem;
+          height: 1.2rem;
+        }
+      }
+    </style>
+  </head>
+  <body class="flex">
+    <!-- Loading Spinner -->
+    <div id="loading-spinner" class="loading">
+      <!-- Customized Spinner -->
+
+    </div>
+
+    <div class="container font-light font-sans mx-auto my-0 p-4 text-sm">
+      <!-- Bio Section -->
+      <div class="flex justify-center">
+        <div class="w-full md:w-1/2 text-center">
+          <div
+            class="flex flex-col items-center justify-center text-center md:flex-row"
+          >
+            <img
+              id="profile-image"
+              class="p-2 rounded-full"
+              alt="Profile Image of Music Love"
+              width="140"
+              height="140"
+            />
+          </div>
+          <div class="text-3xl">
+            <p class="pb-8 pt-4">
+              <a
+                class="text-ytplus hover:text-white"
+                href="https://youtube.com/@theradiostream"
+                target="_blank"
+                rel="noopener noreferrer"
+                >mo͞o</a
+              ><a
+                class="text-ytplus hover:text-white"
+                href="https://youtube.com/@theradiostream"
+                target="_blank"
+                rel="noopener noreferrer"
+                >zik</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- YouTube Embed Section -->
+      <div class="flex justify-center">
+        <div class="w-full md:w-2/3 rounded-lg overflow-hidden">
+          <div class="youtube-container">
+            <iframe
+              title="youtube-iframe"
+              id="youtube-player"
+              class="youtube-iframe"
+             
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              origin="https://theradio.fm"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+      <!-- Button Navigation with Arrows -->
+      <div class="arrow-container mx-auto py-2">
+        <!-- Left Arrow -->
+        <button class="arrow" id="left-arrow">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <!-- Scrollable Buttons Section -->
+        <div
+          class="button-container flex justify-center gap-2 px-4"
+          id="button-container"
+        >
+          <!-- Buttons will be dynamically added here -->
+        </div>
+        <!-- Right Arrow -->
+        <button class="arrow" id="right-arrow">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M9 6l6 6-6 6" />
+          </svg>
+        </button>
+      </div>
+      <!-- Footer -->
+      <div class="flex-grow"></div>
+      <footer class="text-center px-4 pb-8 pt-8 gap-1 rounded-lg">
+        <p>
+          Powered by
+          <a
+            class="text-ytplus hover:text-white"
+            href="https://youtube.com/@theradiostream"
+            target="_blank"
+            rel="noopener noreferrer"
+            >mo͞ozik</a
+          >
+        </p>
+      </footer>
+      <div class="py-2">
+        <p class="text-center text-xs sm:text-sm text-gray-500">
+          Made with music
+          <a
+            class="text-ytplus hover:text-white"
+            href="https://youtube.com/@theradiostream"
+            target="_blank"
+            rel="noopener noreferrer"
+            >❤️</a
+          >
+          from South Africa
+        </p>
+      </div>
+    </div>
+    <!-- JavaScript -->
+    <script>
+      const data = {
+        bio: {
+          name: "John Doe",
+          title: "Playlist Curator",
+          description:
+            "YouTube Plus is a curated playlist collection of the best music videos on YouTube. Enjoy the latest hits and dance tracks from around the world.",
+          image: "profile.png",
+        },
+        playlists: [
+
+          {
+            title: "Solution",
+            description: "Soft Rock Ballads on YouTube.",
+            url: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0lp_fJjhRiT8p0h32gmkTOB&controls=0&rel=0",
+            auto: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0lp_fJjhRiT8p0h32gmkTOB&controls=0&rel=0&autoplay=1",
+          },
+
+          {
+            title: "404",
+            description: "New Electronica Tracks on YouTube",
+            url: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0lTsmQBVDeOTM63og_pLAdx&controls=0&rel=0",
+            auto: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0lTsmQBVDeOTM63og_pLAdx&controls=0&rel=0&autoplay=1",
+          },
+          
+          {
+            title: "Battery",
+            description: "Soft Rock Ballads on YouTube.",
+            url: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0lXxPLZ9hBT9M46m53H5GES&controls=0&rel=0",
+            auto: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0lXxPLZ9hBT9M46m53H5GES&controls=0&rel=0&autoplay=1",
+          },
+          
+          {
+            title: "Null",
+            description: "Totally Pop",
+            url: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0lnbXjnFF3bdEBbRHkr-R3k&controls=0&rel=0",
+            auto: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0lnbXjnFF3bdEBbRHkr-R3k&controls=0&rel=0&controls=0&rel=0&autoplay=1",
+          },
+          
+          {
+            title: "Karmic",
+            description: "Top US Tracks on YouTube.",
+            url: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0kjcMzNf2NjulS4lS6KKF_r&controls=0&rel=0",
+            auto: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0kjcMzNf2NjulS4lS6KKF_r&controls=0&rel=0&autoplay=1",
+          },
+          
+          {
+            title: "Unheard",
+            description: "Fresh Dance & Club Tracks on YouTube.",
+            url: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0n-oHB3aYzcm5-REHOMbqhe&controls=0&rel=0",
+            auto: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0n-oHB3aYzcm5-REHOMbqhe&controls=0&rel=0&autoplay=1",
+          },
+
+          {
+            title: "Brave",
+            description: "Alternative Indie Tracks on YouTube",
+            url: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0kczEltzTtYV7w9m0qTZfyw&controls=0&rel=0",
+            auto: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0kczEltzTtYV7w9m0qTZfyw&controls=0&rel=0&autoplay=1",
+          },
+          
+          {
+            title: "Esc",
+            description: "Electronic Beats Tracks on YouTube",
+            url: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0n1lpVjgjzcx43ornjTELow&controls=0&rel=0",
+            auto: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0n1lpVjgjzcx43ornjTELow&controls=0&rel=0&autoplay=1",
+          },
+
+          {
+            title: "Gupta",
+            description: "Soft Rock Ballads on YouTube.",
+            url: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0mfe-u_9hQ1sIUFbie974U8&controls=0&rel=0",
+            auto: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0mfe-u_9hQ1sIUFbie974U8&controls=0&rel=0&autoplay=1",
+          },
+          
+          {
+            title: "Infinite",
+            description: "Today's Dance Tracks on YouTube.",
+            url: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0n3L_D_xICQckhvRq2yB7Ar&controls=0&rel=0",
+            auto: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0n3L_D_xICQckhvRq2yB7Ar&controls=0&rel=0&autoplay=1",
+          },
+          
+          {
+            title: "Lovers",
+            description: "",
+            url: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0kw9EGJ9byzsLXDfMsNunpP&controls=0&rel=0",
+            auto: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0kw9EGJ9byzsLXDfMsNunpP&controls=0&rel=0&autoplay=1",
+          },
+          
+          {
+            title: "Storybook",
+            description: "Pop Gold Tracks on YouTube.",
+            url: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0ncwB_L21a_IAze62WrsD7_&controls=0&rel=0",
+            auto: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0ncwB_L21a_IAze62WrsD7_&controls=0&rel=0&autoplay=1",
+          },
+
+          {
+            title: "Remainder",
+            description: "Soft Rock Ballads on YouTube.",
+            url: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0lr0LpIcUw1Is3FK0GuF45O&controls=0&rel=0",
+            auto: "https://www.youtube.com/embed/playlist?list=PLuWIxgNYqm0lr0LpIcUw1Is3FK0GuF45O&controls=0&rel=0&autoplay=1",
+          }
+          
+        ],
+      };
+
+      let buttonWidth = 144; // Default button width in pixels
+
+      function calculateButtonWidth() {
+        const button = document.querySelector(".button");
+        if (button) {
+          buttonWidth =
+            button.offsetWidth + parseInt(getComputedStyle(button).marginRight);
+        }
+      }
+
+      function loadBio() {
+        document.getElementById("profile-image").src = data.bio.image;
+      }
+
+      function initPlayer() {
+        document.getElementById("youtube-player").src = data.playlists[0].url;
+      }
+
+      function loadButtons() {
+        const buttonContainer = document.querySelector(".button-container");
+
+        data.playlists.forEach((playlist, index) => {
+          const button = createButton(playlist, index);
+          buttonContainer.appendChild(button);
+        });
+
+        selectButton(0);
+        centerButton(0);
+      }
+
+      function centerButton(index) {
+        const buttonContainer = document.getElementById("button-container");
+        const button = document.getElementById(`btn-${index}`);
+        const containerWidth = buttonContainer.offsetWidth;
+        const buttonLeft = button.offsetLeft;
+        const buttonWidth = button.offsetWidth;
+
+        buttonContainer.scrollLeft =
+          buttonLeft - containerWidth / 2 + buttonWidth / 2;
+      }
+
+      function createButton(playlist, index) {
+        const button = document.createElement("button");
+        button.classList.add("button");
+        button.textContent = playlist.title;
+        button.id = `btn-${index}`;
+        button.onclick = () => {
+          loadPlaylist(index);
+          selectButton(index);
+          centerButton(index);
+        };
+        return button;
+      }
+
+      // Function to check if the device is iOS or Android
+      function isMobile() {
+        return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      }
+
+      // Function to load playlist content and update YouTube player
+      function loadPlaylist(index) {
+        const playlist = data.playlists[index];
+        const youtubePlayer = document.getElementById("youtube-player");
+
+        // Load non-autoplay version first
+        youtubePlayer.src = playlist.url;
+
+        // For iOS and Android, after a short delay, switch to autoplay version
+        if (isMobile()) {
+          setTimeout(() => {
+            youtubePlayer.src = playlist.auto;
+          }, 5); // Delay allows non-autoplay to load briefly before switching to autoplay
+        }
+      }
+
+      function selectButton(selectedId) {
+        document.querySelectorAll(".button").forEach((button) => {
+          const buttonId = button.id.split("-")[1];
+          button.classList.toggle("selected", buttonId == selectedId);
+        });
+      }
+
+      function scrollRight() {
+        const container = document.getElementById("button-container");
+        const firstButton = container.firstElementChild;
+
+        container.appendChild(firstButton);
+        container.scrollLeft += buttonWidth;
+      }
+
+      function scrollLeft() {
+        const container = document.getElementById("button-container");
+        const lastButton = container.lastElementChild;
+
+        container.prepend(lastButton);
+        container.scrollLeft -= buttonWidth;
+      }
+
+      // Touch handling for touch-sensitive scrolling
+      let isTouching = false;
+      let startX = 0;
+      let touchScrollLeft = 0;
+
+      function handleTouchStart(event) {
+        isTouching = true;
+        startX = event.touches[0].pageX;
+        touchScrollLeft =
+          document.getElementById("button-container").scrollLeft;
+      }
+
+      function handleTouchMove(event) {
+        if (!isTouching) return;
+        const touchX = event.touches[0].pageX;
+        const walk = (touchX - startX) * 1.5;
+        document.getElementById("button-container").scrollLeft =
+          touchScrollLeft - walk;
+      }
+
+      function handleTouchEnd() {
+        isTouching = false;
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        loadBio();
+        initPlayer();
+        loadButtons();
+        calculateButtonWidth();
+
+        document.documentElement.classList.add("loaded");
+
+        document
+          .getElementById("left-arrow")
+          .addEventListener("click", scrollLeft);
+        document
+          .getElementById("right-arrow")
+          .addEventListener("click", scrollRight);
+
+        window.addEventListener("resize", calculateButtonWidth);
+
+        const buttonContainer = document.getElementById("button-container");
+        buttonContainer.addEventListener("touchstart", handleTouchStart);
+        buttonContainer.addEventListener("touchmove", handleTouchMove);
+        buttonContainer.addEventListener("touchend", handleTouchEnd);
+
+        // Hide the loading spinner after a slight delay to ensure all elements are rendered
+        setTimeout(() => {
+          const spinner = document.getElementById("loading-spinner");
+          if (spinner) {
+            spinner.classList.add("hidden");
+          }
+        }, 300); // 300ms delay for smoother transitions
+      });
+    </script>
+  </body>
+</html>

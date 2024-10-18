@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <title>Music Love</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no, viewport-fit=cover" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="HandheldFriendly" content="true" />
     <meta name="MobileOptimized" content="380" />
@@ -28,7 +28,7 @@
     <link rel="icon" href="favicon.ico" />
     <link rel="icon" type="image/png" sizes="512x512" href="./icons/apple-touch-icon-512x512.png" />
 
-    <meta name="theme-color" content="#1e1e1e" />
+    <meta name="theme-color" content="#000000" />
 
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="msapplication-TileColor" content="#254b4d" />
@@ -40,7 +40,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Music Love" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    
+
     <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="16x16" href="./icons/apple-touch-icon-16x16.png">
     <link rel="apple-touch-icon" sizes="57x57" href="./icons/apple-touch-icon-57x57.png">
@@ -54,7 +54,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon-180x180.png">
 
     <link rel="manifest" href="manifest.json">
-  
+
     <link href="splashscreens/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
     <link href="splashscreens/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
     <link href="splashscreens/iphoneplus_splash.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
@@ -62,7 +62,6 @@
     <link href="splashscreens/ipad_splash.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
     <link href="splashscreens/ipadpro1_splash.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
     <link href="splashscreens/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-  
 
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/framework7-bundle.min.css">
@@ -71,6 +70,8 @@
     <link rel="stylesheet" href="css/pages/index.css?r=70992">
     <link rel="stylesheet" href="css/classes.css">
     <link rel="stylesheet" href="css/custom.css">
+
+
 
     <!-- mixpanel begin -->
     <script type="text/javascript">
@@ -82,10 +83,10 @@
 
 <body class="theme-dark color-theme-red">
 
-    <div class="hidden-focus-element" tabindex="0"></div>
+    <div class="hidden-focus-element"></div>
 
     <div id="app" class="framework7-root app">
-        <div class="panel-backdrop"></div>     
+        <div class="panel-backdrop"></div>
         <div id="view-main" class="view view-main view-init safe-areas" data-url="/">
             <div id="page" class="page" data-name="index">
                 <div class="status--bar"></div>
@@ -95,56 +96,55 @@
                         <a id="o-1012" href="#tab-1" class="tab-link">
                             <i id="o-1013" class="icon f7-icons ios-only">play</i>
                             <i id="o-1014" class="icon icon-fill f7-icons ios-only">play</i>
-                            <i id="o-1015" class="icon f7-icons md-only">play</i>                                 
-                        </a>
+                            <i id="o-1015" class="icon f7-icons md-only">play</i>
                         <a id="o-1017" href="#tab-2" class="tab-link">
                             <i id="o-1018" class="icon f7-icons ios-only">play_rectangle</i>
                             <i id="o-1019" class="icon icon-fill f7-icons ios-only">play_rectangle</i>
-                            <i id="o-1020" class="icon f7-icons md-only">play_rectangle</i>                                
+                            <i id="o-1020" class="icon f7-icons md-only">play_rectangle</i>
                         </a>
                         <a id="o-1022" href="#tab-3" class="tab-link">
                             <i id="o-1023" class="icon f7-icons ios-only">rectangle_stack_person_crop</i>
                             <i id="o-1024" class="icon icon-fill f7-icons ios-only">rectangle_stack_person_crop</i>
-                            <i id="o-1025" class="icon f7-icons md-only">rectangle_stack_person_crop</i>                                 
+                            <i id="o-1025" class="icon f7-icons md-only">rectangle_stack_person_crop</i>
                         </a>
                         <a id="o-1027" href="#tab-4" class="tab-link">
                             <i id="o-1028" class="icon f7-icons ios-only">rocket</i>
                             <i id="o-1029"
                                 class="icon icon-fill f7-icons ios-only">rocket</i>
-                            <i id="o-1030" class="icon f7-icons md-only">rocket</i>                                
+                            <i id="o-1030" class="icon f7-icons md-only">rocket</i>
                         </a>
                     </div>
                 </div>
-                
+
                 <div id="tabs-o-2010" class="tabs">
 
                     <div id="tab-0" class="page-content tab tab-active">
                         <div id="div-1040" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
-                            <iframe title="tab-0" id="iframe-1040" src="pages/cover/index.html" loading="eager" class="embed-responsive-item"></iframe>
+                            <iframe title="tab-0" id="iframe-1040" src="pages/cover/index.html" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
 
                     <div id="tab-1" class="page-content tab">
                         <div id="div-1041" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
-                            <iframe title="tab-1" id="iframe-1041" src="pages/radios.html" loading="lazy" class="embed-responsive-item"></iframe>
+                            <iframe title="tab-1" id="iframe-1041" src="pages/radio/index.html" loading="lazy" scrolling="no" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
 
                     <div id="tab-2" class="page-content tab">
                         <div id="div-1042" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
-                            <iframe title="tab-2" id="iframe-1042" src="pages/yt.html" loading="lazy" class="embed-responsive-item"></iframe>
+                            <iframe title="tab-2" id="iframe-1042 contentFrame" src="pages/moozik/index.html" loading="lazy" scrolling="no" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
 
                     <div id="tab-3" class="page-content tab">
                         <div id="div-1043" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
-                            <iframe title="tab-3" id="iframe-1043" src="pages/fluid.html" loading="lazy" class="embed-responsive-item"></iframe>
+                            <iframe title="tab-3" id="iframe-1043" src="pages/fluid.html" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
 
                     <div id="tab-4" class="page-content tab">
                         <div id="div-1044" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
-                            <iframe title="tab-4" id="iframe-1044" src="pages/gamesnacks.html" loading="lazy" class="embed-responsive-item"></iframe>
+                            <iframe title="tab-4" id="iframe-1044" src="pages/gamesnacks.html" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
 
@@ -159,8 +159,6 @@
     <script type="text/javascript" src="js/plugins/thorium.core.min.js"></script>
     <script type="text/javascript" src="js/custom.js" ></script>
 
-    <!--script type="text/javascript" src="js/mixpanel-sdk.js" ></script-->
-    
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             if (typeof thoriumCorePlugin !== 'undefined') {
@@ -223,46 +221,78 @@
         });
     </script>
 
-
     <script>
-        // JavaScript to reload tabs on every click after refresh until navigating to another tab
-        const tabs = document.querySelectorAll('.tab-link');
-        const clickCounts = {};
-        let lastTab = "";  // Declare lastTab globally to track between clicks
-        let initialLoad = true; // Flag for initial load to trigger reload on every click after refresh
-        
-        tabs.forEach(tab => {
-            const tabId = tab.getAttribute('href');
-            clickCounts[tabId] = 0; // Initialize click count for each tab
+        function setupContentFrameListener() {
+            const contentFrame = document.getElementById("contentFrame");
 
-            tab.addEventListener('click', function (e) {
-                e.preventDefault();  // Prevent default link behavior if necessary
+            // When content frame is fully loaded, setup its iframe listener
+            contentFrame.onload = function() {
+                // Listen for YouTube iframe events inside contentFrame
+                setupYouTubeIframeListener(contentFrame);
+            };
+        }
 
-                // Check if the current tab was the last clicked tab
-                if (lastTab === tabId) {
-                    clickCounts[tabId]++;
-                } else {
-                    clickCounts[tabId] = 1; // Reset count if a different tab is clicked
-                    initialLoad = false; // If a new tab is selected, stop initial reloading behavior
-                }
+        // Set up listener for YouTube iframe events within contentFrame
+        function setupYouTubeIframeListener(contentFrame) {
+            // Grab the inner YouTube iframe
+            const youtubeIframe = contentFrame.contentWindow.document.querySelector("iframe[src*='youtube.com']");
 
-                // Set lastTab to the current tab
-                lastTab = tabId;
+            if (youtubeIframe) {
+                // Monitor fullscreen events from the YouTube iframe
+                youtubeIframe.addEventListener("fullscreenchange", function() {
+                    console.log("YouTube iframe is entering or exiting fullscreen");
+                });
 
-                // Reload the tab's iframe on every click after refresh or every second click
-                if (initialLoad || clickCounts[tabId] % 2 === 0) {
-                    // Find the iframe inside the tab and reload its src
-                    const iframe = document.querySelector(`${tabId} iframe`);
-                    if (iframe) {
-                        const src = iframe.getAttribute('src');
-                        iframe.setAttribute('src', src); // Reload iframe
+                // Optional: You can add other event listeners for the YouTube iframe
+
+                // Intercept popout links inside YouTube iframe (optional)
+                youtubeIframe.contentWindow.document.addEventListener("click", function(event) {
+                    let target = event.target;
+
+                    // Check if it's a YouTube link
+                    if (target.tagName === "A" && target.href.includes("youtube.com")) {
+                        event.preventDefault(); // Prevent default YouTube link behavior
+                        handleYouTubeLink(target.href); // Custom handling
                     }
-                }
-            });
-        });
+                });
+            }
+        }
+
+        // Handle YouTube link popout (same as before)
+        function handleYouTubeLink(youtubeUrl) {
+            openYouTubeLink(youtubeUrl);
+            returnToIframe(); // Handle return to iframe content
+        }
+
+        function openYouTubeLink(youtubeUrl) {
+            const youtubeAppUrl = "vnd.youtube://" + youtubeUrl.split('watch?v=')[1];
+            window.location.href = youtubeAppUrl;
+
+            setTimeout(() => {
+                window.location.href = youtubeUrl;
+            }, 1000); // Fallback to browser
+        }
+
+        function returnToIframe() {
+            const contentFrame = document.getElementById("contentFrame");
+
+            // Preserve iframe state
+            preserveIframeContent(contentFrame);
+
+            // Use postMessage() to signal return to the iframe
+            contentFrame.contentWindow.postMessage("focusIframe", "*");
+        }
+
+        // Store content of iframe for restoring later
+        function preserveIframeContent(iframe) {
+            const content = iframe.contentWindow.document.body.innerHTML;
+            sessionStorage.setItem("iframeContent", content);
+        }
+
+        window.onload = function() {
+            setupContentFrameListener();
+        };
     </script>
-
-
 
 </body>
 </html>

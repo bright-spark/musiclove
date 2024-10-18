@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Music Love</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Martin Myburgh" />
+  <meta name="description" content="Music Love, your hub for unlimited entertainment." />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
+
+  <!-- Tailwind CSS (Precompiled via CDN for Development) -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Loading Spinner Styles */
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .loading.hidden {
+      display: none;
+    }
+
+    /* Ensure body is visible by default */
+    body {
+      background-color: #000;
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      color: white;
+      overflow: hidden; /* If you still want to prevent body overflow */
+    }
+
+    /* Buttons */
+    .button {
+      width: 9rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: normal;
+      border-radius: 0.5rem;
+      border: 1px solid transparent;
+      color: #f6161c;
+      background-color: transparent;
+      margin-right: 0.5rem;
+      cursor: pointer;
+      transition: font-size 0.3s ease, color 0.3s ease, border 0.3s ease;
+      flex: 0 0 auto;
+    }
+
+    .button:hover {
+      background-color: #000000;
+      color: #f6161c;
+    }
+
+    /* Selected button style */
+    .selected {
+      font-size: 1.3rem;
+      border: 1px solid #f6161c;
+    }
+
+    /* Scrollable Button Row */
+    .button-container {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: hidden; /* No horizontal scrollbar */
+      overflow-y: hidden; /* Hide vertical overflow */
+      scroll-behavior: smooth;
+      max-width: 100%;
+      position: relative;
+    }
+
+    /* Arrow Styling */
+    .arrow {
+      background: transparent;
+      padding: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .arrow:hover {
+      background-color: rgba(255, 0, 0, 0.1);
+    }
+
+    .arrow svg {
+      fill: red;
+      width: 1.7rem; /* Increased from 1.5rem */
+      height: 1.7rem; /* Increased from 1.5rem */
+    }
+
+    .arrow-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      overflow: hidden; /* Prevents arrow container overflow */
+    }
+
+    /* YouTube Embed Section */
+    .youtube-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      background-color: #00000077;
+    }
+
+    .youtube-iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #101010;
+      padding: 1rem;
+      text-align: center;
+      color: #fff;
+      overflow: hidden; /* Prevents footer overflow */
+    }
+
+    footer a {
+      color: #f6161c;
+      text-decoration: none;
+    }
+
+    .text-ytplus {
+      color: #f6161c;
+      text-decoration: none;
+    }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 1024px) {
+      /* Buttons for medium-sized screens (tablets) */
+      .button {
+        width: 7rem;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.75rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      /* Buttons for smaller screens (small tablets/phones) */
+      .button {
+        width: 6rem;
+        padding: 0.3rem 0.6rem;
+        font-size: 0.7rem;
+      }
+
+      .arrow svg {
+        width: 1.4rem; /* Increased by 2px */
+        height: 1.4rem; /* Increased by 2px */
+      }
+    }
+
+    @media (max-width: 480px) {
+      /* Buttons for mobile screens */
+      .button {
+        width: 5rem;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.6rem;
+      }
+
+      .arrow svg {
+        width: 1.2rem; /* Increased by 2px */
+        height: 1.2rem; /* Increased by 2px */
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Loading Spinner -->
+  <div id="loading-spinner" class="loading">
+    <!-- Customized Spinner -->
+    <svg class="animate-spin h-10 w-10 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="white" stroke-width="4"></circle>
+      <path class="opacity-75" fill="white" d="M4 12a8 8 0 018-8v8H4z"></path>
+    </svg>
+  </div>
+
+  <!-- Container -->
+  <div class="container mx-auto mt-4 px-4 w-full h-full font-sans font-light text-sm">
+
+    <!-- Bio Section -->
+    <div class="flex justify-center">
+      <div class="w-full md:w-1/2 text-center">
+        <div class="text-center mt-2 flex justify-center items-center gap-1 flex-col md:flex-row">
+          <img id="profile-image" class="rounded-full" alt="Music Love" width="140" height="140">
+        </div>
+        <div class="text-3xl mt-2">
+          <p>mo͞o<a class="text-ytplus hover:text-white" href="https://youtube.com/@theradiostream" target="_blank" rel="noopener noreferrer">zik</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- YouTube Embed Section -->
+    <div class="flex justify-center mt-10">
+      <div class="w-full md:w-2/3 rounded-lg overflow-hidden">
+        <div class="youtube-container">
+          <iframe title="youtube-iframe" id="youtube-player" class="youtube-iframe" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Button Navigation with Arrows -->
+    <div class="arrow-container mt-8">
+      <!-- Left Arrow -->
+      <button class="arrow" id="left-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+
+      <!-- Scrollable Buttons Section -->
+      <div class="button-container flex justify-center gap-2 px-4" id="button-container">
+        <!-- Buttons will be dynamically added here -->
+      </div>
+
+      <!-- Right Arrow -->
+      <button class="arrow" id="right-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+
+    <!-- Spacer to push footer to bottom -->
+    <div class="flex-grow"></div>
+
+    <!-- Footer -->
+    <footer class="mt-10 text-center px-4 pb-8 pt-8 gap-1 rounded-lg">
+      <p>Powered by <a class="text-ytplus hover:text-white" href="https://youtube.com/@theradiostream" target="_blank" rel="noopener noreferrer">mo͞ozik</a></p>
+    </footer>
+
+    <div class="mt-4 mb-10 text-center">
+      <p class="text-sm sm:text-sm text-gray-500">Made with music <a class="text-ytplus hover:text-white" href="https://youtube.com/@theradiostream" target="_blank" rel="noopener noreferrer">❤️</a> from South Africa</p>
+    </div>
+
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // JSON data for bio and playlists
+    const data = {
+      bio: {
+        name: "John Doe",
+        title: "Playlist Curator",
+        description: "YouTube Plus is a curated playlist collection of the best music videos on YouTube.",
+        image: "profile.png"
+      },
+      playlists: [
+        {
+          title: "Hits",
+          url: "https://www.youtube.com/embed/4QIZE708gJ4?controls=0",
+          auto: "https://www.youtube.com/embed/4QIZE708gJ4?controls=0&autoplay=1"
+        },
+        {
+          title: "Pop",
+          url: "https://www.youtube.com/embed/hLQl3WQQoQ0?controls=0",
+          auto: "https://www.youtube.com/embed/hLQl3WQQoQ0?controls=0&autoplay=1"
+        },
+        {
+          title: "Dance",
+          url: "https://www.youtube.com/embed/ouEl3qTLc0M?controls=0",
+          auto: "https://www.youtube.com/embed/ouEl3qTLc0M?controls=0&autoplay=1"
+        },
+        {
+          title: "Club",
+          url: "https://www.youtube.com/embed/evJ6gX1lp2o?controls=0",
+          auto: "https://www.youtube.com/embed/evJ6gX1lp2o?controls=0&autoplay=1"
+        },
+        {
+          title: "Ballads",
+          url: "https://www.youtube.com/embed/r3Pr1_v7hsw?controls=0",
+          auto: "https://www.youtube.com/embed/r3Pr1_v7hsw?controls=0&autoplay=1"
+        },
+        {
+          title: "Chill",
+          url: "https://www.youtube.com/embed/LnIU32wdbNc?controls=0",
+          auto: "https://www.youtube.com/embed/LnIU32wdbNc?controls=0&autoplay=1"
+        },
+        {
+          title: "Classics",
+          url: "https://www.youtube.com/embed/5NV6Rdv1a3I?controls=0",
+          auto: "https://www.youtube.com/embed/5NV6Rdv1a3I?controls=0&autoplay=1"
+        }
+      ]
+    };
+
+    let buttonWidth = 144; // Default button width in pixels (9rem = 144px)
+
+    // Variables for touch handling
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const swipeThreshold = 50; // Minimum distance for a swipe to be registered
+
+    // Calculate the button width dynamically based on the actual rendered size
+    function calculateButtonWidth() {
+      const button = document.querySelector('.button');
+      if (button) {
+        const style = getComputedStyle(button);
+        const marginRight = parseFloat(style.marginRight);
+        buttonWidth = button.offsetWidth + marginRight;
+      }
+    }
+
+    // Load bio content
+    function loadBio() {
+      const profileImage = document.getElementById("profile-image");
+      const youtubePlayer = document.getElementById("youtube-player");
+
+      // Handle image loading with fallback
+      const img = new Image();
+      img.src = data.bio.image;
+      img.onload = () => {
+        profileImage.src = data.bio.image;
+      };
+      img.onerror = () => {
+        // Fallback image if the specified image fails to load
+        profileImage.src = 'default-profile.png';
+      };
+
+      youtubePlayer.src = data.playlists[0].url;
+    }
+
+    // Dynamically load buttons from the playlists array
+    function loadButtons() {
+      const buttonContainer = document.querySelector(".button-container");
+
+      data.playlists.forEach((playlist, index) => {
+        const button = createButton(playlist, index);
+        buttonContainer.appendChild(button);
+      });
+
+      selectButton(0); // Select the first button on load
+
+      // Center the first button in the scroller
+      centerButton(0);
+    }
+
+    // Function to center a button in the button container
+    function centerButton(index) {
+      const buttonContainer = document.getElementById("button-container");
+      const button = document.getElementById(`btn-${index}`);
+      const containerWidth = buttonContainer.offsetWidth;
+      const buttonLeft = button.offsetLeft;
+      const buttonWidthCurrent = button.offsetWidth;
+
+      // Scroll to center the button
+      buttonContainer.scrollLeft = buttonLeft - (containerWidth / 2) + (buttonWidthCurrent / 2);
+    }
+
+    // Function to create a button with attached event listener
+    function createButton(playlist, index) {
+      const button = document.createElement("button");
+      button.classList.add("button");
+      button.textContent = playlist.title;
+      button.id = `btn-${index}`;
+      button.onclick = () => {
+        loadPlaylist(index);
+        selectButton(index);
+        centerButton(index); // Center the button when clicked
+      };
+      return button;
+    }
+
+    // Function to load playlist content (preroll normal followed by auto)
+    function loadPlaylist(index) {
+      const youtubePlayer = document.getElementById("youtube-player");
+      youtubePlayer.src = data.playlists[index].url;
+
+      // Switch to autoplay URL after 5ms
+      setTimeout(() => {
+        youtubePlayer.src = data.playlists[index].auto;
+      }, 5);
+    }
+
+    // Function to handle button selection state
+    function selectButton(selectedId) {
+      document.querySelectorAll('.button').forEach((button) => {
+        const buttonId = button.id.split('-')[1]; // Get the numeric part of the button ID
+        button.classList.toggle("selected", buttonId == selectedId); // Compare with the selectedId
+      });
+    }
+
+    // Scroll the button container to the left and dynamically manage buttons
+    function scrollLeft() {
+      const container = document.getElementById('button-container');
+      const firstButton = container.firstElementChild;
+
+      // Move the first button to the end immediately
+      container.appendChild(firstButton);
+
+      // Adjust the scroll position to maintain smoothness
+      container.scrollLeft += buttonWidth;
+    }
+
+    // Scroll the button container to the right and dynamically manage buttons
+    function scrollRight() {
+      const container = document.getElementById('button-container');
+      const lastButton = container.lastElementChild;
+
+      // Move the last button to the beginning immediately
+      container.prepend(lastButton);
+
+      // Adjust the scroll position to maintain smoothness
+      container.scrollLeft -= buttonWidth;
+    }
+
+    // Function to handle touch start
+    function handleTouchStart(event) {
+      touchStartX = event.touches[0].clientX;
+    }
+
+    // Function to handle touch move
+    function handleTouchMove(event) {
+      touchEndX = event.touches[0].clientX;
+    }
+
+    // Function to handle touch end
+    function handleTouchEnd() {
+      const touchDifference = touchEndX - touchStartX;
+      if (Math.abs(touchDifference) > swipeThreshold) {
+        if (touchDifference < 0) {
+          // Swiped left
+          scrollLeft();
+        } else {
+          // Swiped right
+          scrollRight();
+        }
+      }
+      // Reset touch positions
+      touchStartX = 0;
+      touchEndX = 0;
+    }
+
+    // Add event listeners for left and right arrow buttons
+    function addArrowEventListeners() {
+      document.getElementById('left-arrow').addEventListener('click', scrollLeft);
+      document.getElementById('right-arrow').addEventListener('click', scrollRight);
+    }
+
+    // Add touch event listeners to the button container
+    function addTouchEventListeners() {
+      const buttonContainer = document.getElementById('button-container');
+      buttonContainer.addEventListener('touchstart', handleTouchStart, false);
+      buttonContainer.addEventListener('touchmove', handleTouchMove, false);
+      buttonContainer.addEventListener('touchend', handleTouchEnd, false);
+    }
+
+    // Initialize all functionalities after DOM content is loaded
+    document.addEventListener("DOMContentLoaded", () => {
+      loadBio();
+      loadButtons();
+      calculateButtonWidth(); // Calculate initial button width
+
+      addArrowEventListeners();
+      addTouchEventListeners();
+
+      // Recalculate button width on window resize for responsive behavior
+      window.addEventListener('resize', calculateButtonWidth);
+
+      // Hide the loading spinner after a slight delay to ensure all elements are rendered
+      // Adjust the timeout as necessary
+      setTimeout(() => {
+        const spinner = document.getElementById('loading-spinner');
+        if (spinner) {
+          spinner.classList.add('hidden');
+        }
+      }, 300); // 300ms delay
+    });
+  </script>
+
+</body>
+
+</html>

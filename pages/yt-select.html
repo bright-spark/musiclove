@@ -6,8 +6,8 @@
   <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body>
-  <iframe id="ytPlayer" src="https://www.youtube.com/embed/4QIZE708gJ4?list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&index=1&controls=0&autoplay=0" 
-    title="YouTube Video Player" frameborder="0" 
+  <iframe id="ytPlayer" src="https://www.youtube.com/embed/4QIZE708gJ4?list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&index=1&controls=0&rel=0&autoplay=0" 
+    title="YouTube Video Player" 
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
   </iframe>
@@ -15,7 +15,7 @@
   <script>
     window.onload = function() {
       const ytPlayer = document.getElementById('ytPlayer');
-      ytPlayer.src = "https://www.youtube.com/embed/4QIZE708gJ4?list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&index=1&controls=0&autoplay=1";
+      ytPlayer.src = "https://www.youtube.com/embed/4QIZE708gJ4?list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&index=1&controls=0&rel=0&autoplay=1";
     };
   </script>
 </body>

@@ -1,0 +1,15 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "fm.theradio.twa",
+      "sha256_cert_fingerprints": [
+        "2E:43:C4:1D:E4:C7:9F:0B:11:44:CB:99:DB:53:A1:A4:72:94:66:9D:3C:8C:76:C5:C0:0F:E2:2C:BB:30:EF:EA",
+        "6A:B4:48:E3:09:D7:A4:9C:F5:6C:46:2E:03:67:12:DD:75:45:95:6A:23:91:38:23:55:CD:C2:41:3C:C1:54:E7"
+      ]
+    }
+  }
+]

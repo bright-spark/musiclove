@@ -46,11 +46,11 @@
 
 <body data-rsssl="1">
 
-    <!--<iframe title="YouTube video player" id="playlistiframe" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>-->
+    <!--<iframe title="YouTube video player" id="playlistiframe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>-->
 
     <iframe title="YouTube Video Player" id="playlistiframe"
         allow="web-share; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        type="text/html" frameborder="0" allowfullscreen></iframe>
+        type="text/html" allowfullscreen></iframe>
 
     <script>
         // Array of prepopulated strings (YouTube playlist IDs)
@@ -62,21 +62,21 @@
             //"PLuWIxgNYqm0lXxPLZ9hBT9M46m53H5GES",
             //"PLuWIxgNYqm0kV69z-SJHDwAuebGmIhbp6"
 
-            //"Tx1sqYc3qas&list=RDTx1sqYc3qas&start_radio=1",
-            //"Ah0Ys50CqO8&list=RDQMF2R40qRK-qk&start_radio=1",
-            //"LjF9IqvXDjY&list=RDLjF9IqvXDjY&start_radio=1",
-            //"N44lUwwvNFs&list=RDN44lUwwvNFs&start_radio=1",
-            //"jfioZtZ9iiE&list=RDjfioZtZ9iiE&start_radio=1",
-            //"RO_9LDW4YhM&list=RDRO_9LDW4YhM&start_radio=1",
-            //"ZtD9bQIjE_k&list=RDZtD9bQIjE_k&start_radio=1",
-            //"mj4cD5xn2n0&list=RD1e_j20yFAvo&start_radio=1",
-            //"BC19kwABFwc&list=RD4RkM-v2i5Ew&start_radio=1",
-            //"4RkM-v2i5Ew&list=RDBC19kwABFwc&start_radio=1",
-            //"kEDZZin4_eM&list=RD1e_j20yFAvo&start_radio=1"
-            //"VqQeT7wKqvs?si=JNpBo7q0rduSW7aZ&start_radio=1"
+            //"Tx1sqYc3qas&list=RDTx1sqYc3qas",
+            //"Ah0Ys50CqO8&list=RDQMF2R40qRK-qk",
+            //"LjF9IqvXDjY&list=RDLjF9IqvXDjY",
+            //"N44lUwwvNFs&list=RDN44lUwwvNFs",
+            //"jfioZtZ9iiE&list=RDjfioZtZ9iiE",
+            //"RO_9LDW4YhM&list=RDRO_9LDW4YhM",
+            //"ZtD9bQIjE_k&list=RDZtD9bQIjE_k",
+            //"mj4cD5xn2n0&list=RD1e_j20yFAvo",
+            //"BC19kwABFwc&list=RD4RkM-v2i5Ew",
+            //"4RkM-v2i5Ew&list=RDBC19kwABFwc",
+            //"kEDZZin4_eM&list=RD1e_j20yFAvo"
+            //"VqQeT7wKqvs?si=JNpBo7q0rduSW7aZ"
             //"VqQeT7wKqvs"
-            //"7Nv9BxZTDsE?si=eLYimavv76NDOaEQ&start_radio=1"
-            "7Nv9BxZTDsE&list=PLTG-kK3_R4OKqu1aoa5PVZrGlRh0IJoOD&start_radio=1"
+            //"7Nv9BxZTDsE?si=eLYimavv76NDOaEQ"
+            "7Nv9BxZTDsE&list=PLTG-kK3_R4OKqu1aoa5PVZrGlRh0IJoOD"
         ];
 
         function getCookie(name) {
@@ -102,7 +102,7 @@
                 // document.getElementById("playlistiframe").src = "https://www.youtube-nocookie.com/embed/videoseries?list=" + nextPlaylist;
                 // document.getElementById("playlistiframe").src = "https://www.youtube-nocookie.com/embed/" + nextPlaylist;
                 // https://www.youtube-nocookie.com/embed/?v=Tx1sqYc3qas&list=RDTx1sqYc3qas
-                // https://www.youtube.com/watch?v=mj4cD5xn2n0&list=RD1e_j20yFAvo&start_radio=1
+                // https://www.youtube.com/watch?v=mj4cD5xn2n0&list=RD1e_j20yFAvo
                 //"https://www.youtube-nocookie.com/embed/?v="  
                 document.getElementById("playlistiframe").src = "https://www.youtube-nocookie.com/embed/?v=" + nextPlaylist;
             } else {

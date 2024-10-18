@@ -116,7 +116,7 @@
 
     function loadPlaylist() {
       const nextPlaylist = getNextPlaylist();
-      document.getElementById('playlistiframe').src = `https://youtube.com/embed/playlist?list=${nextPlaylist}&start_radio=1`;
+      document.getElementById('playlistiframe').src = `https://youtube.com/embed/playlist?list=${nextPlaylist}`;
     }
 
     window.addEventListener('load', loadPlaylist);
