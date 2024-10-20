@@ -28,7 +28,7 @@
         margin: 0;
         font-family: "Roboto", sans-serif;
         color: white;
-        overflow: hidden; /* Prevent body overflow */
+        overflow: auto; /* Prevent body overflow */
       }
 
       /* Loading Spinner Styles */
@@ -60,7 +60,7 @@
         font-weight: normal;
         border-radius: 0.4rem;
         border: 1px solid transparent;
-        color: #f6161c;
+        color: #ffffff;
         background-color: transparent;
         margin-right: 0.5rem;
         cursor: pointer;
@@ -69,13 +69,16 @@
       }
 
       .button:hover {
-        background-color: #000000;
+        background-color: transparent;
         color: #f6161c;
       }
 
       .selected {
-        font-size: 1.3rem;
-        border: 1px solid #f6161c;
+        font-size: 1rem;
+        font-weight: bolder;
+        background-color: transparent;
+        color: #f6161c;
+        border: 2px solid #f6161c;
       }
 
       .button-container {
@@ -90,7 +93,7 @@
 
       .arrow {
         background: transparent;
-        padding: 0.5rem;
+        padding: 0.9rem;
         cursor: pointer;
         transition: background-color 0.3s ease;
         display: flex;
@@ -104,8 +107,8 @@
 
       .arrow svg {
         fill: red;
-        width: 1.7rem;
-        height: 1.7rem;
+        width: 1.9rem;
+        height: 1.9rem;
       }
 
       .arrow-container {
@@ -134,7 +137,7 @@
       }
 
       footer {
-        background-color: #101010;
+        background-color: #1b1b1b;
         padding: 1rem;
         text-align: center;
         color: #fff;
@@ -184,14 +187,54 @@
           height: 1.2rem;
         }
       }
+
+      @media (max-width: 320px) {
+        .button {
+          width: 4rem;
+          padding: 0.2rem 0.4rem;
+          font-size: 0.6rem;
+        }
+
+        .arrow svg {
+          width: 1rem;
+          height: 1rem;
+        }
+      }
+
+      .lds-dual-ring,
+
+      .lds-dual-ring:after {
+        box-sizing: border-box;
+      }
+      .lds-dual-ring {
+        display: inline-block;
+        width: 80px;
+        height: 80px;
+      }
+      .lds-dual-ring:after {
+        color:red;
+        content: " ";
+        display: block;
+        width: 64px;
+        height: 64px;
+        margin: 8px;
+        border-radius: 50%;
+        border: 6.4px solid currentColor;
+        border-color: currentColor transparent currentColor transparent;
+        animation: lds-dual-ring 0.50s linear infinite;
+      }
+      @keyframes lds-dual-ring {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
     </style>
   </head>
   <body class="flex">
-    <!-- Loading Spinner -->
-    <div id="loading-spinner" class="loading">
-      <!-- Customized Spinner -->
-
-    </div>
 
     <div class="container font-light font-sans mx-auto my-0 p-4 text-sm">
       <!-- Bio Section -->
@@ -203,7 +246,7 @@
             <img
               id="profile-image"
               class="p-2 rounded-full"
-              alt="Profile Image of Music Love"
+              alt="Music Love"
               width="140"
               height="140"
             />
@@ -235,7 +278,6 @@
               title="youtube-iframe"
               id="youtube-player"
               class="youtube-iframe"
-              frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerpolicy="strict-origin-when-cross-origin"
               origin="https://theradio.fm"
@@ -294,6 +336,7 @@
         </p>
       </div>
     </div>
+
     <!-- JavaScript -->
     <script>
       const data = {
@@ -308,92 +351,80 @@
 
           {
             title: "Afrikaans",
-            description: "Totally Pop",
             url: "https://www.youtube.com/embed/playlist?list=RDEMrXlQOvXJrmnCFsKcLG_LqA&controls=0&rel=0",
             auto: "https://www.youtube.com/embed/playlist?list=RDEMrXlQOvXJrmnCFsKcLG_LqA&controls=0&rel=0&autoplay=1",
           },
 
           {
             title: "Hits List",
-            description: "Top US Tracks on YouTube.",
             url: "https://www.youtube.com/embed/playlist?list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&controls=0&rel=0",
             auto: "https://www.youtube.com/embed/playlist?list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&controls=0&rel=0&autoplay=1",
-          },  
+          },
 
           {
             title: "Pop Hits",
-            description: "Fresh Dance & Club Tracks on YouTube.",
             url: "https://www.youtube.com/embed/playlist?list=RDCLAK5uy_nhf3h98yS3LCk_bVNQu6GjWG7ARvMaiFQ&controls=0&rel=0",
             auto: "https://www.youtube.com/embed/playlist?list=RDCLAK5uy_nhf3h98yS3LCk_bVNQu6GjWG7ARvMaiFQ&controls=0&rel=0&autoplay=1",
           },
-  
+
           {
             title: "Rock",
-            description: "Rock Tracks on YouTube",
             url: "https://www.youtube.com/embed/playlist?list=RDCLAK5uy_lfU6d5d-whk0KvABtxS0yZrj6n4NW2eTM&controls=0&rel=0",
             auto: "https://www.youtube.com/embed/playlist?list=RDCLAK5uy_lfU6d5d-whk0KvABtxS0yZrj6n4NW2eTM&controls=0&rel=0&autoplay=1",
           },
 
           {
             title: "R&B",
-            description: "Rap Tracks on YouTube",
             url: "https://www.youtube.com/embed/playlist?list=RDCLAK5uy_mu-BhJj3yO1OXEMzahs_aJVtNWJwAwFEE&controls=0&rel=0",
             auto: "https://www.youtube.com/embed/playlist?list=RDCLAK5uy_mu-BhJj3yO1OXEMzahs_aJVtNWJwAwFEE&controls=0&rel=0&autoplay=1",
           },
 
           {
             title: "Indie",
-            description: "Alternative Indie Tracks on YouTube",
             url: "https://www.youtube.com/embed/playlist?list=RDCLAK5uy_l4QirOJJ99DTK5t5h7PdS_apsSClRfPpc&controls=0&rel=0",
             auto: "https://www.youtube.com/embed/playlist?list=RDCLAK5uy_l4QirOJJ99DTK5t5h7PdS_apsSClRfPpc&controls=0&rel=0&autoplay=1",
           },
 
           {
             title: "Alternative",
-            description: "Alternative Indie Tracks on YouTube",
             url: "https://www.youtube.com/embed/playlist?list=RDCLAK5uy_n4oG0HK-gS2c_tstquxLhCBjs-CF2g8Qg&controls=0&rel=0",
             auto: "https://www.youtube.com/embed/playlist?list=RDCLAK5uy_n4oG0HK-gS2c_tstquxLhCBjs-CF2g8Qg&controls=0&rel=0&autoplay=1",
-          },
-          
-          {
-            title: "Dance Hits",
-            description: "Today's Dance Tracks on YouTube.",
-            url: "https://www.youtube.com/embed/playlist?list=RDCLAK5uy_kLWIr9gv1XLlPbaDS965-Db4TrBoUTxQ8&controls=0&rel=0",
-            auto: "https://www.youtube.com/embed/playlist?list=RDCLAK5uy_kLWIr9gv1XLlPbaDS965-Db4TrBoUTxQ8&controls=0&rel=0&autoplay=1",
           },
 
           {
             title: "Decibles",
-            description: "Today's Dance Tracks on YouTube.",
             url: "https://www.youtube.com/embed/playlist?list=RDCLAK5uy_k5vcGRXixxemtzK1eKDS7BeHys7mvYOdk&controls=0&rel=0",
             auto: "https://www.youtube.com/embed/playlist?list=RDCLAK5uy_k5vcGRXixxemtzK1eKDS7BeHys7mvYOdk&controls=0&rel=0&autoplay=1",
           },
 
           {
             title: "Beats",
-            description: "Electronic Beats Tracks on YouTube",
             url: "https://www.youtube.com/embed/playlist?list=RDCLAK5uy_lDmrvWsJapdRC-uQzUdJmc1tPWB-jkzRM&controls=0&rel=0",
             auto: "https://www.youtube.com/embed/playlist?list=RDCLAK5uy_lDmrvWsJapdRC-uQzUdJmc1tPWB-jkzRM&controls=0&rel=0&autoplay=1",
           },
-          
+
           {
             title: "Electronica",
-            description: "New Electronica Tracks on YouTube",
             url: "https://www.youtube.com/embed/playlist?list=RDCLAK5uy_kBbljBMZ2exMXUc3MZdtXHsMwvGqf3eE8&controls=0&rel=0",
             auto: "https://www.youtube.com/embed/playlist?list=RDCLAK5uy_kBbljBMZ2exMXUc3MZdtXHsMwvGqf3eE8&controls=0&rel=0&autoplay=1",
           },
 
           {
+            title: "Dance Hits",
+            url: "https://www.youtube.com/embed/playlist?list=RDCLAK5uy_kLWIr9gv1XLlPbaDS965-Db4TrBoUTxQ8&controls=0&rel=0",
+            auto: "https://www.youtube.com/embed/playlist?list=RDCLAK5uy_kLWIr9gv1XLlPbaDS965-Db4TrBoUTxQ8&controls=0&rel=0&autoplay=1",
+          },
+
+          {
             title: "Sing-Along",
-            description: "",
             url: "https://www.youtube.com/embed/playlist?list=RDCLAK5uy_nUi8B-S9ckz5feHM7oMGyQQ_eKW2Zl9aE&controls=0&rel=0",
             auto: "https://www.youtube.com/embed/playlist?list=RDCLAK5uy_nUi8B-S9ckz5feHM7oMGyQQ_eKW2Zl9aE&controls=0&rel=0&autoplay=1",
           }
-          
+
         ],
       };
 
-      let buttonWidth = 300; // Default button width in pixels
+      let buttonWidth = 280; // Default button width in pixels
 
       function calculateButtonWidth() {
         const button = document.querySelector(".button");
@@ -462,9 +493,10 @@
 
         // For iOS and Android, after a short delay, switch to autoplay version
         if (isMobile()) {
+          return
           setTimeout(() => {
             youtubePlayer.src = playlist.auto;
-          }, 5); // Delay allows non-autoplay to load briefly before switching to autoplay
+          }, 50); // Delay allows non-autoplay to load briefly before switching to autoplay
         }
       }
 
@@ -480,7 +512,7 @@
         const firstButton = container.firstElementChild;
 
         container.appendChild(firstButton);
-        container.scrollLeft += buttonWidth;
+        container.scrollRight += buttonWidth;
       }
 
       function scrollLeft() {
@@ -516,11 +548,11 @@
       }
 
       document.addEventListener("DOMContentLoaded", () => {
-        
-        loadBio();
-        initPlayer();
+
         loadButtons();
         calculateButtonWidth();
+        loadBio();
+        initPlayer();
 
         document.documentElement.classList.add("loaded");
 
@@ -534,18 +566,13 @@
         window.addEventListener("resize", calculateButtonWidth);
 
         const buttonContainer = document.getElementById("button-container");
+
         buttonContainer.addEventListener("touchstart", handleTouchStart);
         buttonContainer.addEventListener("touchmove", handleTouchMove);
         buttonContainer.addEventListener("touchend", handleTouchEnd);
 
-        // Hide the loading spinner after a slight delay to ensure all elements are rendered
-        setTimeout(() => {
-          const spinner = document.getElementById("loading-spinner");
-          if (spinner) {
-            spinner.classList.add("hidden");
-          }
-        }, 300); // 300ms delay for smoother transitions
       });
+
     </script>
   </body>
 </html>
