@@ -47,7 +47,7 @@
     {"title":"JacarandaFM", "author":"South Africa","media":"https://live.jacarandafm.com/jacarandahigh.mp3", "type":"audio/aac", "live":true, "liveDuration":3},
     {"title":"947", "author":"South Africa","media":"https://25643.live.streamtheworld.com/FM947_192AAC.aac", "type":"audio/aac", "live":true, "liveDuration":3},
     {"title":"5FM", "author":"South Africa","media":"https://25483.live.streamtheworld.com/5FMAAC.aac", "type":"audio/aac", "live":true, "liveDuration":3},
-    {"title":"MetroFM", "author":"South Africa","media":"https://25483.live.streamtheworld.com/METROFMAAC.aac", "type":"audio/aac", "live":true, "liveDuration":3},
+    {"title":"MetroFM", "author":"South Africa","media":"https://27793.live.streamtheworld.com/METROFMAAC.aac", "type":"audio/aac", "live":true, "liveDuration":3},
     {"title":"YFM", "author":"South Africa","media":"https://streaming.fabrik.fm/yfm/echocast/audio/index.m3u8", "type":"audio/aac", "live":true, "liveDuration":3},
     {"title":"OFM", "author":"South Africa","media":"https://edge.iono.fm/xice/ofm_live_high.aac", "type":"audio/aac", "live":true, "liveDuration":3},
     {"title":"Radiowave", "author":"Namibia","media":"https://edge.iono.fm/xice/194_high.aac", "type":"audio/aac", "live":true, "liveDuration":3},
