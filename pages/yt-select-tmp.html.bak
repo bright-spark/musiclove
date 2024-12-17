@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <title>YouTube Red</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="musiclove>yt-select">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="HandheldFriendly" content="true">
+  <meta name="MobileOptimized" content="320">
+  <meta name="theme-color" content="#1e1e1e" />
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no, viewport-fit=cover">
+  <link rel="stylesheet" href="/css/custom.css">
+  <style>
+    html, body, iframe {
+      margin: 0;
+      padding: 0;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      height: 100%;
+      z-index: 2147483647; /* Maximum z-index value */
+      position: fixed;
+    }
+
+    iframe {
+      overflow: hidden;
+      display: block;
+      width: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <iframe title="YouTube video player" id="playlistiframe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  
+  <script>
+    "use strict";
+  
+    const playlists = [
+      "PLPmdCGqzDq0Omc-BAk9lPEzhqeEdXfKVX",
+    ];
+
+    function getNextPlaylist() {
+      const currentIndex = parseInt(localStorage.getItem('currentIndex') || '-1', 10);
+      const nextIndex = currentIndex === -1 ? Math.floor(Math.random() * playlists.length) : (currentIndex + 1) % playlists.length;
+      localStorage.setItem('currentIndex', nextIndex);
+      return playlists[nextIndex];
+    }
+
+    function loadPlaylist() {
+      const nextPlaylist = getNextPlaylist();
+      document.getElementById('playlistiframe').src = `https://youtube.com/embed/playlist?list=${nextPlaylist}&controls=0&rel=0&showinfo=0&modestbranding=1&autoplay=1&enablejsapi=1`;
+    }
+
+    window.addEventListener('load', loadPlaylist);
+    
+  </script>
+  <script src="wakey.js"></script>
+</body>
+</html>

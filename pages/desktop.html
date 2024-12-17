@@ -1,20 +1,17 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
-
-<head itemscope itemtype="http://schema.org/WebSite">
-
-
-
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title itemprop="name">Jacaranda FM Desktop</title>
-  <link rel="canonical" href="https://jacarandafm.live" itemprop="url">
-  <meta name="keywords" content="Jacaranda FM, Music, Love, Audio, Player">
-  <meta name="description" content="Playing the music you love" />
-  <meta name="viewport"
-    content="width=device-width, viewport-fit=cover, initial-scale=1.0">
-
-  <script type="application/ld+json">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Jacaranda FM Desktop</title>
+    
+    <link rel="stylesheet" href="../node_modules/framework7/framework7-bundle.min.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/thorium.min.css">
+    
+    <!-- Preserve any additional head content -->
+    <link href="https://jacarandafm.live" itemprop="url" rel="canonical"/>
+    <script type="application/ld+json">
 {
   "@context": "http://schema.org",
   "@type": "Organization",
@@ -32,357 +29,335 @@
   }]
 }
 </script>
-
-  <meta property="og:locale" content="en_GB" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Jacaranda FM" />
-  <meta property="og:description" content="Playing the music you love" />
-  <meta property="og:url" content="https://jacarandafm.live" />
-  <meta property="og:site_name" content="Jacaranda FM" />
-  <meta property="og:image" content="" />
-
-  <link rel="stylesheet" href="https://turntable.kagiso.io/core/css/main-jacaranda.css">
-  <link rel="stylesheet" href="https://turntable.kagiso.io/CACHE/css/37eada545cf5.css" />
-  <link rel="apple-touch-icon" sizes="152x152"
-    href="https://turntable.kagiso.io/core/images/jacaranda/apple-touch-icon.png">
-  <link rel="shortcut icon" href="https://turntable.kagiso.io/core/images/jacaranda/favicon.ico">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-  <link rel="stylesheet" href="https://turntable.kagiso.io/core/vendor/owlCarousel/dist/assets/owl.carousel.min.css">
-
-
-
-
-
-
+    <link href="https://turntable.kagiso.io/core/images/jacaranda/apple-touch-icon.png" rel="apple-touch-icon" sizes="152x152"/>
+    <link href="https://turntable.kagiso.io/core/images/jacaranda/favicon.ico" rel="shortcut icon"/>
 </head>
-
-<body class="template-listen-live">
-  <div class="spinner-container">
-    <div class="lds-ripple">
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-  <main class="main" style="background-color:#44034f; min-height: 100vh" role="main">
-    <div class="listen-live-header">
-      <a href="/" class="header--logo"></a>
-    </div>
-    <section class="timeline-section-secondary">
-      <div class="timeline">
-        <div class="timeline-current">
-          <article class="timeline-card type-song size-lg">
-            <div class="timeline-card--corner"></div>
-            <div class="timeline-card--icon">
-              <span class="icon-"></span>
-            </div>
-            <figure class="timeline-card--figure">
-              <div class="timeline-card--overlay">
-                <div class="cta-container">
-                  <h4 class="call-to-action">Click here to play</h4>
-                  <div class="play-icon"><img
-                      src="https://turntable.kagiso.io/core/images/icons/icon_timeline_overlay_playbtn.svg"
-                      alt="Play Button">
-                  </div>
-                </div>
-              </div>
-              <div class="timeline-card--figure--img"></div>
-              <ul class="timeline-card--actions">
-                <li>
-                  <button class="timeline-card--action-like is-active"><span class="icon-like"></span></button>
-                </li>
-                <li>
-                  <button class="timeline-card--action-dislike is-active"><span class="icon-dislike"></span></button>
-                </li>
-                <li>&nbsp;</li>
-                <li style="position: absolute; right: 0">
-                  <button class="is-active timeline-card--action-audio_quality dropdown-toggle" type="button"
-                    data-toggle="dropdown"><span>
-                      <svg viewBox="0 0 39 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M34.318 21.96c.08-.64.14-1.28.14-1.96 0-.68-.06-1.32-.14-1.96l4.22-3.3c.38-.3.48-.84.24-1.28l-4-6.92c-.24-.44-.78-.6-1.22-.44l-4.98 2c-1.04-.8-2.16-1.46-3.38-1.96l-.76-5.3a.975.975 0 0 0-.98-.84h-8c-.5 0-.92.36-.98.84l-.76 5.3c-1.22.5-2.34 1.18-3.38 1.96l-4.98-2c-.46-.18-.98 0-1.22.44l-4 6.92c-.26.44-.14.98.24 1.28l4.22 3.3c-.08.64-.14 1.3-.14 1.96 0 .66.06 1.32.14 1.96l-4.22 3.3c-.38.3-.48.84-.24 1.28l4 6.92c.24.44.78.6 1.22.44l4.98-2c1.04.8 2.16 1.46 3.38 1.96l.76 5.3c.06.48.48.84.98.84h8c.5 0 .92-.36.98-.84l.76-5.3c1.22-.5 2.34-1.18 3.38-1.96l4.98 2c.46.18.98 0 1.22-.44l4-6.92c.24-.44.14-.98-.24-1.28l-4.22-3.3zM19.458 27c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7z"
-                          fill="currentColor"></path>
-                      </svg>
-                    </span></button>
-                  <ul class="dropdown-menu stream-quality-control">
-                    <li><small><b>Stream Quality</b></small></li>
-                    <li class="stream-level-button low"><small><a href="#"
-                          onClick="window.playerInstance.setQualityLevel('low')">low</a></small></li>
-                    <li class="stream-level-button high"><small><a href="#"
-                          onClick="window.playerInstance.setQualityLevel('high')">high</a></small></li>
-                  </ul>
-                </li>
-              </ul>
-            </figure>
-            <div class="timeline-card--text">
-              <h5 class="timeline-card--subtitle"></h5>
-              <h4 class="timeline-card--title"></h4>
-              <div class="timeline-card--equalizer">
-                <svg xmlns="http://www.w3.org/2000/svg" class="equalizer--svg" viewBox="0 0 220 20">
-                  <g>
-                    <rect class="bar" x="0" y="0"></rect>
-                    <rect class="bar" x="12" y="0"></rect>
-                    <rect class="bar" x="24" y="0"></rect>
-                    <rect class="bar" x="36" y="0"></rect>
-                    <rect class="bar" x="48" y="0"></rect>
-                    <rect class="bar" x="60" y="0"></rect>
-                    <rect class="bar" x="72" y="0"></rect>
-                    <rect class="bar" x="84" y="0"></rect>
-                    <rect class="bar" x="96" y="0"></rect>
-                    <rect class="bar" x="108" y="0"></rect>
-                    <rect class="bar" x="120" y="0"></rect>
-                    <rect class="bar" x="132" y="0"></rect>
-                    <rect class="bar" x="144" y="0"></rect>
-                    <rect class="bar" x="156" y="0"></rect>
-                    <rect class="bar" x="168" y="0"></rect>
-                    <rect class="bar" x="180" y="0"></rect>
-                    <rect class="bar" x="192" y="0"></rect>
-                    <rect class="bar" x="204" y="0"></rect>
-                    <rect class="bar" x="216" y="0"></rect>
-                  </g>
-                </svg>
-              </div>
-            </div>
-            <div class="timeline-player-container">
-              <div class="timeline-player-inner row">
-                <div class="col-md-5 col-sm-6 col-xs-6 player-buttons">
-                  <button id="toggle-play" class="timeline-player-button" type="button">
-                    <span class="timeline-player-icons play-icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                        id="Capa_1" x="0px" y="0px" width="22px" height="22px" viewBox="0 0 510 510"
-                        style="enable-background:new 0 0 510 510;" xml:space="preserve">
-                        <g>
-                          <g id="play-circle-outline">
-                            <path class="svg-path"
-                              d="M204,369.75L357,255L204,140.25V369.75z M255,0C114.75,0,0,114.75,0,255s114.75,255,255,255s255-114.75,255-255    S395.25,0,255,0z M255,459c-112.2,0-204-91.8-204-204S142.8,51,255,51s204,91.8,204,204S367.2,459,255,459z"
-                              fill="#FFFFFF" />
-                          </g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                      </svg>
-                    </span>
-                    <span class="timeline-player-icons pause-icon hidden">
-                      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="22px" height="22px"
-                        viewBox="0 0 510 510" style="enable-background:new 0 0 510 510;" xml:space="preserve">
-                        <g>
-                          <g id="pause-circle-outline">
-                            <path class="svg-path"
-                              d="M178.5,357h51V153h-51V357z M255,0C114.75,0,0,114.75,0,255s114.75,255,255,255s255-114.75,255-255S395.25,0,255,0z
-                                M255,459c-112.2,0-204-91.8-204-204S142.8,51,255,51s204,91.8,204,204S367.2,459,255,459z M280.5,357h51V153h-51V357z" />
-                          </g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                      </svg>
-                    </span>
-                  </button>
-                  <button id="toggle-mute" class="timeline-player-button" type="button">
-                    <span class="timeline-player-icons volume-icon">
-                      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="22px" height="22px"
-                        viewBox="0 0 459 459" style="enable-background:new 0 0 459 459;" xml:space="preserve">
-                        <g>
-                          <g id="volume-up">
-                            <path class="svg-path" d="M0,153v153h102l127.5,127.5v-408L102,153H0z M344.25,229.5c0-45.9-25.5-84.15-63.75-102v204
+<body class="theme-dark color-theme-red">
+    <div class="page">
+        <div class="page-content">
+            <div class="spinner-container">
+<div class="lds-ripple">
+<div></div>
+<div></div>
+</div>
+</div>
+            <main class="main" role="main" style="background-color:#44034f; min-height: 100vh">
+<div class="listen-live-header">
+<a class="header--logo" href="/"></a>
+</div>
+<section class="timeline-section-secondary">
+<div class="timeline">
+<div class="timeline-current">
+<article class="timeline-card type-song size-lg">
+<div class="timeline-card--corner"></div>
+<div class="timeline-card--icon">
+<span class="icon-"></span>
+</div>
+<figure class="timeline-card--figure">
+<div class="timeline-card--overlay">
+<div class="cta-container">
+<h4 class="call-to-action">Click here to play</h4>
+<div class="play-icon"><img alt="Play Button" src="https://turntable.kagiso.io/core/images/icons/icon_timeline_overlay_playbtn.svg"/>
+</div>
+</div>
+</div>
+<div class="timeline-card--figure--img"></div>
+<ul class="timeline-card--actions">
+<li>
+<button class="timeline-card--action-like is-active"><span class="icon-like"></span></button>
+</li>
+<li>
+<button class="timeline-card--action-dislike is-active"><span class="icon-dislike"></span></button>
+</li>
+<li> </li>
+<li style="position: absolute; right: 0">
+<button class="is-active timeline-card--action-audio_quality dropdown-toggle" data-toggle="dropdown" type="button"><span>
+<svg fill="none" viewbox="0 0 39 40" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M34.318 21.96c.08-.64.14-1.28.14-1.96 0-.68-.06-1.32-.14-1.96l4.22-3.3c.38-.3.48-.84.24-1.28l-4-6.92c-.24-.44-.78-.6-1.22-.44l-4.98 2c-1.04-.8-2.16-1.46-3.38-1.96l-.76-5.3a.975.975 0 0 0-.98-.84h-8c-.5 0-.92.36-.98.84l-.76 5.3c-1.22.5-2.34 1.18-3.38 1.96l-4.98-2c-.46-.18-.98 0-1.22.44l-4 6.92c-.26.44-.14.98.24 1.28l4.22 3.3c-.08.64-.14 1.3-.14 1.96 0 .66.06 1.32.14 1.96l-4.22 3.3c-.38.3-.48.84-.24 1.28l4 6.92c.24.44.78.6 1.22.44l4.98-2c1.04.8 2.16 1.46 3.38 1.96l.76 5.3c.06.48.48.84.98.84h8c.5 0 .92-.36.98-.84l.76-5.3c1.22-.5 2.34-1.18 3.38-1.96l4.98 2c.46.18.98 0 1.22-.44l4-6.92c.24-.44.14-.98-.24-1.28l-4.22-3.3zM19.458 27c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</span></button>
+<ul class="dropdown-menu stream-quality-control">
+<li><small><b>Stream Quality</b></small></li>
+<li class="stream-level-button low"><small><a href="#" onclick="window.playerInstance.setQualityLevel('low')">low</a></small></li>
+<li class="stream-level-button high"><small><a href="#" onclick="window.playerInstance.setQualityLevel('high')">high</a></small></li>
+</ul>
+</li>
+</ul>
+</figure>
+<div class="timeline-card--text">
+<h5 class="timeline-card--subtitle"></h5>
+<h4 class="timeline-card--title"></h4>
+<div class="timeline-card--equalizer">
+<svg class="equalizer--svg" viewbox="0 0 220 20" xmlns="http://www.w3.org/2000/svg">
+<g>
+<rect class="bar" x="0" y="0"></rect>
+<rect class="bar" x="12" y="0"></rect>
+<rect class="bar" x="24" y="0"></rect>
+<rect class="bar" x="36" y="0"></rect>
+<rect class="bar" x="48" y="0"></rect>
+<rect class="bar" x="60" y="0"></rect>
+<rect class="bar" x="72" y="0"></rect>
+<rect class="bar" x="84" y="0"></rect>
+<rect class="bar" x="96" y="0"></rect>
+<rect class="bar" x="108" y="0"></rect>
+<rect class="bar" x="120" y="0"></rect>
+<rect class="bar" x="132" y="0"></rect>
+<rect class="bar" x="144" y="0"></rect>
+<rect class="bar" x="156" y="0"></rect>
+<rect class="bar" x="168" y="0"></rect>
+<rect class="bar" x="180" y="0"></rect>
+<rect class="bar" x="192" y="0"></rect>
+<rect class="bar" x="204" y="0"></rect>
+<rect class="bar" x="216" y="0"></rect>
+</g>
+</svg>
+</div>
+</div>
+<div class="timeline-player-container">
+<div class="timeline-player-inner row">
+<div class="col-md-5 col-sm-6 col-xs-6 player-buttons">
+<button class="timeline-player-button" id="toggle-play" type="button">
+<span class="timeline-player-icons play-icon">
+<svg height="22px" id="Capa_1" style="enable-background:new 0 0 510 510;" version="1.1" viewbox="0 0 510 510" width="22px" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px">
+<g>
+<g id="play-circle-outline">
+<path class="svg-path" d="M204,369.75L357,255L204,140.25V369.75z M255,0C114.75,0,0,114.75,0,255s114.75,255,255,255s255-114.75,255-255    S395.25,0,255,0z M255,459c-112.2,0-204-91.8-204-204S142.8,51,255,51s204,91.8,204,204S367.2,459,255,459z" fill="#FFFFFF"></path>
+</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+</span>
+<span class="timeline-player-icons pause-icon hidden">
+<svg height="22px" id="Capa_1" style="enable-background:new 0 0 510 510;" version="1.1" viewbox="0 0 510 510" width="22px" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px">
+<g>
+<g id="pause-circle-outline">
+<path class="svg-path" d="M178.5,357h51V153h-51V357z M255,0C114.75,0,0,114.75,0,255s114.75,255,255,255s255-114.75,255-255S395.25,0,255,0z
+                                M255,459c-112.2,0-204-91.8-204-204S142.8,51,255,51s204,91.8,204,204S367.2,459,255,459z M280.5,357h51V153h-51V357z"></path>
+</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+</span>
+</button>
+<button class="timeline-player-button" id="toggle-mute" type="button">
+<span class="timeline-player-icons volume-icon">
+<svg height="22px" id="Capa_1" style="enable-background:new 0 0 459 459;" version="1.1" viewbox="0 0 459 459" width="22px" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px">
+<g>
+<g id="volume-up">
+<path class="svg-path" d="M0,153v153h102l127.5,127.5v-408L102,153H0z M344.25,229.5c0-45.9-25.5-84.15-63.75-102v204
                               C318.75,313.65,344.25,275.4,344.25,229.5z M280.5,5.1v53.55C354.45,81.6,408,147.899,408,229.5S354.45,377.4,280.5,400.35V453.9
-                              C382.5,430.949,459,339.15,459,229.5C459,119.85,382.5,28.049,280.5,5.1z" />
-                          </g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                      </svg>
-                    </span>
-                    <span class="timeline-player-icons mute-icon hidden">
-                      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="22px" height="22px"
-                        viewBox="0 0 461.55 461.55" style="enable-background:new 0 0 461.55 461.55;"
-                        xml:space="preserve">
-                        <g>
-                          <g id="volume-off">
-                            <path class="svg-path" d="M345.525,229.5c0-45.9-25.5-84.15-63.75-102v56.1l63.75,63.75C345.525,239.7,345.525,234.6,345.525,229.5z M409.275,229.5
+                              C382.5,430.949,459,339.15,459,229.5C459,119.85,382.5,28.049,280.5,5.1z"></path>
+</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+</span>
+<span class="timeline-player-icons mute-icon hidden">
+<svg height="22px" id="Capa_1" style="enable-background:new 0 0 461.55 461.55;" version="1.1" viewbox="0 0 461.55 461.55" width="22px" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px">
+<g>
+<g id="volume-off">
+<path class="svg-path" d="M345.525,229.5c0-45.9-25.5-84.15-63.75-102v56.1l63.75,63.75C345.525,239.7,345.525,234.6,345.525,229.5z M409.275,229.5
                               c0,22.95-5.1,45.9-12.75,66.3l38.25,38.25c17.85-30.6,25.5-68.85,25.5-107.1c0-109.65-76.5-201.45-178.5-224.4V56.1
                               C355.725,81.6,409.275,147.9,409.275,229.5z M34.425,0L1.275,33.15L121.125,153H1.275v153h102l127.5,127.5V262.65L340.425,372.3
                               c-17.851,12.75-35.7,22.95-58.65,30.601v53.55c35.7-7.65,66.3-22.95,94.35-45.9l51,51l33.15-33.149l-229.5-229.5L34.425,0z
-                                M230.775,25.5l-53.55,53.55l53.55,53.55V25.5z" />
-                          </g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                      </svg>
-                    </span>
-                  </button>
-                  <div class="slidecontainer">
-                    <input type="range" min="0" max="1" step="0.01" value="0.1" class="slider" id="toggle-volume">
-                  </div>
-                </div>
-                <span class="col-md-7 col-sm-6 col-xs-6 player-status" id="player-status"></span>
-              </div>
-            </div>
-          </article>
+                                M230.775,25.5l-53.55,53.55l53.55,53.55V25.5z"></path>
+</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+</span>
+</button>
+<div class="slidecontainer">
+<input class="slider" id="toggle-volume" max="1" min="0" step="0.01" type="range" value="0.1"/>
+</div>
+</div>
+<span class="col-md-7 col-sm-6 col-xs-6 player-status" id="player-status"></span>
+</div>
+</div>
+</article>
+</div>
+<div class="timeline-right">
+<div class="timeline-cards--fadeout"></div>
+<div class="timeline-show">
+<div class="timeline-show--current">
+<figure class="timeline-show--current--figure">
+<div class="timeline-show--current--icon-live">
+<img alt="current show icon" class="icon-live--inner" src="https://turntable.kagiso.io/core/images/icon_live_inner.svg"/>
+<img alt="current show icon" class="icon-live--outer" src="https://turntable.kagiso.io/core/images/icon_live_outer.svg"/>
+</div>
+</figure>
+<span class="timeline-show--current--time"></span>
+</div>
+<div class="timeline-show--right">
+<div class="timeline-show--countdown">
+</div>
+</div>
+<br/>
+</div>
+<div class="timeline-cards">
+<div class="timeline-cards--inner">
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
         </div>
-        <div class="timeline-right">
-          <div class="timeline-cards--fadeout"></div>
-          <div class="timeline-show">
-            <div class="timeline-show--current">
-              <figure class="timeline-show--current--figure">
-                <div class="timeline-show--current--icon-live">
-                  <img src="https://turntable.kagiso.io/core/images/icon_live_inner.svg" alt="current show icon"
-                    class="icon-live--inner">
-                  <img src="https://turntable.kagiso.io/core/images/icon_live_outer.svg" alt="current show icon"
-                    class="icon-live--outer">
-                </div>
-              </figure>
-              <span class="timeline-show--current--time"></span>
-            </div>
-            <div class="timeline-show--right">
-              <div class="timeline-show--countdown">
-              </div>
-            </div>
-            <br>
-          </div>
-          <div class="timeline-cards">
-            <div class="timeline-cards--inner">
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <script>
+    </div>
+    
+    <!-- Preserve any scripts -->
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "url": "https://jacarandafm.live",
+  "logo": "https://turntable.kagiso.io/core/images/jacaranda/logo_md.svg",
+  "sameAs": [
+    "https://www.facebook.com/Jacaranda942",
+    "https://www.instagram.com/jacarandafm/",
+    "https://twitter.com/jacarandafm"
+  ],
+  "contactPoint": [{
+    "@type": "ContactPoint",
+    "telephone": "+27 83 268 1117",
+    "contactType": "developer"
+  }]
+}
+</script>
+    <script>
     window.swfPath = "https://turntable.kagiso.io/core/swf/";
     window.streamURL = "https://live.jacarandafm.com/jacarandahigh.mp3";
     window.siteName = "jacaranda";
     window.parentRef = this;
   </script>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://hammerjs.github.io/dist/hammer.js"></script>
-  <script>window.jQuery || document.write('<script src="https://turntable.kagiso.io/core/vendor/jquery/jquery-2.2.0.min.js"><\/script>')</script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
-  <script src="https://unpkg.com/in-view@0.6.1/dist/in-view.min.js"></script>
-  <script src="https://synchrobox.adswizz.com/register2.php"></script>
-  <script src="https://cdn.adswizz.com/adswizz/js/SynchroClient2.js"></script>
-  <script defer src="https://p2.iono.fm/bundle/0.8.1/player.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.min.js"></script>
-  <script src="https://turntable.kagiso.io/CACHE/js/384bd5694df3.js"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://hammerjs.github.io/dist/hammer.js"></script>
+    <script>window.jQuery || document.write('<script src="https://turntable.kagiso.io/core/vendor/jquery/jquery-2.2.0.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+    <script src="https://unpkg.com/in-view@0.6.1/dist/in-view.min.js"></script>
+    <script src="https://synchrobox.adswizz.com/register2.php"></script>
+    <script src="https://cdn.adswizz.com/adswizz/js/SynchroClient2.js"></script>
+    <script defer="" src="https://p2.iono.fm/bundle/0.8.1/player.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.min.js"></script>
+    <script src="https://turntable.kagiso.io/CACHE/js/384bd5694df3.js"></script>
 </body>
-
 </html>

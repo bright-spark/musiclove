@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-  <meta charset="utf-8">
-  <title>Gamesnacks</title>
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="musiclove>gamesnacks">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="HandheldFriendly" content="true">
-  <meta name="MobileOptimized" content="320">
-  <meta name="theme-color" content="#1e1e1e" />
-  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no, viewport-fit=cover">
-  <link rel="stylesheet" href="/css/custom.css">
-  <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Gamesnacks</title>
+    
+    <link rel="stylesheet" href="../node_modules/framework7/framework7-bundle.min.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/thorium.min.css">
+    
+    <!-- Preserve any additional head content -->
+    <style>
     html, body, iframe {
       margin: 0;
       padding: 0;
@@ -34,9 +31,12 @@
     }
   </style>
 </head>
-<body>
-	
-    <iframe title="flexi-flux" id="flexi-flux" src="https://gamesnacks.com/" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
+<body class="theme-dark color-theme-red">
+    <div class="iframe-container">
+        <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" id="flexi-flux" referrerpolicy="strict-origin-when-cross-origin" src="https://gamesnacks.com/" title="flexi-flux"></iframe>
+    </div>
+    
+    <!-- Preserve any scripts -->
+    
 </body>
 </html>

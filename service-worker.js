@@ -7,101 +7,147 @@
  * See the file LICENSE for details.
 */
 
-const origin=self.location.origin;
-const skipAllExternalUrl=true;
-const blacklist=["https://firestore.googleapis.com","version.json",".php","%7B%7Binstimage%7D%7D"];
-const preloadList=['./','./offline.html', './index.html', './manifest.json', './favicon.ico', './assets/css/style.css', './assets/js/main.js', './assets/js/jquery-3.6.0.min.js', './assets/js/jquery-ui 1.12.1.min.js', './assets/js/jquery-ui.min.css', './assets/js/jquery-ui.structure.min.css', './assets/js/jquery-ui.theme.min.css', './assets/js/jquery-ui-timepicker-addon.min.js', './assets/js/jquery-ui-timepicker-addon.min.css',]
+const CACHE_NAME = 'musiclove-cache-v';
+const APP_SHELL = [
+  './',
+  './offline.html',
+  './index.html',
+  './manifest.json',
+  './favicon.ico',
+  './css/app.css',
+  './css/thorium.min.css',
+  './css/classes.css',
+  './js/app.js',
+  './js/routes.js',
+  './node_modules/framework7/framework7-bundle.min.css',
+  './node_modules/framework7/framework7-bundle.min.js',
+  './font-awesome/css/font-awesome.min.css'
+];
 
-function isRejectable(url) {
-  if ((skipAllExternalUrl == true) && (url.indexOf(origin) == -1)) {
-    return true;
-  } else {
-    if (blacklist.some(v => url.includes(v))) {
-      return true;
-    } else {
-      return false;
+// Function to get current cache name
+async function getCurrentCacheName() {
+  try {
+    const response = await fetch('./version.json');
+    if (response.ok) {
+      const versionData = await response.json();
+      return `${CACHE_NAME}${versionData.version}`;
     }
+  } catch (error) {
+    console.log('[ServiceWorker] Version check failed:', error);
   }
+  return CACHE_NAME + '0';
 }
 
-self.addEventListener('install', function(event) {
-  event.waitUntil(preLoad());
-  console.log('[com.thorium.serviceworker] Service Worker Initialized');
-});
-
-/* -- SW Initialization --*/
-var preLoad = function(){
-  console.log('[com.thorium.serviceworker] Service Worker Installation');
-  return caches.open('thorium-cache')
-  .then(function(cache) {
-    return cache.addAll(preloadList);
-  });
+// Function to check if cache needs update
+async function checkForUpdates() {
+  try {
+    const response = await fetch('./version.json');
+    if (response.ok) {
+      const versionData = await response.json();
+      const currentCacheName = await getCurrentCacheName();
+      const expectedCacheName = `${CACHE_NAME}${versionData.version}`;
+      
+      if (currentCacheName !== expectedCacheName) {
+        console.log('[ServiceWorker] New version detected, clearing cache');
+        await clearOldCache();
+        return true;
+      }
+    }
+  } catch (error) {
+    console.log('[ServiceWorker] Version check failed:', error);
+  }
+  return false;
 }
 
-self.addEventListener('activate', function(event) {
-  console.log('[com.thorium.serviceworker] service worker activated');
-});
+// Clear old cache
+async function clearOldCache() {
+  const cacheNames = await caches.keys();
+  const currentCacheName = await getCurrentCacheName();
+  await Promise.all(
+    cacheNames.map(cacheName => {
+      if (cacheName.startsWith(CACHE_NAME) && cacheName !== currentCacheName) {
+        return caches.delete(cacheName);
+      }
+    })
+  );
+}
 
-/* -- SW Fetch during use --*/
-self.addEventListener('fetch', function(event) {
-  if ( isRejectable(event.request.url)==true) {
-    console.log('[com.thorium.serviceworker] request rejected '+event.request.url);
-    return;
-  }
-  event.respondWith(
-    checkResponse(event.request)
-    .catch(function() {
-      console.log('[com.thorium.serviceworker] file returned from cache: '+event.request.url);
-      return returnFromCache(event.request);
-    }
-  ));
+// Install event - cache app shell
+self.addEventListener('install', event => {
   event.waitUntil(
-    addToCache(event.request)
+    (async () => {
+      const cacheName = await getCurrentCacheName();
+      const cache = await caches.open(cacheName);
+      console.log('[ServiceWorker] Caching app shell');
+      await cache.addAll(APP_SHELL);
+      console.log('[ServiceWorker] App shell cached');
+      return self.skipWaiting();
+    })()
   );
 });
 
-var checkResponse = function(request){
-  return new Promise(function(fulfill, reject) {
-    fetch(request)
-    .then(function(response){
-      if(response.status !== 404) {
-        console.log('[com.thorium.serviceworker] Response Status '+response.status+": "+request.url);
-        fulfill(response)
-      } else {
-        console.log("[com.thorium.serviceworker] reject response for url "+request.url);
-        reject();
+// Activate event - clean up old caches
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    Promise.all([
+      clearOldCache(),
+      self.clients.claim()
+    ])
+  );
+});
+
+// Fetch event - serve from cache, fallback to network
+self.addEventListener('fetch', event => {
+  // Skip non-GET requests
+  if (event.request.method !== 'GET') return;
+
+  // Skip certain URLs
+  if (event.request.url.includes('firestore.googleapis.com')) return;
+  if (event.request.url.includes('.php')) return;
+
+  event.respondWith(
+    (async () => {
+      const cacheName = await getCurrentCacheName();
+      const cache = await caches.open(cacheName);
+      const cachedResponse = await cache.match(event.request);
+
+      if (cachedResponse) {
+        // If we have a cached response, check if we need to update cache
+        event.waitUntil(
+          (async () => {
+            try {
+              const needsUpdate = await checkForUpdates();
+              if (needsUpdate) {
+                const networkResponse = await fetch(event.request);
+                if (networkResponse.ok) {
+                  const newCache = await caches.open(await getCurrentCacheName());
+                  await newCache.put(event.request, networkResponse.clone());
+                }
+              }
+            } catch (error) {
+              console.log('[ServiceWorker] Update check failed:', error);
+            }
+          })()
+        );
+        return cachedResponse;
       }
-    }, reject)
-  });
-};
 
-var addToCache = function (request) {
-  try {
-    return caches.open('thorium-cache').then(function (cache) {
-      return fetch(request)
-        .then(function (response) {
-          console.log('com.thorium.serviceworker] file added to cache ' + request.url);
-          return cache.put(request, response);
-        });
-    });
-  }
-  catch(err) {
-    console.log('com.thorium.serviceworker] error ' + err.message);
-  }  
-};
-
-var returnFromCache = function (request) {
-  return caches.open('thorium-cache')
-    .then(function (cache) {
-      return cache.match(request)
-        .then(function (matching) {
-          if (!matching || matching.status == 404) {
-            console.log("[com.thorium.serviceworker] offline page");
-            return cache.match('offline.html');
-          } else {
-            console.log("[com.thorium.serviceworker] cache returned " + request.url);
-            return matching
-          }
-        });
-    });
-};
+      // If not in cache, try network
+      try {
+        const networkResponse = await fetch(event.request);
+        // Cache successful responses
+        if (networkResponse.ok) {
+          await cache.put(event.request, networkResponse.clone());
+        }
+        return networkResponse;
+      } catch (error) {
+        // If both cache and network fail, show offline page
+        const offlineResponse = await cache.match('./offline.html');
+        if (offlineResponse) {
+          return offlineResponse;
+        }
+        throw error;
+      }
+    })()
+  );
+});

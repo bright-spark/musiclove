@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>YouTube Red</title>    
-  <link rel="stylesheet" href="/css/custom.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>YouTube Red</title>
+    
+    <link rel="stylesheet" href="../node_modules/framework7/framework7-bundle.min.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/thorium.min.css">
+    
+    <!-- Preserve any additional head content -->
+    
 </head>
-<body>
-  <iframe title="YouTube video player" id="playlistiframe"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin" 
-          allowfullscreen rel="noopener"></iframe>
-  
-  <script>
+<body class="theme-dark color-theme-red">
+    <div class="iframe-container">
+        <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" id="playlistiframe" referrerpolicy="strict-origin-when-cross-origin" rel="noopener" title="YouTube video player"></iframe>
+    </div>
+    
+    <!-- Preserve any scripts -->
+    <script>
     "use strict";
   
     // Correctly formatted playlist URLs
@@ -188,8 +195,6 @@
 
     window.addEventListener('load', loadPlaylist);
   </script>
-
-  <!-- Ensure wakey.js exists and is correctly linked -->
-  <script src="wakey.js"></script>
+    <script src="wakey.js"></script>
 </body>
 </html>

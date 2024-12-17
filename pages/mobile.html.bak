@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+
+  <title>Jacaranda FM Mobile</title>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, viewport-fit=cover, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://turntable.kagiso.io/core/css/mobile/listen_live_page.css">
+  <style nonce="2726c7f26c">
+    #play-button {
+      border-bottom: 2px solid #ffffff;
+      border-left: 2px solid #00abec;
+      border-right: 2px solid #f3008a;
+      border-top: 2px solid #ffd016;
+    }
+
+    .navigation {
+      visibility: hidden;
+    }
+
+    .search {
+      visibility: hidden;
+    }
+
+    .on-air-pill {
+      background-color: #42114F;
+      opacity: 100;
+    }
+
+    #player {
+      background-color: #42114F;
+    }
+
+    .live-streams {
+      background: #5c006a;
+    }
+
+    .header {
+      background-color: #42114F;
+    }
+
+    .live-streams div>span {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .search-form {
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .search form input[type=text] {
+      color: white;
+    }
+
+
+    .scrolling-text {
+      white-space: nowrap;
+      display: inline-block;
+      animation: scroll-text 10s linear infinite;
+    }
+
+    @keyframes scroll-text {
+      from {
+        transform: translateX(100%);
+      }
+
+      to {
+        transform: translateX(-100%);
+      }
+    }
+
+    .search form input[type=text] {
+      background-color: transparent;
+      height: 40px;
+      border: none;
+      margin: 0;
+      padding-left: 20px;
+      padding-right: 10px;
+    }
+
+    .search form input[type=text]:focus {
+      outline: none;
+    }
+
+    .search-button {
+      background-color: transparent;
+      border: none;
+      padding-right: 10px;
+    }
+
+    .search-form {
+      display: none;
+      border-radius: 25px;
+      padding: 0;
+      margin-right: 10px;
+    }
+
+    .search-icon {
+      padding-right: 17px;
+    }
+
+    .player-metadata {
+      min-width: 95vw;
+    }
+  </style>
+  <title>
+
+    Jacaranda FM
+
+  </title>
+
+
+
+
+
+</head>
+
+<body>
+  <div class="header" id="header">
+    <div class="navigation">
+      <style>
+        .listen-live-btn,
+        .donate {
+          color: #ffd016 !important;
+          border-color: #ffd016 !important;
+        }
+
+        .navigation .offcanvas-start {
+          background-color: #5c006a;
+        }
+
+        .navigation .navbar-toggler {
+          filter: invert(1);
+        }
+
+        .navigation .donate-btn,
+        .navigation .listen-live {
+          display: flex;
+          color: white !important;
+        }
+
+
+        .navigation .listen-live .label {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          justify-content: center;
+          align-self: center;
+        }
+      </style>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navigation"
+        aria-controls="offcanvasNavbar">
+        <img src="https://turntable.kagiso.io/core/images/hamburger-icon.svg" alt="menu">
+      </button>
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="navigation" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+          <a type="button" data-bs-dismiss="offcanvas" aria-label="Close">
+            <img src="https://turntable.kagiso.io/core/images/icons/close_icon.svg" alt="close icon" width="16">
+            <span>Close</span>
+          </a>
+        </div>
+        <div class="offcanvas-body">
+          <div class="dropdown">
+            <li
+              class="nav-item border border-light border-opacity-25 border-start-0 border-end-0 border-bottom-0 px-3 py-3">
+              <a class="nav-link py-2 my-3 border border-1 rounded-pill listen-live-btn px-3" href="/listen-live">
+                Listen Live
+              </a>
+              <a class="nav-link py-2 my-2 border border-1 rounded-pill donate px-3" href="/donate/">
+                Donate
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a href="/">Home</a>
+            <li class="nav-item">
+              <a href="/shows/">shows</a>
+            </li>
+            <li class="nav-item">
+              <a href="/news/">News &amp; Sport</a>
+            </li>
+            <li class="nav-item">
+              <a href="/traffic/">Traffic</a>
+            </li>
+            <li class="nav-item">
+              <a href="/weather/">Weather</a>
+            </li>
+            <li class="nav-item">
+              <a href="/good-morning-angels/">Good Morning Angels</a>
+            </li>
+            <li class="nav-item">
+              <a href="/jacpod/">JacPod</a>
+            </li>
+            <li class="nav-item">
+              <a href="/podcasts/">Audio On-Demand</a>
+            </li>
+            <li class="nav-item">
+              <a href="/lifestyle/">Lifestyle</a>
+            </li>
+            <li class="nav-item">
+              <a href="/charts/">Charts</a>
+            </li>
+            <li class="nav-item">
+              <a href="/comps/">Win</a>
+            </li>
+            <li class="nav-item">
+              <a href="/events/">Events</a>
+            </li>
+            <li class="nav-item">
+              <a href="/contact-us/">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a href="/play-games/">Play Games on Jac</a>
+            </li>
+            <li class="nav-item">
+              <a href="/advertise-us/">Advertise with us</a>
+            </li>
+            <li class="nav-item">
+              <a href="/her-perfect-pitch-2023/">Womenpreneur Her Perfect Pitch</a>
+            </li>
+            <li class="nav-item">
+              <a href="/music-room/">Music Room</a>
+            </li>
+            </li>
+            <li class="nav-item">&nbsp;</li>
+            <li class="nav-item" id="login-logout" hidden>
+              <a href="/sign_in/?next=/listen-live/" class="sign-out"> Sign In</a>
+            </li>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="brand-logo">
+      <a href="/">
+        <img src="https://turntable.kagiso.io/core/images/jacaranda/logo_md.svg" alt="logo" height="40">
+      </a>
+    </div>
+    <div class="search">
+      <form action="/search/" method="get" class="search-form">
+        <input type="text" name="query" placeholder="Search...">
+        <button type="submit" class="search-button">
+          <img src="https://turntable.kagiso.io/core/images/icons/search.svg" alt="search" width="25">
+        </button>
+      </form>
+      <img class="search-icon" src="https://turntable.kagiso.io/core/images/icons/search.svg" alt="search" width="39">
+    </div>
+  </div>
+  <link rel="stylesheet" href="https://turntable.kagiso.io/CACHE/css/352908d6951e.css" type="text/css" />
+  <div class="offcanvas offcanvas-bottom auth-offcanvas bg-transparent h-auto" data-bs-scroll="true" tabindex="-1"
+    id="auth-offcanvas">
+    <div class="offcanvas-header text-center bg-black d-flex justify-content-center rounded-top-3">
+      <h3 class="offcanvas-title fw-bold px-3 py-2 text-white">
+        Thanks for interacting with us
+      </h3>
+      <button type="button"
+        class="btn-close btn-close-white position-absolute top-0 end-0 mt-2 me-2 rounded-circle btn-border-white"
+        data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column align-items-center space-around">
+      <button class="btn btn-primary text-uppercase fw-bold rounded-pill my-3 w-75 p-2" type="button"
+        onclick="show_offcanvas('login-offcanvas')">SIGN IN
+      </button>
+      <a class="btn btn-primary text-uppercase fw-bold rounded-pill my-2 w-75 p-2"
+        href="/sign_up/?next=https://www.jacarandafm.com/listen-live/"> Register your account </a>
+      <p class="text-white-black">By continuing, you agree to our
+        <a href="/terms-of-use" class="text-decoration-none fw-bold">Terms of Use</a> and acknowledge
+        that you have read our <a href="/privacy-policy" class="text-decoration-none fw-bold">Privacy Policy</a>
+        to learn how we handle your data.
+      </p>
+    </div>
+  </div>
+  <link rel="stylesheet" href="https://turntable.kagiso.io/CACHE/css/18ac468d2086.css" type="text/css" />
+  <div class="offcanvas offcanvas-bottom auth-offcanvas bg-transparent h-auto" data-bs-scroll="true" tabindex="-1"
+    id="login-offcanvas">
+    <div class="offcanvas-header text-center bg-black d-flex flex-column rounded-top-3 text-white">
+      <h3 class="fw-bold" id="loginOverlayTitle">
+        Sign In
+      </h3>
+      <button type="button"
+        class="btn-close btn-close-white position-absolute top-0 end-0 mt-2 me-2 rounded-circle btn-border-white"
+        data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body flex-column align-items-center space-around text-white-black">
+      <form id="loginForm" action="/sign_in/" method="post" class="px-5">
+        <div class="mb-3 d-none" id="errorMessage">
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            Email or password is incorrect!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="email" placeholder="e.g name@emailaddress.com">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="e.g John">
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="rememberMe">
+          <label class="form-check-label" for="rememberMe">Remember me</label>
+        </div>
+        <div class="mb-3">
+          <a href="#" onclick="show_offcanvas('forgot-password-offcanvas')" class="text-decoration-none">
+            Forgot your password?
+          </a>
+        </div>
+        <button type="submit" class="btn btn-primary text-uppercase fw-bold rounded-pill my-3 w-100 p-2">Sign In
+        </button>
+      </form>
+      <div id="loginMessage" class="d-none flex-column justify-content-center align-items-center px-1 pb-3">
+        <h4 class="fw-bold py-4 text-center">Now you can vote on all songs</h4>
+        <img src="https://turntable.kagiso.io/core/images/icons/check-mark.svg" alt="check mark" class="pb-3">
+      </div>
+    </div>
+  </div>
+  <link rel="stylesheet" href="https://turntable.kagiso.io/CACHE/css/f1fbbb5f33f2.css" type="text/css" />
+  <div class="offcanvas offcanvas-bottom auth-offcanvas bg-transparent h-auto" data-bs-scroll="true" tabindex="-1"
+    id="forgot-password-offcanvas">
+    <div class="offcanvas-header text-center text-white bg-black d-flex flex-column rounded-top-3">
+      <h3 class="fw-bold">Forgot Password</h3>
+      <button type="button"
+        class="btn-close btn-close-white position-absolute top-0 end-0 mt-2 me-2 rounded-circle btn-border-white"
+        data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body flex-column align-items-center space-around px-5">
+      <form id="forgotPassword">
+        <div class="mb-3 d-none" id="PasswordResetErrorMessage">
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <span>We could not find a user for that email address</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label text-uppercase"><strong>Enter your email</strong></label>
+          <input type="email" class="form-control" name="email" id="resetEmail" placeholder="e.g name@emailaddress.com">
+        </div>
+        <button type="submit" class="btn btn-primary text-uppercase fw-bold rounded-pill my-3 w-100 me-3 p-2">Reset
+          Password
+        </button>
+        <p>
+          By continuing, you agree to our <a href="/terms-of-use" class="text-decoration-none fw-bold">Terms of Use</a>
+          and acknowledge
+          that you have read our <a href="/privacy-policy" class="text-decoration-none fw-bold">Privacy Policy</a> to
+          learn how we handle your data.
+        </p>
+      </form>
+      <div id="PasswordResetSuccessMessage"
+        class="d-none  flex-column justify-content-center align-items-center px-1 pb-3">
+        <h2 class="fw-bold py-2">You have successfully</h2>
+        <img class="py-1" src="https://turntable.kagiso.io/core/images/icons/check-mark.svg" alt="check mark">
+        <h2 class="fw-bold py-2 text-center">requested a password reset.</h2>
+        <h2 class="fw-bold py-2 text-center">Follow instructions sent via email.</h2>
+      </div>
+    </div>
+  </div>
+  <script nonce="2726c7f26c" type="text/javascript"
+    src="https://turntable.kagiso.io/core/js/mobile/login_overlay.js"></script>
+  <div id="player">
+    <div class="opacity-0">.</div>
+    <div class="player-metadata">
+      <div class="player-details">
+        <div class="player-controls">
+          <button id="play-button">
+            <span class="player-button-icons active default">
+              <svg width="30px" height="30px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 330 330"
+                style="enable-background:new 0 0 330 330; fill: #ffffff; margin-top: 2px; margin-left:3px"
+                xml:space="preserve">
+                <path id="XMLID_308_" d="M37.728,328.12c2.266,1.256,4.77,1.88,7.272,1.88c2.763,0,5.522-0.763,7.95-2.28l240-149.999
+	c4.386-2.741,7.05-7.548,7.05-12.72c0-5.172-2.664-9.979-7.05-12.72L52.95,2.28c-4.625-2.891-10.453-3.043-15.222-0.4
+	C32.959,4.524,30,9.547,30,15v300C30,320.453,32.959,325.476,37.728,328.12z" />
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+              </svg>
+            </span>
+            <span class="player-button-icons pause">
+
+
+              <svg width="30px" height="30px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 47.607 47.607"
+                style="enable-background:new 0 0 47.607 47.607; fill: #FFFFFF; margin-top: 2px;" xml:space="preserve">
+                <g>
+                  <path d="M17.991,40.976c0,3.662-2.969,6.631-6.631,6.631l0,0c-3.662,0-6.631-2.969-6.631-6.631V6.631C4.729,2.969,7.698,0,11.36,0
+		l0,0c3.662,0,6.631,2.969,6.631,6.631V40.976z" />
+                  <path d="M42.877,40.976c0,3.662-2.969,6.631-6.631,6.631l0,0c-3.662,0-6.631-2.969-6.631-6.631V6.631
+		C29.616,2.969,32.585,0,36.246,0l0,0c3.662,0,6.631,2.969,6.631,6.631V40.976z" />
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+              </svg>
+            </span>
+          </button>
+
+        </div>
+        <div class="player-action action">Paused</div>
+      </div>
+      <div class="companion-ad-on-air">
+        <div class="on-air-details mx-3">
+          <div class="on-air-show">
+            <div class="on-air-pill"><strong>ON AIR:</strong> JacarandaFM</div>
+          </div>
+          <div class="title" id="song-title">&nbsp;</div>
+          <div class="artist" id="song-artist">&nbsp;</div>
+        </div>
+        <div class="companion-ad">
+        </div>
+      </div>
+    </div>
+    <div class="gradient-top"></div>
+    <div class="gradient-bottom"></div>
+  </div>
+  <script nonce="2726c7f26c"
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script nonce="2726c7f26c" charset="utf-8" src="//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script nonce="2726c7f26c" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.min.js"></script>
+
+  <script nonce="2726c7f26c" defer charset="utf-8" src="//p2.iono.fm/bundle/0.8.1/player.js"></script>
+
+  <script nonce="2726c7f26c">
+    let logo = $('.header .brand-logo');
+    let searchIcon = $('.search-icon');
+    let searchForm = $('.search-form');
+    let searchField = $('.search-form input');
+
+    searchIcon.on('click', function () {
+      logo.hide();
+      searchIcon.hide();
+      searchForm.css('display', 'flex');
+      searchField.focus();
+      searchField.on('focusout', function () {
+        searchForm.hide();
+        logo.show();
+        searchIcon.show();
+      });
+    });
+
+    const playerHeight = $('#player').height();
+    $('.gradient-bottom ').css('height', playerHeight);
+    $('.gradient-top ').css('height', playerHeight);
+  </script>
+  <script nonce="2726c7f26c">
+
+    const playerConfig = {
+
+      STREAM_METADATA_ID: "urn:ionocm:stream:17",
+      METADATA_URL: "https://live.jacarandafm.com/metadata",
+      ENDPOINT_TIMELINE: "https://mobile-api.jacarandafm.com/api/v2/timeline?format=json",
+      WEBSOCKET_CHANNEL: "updateJAC",
+      ENDPOINT_SONG: "https://mobile-api.jacarandafm.com/song/jac/",
+
+      STREAM_URLS: [
+
+        {
+          url: "https://live.jacarandafm.com/jacarandalow.aac",
+          quality: "low"
+        },
+
+        {
+          url: "https://live.jacarandafm.com/jacarandahigh.mp3",
+          quality: "medium"
+        },
+
+        {
+          url: "https://live.jacarandafm.com/jacarandahigh.mp3",
+          quality: "high"
+        },
+
+      ],
+
+      IONO_ADS_LICENSE: 'iono-test-key',
+      IONO_ANALYTICS_URL: 'https://iframe.iono.fm/tracking?cb=<cb>&v=<version>&e=<event>&c=<contentType>&sid=<sid>&uuid=<uuid>&id=<uid>&q=<quality>&f=<format>&p=<position>&ad=<aduid>&adc=<ad_creative>&prc=<percent>&r=<referer>',
+      PUSH_SERVER_URL: 'https://timeline-push-server.kagiso.app',
+      ADSWIZZ_ZONE_ALIASES: [
+        'DisplayZone-320x50',
+        'DisplayZone-970x250',
+      ],
+
+      LIKE_DEFAULT_URL: "https://turntable.kagiso.io/images/JacarandaFM_ThumbsUpWhiteSmall80x80.original.original.png",
+      LIKE_ACTIVE_URL: "https://turntable.kagiso.io/images/JacarandaFM_ThumbsUpPurpleSmall80x80.original.original.png",
+      DISLIKE_DEFAULT_URL: "https://turntable.kagiso.io/images/JacarandaFM_ThumbsDownWhiteSmall80x80.original.original.png",
+      DISLIKE_ACTIVE_URL: "https://turntable.kagiso.io/images/JacarandaFM_ThumbsDownPurpleSmall80x80_1.origin.original.png",
+
+      PREVIOUS_STREAM: {
+        name: "",
+        url: ""
+      },
+      NEXT_STREAM: {
+        name: "",
+        url: ""
+      }
+    }
+  </script>
+  <script nonce="2726c7f26c" src="https://turntable.kagiso.io/core/js/mini-player-config.js"></script>
+</body>
+
+</html>

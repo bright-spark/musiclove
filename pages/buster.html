@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Suppress Cookie Banners</title>
-  <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Suppress Cookie Banners</title>
+    
+    <link rel="stylesheet" href="../node_modules/framework7/framework7-bundle.min.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/thorium.min.css">
+    
+    <!-- Preserve any additional head content -->
+    <style>
     body, html {
       margin: 0;
       padding: 0;
@@ -19,9 +25,13 @@
     }
   </style>
 </head>
-<body>
-  <iframe id="iframeID" src="https://wimpy.co.za"></iframe>
-  <script>
+<body class="theme-dark color-theme-red">
+    <div class="iframe-container">
+        <iframe id="iframeID" src="https://wimpy.co.za"></iframe>
+    </div>
+    
+    <!-- Preserve any scripts -->
+    <script>
     document.getElementById('iframeID').onload = function() {
       let iframe = document.getElementById('iframeID');
       let iframeWindow = iframe.contentWindow;
