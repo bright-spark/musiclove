@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>YouTube Red</title>    
-  <link rel="stylesheet" href="/css/custom.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>YouTube Red</title>
+    
+    <link rel="stylesheet" href="../node_modules/framework7/framework7-bundle.min.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/thorium.min.css">
+    
+    <!-- Preserve any additional head content -->
+    
 </head>
-<body>
-  <iframe id="ytPlayer" src="https://www.youtube.com/embed/4QIZE708gJ4?list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&index=1&controls=0&rel=0&autoplay=0" 
-    title="YouTube Video Player" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-  </iframe>
-  <script src="wakey.js"></script>
-  <script>
+<body class="theme-dark color-theme-red">
+    <div class="iframe-container">
+        <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" id="ytPlayer" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/4QIZE708gJ4?list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&amp;index=1&amp;controls=0&amp;rel=0&amp;autoplay=0" title="YouTube Video Player">
+</iframe>
+    </div>
+    
+    <!-- Preserve any scripts -->
+    <script src="wakey.js"></script>
+    <script>
     window.onload = function() {
       const ytPlayer = document.getElementById('ytPlayer');
       ytPlayer.src = "https://www.youtube.com/embed/4QIZE708gJ4?list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&index=1&controls=0&rel=0&autoplay=1";

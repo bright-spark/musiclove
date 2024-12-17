@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	
+  <meta charset="utf-8">
+  <title>YT</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="YouTube">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="HandheldFriendly" content="true">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0">
+	
+  <style>
+    html,
+    body,
+    iframe {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 100%;
+      border: none;
+    }
+  </style>
+	
+</head>
+
+<body>
+
+	<iframe title="YouTube Player" id="playlistiframe"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+	<script>
+		var strings = [
+			"PLPmdCGqzDq0Omc-BAk9lPEzhqeEdXfKVX",
+		];
+
+		function generateRandomPlaylist() {
+			// Retrieve the playlist history from local storage
+			var playlistHistory = JSON.parse(localStorage.getItem("playlistHistory")) || [];
+
+			// Filter out recent playlists
+			var availablePlaylists = strings.filter(function(playlist) {
+				return !playlistHistory.includes(playlist);
+			});
+
+			// If all playlists have been played recently, reset history
+			if (availablePlaylists.length === 0) {
+				playlistHistory = [];
+				availablePlaylists = strings.slice(); // Copy all playlists to available list
+			}
+
+			// Generate a random index
+			var randomIndex = Math.floor(Math.random() * availablePlaylists.length);
+
+			// Get the selected playlist
+			var randomPlaylist = availablePlaylists[randomIndex];
+
+			// Update the history
+			playlistHistory.push(randomPlaylist);
+
+			// Keep the history to a certain length, e.g., last 3 playlists
+			if (playlistHistory.length > 3) {
+				playlistHistory.shift(); // Remove the oldest playlist
+			}
+
+			// Save the updated history to local storage
+			localStorage.setItem("playlistHistory", JSON.stringify(playlistHistory));
+
+			// Set the src attribute of the iframe to the random string
+			document.getElementById("playlistiframe").src = "https://www.youtube-nocookie.com/embed/videoseries?list=" + randomPlaylist + "&controls=0&rel=0&showinfo=0&modestbranding=1&autoplay=0&enablejsapi=1";
+		}
+
+		// Call the function when the page loads
+		window.addEventListener("load", generateRandomPlaylist);
+	</script>
+	<script src="wakey.js"></script>
+</body>
+
+</html>

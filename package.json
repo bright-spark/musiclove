@@ -1,0 +1,35 @@
+{
+  "name": "musiclove",
+  "version": "1.0.0",
+  "description": "Music Love application with Framework7",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server . -c-1 -o",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "framework7": "^8.3.0",
+    "framework7-icons": "^5.0.5"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "browserslist": [
+    "Android >= 7",
+    "IOS >= 13",
+    "Safari >= 13",
+    "Chrome >= 52",
+    "Firefox >= 31"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bright-spark/musiclove.git"
+  },
+  "keywords": [
+    "framework7",
+    "music",
+    "app"
+  ],
+  "author": "Martin Myburgh",
+  "license": "MIT"
+}

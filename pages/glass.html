@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="en"> 
-    <head>
-
-        <title>YouTube Glass</title>
-        <meta charset="utf-8">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-title" content="ho·ly | myo͞ozik">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-        <meta name="format-detection" content="telephone=no">
-        <style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>YouTube Glass</title>
+    
+    <link rel="stylesheet" href="../node_modules/framework7/framework7-bundle.min.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/thorium.min.css">
+    
+    <!-- Preserve any additional head content -->
+    <style>
             html, body, iframe {
                         margin:0;
                         padding:0;
@@ -26,10 +28,13 @@
                         border:none;
                         }
         </style>
+</head>
+<body class="theme-dark color-theme-red">
+    <div class="iframe-container">
+        <iframe allow="web-share; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" src="youtube.html" title="flexi-flux"></iframe>
+    </div>
     
-        <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0">
-    </head>
-<body>
-    <iframe title="flexi-flux" src="youtube.html" allow="web-share; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <!-- Preserve any scripts -->
+    
 </body>
 </html>

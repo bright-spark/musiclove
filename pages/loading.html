@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Loading Page</title>
+    
+    <link rel="stylesheet" href="../node_modules/framework7/framework7-bundle.min.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/thorium.min.css">
+    
+    <!-- Preserve any additional head content -->
     <style>
         body {
             background-color: #1E1E1E;
@@ -45,8 +49,15 @@
         }
     </style>
 </head>
-<body>
-    <div class="spinner"></div>
-    <div class="loading-bar"></div>
+<body class="theme-dark color-theme-red">
+    <div class="page">
+        <div class="page-content">
+            <div class="spinner"></div>
+            <div class="loading-bar"></div>
+        </div>
+    </div>
+    
+    <!-- Preserve any scripts -->
+    
 </body>
 </html>
