@@ -2,8 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Dynamic URL Loader</title>
+    
+    <link rel="stylesheet" href="../node_modules/framework7/framework7-bundle.min.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/thorium.min.css">
+    
+    <!-- Preserve any additional head content -->
     <style>
         body, html {
             margin: 0;
@@ -18,8 +24,12 @@
         }
     </style>
 </head>
-<body>
-    <iframe id="content-frame"></iframe>
+<body class="theme-dark color-theme-red">
+    <div class="iframe-container">
+        <iframe id="content-frame"></iframe>
+    </div>
+    
+    <!-- Preserve any scripts -->
     <script>
         // X-Frame-Bypass URL
         const xframe = "https://x.xxlxx.co/?url="

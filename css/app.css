@@ -1,0 +1,291 @@
+/* Theme Colors */
+:root {
+  --f7-theme-color: #ff3b30;
+  --f7-theme-color-rgb: 255, 59, 48;
+  --app-bg-color: #1a1a1a;
+  --app-text-primary: rgba(255, 255, 255, 0.87);
+  --app-text-secondary: rgba(255, 255, 255, 0.6);
+  --app-text-description: #808080;
+  --app-toolbar-bg: #000000;
+  --app-toolbar-icon: #666666;
+  --app-red-darker: #cc2f26;
+  --app-red-lighter: #ff7268;
+  --app-surface-1: #1e1e1e;
+  --app-surface-2: #2d2d2d;
+  --app-surface-3: #404040;
+  --app-divider: rgba(255, 255, 255, 0.12);
+}
+
+/* Dark Theme Variables */
+:root.theme-dark {
+  --f7-page-bg-color: #121212;
+  --f7-bars-bg-color: var(--app-surface-1);
+  --f7-list-bg-color: var(--app-surface-1);
+  --f7-list-item-bg-color: var(--app-surface-1);
+  --f7-list-item-border-color: var(--app-divider);
+  --f7-list-item-text-color: var(--app-text-primary);
+  --f7-list-item-after-text-color: var(--app-text-secondary);
+  --f7-card-bg-color: var(--app-surface-1);
+  --f7-card-outline-border-color: var(--app-divider);
+  --f7-navbar-bg-color: var(--app-surface-1);
+  --f7-navbar-text-color: var(--app-text-primary);
+  --f7-toolbar-bg-color: var(--app-surface-1);
+  --f7-tabbar-link-inactive-color: var(--app-text-secondary);
+  --f7-tabbar-link-active-color: var(--f7-theme-color);
+  --f7-searchbar-bg-color: var(--app-surface-2);
+  --f7-input-bg-color: var(--app-surface-2);
+}
+
+/* Base Styles */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--app-bg-color);
+  color: var(--app-text-primary);
+  font-family: -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+body {
+  font-weight: 400;
+}
+
+/* Logo and Title */
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 20px;
+}
+
+.app-title {
+  font-size: 24px;
+  font-weight: normal;
+  letter-spacing: 2px;
+  margin: 0;
+  color: var(--app-text-primary);
+}
+
+/* Description Text */
+.description {
+  text-align: center;
+  padding: 20px;
+  font-family: "SF Mono", "Roboto Mono", Consolas, monospace;
+  color: var(--app-text-description);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* App Layout */
+#app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.view-main {
+  flex: 1;
+  height: 100%;
+}
+
+.page {
+  background-color: var(--app-bg-color);
+}
+
+.page-content {
+  padding-bottom: 50px;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--app-text-primary);
+  font-weight: 600;
+}
+
+p {
+  color: var(--app-text-primary);
+  margin-bottom: 1rem;
+}
+
+/* Interactive Elements */
+.button {
+  --f7-button-bg-color: var(--f7-theme-color);
+  --f7-button-pressed-bg-color: var(--app-red-darker);
+  --f7-button-hover-bg-color: var(--app-red-lighter);
+  transition: background-color 0.2s ease;
+}
+
+.button-outline {
+  border-color: var(--f7-theme-color);
+  color: var(--f7-theme-color);
+}
+
+.button-outline:active {
+  background-color: rgba(var(--f7-theme-color-rgb), 0.15);
+}
+
+/* Navigation */
+.toolbar {
+  --f7-toolbar-bg-color: var(--app-toolbar-bg);
+  --f7-toolbar-height: 50px;
+  background-color: var(--app-toolbar-bg) !important;
+  border: none !important;
+}
+
+.toolbar-inner {
+  padding: 0 10px;
+}
+
+.tab-link {
+  color: var(--app-toolbar-icon);
+  transition: color 0.2s ease;
+}
+
+.tab-link i {
+  font-size: 24px;
+  opacity: 0.7;
+}
+
+.tab-link-active {
+  color: var(--app-text-primary) !important;
+}
+
+.tab-link-active i {
+  opacity: 1;
+}
+
+/* Hide Labels */
+.tabbar-labels .tab-link:not(.tab-link-active) .tabbar-label {
+  display: none;
+}
+
+/* Content Fade */
+.content-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, transparent, var(--app-bg-color));
+  pointer-events: none;
+}
+
+/* Iframe Container */
+.iframe-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.iframe-content {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: var(--app-bg-color);
+}
+
+/* Hide Scrollbars */
+.iframe-content {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.iframe-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Loading States */
+.skeleton-text {
+  background: linear-gradient(90deg, var(--app-surface-2) 25%, var(--app-surface-3) 37%, var(--app-surface-2) 63%);
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.4s ease infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+/* Links */
+a {
+  color: var(--f7-theme-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--app-red-lighter);
+}
+
+a:active {
+  color: var(--app-red-darker);
+}
+
+/* Lists */
+.list {
+  background-color: var(--app-surface-1);
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+.list-item {
+  background-color: var(--app-surface-1);
+  transition: background-color 0.2s ease;
+}
+
+.list-item:active {
+  background-color: var(--app-surface-2);
+}
+
+/* Cards */
+.card {
+  background-color: var(--app-surface-1);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Inputs */
+input, textarea, select {
+  background-color: var(--app-surface-2);
+  color: var(--app-text-primary);
+  border: 1px solid var(--app-divider);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--f7-theme-color);
+  outline: none;
+}
