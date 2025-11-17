@@ -50,20 +50,10 @@ var app = new Framework7({
   // App events
   on: {
     init: async function () {
-      // Clear all caches on app startup
-      if ('caches' in window) {
-        try {
-          const cacheKeys = await caches.keys();
-          await Promise.all(
-            cacheKeys.map(key => caches.delete(key))
-          );
-          console.log('[App] Successfully cleared all caches');
-        } catch (error) {
-          console.error('[App] Error clearing caches:', error);
-        }
-      }
+      // Cache management is handled by service worker's version-based system
+      // Service worker automatically clears old caches on activation
       console.log('App initialized');
-      
+
       // Set up tab functionality
       const tabLinks = document.querySelectorAll('.tab-link');
       const tabs = document.querySelectorAll('.tab');
