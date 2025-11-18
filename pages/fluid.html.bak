@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>YouTube Red</title>
+    
+    <link rel="stylesheet" href="../node_modules/framework7/framework7-bundle.min.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/thorium.min.css">
+    
+    <!-- Preserve any additional head content -->
+    
+</head>
+<body class="theme-dark color-theme-red">
+    <div class="page">
+        <div class="page-content">
+            <div class="elfsight-app-38dbe946-510f-41f4-a2c4-8e971b85d48d" data-elfsight-app-lazy=""></div>
+        </div>
+    </div>
+    
+    <!-- Preserve any scripts -->
+    <script data-use-service-core="" defer="" src="https://static.elfsight.com/platform/platform.js"></script>
+</body>
+</html>
