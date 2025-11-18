@@ -17,10 +17,11 @@ const APP_SHELL = [
   './css/app.css',
   './css/thorium.min.css',
   './css/classes.css',
+  './css/custom.css',
+  './css/framework7-bundle.min.css',
   './js/app.js',
   './js/routes.js',
-  './node_modules/framework7/framework7-bundle.min.css',
-  './node_modules/framework7/framework7-bundle.min.js',
+  './js/framework/framework7-bundle.min.js',
   './font-awesome/css/font-awesome.min.css'
 ];
 
