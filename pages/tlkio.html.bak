@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+
+    <title>Tlk.io Chat</title>
+    <meta charset="utf-8">
+    <style>
+        html,
+        body,
+        iframe {
+            margin: 0;
+            padding: 0;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            height: 100vh;
+            z-index: 999999;
+        }
+
+        iframe {
+            display: block;
+            width: 100%;
+            overflow: hidden;
+            border: none;
+        }
+    </style>
+    <meta name="viewport"
+        content="width=device-width, viewport-fit=cover, initial-scale=1.0">
+
+
+
+
+
+</head>
+
+<body>
+    <iframe title="tlk.io" id="tlkio" src="https://embed.tlk.io/inventinred?theme=theme--night"
+        loading="lazy" allowfullscreen>
+    </iframe>
+</body>
+
+</html>

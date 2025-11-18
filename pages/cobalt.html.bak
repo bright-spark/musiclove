@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Cobalt</title>
+    <meta name="viewport"
+        content="width=device-width, viewport-fit=cover, initial-scale=1.0">
+
+
+
+
+
+</head>
+<title>Cobalt</title>
+
+<body>
+    <!--2024 FlexiFlux by Bright-Spark-->
+    <iframe src="https://cobalt.redbuilder.io/" style="
+                position:fixed; 
+                top:0; 
+                left:0; 
+                bottom:0; 
+                right:0; 
+                width:100%; 
+                min-height:100vh; 
+                border:none; 
+                margin:0; 
+                padding:0; 
+                overflow:hidden; 
+                z-index:999999;" allowfullscreen scrolling="on" loading="eager" sandbox="
+                allow-scripts 
+                allow-same-origin 
+                allow-presentation" allow="
+                autoplay; 
+                encrypted-media; 
+                fullscreen; 
+                gyroscope; 
+                picture-in-picture; 
+                microphone *; 
+                camera *;">Your browser is not invetedinred so don't mis out on all the fun, get your own inteligent AI
+        browser like <a href="https://www.microsoft.com/en-us/edge">Microsoft Edge</a> for free.
+    </iframe>
+</body>
+
+</html>
