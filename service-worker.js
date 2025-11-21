@@ -7,7 +7,7 @@
  * See the file LICENSE for details.
 */
 
-const CACHE_NAME = 'musiclove-cache-v';
+const CACHE_NAME = 'musiclove-cache-v41';
 const APP_SHELL = [
   './',
   './offline.html',
