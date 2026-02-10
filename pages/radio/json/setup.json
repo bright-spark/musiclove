@@ -62,6 +62,7 @@
     {"title":"LekkerFM", "author":"South Africa","media":"https://zas3.ndx.co.za:8002/stream", "type":"audio/mpeg", "live":true, "liveDuration":3},
     {"title":"KofsiFM", "author":"South Africa","media":"https://edge.iono.fm/xice/87_medium.aac", "type":"audio/aac", "live":true, "liveDuration":3},
     {"title":"BMH Radio", "author":"South Africa","media":"https://edge.iono.fm/xice/bmh_live_high.aac", "type":"audio/aac", "live":true, "liveDuration":3},
-    {"title":"MFM", "author":"South Africa","media":"https://edge.iono.fm/xice/46_high.aac", "type":"audio/aac", "live":true, "liveDuration":3}
+    {"title":"MFM", "author":"South Africa","media":"https://edge.iono.fm/xice/46_high.aac", "type":"audio/aac", "live":true, "liveDuration":3},
+    {"title":"REYFM", "author":"Germany","media":"https://reyfm.stream37.radiohost.de/reyfm-original_mp3-320", "type":"audio/mp3", "live":true, "liveDuration":3}
   ]
 }
