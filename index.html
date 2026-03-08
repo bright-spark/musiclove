@@ -140,7 +140,7 @@
 
                     <div id="tab-1" class="page-content tab">
                         <div id="div-1041" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
-                            <iframe title="tab-1" id="iframe-1041" src="pages/radio/index.html" loading="lazy" scrolling="no" class="embed-responsive-item"></iframe>
+                            <iframe title="tab-1" id="iframe-1041" data-src="pages/radio/index.html" loading="lazy" scrolling="no" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
 
@@ -148,20 +148,20 @@
                         <div id="div-1042" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
                             <!--<iframe title="tab-2" id="iframe-1042 contentFrame" src="https://moozik.theradio.fm" loading="eager" scrolling="no" class="embed-responsive-item"></iframe>-->
                             <!--<iframe title="tab-2" id="iframe-1042 contentFrame" src="https://ytpl.us" loading="lazy" scrolling="auto" class="embed-responsive-item"></iframe>-->
-                            <iframe title="tab-2" id="iframe-1041" src="https://tubeflix.net" allow="web-share; microphone;" class="embed-responsive-item"></iframe>
+                            <iframe title="tab-2" id="iframe-1042" data-src="https://tubeflix.net" allow="web-share; microphone;" loading="lazy" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
 
                     <div id="tab-3" class="page-content tab">
                         <div id="div-1043" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
-                            <iframe title="tab-3" id="iframe-1043" src="pages/fluid.html" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
+                            <iframe title="tab-3" id="iframe-1043" data-src="pages/fluid.html" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
 
                     <div id="tab-4" class="page-content tab">
                         <div id="div-1044" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
                             <!---<iframe title="tab-4" id="iframe-1044" src="https://idev.games" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>-->
-                            <iframe title="tab-4" id="iframe-1044" src="pages/gamesnacks.html" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
+                            <iframe title="tab-4" id="iframe-1044" data-src="pages/gamesnacks.html" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
 
@@ -246,78 +246,6 @@
         });
     </script>
 
-    <script>
-        function setupContentFrameListener() {
-            const contentFrame = document.getElementById("contentFrame");
-
-            // When content frame is fully loaded, setup its iframe listener
-            contentFrame.onload = function() {
-                // Listen for YouTube iframe events inside contentFrame
-                setupYouTubeIframeListener(contentFrame);
-            };
-        }
-
-        // Set up listener for YouTube iframe events within contentFrame
-        function setupYouTubeIframeListener(contentFrame) {
-            // Grab the inner YouTube iframe
-            const youtubeIframe = contentFrame.contentWindow.document.querySelector("iframe[src*='youtube.com']");
-
-            if (youtubeIframe) {
-                // Monitor fullscreen events from the YouTube iframe
-                youtubeIframe.addEventListener("fullscreenchange", function() {
-                    console.log("YouTube iframe is entering or exiting fullscreen");
-                });
-
-                // Optional: You can add other event listeners for the YouTube iframe
-
-                // Intercept popout links inside YouTube iframe (optional)
-                youtubeIframe.contentWindow.document.addEventListener("click", function(event) {
-                    let target = event.target;
-
-                    // Check if it's a YouTube link
-                    if (target.tagName === "A" && target.href.includes("youtube.com")) {
-                        event.preventDefault(); // Prevent default YouTube link behavior
-                        handleYouTubeLink(target.href); // Custom handling
-                    }
-                });
-            }
-        }
-
-        // Handle YouTube link popout (same as before)
-        function handleYouTubeLink(youtubeUrl) {
-            openYouTubeLink(youtubeUrl);
-            returnToIframe(); // Handle return to iframe content
-        }
-
-        function openYouTubeLink(youtubeUrl) {
-            const youtubeAppUrl = "vnd.youtube://" + youtubeUrl.split('watch?v=')[1];
-            window.location.href = youtubeAppUrl;
-
-            setTimeout(() => {
-                window.location.href = youtubeUrl;
-            }, 1000); // Fallback to browser
-        }
-
-        function returnToIframe() {
-            const contentFrame = document.getElementById("contentFrame");
-
-            // Preserve iframe state
-            preserveIframeContent(contentFrame);
-
-            // Use postMessage() to signal return to the iframe
-            contentFrame.contentWindow.postMessage("focusIframe", "*");
-        }
-
-        // Store content of iframe for restoring later
-        function preserveIframeContent(iframe) {
-            const content = iframe.contentWindow.document.body.innerHTML;
-            sessionStorage.setItem("iframeContent", content);
-        }
-
-        window.onload = function() {
-            setupContentFrameListener();
-        };
-    </script>
 
 </body>
 </html>

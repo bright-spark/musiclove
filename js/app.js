@@ -67,23 +67,38 @@ var app = new Framework7({
       // Set up tab functionality
       const tabLinks = document.querySelectorAll('.tab-link');
       const tabs = document.querySelectorAll('.tab');
-      
+
+      // Lazy-load deferred iframes when their tab is activated
+      function activateDeferredIframes(tab) {
+        tab.querySelectorAll('iframe[data-src]').forEach(iframe => {
+          iframe.src = iframe.dataset.src;
+          iframe.removeAttribute('data-src');
+        });
+      }
+
+      // Activate iframes in the initially active tab
+      const initialTab = document.querySelector('.tab.tab-active');
+      if (initialTab) {
+        activateDeferredIframes(initialTab);
+      }
+
       tabLinks.forEach(link => {
         link.addEventListener('click', (e) => {
           e.preventDefault();
-          
+
           // Remove active classes
           tabLinks.forEach(l => l.classList.remove('tab-link-active'));
           tabs.forEach(t => t.classList.remove('tab-active'));
-          
+
           // Add active class to clicked tab
           link.classList.add('tab-link-active');
-          
+
           // Get target tab ID and activate it
           const targetId = link.getAttribute('href');
           const targetTab = document.querySelector(targetId);
           if (targetTab) {
             targetTab.classList.add('tab-active');
+            activateDeferredIframes(targetTab);
           }
         });
       });
