@@ -1,7 +1,3 @@
-// Absolute URL so the path resolves correctly regardless of the iframe's
-// own location (e.g. pages/sub/index.html vs pages/index.html).
-const GLOBAL_IFRAME_CSS_URL = new URL('/css/global-iframe.css', window.location.origin).href;
-
 // Function to inject CSS into an iframe
 function injectStylesIntoIframe(iframe) {
     try {
@@ -11,7 +7,7 @@ function injectStylesIntoIframe(iframe) {
             const linkElement = document.createElement('link');
             linkElement.rel = 'stylesheet';
             linkElement.type = 'text/css';
-            linkElement.href = GLOBAL_IFRAME_CSS_URL;
+            linkElement.href = '/css/global-iframe.css';
 
             // Try to inject into iframe's head
             try {
