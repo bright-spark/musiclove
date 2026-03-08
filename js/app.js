@@ -63,12 +63,9 @@ var app = new Framework7({
         }
       }
       console.log('App initialized');
-      
-      // Set up tab functionality
-      const tabLinks = document.querySelectorAll('.tab-link');
-      const tabs = document.querySelectorAll('.tab');
 
-      // Lazy-load deferred iframes when their tab is activated
+      // Lazy-load deferred iframes when their tab is activated.
+      // Use Framework7's tab:show event so we don't conflict with F7 tab handling.
       function activateDeferredIframes(tab) {
         tab.querySelectorAll('iframe[data-src]').forEach(iframe => {
           iframe.src = iframe.dataset.src;
@@ -82,25 +79,9 @@ var app = new Framework7({
         activateDeferredIframes(initialTab);
       }
 
-      tabLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-
-          // Remove active classes
-          tabLinks.forEach(l => l.classList.remove('tab-link-active'));
-          tabs.forEach(t => t.classList.remove('tab-active'));
-
-          // Add active class to clicked tab
-          link.classList.add('tab-link-active');
-
-          // Get target tab ID and activate it
-          const targetId = link.getAttribute('href');
-          const targetTab = document.querySelector(targetId);
-          if (targetTab) {
-            targetTab.classList.add('tab-active');
-            activateDeferredIframes(targetTab);
-          }
-        });
+      // Let Framework7 manage tab switching; fire deferred load on show
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('tab:show', () => activateDeferredIframes(tab));
       });
     },
     pageInit: function () {
