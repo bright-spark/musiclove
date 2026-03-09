@@ -193,6 +193,26 @@
     </script>
 
     <script>
+        // Cross-tab audio detection: relay radio station info to tubeflix.net
+        // When the radio tab (tab-1) starts playing, it posts the station details to this
+        // parent page, which then forwards them to the tubeflix.net iframe (tab-2).
+        // tubeflix.net can listen for 'RADIO_NOW_PLAYING' messages and use the streamUrl
+        // with its Shazam integration to identify what is playing on the radio.
+        window.addEventListener('message', function (event) {
+            var radioIframe = document.getElementById('iframe-1041');
+            var tubeflixIframe = document.getElementById('iframe-1042');
+
+            if (radioIframe && event.source === radioIframe.contentWindow) {
+                if (event.data && event.data.type === 'RADIO_NOW_PLAYING') {
+                    if (tubeflixIframe && tubeflixIframe.contentWindow) {
+                        tubeflixIframe.contentWindow.postMessage(event.data, 'https://tubeflix.net');
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script>
         // Initialize Mixpanel with your project token and options
         mixpanel.init("d8e183c46e74ad470aeb003fc8af30e6", {
             debug: false,              // Enable debug mode for console logs

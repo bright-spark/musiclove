@@ -707,6 +707,19 @@
                 _gPlayer.onChange('play');
             }
 
+            // Notify parent window so it can relay station info to tubeflix.net
+            if (window.parent !== window && media_url) {
+                window.parent.postMessage({
+                    type: 'RADIO_NOW_PLAYING',
+                    station: {
+                        title: _entries[t].title,
+                        author: _entries[t].author,
+                        streamUrl: media_url,
+                        mediaType: _entries[t].type || 'audio/mpeg'
+                    }
+                }, '*');
+            }
+
         },
         getWave: function (gSet, n, media_url) {
             var t = _gConsole.select(n);
