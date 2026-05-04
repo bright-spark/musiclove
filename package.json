@@ -5,6 +5,7 @@
   "main": "index.html",
   "scripts": {
     "start": "http-server . -c-1 -o",
+    "deploy:cloudflare": "wrangler deploy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -12,7 +13,8 @@
     "framework7-icons": "^5.0.5"
   },
   "devDependencies": {
-    "http-server": "^14.1.1"
+    "http-server": "^14.1.1",
+    "wrangler": "^4.15.2"
   },
   "browserslist": [
     "Android >= 7",

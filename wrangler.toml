@@ -1,0 +1,8 @@
+name = "musiclove-og-proxy"
+main = "cloudflare/workers/og-proxy.js"
+compatibility_date = "2026-05-04"
+
+routes = [
+  { pattern = "theradio.fm/*", zone_name = "theradio.fm" },
+  { pattern = "www.theradio.fm/*", zone_name = "theradio.fm" }
+]
