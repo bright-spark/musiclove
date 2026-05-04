@@ -134,7 +134,7 @@
 
                     <div id="tab-0" class="page-content tab tab-active">
                         <div id="div-1040" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
-                            <iframe title="tab-0" id="iframe-1040" src="pages/cover/index.html" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
+                            <iframe title="tab-0" id="iframe-1040" src="pages/cover/index.html" allow="web-share; fullscreen" allowfullscreen loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
 
@@ -144,7 +144,7 @@
                             <!--<iframe title="tab-1" id="iframe-1041" src="https://v0-minimal-radio.vercel.app" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>-->
                             <!--<iframe title="tab-1" id="iframe-1041" src="https://v0-radiowave.vercel.app" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>-->
                             <!--<iframe title="tab-1" id="iframe-1041" src="https://freetheradio.replit.app" allow="web-share" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>-->
-                            <iframe title="tab-1" id="iframe-1041" src="https://play.theradio.fm" allow="web-share" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
+                            <iframe title="tab-1" id="iframe-1041" src="https://play.theradio.fm" allow="web-share; fullscreen" allowfullscreen loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
 
@@ -153,7 +153,7 @@
                             <!--<iframe title="tab-2" id="iframe-1042 contentFrame" src="https://moozik.theradio.fm" loading="eager" scrolling="no" class="embed-responsive-item"></iframe>-->
                             <!--<iframe title="tab-2" id="iframe-1042 contentFrame" src="https://ytpl.us" loading="lazy" scrolling="auto" class="embed-responsive-item"></iframe>-->
                             <!--<iframe title="tab-2" id="iframe-1042" src="https://tubeflix.net" allow="web-share; microphone;" class="embed-responsive-item"></iframe>-->
-                            <iframe title="tab-1" id="iframe-1041" src="https://freetheradio.replit.app" allow="web-share" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
+                            <iframe title="tab-2" id="iframe-1042" src="https://freetheradio.replit.app" allow="web-share; fullscreen" allowfullscreen loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
 
@@ -161,7 +161,7 @@
                         <div id="div-1043" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
                             <!--<iframe title="tab-3" id="iframe-1043" src="pages/fluid.html" allow="web-share" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>-->
                             <!--<iframe title="tab-3" id="iframe-1043" src="https://v0-podcast-app-two.vercel.app" allow="web-share" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>-->
-                            <iframe title="tab-3" id="iframe-1043" src="https://v0-podcast-app-two.vercel.app" allow="web-share" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
+                            <iframe title="tab-3" id="iframe-1043" src="https://v0-podcast-app-two.vercel.app" allow="web-share; fullscreen" allowfullscreen loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
 
@@ -169,7 +169,7 @@
                         <div id="div-1044" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
                             <!--<iframe title="tab-4" id="iframe-1044" src="https://idev.games" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>-->
                             <!--<iframe title="tab-4" id="iframe-1044" src="pages/gamesnacks.html" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>-->
-                            <iframe title="tab-3" id="iframe-1043" src="https://tubeflix.net" allow="web-share; microphone;" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
+                            <iframe title="tab-4" id="iframe-1044" src="https://tubeflix.net" allow="web-share; microphone; fullscreen" allowfullscreen loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
 
@@ -180,12 +180,6 @@
 
     <script type="text/javascript" src="js/service-worker-register.js"></script>
     
-    <script type="text/javascript">
-        if (typeof navigator.serviceWorker !== 'undefined') {
-            navigator.serviceWorker.register('sw.js')
-        }
-    </script>
-
     <script type="text/javascript" src="js/framework/framework7-bundle.min.js"></script>
     <script type="text/javascript" src="js/thorium.config.js"></script>
     <script type="text/javascript" src="js/plugins/thorium.core.min.js"></script>
@@ -201,22 +195,28 @@
     </script>
 
     <script>
-        // Initialize Mixpanel with your project token and options
-        mixpanel.init("d8e183c46e74ad470aeb003fc8af30e6", {
-            debug: false,              // Enable debug mode for console logs
-            track_pageview: true,      // Automatically track page views
-            persistence: "localStorage" // Persist data in localStorage
-        });
+        if (window.mixpanel && typeof window.mixpanel.init === 'function') {
+            // Initialize Mixpanel with your project token and options
+            mixpanel.init("d8e183c46e74ad470aeb003fc8af30e6", {
+                debug: false,              // Enable debug mode for console logs
+                track_pageview: true,      // Automatically track page views
+                persistence: "localStorage" // Persist data in localStorage
+            });
 
-        // 1. Track initial page load as a pageview
-        mixpanel.track('Page Viewed', {
-            'page_name': document.title,
-            'url': window.location.href
-        });
+            // 1. Track initial page load as a pageview
+            mixpanel.track('Page Viewed', {
+                'page_name': document.title,
+                'url': window.location.href
+            });
+        }
 
         // 2. Track tab click events for engagement
         function trackTabClick(tabName, tabId) {
-            mixpanel.track('Tab Clicked', {
+            if (!window.mixpanel || typeof window.mixpanel.track !== 'function') {
+                return;
+            }
+
+            window.mixpanel.track('Tab Clicked', {
                 'tab_name': tabName,
                 'tab_id': tabId,
                 'url': window.location.href
@@ -247,84 +247,15 @@
             let endTime = Date.now();
             let timeSpent = (endTime - startTime) / 1000; // time in seconds
 
-            mixpanel.track('Time Engaged', {
+            if (!window.mixpanel || typeof window.mixpanel.track !== 'function') {
+                return;
+            }
+
+            window.mixpanel.track('Time Engaged', {
                 'time_spent_seconds': timeSpent,
                 'url': window.location.href
             });
         });
-    </script>
-
-    <script>
-        function setupContentFrameListener() {
-            const contentFrame = document.getElementById("contentFrame");
-
-            // When content frame is fully loaded, setup its iframe listener
-            contentFrame.onload = function() {
-                // Listen for YouTube iframe events inside contentFrame
-                setupYouTubeIframeListener(contentFrame);
-            };
-        }
-
-        // Set up listener for YouTube iframe events within contentFrame
-        function setupYouTubeIframeListener(contentFrame) {
-            // Grab the inner YouTube iframe
-            const youtubeIframe = contentFrame.contentWindow.document.querySelector("iframe[src*='youtube.com']");
-
-            if (youtubeIframe) {
-                // Monitor fullscreen events from the YouTube iframe
-                youtubeIframe.addEventListener("fullscreenchange", function() {
-                    console.log("YouTube iframe is entering or exiting fullscreen");
-                });
-
-                // Optional: You can add other event listeners for the YouTube iframe
-
-                // Intercept popout links inside YouTube iframe (optional)
-                youtubeIframe.contentWindow.document.addEventListener("click", function(event) {
-                    let target = event.target;
-
-                    // Check if it's a YouTube link
-                    if (target.tagName === "A" && target.href.includes("youtube.com")) {
-                        event.preventDefault(); // Prevent default YouTube link behavior
-                        handleYouTubeLink(target.href); // Custom handling
-                    }
-                });
-            }
-        }
-
-        // Handle YouTube link popout (same as before)
-        function handleYouTubeLink(youtubeUrl) {
-            openYouTubeLink(youtubeUrl);
-            returnToIframe(); // Handle return to iframe content
-        }
-
-        function openYouTubeLink(youtubeUrl) {
-            const youtubeAppUrl = "vnd.youtube://" + youtubeUrl.split('watch?v=')[1];
-            window.location.href = youtubeAppUrl;
-
-            setTimeout(() => {
-                window.location.href = youtubeUrl;
-            }, 1000); // Fallback to browser
-        }
-
-        function returnToIframe() {
-            const contentFrame = document.getElementById("contentFrame");
-
-            // Preserve iframe state
-            preserveIframeContent(contentFrame);
-
-            // Use postMessage() to signal return to the iframe
-            contentFrame.contentWindow.postMessage("focusIframe", "*");
-        }
-
-        // Store content of iframe for restoring later
-        function preserveIframeContent(iframe) {
-            const content = iframe.contentWindow.document.body.innerHTML;
-            sessionStorage.setItem("iframeContent", content);
-        }
-
-        window.onload = function() {
-            setupContentFrameListener();
-        };
     </script>
 
 </body>

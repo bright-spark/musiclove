@@ -15,14 +15,24 @@ const APP_SHELL = [
   './manifest.json',
   './favicon.ico',
   './css/app.css',
+  './css/framework7-bundle.min.css',
+  './css/framework7-keypad.min.css',
   './css/thorium.min.css',
   './css/classes.css',
-  './js/app.js',
-  './js/routes.js',
-  './node_modules/framework7/framework7-bundle.min.css',
-  './node_modules/framework7/framework7-bundle.min.js',
+  './css/custom.css',
+  './css/pages/index.css',
+  './js/framework/framework7-bundle.min.js',
+  './js/thorium.config.js',
+  './js/plugins/thorium.core.min.js',
+  './js/iframe-style-injector.js',
+  './js/custom.js',
+  './js/service-worker-register.js',
   './font-awesome/css/font-awesome.min.css'
 ];
+
+function isSameOriginRequest(request) {
+  return new URL(request.url).origin === self.location.origin;
+}
 
 // Function to get current cache name
 async function getCurrentCacheName() {
@@ -100,6 +110,7 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   // Skip non-GET requests
   if (event.request.method !== 'GET') return;
+  if (!isSameOriginRequest(event.request)) return;
 
   // Skip certain URLs
   if (event.request.url.includes('firestore.googleapis.com')) return;

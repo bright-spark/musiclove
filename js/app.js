@@ -50,18 +50,6 @@ var app = new Framework7({
   // App events
   on: {
     init: async function () {
-      // Clear all caches on app startup
-      if ('caches' in window) {
-        try {
-          const cacheKeys = await caches.keys();
-          await Promise.all(
-            cacheKeys.map(key => caches.delete(key))
-          );
-          console.log('[App] Successfully cleared all caches');
-        } catch (error) {
-          console.error('[App] Error clearing caches:', error);
-        }
-      }
       console.log('App initialized');
       
       // Set up tab functionality
