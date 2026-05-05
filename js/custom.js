@@ -165,6 +165,76 @@ function syncFullscreenShellContext() {
   }
 }
 
+function getOgShareImageUrl() {
+  const og = document.querySelector('meta[property="og:image"]');
+  const raw = og?.getAttribute('content')?.trim();
+  if (raw) {
+    try {
+      return new URL(raw, document.baseURI).href;
+    } catch {
+      return raw;
+    }
+  }
+  const tw = document.querySelector('meta[name="twitter:image"]');
+  const twRaw = tw?.getAttribute('content')?.trim();
+  if (twRaw) {
+    try {
+      return new URL(twRaw, document.baseURI).href;
+    } catch {
+      return twRaw;
+    }
+  }
+  return null;
+}
+
+async function sharePayloadWithOgImage(basePayload) {
+  const base = basePayload || {};
+  const { files: _ignoredEmbedFiles, ...rest } = base;
+
+  const ogUrl = getOgShareImageUrl();
+  if (!ogUrl) {
+    return base;
+  }
+
+  let blob;
+  try {
+    const res = await fetch(ogUrl, { mode: 'cors', credentials: 'omit' });
+    if (!res.ok) {
+      return base;
+    }
+    blob = await res.blob();
+  } catch {
+    return base;
+  }
+
+  if (!blob?.size) {
+    return base;
+  }
+
+  const mime = blob.type && blob.type.startsWith('image/') ? blob.type : 'image/png';
+  const imageFile = new File([blob], 'share.png', { type: mime });
+
+  const { url: _omitUrl, ...restWithoutUrl } = rest;
+  const candidates = [
+    { ...rest, files: [imageFile] },
+    { ...restWithoutUrl, files: [imageFile] },
+    { title: rest.title, text: rest.text, files: [imageFile] },
+    { text: rest.text || rest.title, files: [imageFile] },
+    { files: [imageFile] },
+  ];
+
+  for (const data of candidates) {
+    if (!data.files?.length) {
+      continue;
+    }
+    if (typeof navigator.canShare !== 'function' || navigator.canShare(data)) {
+      return data;
+    }
+  }
+
+  return base;
+}
+
 async function handleEmbeddedShareMessage(event) {
   const data = event.data;
 
@@ -192,7 +262,8 @@ async function handleEmbeddedShareMessage(event) {
   }
 
   try {
-    await navigator.share(data.payload || {});
+    const sharePayload = await sharePayloadWithOgImage(data.payload || {});
+    await navigator.share(sharePayload);
     postMessageToIframe(iframe, { type: 'web-share-result', ok: true, frameKey, tabId }, event.origin);
   } catch (error) {
     postMessageToIframe(iframe, { type: 'web-share-result', ok: false, error: error.message, frameKey, tabId }, event.origin);
