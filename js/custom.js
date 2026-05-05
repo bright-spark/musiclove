@@ -136,7 +136,8 @@ function setupEmbeddedTabPersistence() {
   });
 
   document.querySelectorAll('.tab-link').forEach((link) => {
-    link.addEventListener('click', () => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
       const targetId = link.getAttribute('href');
 
       if (targetId) {
