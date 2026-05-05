@@ -126,8 +126,6 @@ function isAllowedShellOrigin(event) {
 }
 
 function setupEmbeddedTabPersistence() {
-  const state = getShellState();
-
   document.querySelectorAll('iframe.embed-responsive-item').forEach((iframe) => {
     restoreIframeSettings(iframe);
     registerShellFrame(iframe);
@@ -147,13 +145,8 @@ function setupEmbeddedTabPersistence() {
     });
   });
 
-  if (state.activeTab) {
-    activateShellTab(state.activeTab);
-  } else {
-    const activeTab = document.querySelector('.tab.tab-active');
-    const activeIframe = activeTab && activeTab.querySelector('iframe.embed-responsive-item');
-    shellActiveFrameKey = activeIframe ? getFrameKey(activeIframe) : null;
-  }
+  // Cover (tab-0) on every load only; do not restore last-open tab from storage.
+  activateShellTab('#tab-0');
 }
 
 function syncFullscreenShellContext() {
