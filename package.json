@@ -3,14 +3,22 @@
   "version": "1.0.0",
   "description": "Music Love application with Framework7",
   "main": "index.html",
+  "type": "module",
   "scripts": {
     "start": "http-server . -c-1 -o",
     "deploy:cloudflare": "wrangler deploy",
+    "deploy:vercel": "vercel --prod",
+    "deploy:vercel:preview": "vercel",
+    "extract:og": "node scripts/extract-og-data.mjs",
+    "update:og": "node scripts/update-og-in-index.mjs",
+    "update:og:preview": "node scripts/update-og-in-index.mjs --dry-run",
+    "test:og": "node scripts/test-og-data.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "framework7": "^8.3.0",
-    "framework7-icons": "^5.0.5"
+    "framework7-icons": "^5.0.5",
+    "vercel": "^53.1.1"
   },
   "devDependencies": {
     "http-server": "^14.1.1",

@@ -89,7 +89,15 @@ self.addEventListener('install', event => {
       const cacheName = await getCurrentCacheName();
       const cache = await caches.open(cacheName);
       console.log('[ServiceWorker] Caching app shell');
-      await cache.addAll(APP_SHELL);
+      await Promise.all(
+        APP_SHELL.map(async asset => {
+          try {
+            await cache.add(asset);
+          } catch (error) {
+            console.log('[ServiceWorker] Failed to cache app shell asset:', asset, error);
+          }
+        })
+      );
       console.log('[ServiceWorker] App shell cached');
       return self.skipWaiting();
     })()
