@@ -2,16 +2,6 @@ name = "musiclove"
 
 main = 'src/index.ts'
 compatibility_date = '2026-05-07'
-compatibility_flags = ['nodejs_compat']
-
-[vars]
-NODE_VERSION = '20.18.0'
-
-[env.production]
-NODE_VERSION = '20.18.0'
-
-[env.development]
-NODE_VERSION = '20.18.0'
 
 routes = [
   { pattern = "theradio.fm/*", zone_name = "theradio.fm" },
