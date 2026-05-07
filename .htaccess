@@ -3,3 +3,13 @@ Options -Indexes
     Order allow,deny
     Deny from all
 </Files>
+
+# Cookie-friendly defaults: avoid COEP/COOP (they break many cross-origin embeds and storage flows).
+# Send sensible hygiene headers only.
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Permissions-Policy "storage-access=(self \"https://play.theradio.fm\")"
+    Header always set Permissions-Policy "storage-access=(self \"https://freetheradio.replit.app")"
+    Header always set Permissions-Policy "storage-access=(self \"https://v0.podcasts-app-two.vercel.app\")"
+    Header always set Permissions-Policy "storage-access=(self \"https://tubeflix.net\")" 
+</IfModule>
