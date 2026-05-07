@@ -213,36 +213,9 @@
             });
         }
 
-        // 2. Track tab click events for engagement
-        function trackTabClick(tabName, tabId) {
-            if (!window.mixpanel || typeof window.mixpanel.track !== 'function') {
-                return;
-            }
+        // Tab changes → Mixpanel "Tab Clicked" (see js/custom.js activateShellTab)
 
-            window.mixpanel.track('Tab Clicked', {
-                'tab_name': tabName,
-                'tab_id': tabId,
-                'url': window.location.href
-            });
-        }
-
-        document.getElementById('o-1012').addEventListener('click', function() {
-            trackTabClick('Live Radio Player', 'tab-1');
-        });
-
-        document.getElementById('o-1017').addEventListener('click', function() {
-            trackTabClick('Radio Browser', 'tab-2');
-        });
-
-        document.getElementById('o-1022').addEventListener('click', function() {
-            trackTabClick('Podcast Player', 'tab-3');
-        });
-
-        document.getElementById('o-1027').addEventListener('click', function() {
-            trackTabClick('TubeFlix.net Player', 'tab-4');
-        });
-
-        // 3. Track time engaged (from load to leave)
+        // Track time engaged (from load to leave)
         let startTime = Date.now();
 
         // When the user leaves or closes the page, calculate the time spent

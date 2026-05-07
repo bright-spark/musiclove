@@ -70,7 +70,37 @@ function restoreIframeSettings(iframe) {
   persistIframeSettings(iframe);
 }
 
-function activateShellTab(targetId) {
+/** Mixpanel: matches toolbar tabs + cover (tab-0); properties use snake_case */
+const SHELL_TAB_ANALYTICS = {
+  '#tab-0': { tab_name: 'Cover', tab_id: 'tab-0' },
+  '#tab-1': { tab_name: 'Live Radio Player', tab_id: 'tab-1' },
+  '#tab-2': { tab_name: 'Radio Browser', tab_id: 'tab-2' },
+  '#tab-3': { tab_name: 'Podcast Player', tab_id: 'tab-3' },
+  '#tab-4': { tab_name: 'TubeFlix.net Player', tab_id: 'tab-4' },
+};
+
+function trackShellTabActivated(targetId) {
+  const mp = typeof window !== 'undefined' ? window.mixpanel : undefined;
+  if (!mp || typeof mp.track !== 'function') {
+    return;
+  }
+
+  const meta = SHELL_TAB_ANALYTICS[targetId];
+  const payload = meta
+    ? { tab_name: meta.tab_name, tab_id: meta.tab_id, url: window.location.href }
+    : { tab_name: targetId, tab_id: targetId.replace(/^#/, ''), url: window.location.href };
+
+  mp.track('Tab Clicked', payload);
+}
+
+function getActiveShellTabId() {
+  const active = document.querySelector('.tabs .tab.tab-active');
+  return active && active.id ? `#${active.id}` : null;
+}
+
+function activateShellTab(targetId, options) {
+  const skipAnalytics = options && options.skipAnalytics === true;
+
   if (!targetId) {
     return;
   }
@@ -80,6 +110,9 @@ function activateShellTab(targetId) {
   if (!targetTab) {
     return;
   }
+
+  const previousTabId = getActiveShellTabId();
+  const tabChanged = previousTabId !== targetId;
 
   document.querySelectorAll('.tab-link').forEach((link) => {
     link.classList.toggle('tab-link-active', link.getAttribute('href') === targetId);
@@ -96,6 +129,10 @@ function activateShellTab(targetId) {
   state.activeTab = targetId;
   state.activeFrame = shellActiveFrameKey;
   setShellState(state);
+
+  if (!skipAnalytics && tabChanged) {
+    trackShellTabActivated(targetId);
+  }
 }
 
 function getIframeTabId(iframe) {
@@ -147,7 +184,7 @@ function setupEmbeddedTabPersistence() {
   });
 
   // Cover (tab-0) on every load only; do not restore last-open tab from storage.
-  activateShellTab('#tab-0');
+  activateShellTab('#tab-0', { skipAnalytics: true });
 }
 
 function syncFullscreenShellContext() {
