@@ -7,6 +7,8 @@
  * See the file LICENSE for details.
 */
 
+importScripts("https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js");
+
 const CACHE_NAME = 'musiclove-cache-v41';
 const APP_SHELL = [
   './',

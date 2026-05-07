@@ -2,8 +2,18 @@
 <html lang="en">
 
 <head>
-    
-    
+  <!-- OneSignal Notifications -->  
+  <!--<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>-->
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.init({
+        appId: "f74a4c03-9de2-43f9-b44f-8aa8ef94acb4",
+        });
+    });
+    </script>
+  <!-- End OneSignal Notifications -->
   <!-- Static OG Meta Tags for theradio.fm -->
   <meta property="og:title" content="Music Love - theradio.fm" />
   <meta property="og:description" content="Your hub for unlimited music, radio, and entertainment. Free, no login required." />
