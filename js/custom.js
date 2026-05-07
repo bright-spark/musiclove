@@ -37,6 +37,8 @@ function normalizeIframePermissions(iframe) {
 
   permissions.add('web-share');
   permissions.add('fullscreen');
+  // Lets cross-origin embeds use the Storage Access API (cookies / unpartitioned storage).
+  permissions.add('storage-access *');
   iframe.setAttribute('allow', Array.from(permissions).join('; '));
   iframe.setAttribute('allowfullscreen', '');
 }
@@ -140,6 +142,34 @@ function getIframeTabId(iframe) {
   return tab ? `#${tab.id}` : null;
 }
 
+function getIframeEmbedOrigin(iframe) {
+  const src = iframe.getAttribute('src');
+  if (!src || src.startsWith('about:')) {
+    return null;
+  }
+  try {
+    return new URL(src, window.location.href).origin;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Top-level delegation for third-party storage (Chrome et al.). Requires transient user
+ * activation when calling from a tab click. Embedded origins still may need to call
+ * document.requestStorageAccess() inside the iframe for full access in all browsers.
+ */
+function requestStorageAccessForEmbeddedIframe(iframe) {
+  const origin = getIframeEmbedOrigin(iframe);
+  if (!origin || origin === window.location.origin) {
+    return;
+  }
+  if (typeof document.requestStorageAccessFor !== 'function') {
+    return;
+  }
+  document.requestStorageAccessFor(origin).catch(() => {});
+}
+
 function registerShellFrame(iframe) {
   if (iframe.contentWindow) {
     shellFrameSources.set(iframe.contentWindow, iframe);
@@ -179,6 +209,11 @@ function setupEmbeddedTabPersistence() {
 
       if (targetId) {
         activateShellTab(targetId);
+        const targetTab = document.querySelector(targetId);
+        const iframe = targetTab && targetTab.querySelector('iframe.embed-responsive-item');
+        if (iframe) {
+          requestStorageAccessForEmbeddedIframe(iframe);
+        }
       }
     });
   });
