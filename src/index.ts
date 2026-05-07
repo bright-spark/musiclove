@@ -2,6 +2,10 @@
 
 import indexHtmlSource from './index-html-embed.txt';
 
+interface MusicloveEnv {
+  ASSETS: Fetcher;
+}
+
 const THERADIOFM_WEBRADIO = 'https://theradiofm.webradiosite.com';
 
 const ROOT_EMBED_SHELL_HTML = `<!DOCTYPE html>
@@ -30,7 +34,7 @@ const ROOT_EMBED_SHELL_HTML = `<!DOCTYPE html>
 const CRAWLER_USER_AGENT_PATTERN =
   /bot|crawler|spider|facebookexternalhit|facebot|twitterbot|linkedinbot|slackbot|discordbot|whatsapp|telegrambot|pinterest|embedly|quora link preview|outbrain|vkshare|skypeuripreview|ia_archiver/i;
 const STATIC_ASSET_PATH_PATTERN =
-  /^\/(?:assets|css|font-awesome|icons|js|pages|screenshots)\//i;
+  /^\/(?:assets|css|font-awesome|icons|js|pages|screenshots|img|fonts)\//i;
 const FILE_EXTENSION_PATTERN = /\.[a-z0-9]{2,8}$/i;
 
 function isStaticAssetPath(pathname: string): boolean {
@@ -120,8 +124,17 @@ async function fetchWithRedirects(
   throw new Error(`Too many redirects: ${redirectHistory.join(', ')}`);
 }
 
+/** Repo-root `index.html` (Framework7 shell) for `/app`, with `<base>` so `css/`, `js/`, `pages/` resolve from this origin. */
+function framework7AppShellHtml(request: Request): string {
+  if (/\b<base\b/i.test(indexHtmlSource)) {
+    return indexHtmlSource;
+  }
+  const origin = new URL(request.url).origin;
+  return indexHtmlSource.replace(/<head([^>]*)>/i, `<head$1>\n  <base href="${origin}/" />`);
+}
+
 export default {
-  async fetch(request: Request): Promise<Response> {
+  async fetch(request: Request, env: MusicloveEnv): Promise<Response> {
     try {
       const url = new URL(request.url);
 
@@ -129,7 +142,8 @@ export default {
         if (request.method !== 'GET' && request.method !== 'HEAD') {
           return new Response('Method Not Allowed', { status: 405 });
         }
-        return new Response(request.method === 'HEAD' ? null : indexHtmlSource, {
+        const body = request.method === 'HEAD' ? null : framework7AppShellHtml(request);
+        return new Response(body, {
           status: 200,
           headers: {
             'content-type': 'text/html; charset=utf-8',
@@ -150,7 +164,7 @@ export default {
             },
           });
         }
-        return fetch(request);
+        return env.ASSETS.fetch(request);
       }
 
       const proxyRequest = buildProxyRequest(request);

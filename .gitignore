@@ -133,5 +133,9 @@ dist
 # Generated Worker embed (copy of index.html for /app route)
 src/index-html-embed.txt
 
+# Generated static tree for Cloudflare Workers Assets (see scripts/sync-deploy-static.mjs)
+deploy-static/
+.wrangler/
+
 # Vercel
 .vercel

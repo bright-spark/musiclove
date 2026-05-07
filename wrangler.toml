@@ -8,6 +8,13 @@ routes = [
   { pattern = "www.theradio.fm/*", zone_name = "theradio.fm" }
 ]
 
+# Host the repo as static files so /js/*, /css/*, /pages/*, etc. resolve on theradio.fm.
+# run_worker_first: handle /, /app, and OG proxy in the Worker before any asset fallback.
+[assets]
+directory = "deploy-static"
+binding = "ASSETS"
+run_worker_first = true
+
 [observability]
 enabled = false
 head_sampling_rate = 1

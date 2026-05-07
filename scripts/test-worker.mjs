@@ -159,6 +159,9 @@ async function main() {
     if (!appBody.includes('<title>Music Love</title>')) {
       throw new Error('GET /app: body missing index.html title');
     }
+    if (!appBody.includes('<base href=')) {
+      throw new Error('GET /app: expected injected <base> for Framework7 asset resolution');
+    }
 
     console.log('test-worker: ok');
     console.log(`  crawler GET / -> ${crawlRes.status}, x-og-proxy: ${ogProxy}`);

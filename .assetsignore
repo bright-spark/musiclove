@@ -1,0 +1,23 @@
+# Keep Worker static uploads small and fast (gitignore-style, repo root = asset root).
+.git/
+**/.git/**
+node_modules/
+**/node_modules/**
+.wrangler/
+**/.wrangler/**
+.vercel/
+.github/
+scripts/
+src/
+.cursor/
+*.md
+pnpm-lock.yaml
+package.json
+tsconfig.json
+wrangler.toml
+# wrangler.toml--
+.env
+.env.*
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
