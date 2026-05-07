@@ -7,5 +7,13 @@ Options -Indexes
 # Cookie-friendly defaults: avoid COEP/COOP (they break many cross-origin embeds and storage flows).
 # Send sensible hygiene headers only.
 <IfModule mod_headers.c>
-    Header always set X-Content-Type-Options "nosniff" 
+    <If "%{HTTP_HOST} =~ m#^(www\.)?theradio\.fm(:[0-9]+)?$#i">
+        Header always set X-Content-Type-Options "nosniff"
+        Header always set Permissions-Policy "storage-access=(self \"https://theradiofm.webradiosite.com\")"
+        Header always set Permissions-Policy "storage-access=(self \"https://theradio.fm\")"
+        Header always set Permissions-Policy "storage-access=(self \"https://play.theradio.fm\")"
+        Header always set Permissions-Policy "storage-access=(self \"https://freetheradio.replit.app\")"
+        Header always set Permissions-Policy "storage-access=(self \"https://v0.podcasts-app-two.vercel.app\")"
+        Header always set Permissions-Policy "storage-access=(self \"https://tubeflix.net\")"
+    </If>
 </IfModule>

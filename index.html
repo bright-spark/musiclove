@@ -8,6 +8,11 @@
     <script>
     window.OneSignalDeferred = window.OneSignalDeferred || [];
     OneSignalDeferred.push(async function(OneSignal) {
+        var host = location.hostname;
+        var allowed = host === 'theradio.fm' || host === 'www.theradio.fm';
+        if (!allowed) {
+          return;
+        }
         await OneSignal.init({
         appId: "f74a4c03-9de2-43f9-b44f-8aa8ef94acb4",
         });
@@ -153,7 +158,7 @@
 
                     <div id="tab-0" class="page-content tab">
                         <div id="div-1040" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
-                            <iframe title="tab-0" id="iframe-1040" src="pages/cover/index.html" allow="web-share; fullscreen" allowfullscreen loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
+                            <iframe title="tab-0" id="iframe-1040" src="pages/cover/index.html" allow="web-share; fullscreen" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
 
@@ -163,7 +168,7 @@
                             <!--<iframe title="tab-1" id="iframe-1041" src="https://v0-minimal-radio.vercel.app" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>-->
                             <!--<iframe title="tab-1" id="iframe-1041" src="https://v0-radiowave.vercel.app" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>-->
                             <!--<iframe title="tab-1" id="iframe-1041" src="https://freetheradio.replit.app" allow="web-share" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>-->
-                            <iframe title="tab-1" id="iframe-1041" src="https://play.theradio.fm" allow="web-share; fullscreen" allowfullscreen loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
+                            <iframe title="tab-1" id="iframe-1041" src="https://play.theradio.fm" allow="web-share; fullscreen" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
 
@@ -172,7 +177,7 @@
                             <!--<iframe title="tab-2" id="iframe-1042 contentFrame" src="https://moozik.theradio.fm" loading="eager" scrolling="no" class="embed-responsive-item"></iframe>-->
                             <!--<iframe title="tab-2" id="iframe-1042 contentFrame" src="https://ytpl.us" loading="lazy" scrolling="auto" class="embed-responsive-item"></iframe>-->
                             <!--<iframe title="tab-2" id="iframe-1042" src="https://tubeflix.net" allow="web-share; microphone;" class="embed-responsive-item"></iframe>-->
-                            <iframe title="tab-2" id="iframe-1042" src="https://freetheradio.replit.app" allow="web-share; fullscreen" allowfullscreen loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
+                            <iframe title="tab-2" id="iframe-1042" src="https://freetheradio.replit.app" allow="web-share; fullscreen" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
 
@@ -180,7 +185,7 @@
                         <div id="div-1043" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
                             <!--<iframe title="tab-3" id="iframe-1043" src="pages/fluid.html" allow="web-share" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>-->
                             <!--<iframe title="tab-3" id="iframe-1043" src="https://v0-podcast-app-two.vercel.app" allow="web-share" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>-->
-                            <iframe title="tab-3" id="iframe-1043" src="https://v0-podcast-app-two.vercel.app" allow="web-share; fullscreen" allowfullscreen loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
+                            <iframe title="tab-3" id="iframe-1043" src="https://v0-podcast-app-two.vercel.app" allow="web-share; fullscreen" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
 
@@ -188,7 +193,7 @@
                         <div id="div-1044" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
                             <!--<iframe title="tab-4" id="iframe-1044" src="https://idev.games" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>-->
                             <!--<iframe title="tab-4" id="iframe-1044" src="pages/gamesnacks.html" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>-->
-                            <iframe title="tab-4" id="iframe-1044" src="https://tubeflix.net" allow="web-share; microphone; fullscreen" allowfullscreen loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
+                            <iframe title="tab-4" id="iframe-1044" src="https://tubeflix.net" allow="web-share; microphone; fullscreen" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
 
