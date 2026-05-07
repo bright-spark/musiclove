@@ -7,3 +7,7 @@ routes = [
   { pattern = "theradio.fm/*", zone_name = "theradio.fm" },
   { pattern = "www.theradio.fm/*", zone_name = "theradio.fm" }
 ]
+
+[observability.logs]
+enabled = true
+invocation_logs = true
