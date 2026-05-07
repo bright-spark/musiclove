@@ -26,10 +26,13 @@
     "http-server": "^14.1.1",
     "wrangler": "^4.15.2"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "browserslist": [
     "Chrome >= 100",
     "Firefox >= 100",
-    "Safari >= 13 ",
+    "Safari >= 13",
     "iOS >= 13",
     "Android >= 10",
     "not dead"
