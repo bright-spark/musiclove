@@ -153,7 +153,9 @@ function openYouTubeInNewWindow() {
 
 // Track various events
 function trackEvent(eventType, eventData) {
-  mixpanel.track(eventType, eventData);
+  if (typeof mixpanel !== "undefined" && typeof mixpanel.track === "function") {
+    mixpanel.track(eventType, eventData);
+  }
 }
 
 // Make page visible after load
