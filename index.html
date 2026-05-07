@@ -209,45 +209,7 @@
     <script type="text/javascript" src="js/plugins/thorium.core.min.js"></script>
     <script type="text/javascript" src="js/iframe-style-injector.js"></script>
     <script type="text/javascript" src="js/custom.js" ></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            if (typeof thoriumCorePlugin !== 'undefined') {
-                thoriumCorePlugin.appLoaded();
-            }
-        });
-    </script>
-
-    <script>
-        if (window.mixpanel && typeof window.mixpanel.init === 'function') {
-            // Initialize Mixpanel with your project token and options
-            mixpanel.init("d3adebe9e832cbe08f347e5605206f9a", {
-                debug: false,
-                track_pageview: true,
-                persistence: "localStorage"
-            });
-        }
-
-        // Tab changes → Mixpanel "Tab Clicked" (see js/custom.js activateShellTab)
-
-        // Track time engaged (from load to leave)
-        let startTime = Date.now();
-
-        // When the user leaves or closes the page, calculate the time spent
-        window.addEventListener('beforeunload', function () {
-            let endTime = Date.now();
-            let timeSpent = (endTime - startTime) / 1000; // time in seconds
-
-            if (!window.mixpanel || typeof window.mixpanel.track !== 'function') {
-                return;
-            }
-
-            window.mixpanel.track('Time Engaged', {
-                'time_spent_seconds': timeSpent,
-                'url': window.location.href
-            });
-        });
-    </script>
+    <script type="text/javascript" src="js/index.js"></script>
 
 </body>
 </html>

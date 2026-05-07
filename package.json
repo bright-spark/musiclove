@@ -13,11 +13,13 @@
     "update:og": "node scripts/update-og-in-index.mjs",
     "update:og:preview": "node scripts/update-og-in-index.mjs --dry-run",
     "test:og": "node scripts/test-og-data.mjs",
+    "compile": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "framework7": "^8.3.0",
     "framework7-icons": "^5.0.5",
+    "typescript": "^5.0.4",
     "vercel": "^53.1.1"
   },
   "devDependencies": {
@@ -25,11 +27,12 @@
     "wrangler": "^4.15.2"
   },
   "browserslist": [
-    "Android >= 7",
-    "IOS >= 13",
-    "Safari >= 13",
-    "Chrome >= 52",
-    "Firefox >= 31"
+    "Chrome >= 100",
+    "Firefox >= 100",
+    "Safari >= 13 ",
+    "iOS >= 13",
+    "Android >= 10",
+    "not dead"
   ],
   "repository": {
     "type": "git",
