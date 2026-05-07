@@ -1,6 +1,6 @@
 import mixpanel from "mixpanel-browser";
 
-mixpanel.init("d8e183c46e74ad470aeb003fc8af30e6", {
+mixpanel.init("d3adebe9e832cbe08f347e5605206f9a", {
   debug: true,
   track_pageview: true,
   persistence: "localStorage",
@@ -12,7 +12,7 @@ mixpanel.init("d8e183c46e74ad470aeb003fc8af30e6", {
 
 <script>
     // Initialize Mixpanel with your project token and options
-    mixpanel.init("d8e183c46e74ad470aeb003fc8af30e6", {
+    mixpanel.init("d3adebe9e832cbe08f347e5605206f9a", {
         debug: true,              // Enable debug mode for console logs
         track_pageview: true,      // Automatically track page views
         persistence: "localStorage" // Persist data in localStorage
@@ -45,7 +45,7 @@ mixpanel.init("d8e183c46e74ad470aeb003fc8af30e6", {
 
 <script>
     // Initialize Mixpanel with your project token and options
-    mixpanel.init("d8e183c46e74ad470aeb003fc8af30e6", {
+    mixpanel.init("d3adebe9e832cbe08f347e5605206f9a", {
         debug: true,              // Enable debug mode for console logs
         track_pageview: true,      // Automatically track page views
         persistence: "localStorage" // Persist data in localStorage

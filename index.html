@@ -206,16 +206,10 @@
     <script>
         if (window.mixpanel && typeof window.mixpanel.init === 'function') {
             // Initialize Mixpanel with your project token and options
-            mixpanel.init("d8e183c46e74ad470aeb003fc8af30e6", {
-                debug: false,              // Enable debug mode for console logs
-                track_pageview: true,      // Automatically track page views
-                persistence: "localStorage" // Persist data in localStorage
-            });
-
-            // 1. Track initial page load as a pageview
-            mixpanel.track('Page Viewed', {
-                'page_name': document.title,
-                'url': window.location.href
+            mixpanel.init("d3adebe9e832cbe08f347e5605206f9a", {
+                debug: false,
+                track_pageview: true,
+                persistence: "localStorage"
             });
         }
 

@@ -61,4 +61,8 @@
     }
 })(document, window.mixpanel || []);
 
-mixpanel.init("d8e183c46e74ad470aeb003fc8af30e6");
+mixpanel.init("d3adebe9e832cbe08f347e5605206f9a", {
+    debug: false,
+    track_pageview: true,
+    persistence: "localStorage"
+});
