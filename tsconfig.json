@@ -10,5 +10,5 @@
     "moduleResolution": "node",
     "noEmitOnError": true
   },
-  "include": ["src"]
+  "include": ["src/site/**/*.ts", "src/globals.d.ts"]
 }

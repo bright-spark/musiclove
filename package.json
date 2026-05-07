@@ -4,6 +4,7 @@
   "description": "Music Love application with Framework7",
   "main": "index.html",
   "type": "module",
+  "packageManager": "pnpm@10.26.2",
   "scripts": {
     "start": "http-server . -c-1 -o",
     "deploy:cloudflare": "wrangler deploy",
@@ -14,6 +15,7 @@
     "update:og:preview": "node scripts/update-og-in-index.mjs --dry-run",
     "test:og": "node scripts/test-og-data.mjs",
     "compile": "tsc",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
