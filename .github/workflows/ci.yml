@@ -27,5 +27,8 @@ jobs:
       - name: Compile site TypeScript
         run: pnpm run compile
 
+      - name: Test Worker (wrangler dev + assertions)
+        run: pnpm run test:worker
+
       - name: Validate Worker bundle
         run: pnpm exec wrangler deploy --dry-run

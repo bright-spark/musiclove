@@ -130,5 +130,8 @@ dist
 .pnp.*
 .DS_Store
 
+# Generated Worker embed (copy of index.html for /app route)
+src/index-html-embed.txt
+
 # Vercel
 .vercel

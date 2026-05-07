@@ -1,3 +1,32 @@
+/// <reference path="./worker-modules.d.ts" />
+
+import indexHtmlSource from './index-html-embed.txt';
+
+const THERADIOFM_WEBRADIO = 'https://theradiofm.webradiosite.com';
+
+const ROOT_EMBED_SHELL_HTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>theradio.fm</title>
+  <style>
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #000; }
+    iframe { display: block; width: 100%; height: 100%; border: 0; }
+  </style>
+</head>
+<body>
+  <iframe
+    src="${THERADIOFM_WEBRADIO}/"
+    title="theradio.fm"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+    loading="eager"
+    referrerpolicy="strict-origin-when-cross-origin"
+  ></iframe>
+</body>
+</html>
+`;
+
 const CRAWLER_USER_AGENT_PATTERN =
   /bot|crawler|spider|facebookexternalhit|facebot|twitterbot|linkedinbot|slackbot|discordbot|whatsapp|telegrambot|pinterest|embedly|quora link preview|outbrain|vkshare|skypeuripreview|ia_archiver/i;
 const STATIC_ASSET_PATH_PATTERN =
@@ -17,6 +46,14 @@ function isCrawlerRequest(request: Request): boolean {
     !isStaticAssetPath(url.pathname) &&
     CRAWLER_USER_AGENT_PATTERN.test(userAgent)
   );
+}
+
+function isAppPagePath(pathname: string): boolean {
+  return pathname === '/app' || pathname === '/app/';
+}
+
+function isRootDocumentPath(pathname: string): boolean {
+  return pathname === '/' || pathname === '/index.html';
 }
 
 function buildProxyRequest(request: Request): Request {
@@ -86,7 +123,33 @@ async function fetchWithRedirects(
 export default {
   async fetch(request: Request): Promise<Response> {
     try {
+      const url = new URL(request.url);
+
+      if (isAppPagePath(url.pathname)) {
+        if (request.method !== 'GET' && request.method !== 'HEAD') {
+          return new Response('Method Not Allowed', { status: 405 });
+        }
+        return new Response(request.method === 'HEAD' ? null : indexHtmlSource, {
+          status: 200,
+          headers: {
+            'content-type': 'text/html; charset=utf-8',
+            'cache-control': 'public, max-age=300, s-maxage=600',
+          },
+        });
+      }
+
       if (!isCrawlerRequest(request)) {
+        if (request.method === 'GET' && isRootDocumentPath(url.pathname)) {
+          return new Response(ROOT_EMBED_SHELL_HTML, {
+            status: 200,
+            headers: {
+              'content-type': 'text/html; charset=utf-8',
+              'cache-control': 'public, max-age=120, s-maxage=300',
+              // Allow embedding the webradiosite origin inside our iframe (browser enforces child frame policy).
+              'content-security-policy': 'frame-src https://theradiofm.webradiosite.com',
+            },
+          });
+        }
         return fetch(request);
       }
 
