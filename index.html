@@ -5,19 +5,19 @@
     <!-- OneSignal Notifications -->  
     <!--<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>-->
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-        <script>
-        window.OneSignalDeferred = window.OneSignalDeferred || [];
-        OneSignalDeferred.push(async function(OneSignal) {
-            var host = location.hostname;
-            var allowed = host === 'theradio.fm' || host === 'www.theradio.fm';
-            if (!allowed) {
-            return;
-            }
-            await OneSignal.init({
-            appId: "f74a4c03-9de2-43f9-b44f-8aa8ef94acb4",
-            });
+    <script>
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(async function(OneSignal) {
+        var host = location.hostname;
+        var allowed = host === 'theradio.fm' || host === 'www.theradio.fm';
+        if (!allowed) {
+        return;
+        }
+        await OneSignal.init({
+        appId: "f74a4c03-9de2-43f9-b44f-8aa8ef94acb4",
         });
-        </script>
+    });
+    </script>
     <!-- End OneSignal Notifications -->
     <!-- Static OG Meta Tags for theradio.fm -->
     <meta property="og:title" content="Music Love - theradio.fm" />
