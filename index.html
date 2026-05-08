@@ -2,39 +2,39 @@
 <html lang="en">
 
 <head>
-  <!-- OneSignal Notifications -->  
-  <!--<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>-->
-  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-    <script>
-    window.OneSignalDeferred = window.OneSignalDeferred || [];
-    OneSignalDeferred.push(async function(OneSignal) {
-        var host = location.hostname;
-        var allowed = host === 'theradio.fm' || host === 'www.theradio.fm';
-        if (!allowed) {
-          return;
-        }
-        await OneSignal.init({
-        appId: "f74a4c03-9de2-43f9-b44f-8aa8ef94acb4",
+    <!-- OneSignal Notifications -->  
+    <!--<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>-->
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+        <script>
+        window.OneSignalDeferred = window.OneSignalDeferred || [];
+        OneSignalDeferred.push(async function(OneSignal) {
+            var host = location.hostname;
+            var allowed = host === 'theradio.fm' || host === 'www.theradio.fm';
+            if (!allowed) {
+            return;
+            }
+            await OneSignal.init({
+            appId: "f74a4c03-9de2-43f9-b44f-8aa8ef94acb4",
+            });
         });
-    });
-    </script>
-  <!-- End OneSignal Notifications -->
-  <!-- Static OG Meta Tags for theradio.fm -->
-  <meta property="og:title" content="Music Love - theradio.fm" />
-  <meta property="og:description" content="Your hub for unlimited music, radio, and entertainment. Free, no login required." />
-  <meta property="og:url" content="https://theradio.fm" />
-  <meta property="og:site_name" content="theradio.fm" />
-  <meta property="og:image" content="https://theradio.fm/icons/apple-touch-icon-512x512.png" />
-  <meta property="og:image:width" content="512" />
-  <meta property="og:image:height" content="512" />
-  <meta property="og:image:alt" content="theradio.fm - Music Love" />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Music Love - theradio.fm" />
-  <meta name="twitter:description" content="Your hub for unlimited music, radio, and entertainment. Free, no login required." />
-  <meta name="twitter:image" content="https://theradio.fm/icons/apple-touch-icon-512x512.png" />
-  <!-- End OG Meta Tags -->
-<!-- GoSquared -->
+        </script>
+    <!-- End OneSignal Notifications -->
+    <!-- Static OG Meta Tags for theradio.fm -->
+    <meta property="og:title" content="Music Love - theradio.fm" />
+    <meta property="og:description" content="Your hub for unlimited music, radio, and entertainment. Free, no login required." />
+    <meta property="og:url" content="https://theradio.fm" />
+    <meta property="og:site_name" content="theradio.fm" />
+    <meta property="og:image" content="https://theradio.fm/icons/apple-touch-icon-512x512.png" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:image:alt" content="theradio.fm - Music Love" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Music Love - theradio.fm" />
+    <meta name="twitter:description" content="Your hub for unlimited music, radio, and entertainment. Free, no login required." />
+    <meta name="twitter:image" content="https://theradio.fm/icons/apple-touch-icon-512x512.png" />
+    <!-- End OG Meta Tags -->
+    <!-- GoSquared -->
     <script>
       !function(g,s,q,r,d){r=g[r]=g[r]||function(){(r.q=r.q||[]).push(arguments)};
       d=s.createElement(q);d.src='//d1l6p2sc9645hc.cloudfront.net/gosquared.js';q=
@@ -107,8 +107,6 @@
     <link rel="stylesheet" href="css/classes.css">
     <link rel="stylesheet" href="css/custom.css">
 
-
-
     <!-- mixpanel begin -->
     <script type="text/javascript">
         (function (f, b) { if (!b.__SV) { var e, g, i, h; window.mixpanel = b; b._i = []; b.init = function (e, f, c) { function g(a, d) { var b = d.split("."); 2 == b.length && ((a = a[b[0]]), (d = b[1])); a[d] = function () { a.push([d].concat(Array.prototype.slice.call(arguments, 0))); }; } var a = b; "undefined" !== typeof c ? (a = b[c] = []) : (c = "mixpanel"); a.people = a.people || []; a.toString = function (a) { var d = "mixpanel"; "mixpanel" !== c && (d += "." + c); a || (d += " (stub)"); return d; }; a.people.toString = function () { return a.toString(1) + ".people (stub)"; }; i = "disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split( " "); for (h = 0; h < i.length; h++) g(a, i[h]); var j = "set set_once union unset remove delete".split(" "); a.get_group = function () { function b(c) { d[c] = function () { call2_args = arguments; call2 = [c].concat(Array.prototype.slice.call(call2_args, 0)); a.push([e, call2]); }; } for ( var d = {}, e = ["get_group"].concat( Array.prototype.slice.call(arguments, 0)), c = 0; c < j.length; c++) b(j[c]); return d; }; b._i.push([e, f, c]); }; b.__SV = 1.2; e = f.createElement("script"); e.type = "text/javascript"; e.async = !0; e.src = "undefined" !== typeof MIXPANEL_CUSTOM_LIB_URL ? MIXPANEL_CUSTOM_LIB_URL : "file:" === f.location.protocol && "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//) ? "https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js" : "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js"; g = f.getElementsByTagName("script")[0]; g.parentNode.insertBefore(e, g); } })(document, window.mixpanel || []);
@@ -164,19 +162,12 @@
 
                     <div id="tab-1" class="page-content tab tab-active">
                         <div id="div-1041" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
-                            <!--<iframe title="tab-1" id="iframe-1041" src="pages/radio/index.html" loading="lazy" scrolling="no" class="embed-responsive-item"></iframe>-->
-                            <!--<iframe title="tab-1" id="iframe-1041" src="https://v0-minimal-radio.vercel.app" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>-->
-                            <!--<iframe title="tab-1" id="iframe-1041" src="https://v0-radiowave.vercel.app" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>-->
-                            <!--<iframe title="tab-1" id="iframe-1041" src="https://freetheradio.replit.app" allow="web-share" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>-->
                             <iframe title="tab-1" id="iframe-1041" src="https://play.theradio.fm" allow="web-share; fullscreen" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
 
                     <div id="tab-2" class="page-content tab">
                         <div id="div-1042" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
-                            <!--<iframe title="tab-2" id="iframe-1042 contentFrame" src="https://moozik.theradio.fm" loading="eager" scrolling="no" class="embed-responsive-item"></iframe>-->
-                            <!--<iframe title="tab-2" id="iframe-1042 contentFrame" src="https://ytpl.us" loading="lazy" scrolling="auto" class="embed-responsive-item"></iframe>-->
-                            <!--<iframe title="tab-2" id="iframe-1042" src="https://tubeflix.net" allow="web-share; microphone;" class="embed-responsive-item"></iframe>-->
                             <iframe title="tab-2" id="iframe-1042" src="https://freetheradio.replit.app" allow="web-share; fullscreen" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
@@ -184,7 +175,6 @@
                     <div id="tab-3" class="page-content tab">
                         <div id="div-1043" class="embedweb embed-responsive w-100 embed-responsive-cover" data-href="/">
                             <!--<iframe title="tab-3" id="iframe-1043" src="pages/fluid.html" allow="web-share" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>-->
-                            <!--<iframe title="tab-3" id="iframe-1043" src="https://v0-podcast-app-two.vercel.app" allow="web-share" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>-->
                             <iframe title="tab-3" id="iframe-1043" src="https://v0-podcast-app-two.vercel.app" allow="web-share; fullscreen" loading="lazy" scrolling="yes" class="embed-responsive-item"></iframe>
                         </div>
                     </div>
