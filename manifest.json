@@ -1,27 +1,27 @@
 {
-  "short_name": "Music Love",
-  "name": "Music Love",
-  "start_url": "./index.html",
+  "short_name": "theradio.fm",
+  "name": "theradio.fm",
+  "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
   "theme_color": "#131313",
   "background_color": "#121212",
-  "scope": "https://theradio.fm/",
+  "scope": "/",
   "icons": [
     {
-      "src": "./icons/apple-touch-icon-192x192.png",
+      "src": "/icons/apple-touch-icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icons/apple-touch-icon-512x512.png",
+      "src": "/icons/apple-touch-icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icons/apple-touch-icon-512x512.png",
+      "src": "/icons/apple-touch-icon-maskable.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
@@ -29,17 +29,17 @@
   ],
   "screenshots": [
     {
-      "src": "./screenshots/screenshot-1.png",
+      "src": "/screenshots/screenshot-1.png",
       "sizes": "1280x800",
       "type": "image/png"
     },
     {
-      "src": "./screenshots/screenshot-2.png",
+      "src": "/screenshots/screenshot-2.png",
       "sizes": "1280x800",
       "type": "image/png"
     },
     {
-      "src": "./screenshots/screenshot-3.png",
+      "src": "/screenshots/screenshot-3.png",
       "sizes": "1280x800",
       "type": "image/png"
     }
@@ -55,7 +55,6 @@
     "music",
     "social"
   ],
-  "id": "https://theradio.fm/",
   "iarc_rating_id": "ed0c886e-c701-4d6c-b028-181314668e8d",
   "prefer_related_applications": false,
   "related_applications": [

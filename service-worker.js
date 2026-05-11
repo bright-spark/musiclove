@@ -9,13 +9,16 @@
 
 importScripts("https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js");
 
-const CACHE_NAME = 'musiclove-cache-v42';
+const CACHE_NAME = 'musiclove-cache-v43';
 const APP_SHELL = [
   './',
   './offline.html',
   './index.html',
   './manifest.json',
   './favicon.ico',
+  './icons/apple-touch-icon-192x192.png',
+  './icons/apple-touch-icon-512x512.png',
+  './icons/apple-touch-icon-maskable.png',
   './css/app.css',
   './css/framework7-bundle.min.css',
   './css/framework7-keypad.min.css',
