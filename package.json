@@ -30,7 +30,7 @@
     "wrangler": "^4.15.2"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=24"
   },
   "browserslist": [
     "Chrome >= 100",
