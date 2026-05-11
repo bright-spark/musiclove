@@ -1,12 +1,12 @@
 {
   "short_name": "theradio.fm",
   "name": "theradio.fm",
-  "start_url": "/",
+  "start_url": "https://theradio.fm/app",
   "display": "standalone",
   "orientation": "portrait",
   "theme_color": "#131313",
   "background_color": "#121212",
-  "scope": "/",
+  "scope": "https://theradio.fm/app",
   "icons": [
     {
       "src": "/icons/apple-touch-icon-192x192.png",
