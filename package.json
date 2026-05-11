@@ -7,7 +7,7 @@
   "packageManager": "pnpm@10.26.2",
   "scripts": {
     "start": "http-server . -c-1 -o",
-    "deploy:cloudflare": "wrangler deploy",
+    "deploy:cloudflare": "pnpm run build && wrangler deploy",
     "deploy:vercel": "vercel --prod",
     "deploy:vercel:preview": "vercel",
     "extract:og": "node scripts/extract-og-data.mjs",
@@ -20,14 +20,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "framework7": "^8.3.0",
+    "framework7": "^8.3.4",
     "framework7-icons": "^5.0.5",
-    "typescript": "^5.0.4",
-    "vercel": "^53.1.1"
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
     "http-server": "^14.1.1",
-    "wrangler": "^4.15.2"
+    "wrangler": "^4.90.0"
   },
   "engines": {
     "node": ">=24"
