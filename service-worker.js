@@ -9,7 +9,7 @@
 
 importScripts("https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js");
 
-const CACHE_NAME = 'musiclove-cache-v41';
+const CACHE_NAME = 'musiclove-cache-v42';
 const APP_SHELL = [
   './',
   './offline.html',

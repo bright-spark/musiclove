@@ -125,7 +125,7 @@ var app = new Framework7({
     "autoDarkTheme": false,
     "language": "en",
     "routes": routes,
-    "name": "Music Love",
+    "name": "theradio.fm",
     "initOnDeviceReady": true,
     "init": true,
     "iosTranslucentBars": true,

@@ -1,42 +1,50 @@
 {
   "short_name": "Music Love",
   "name": "Music Love",
-  "start_url": "./",
+  "start_url": "https://theradio.fm/",
   "display": "standalone",
   "orientation": "portrait",
   "theme_color": "#131313",
   "background_color": "#121212",
-  "scope": "/",
+  "scope": "https://theradio.fm/",
   "icons": [
     {
-      "src": "./icons/apple-touch-icon-192x192.png",
+      "src": "https://theradio.fm/icons/apple-touch-icon-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "./icons/apple-touch-icon-512x512.png",
+      "src": "https://theradio.fm/icons/apple-touch-icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://theradio.fm/icons/apple-touch-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "screenshots": [
     {
-      "src": "./screenshots/screenshot-1.png",
+      "src": "https://theradio.fm/screenshots/screenshot-1.png",
       "sizes": "1280x800",
       "type": "image/png"
     },
     {
-      "src": "./screenshots/screenshot-2.png",
+      "src": "https://theradio.fm/screenshots/screenshot-2.png",
       "sizes": "1280x800",
       "type": "image/png"
     },
     {
-      "src": "./screenshots/screenshot-3.png",
+      "src": "https://theradio.fm/screenshots/screenshot-3.png",
       "sizes": "1280x800",
       "type": "image/png"
     }
   ],
-  "description": "Welcome to Music Love from theradio.fm, your destination for entertainment and ad-free gaming! Enjoy handpicked playlists, live radio, and ad-free games across all platforms including Windows, Android, and our progressive web app. No logins required, start instantly. With curated social feeds, the best South African and Namibian streaming audio, keeping your privacy-first, Music Love is the ultimate hub for music and entertainment.",
+  "description": "theradio.fm — live radio, playlists, podcasts, and TubeFlix in one app. Free, no login.",
   "dir": "ltr",
   "lang": "en",
   "display_override": ["window-controls-overlay"],
@@ -47,7 +55,7 @@
     "music",
     "social"
   ],
-  "id": "theradio.fm",
+  "id": "https://theradio.fm/",
   "iarc_rating_id": "ed0c886e-c701-4d6c-b028-181314668e8d",
   "prefer_related_applications": false,
   "related_applications": [
@@ -74,12 +82,12 @@
   ],
   "shortcuts": [
     {
-      "name": "about",
+      "name": "About",
       "url": "https://theradio.fm/pages/cover/index.html",
-      "description": "About Music Love"
+      "description": "About theradio.fm"
     },
     {
-      "name": "privacy",
+      "name": "Privacy",
       "url": "https://theradio.fm/pages/privacy/index.html",
       "description": "Privacy Policy"
     }
@@ -87,7 +95,7 @@
   "protocol_handlers": [
     {
       "protocol": "web+music",
-      "url": "/m?%s"
+      "url": "https://theradio.fm/m?%s"
     }
   ],
   "edge_side_panel": {
