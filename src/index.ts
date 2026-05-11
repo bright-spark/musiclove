@@ -8,12 +8,44 @@ interface MusicloveEnv {
 
 const THERADIOFM_WEBRADIO = 'https://theradiofm.webradiosite.com';
 
-const ROOT_EMBED_SHELL_HTML = `<!DOCTYPE html>
+/** Minimal iframe shell for `/` — must include OG + PWA tags so Safari share / Add to Dock show icons (same origin as request for www vs apex). */
+function rootEmbedShellHtml(origin: string): string {
+  const icon512 = `${origin}/icons/apple-touch-icon-512x512.png`;
+  const descEsc = 'Live radio, playlists, podcasts &amp; TubeFlix — free, no login.';
+  return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>theradio.fm</title>
+  <meta name="theme-color" content="#131313" />
+  <meta name="application-name" content="theradio.fm" />
+  <meta name="description" content="${descEsc}" />
+  <link rel="canonical" href="${origin}/" />
+  <meta property="og:url" content="${origin}/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="theradio.fm" />
+  <meta property="og:description" content="${descEsc}" />
+  <meta property="og:image" content="${icon512}" />
+  <meta property="og:image:secure_url" content="${icon512}" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="512" />
+  <meta property="og:image:height" content="512" />
+  <meta property="og:image:alt" content="theradio.fm" />
+  <meta property="og:site_name" content="theradio.fm" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="theradio.fm" />
+  <meta name="twitter:description" content="${descEsc}" />
+  <meta name="twitter:image" content="${icon512}" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="theradio.fm" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="icon" href="${origin}/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="192x192" href="${origin}/icons/apple-touch-icon-192x192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="${icon512}" />
+  <link rel="apple-touch-icon" sizes="180x180" href="${origin}/icons/apple-touch-icon-180x180.png" />
+  <link rel="apple-touch-icon" href="${origin}/icons/apple-touch-icon.png" />
+  <link rel="manifest" href="${origin}/manifest.json" />
   <style>
     html, body { margin: 0; height: 100%; overflow: hidden; background: #000; }
     iframe { display: block; width: 100%; height: 100%; border: 0; }
@@ -30,6 +62,7 @@ const ROOT_EMBED_SHELL_HTML = `<!DOCTYPE html>
 </body>
 </html>
 `;
+}
 
 const CRAWLER_USER_AGENT_PATTERN =
   /bot|crawler|spider|facebookexternalhit|facebot|twitterbot|linkedinbot|slackbot|discordbot|whatsapp|telegrambot|pinterest|embedly|quora link preview|outbrain|vkshare|skypeuripreview|ia_archiver/i;
@@ -154,7 +187,7 @@ export default {
 
       if (!isCrawlerRequest(request)) {
         if (request.method === 'GET' && isRootDocumentPath(url.pathname)) {
-          return new Response(ROOT_EMBED_SHELL_HTML, {
+          return new Response(rootEmbedShellHtml(url.origin), {
             status: 200,
             headers: {
               'content-type': 'text/html; charset=utf-8',
