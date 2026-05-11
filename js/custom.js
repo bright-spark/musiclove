@@ -5,6 +5,9 @@ const shellFrameSources = new Map();
 const shellAllowedOrigins = new Set([
   window.location.origin,
   'https://play.theradio.fm',
+  'https://browser.theradio.fm',
+  'https://podcasts.theradio.fm',
+  'https://tubeflix.theradio.fm',
   'https://freetheradio.replit.app',
   'https://v0-podcast-app-two.vercel.app',
   'https://tubeflix.net',
@@ -366,8 +369,58 @@ function handleEmbeddedFullscreenMessage(event) {
   }
 }
 
+function handleWebradioStorageBridge(event) {
+  var data = event.data;
+  if (!data || typeof data !== 'object') return;
+  var type = data.type;
+  if (type !== 'WEBRADIO_SET' && type !== 'WEBRADIO_GET_REQUEST') return;
+
+  var allowedWebradioOrigins = new Set([
+    'https://play.theradio.fm',
+    'https://browser.theradio.fm',
+    'https://podcasts.theradio.fm',
+    'https://tubeflix.theradio.fm',
+  ]);
+  if (!allowedWebradioOrigins.has(event.origin)) return;
+
+  if (type === 'WEBRADIO_SET' && data.key != null) {
+    var val = data.value == null ? '' : String(data.value);
+    if (typeof TheradioSharedKV !== 'undefined' && TheradioSharedKV.setItem) {
+      TheradioSharedKV.setItem(data.key, val);
+    }
+    try {
+      localStorage.setItem(data.key, val);
+    } catch (e) {}
+    return;
+  }
+
+  if (type === 'WEBRADIO_GET_REQUEST' && data.reqId != null && data.key != null) {
+    var read = null;
+    if (typeof TheradioSharedKV !== 'undefined' && TheradioSharedKV.getItem) {
+      read = TheradioSharedKV.getItem(data.key);
+    }
+    if (read == null) {
+      try {
+        read = localStorage.getItem(data.key);
+      } catch (e) {}
+    }
+    if (event.source && typeof event.source.postMessage === 'function') {
+      event.source.postMessage(
+        {
+          type: 'WEBRADIO_GET_RESPONSE',
+          key: data.key,
+          value: read,
+          reqId: data.reqId,
+        },
+        event.origin
+      );
+    }
+  }
+}
+
 window.addEventListener('message', handleEmbeddedShareMessage);
 window.addEventListener('message', handleEmbeddedFullscreenMessage);
+window.addEventListener('message', handleWebradioStorageBridge);
 document.addEventListener('fullscreenchange', syncFullscreenShellContext);
 document.addEventListener('webkitfullscreenchange', syncFullscreenShellContext);
 document.addEventListener('DOMContentLoaded', setupEmbeddedTabPersistence);

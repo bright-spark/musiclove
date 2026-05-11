@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../play"
+		},
+		{
+			"path": "../browser"
+		},
+		{
+			"path": "../podcasts"
+		},
+		{
+			"path": "../tubeflix"
+		}
+	],
+	"settings": {}
+}
