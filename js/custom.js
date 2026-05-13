@@ -110,6 +110,8 @@ function activateShellTab(targetId, options) {
     return;
   }
 
+  ensureShellTabDomOrder();
+
   const targetTab = document.querySelector(targetId);
 
   if (!targetTab) {
@@ -195,7 +197,39 @@ function isAllowedShellOrigin(event) {
   return shellAllowedOrigins.has(event.origin);
 }
 
+/** Keep tab bar links and tab panes in #tab-0 … #tab-N DOM order (F7 pairs by index; unloadTabContent can reorder). */
+function ensureShellTabDomOrder() {
+  const toolbarInner = document.querySelector('#o-1011');
+  const tabsRoot = document.querySelector('#tabs-o-2010');
+  if (!toolbarInner || !tabsRoot) {
+    return;
+  }
+
+  const tabIndexFromHref = (href) => {
+    const m = /^#tab-(\d+)$/.exec(href || '');
+    return m ? parseInt(m[1], 10) : Number.MAX_SAFE_INTEGER;
+  };
+  const tabIndexFromId = (id) => {
+    const m = /^tab-(\d+)$/.exec(id || '');
+    return m ? parseInt(m[1], 10) : Number.MAX_SAFE_INTEGER;
+  };
+
+  const links = Array.from(toolbarInner.querySelectorAll(':scope > a.tab-link'));
+  links.sort((a, b) => tabIndexFromHref(a.getAttribute('href')) - tabIndexFromHref(b.getAttribute('href')));
+  const linkFrag = document.createDocumentFragment();
+  links.forEach((el) => linkFrag.appendChild(el));
+  toolbarInner.appendChild(linkFrag);
+
+  const panes = Array.from(tabsRoot.querySelectorAll(':scope > .tab'));
+  panes.sort((a, b) => tabIndexFromId(a.id) - tabIndexFromId(b.id));
+  const paneFrag = document.createDocumentFragment();
+  panes.forEach((el) => paneFrag.appendChild(el));
+  tabsRoot.appendChild(paneFrag);
+}
+
 function setupEmbeddedTabPersistence() {
+  ensureShellTabDomOrder();
+
   document.querySelectorAll('iframe.embed-responsive-item').forEach((iframe) => {
     restoreIframeSettings(iframe);
     registerShellFrame(iframe);
@@ -435,3 +469,4 @@ window.addEventListener('message', handleWebradioStorageBridge);
 document.addEventListener('fullscreenchange', syncFullscreenShellContext);
 document.addEventListener('webkitfullscreenchange', syncFullscreenShellContext);
 document.addEventListener('DOMContentLoaded', setupEmbeddedTabPersistence);
+window.addEventListener('load', ensureShellTabDomOrder);
