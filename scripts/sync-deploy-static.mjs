@@ -2,7 +2,7 @@
  * Populates deploy-static/ with only the files the browser loads for / and /app.
  * Used as Workers Static Assets directory (avoids watching the whole repo in wrangler dev).
  */
-import { cpSync, mkdirSync, rmSync, existsSync, copyFileSync } from 'node:fs';
+import { cpSync, mkdirSync, rmSync, existsSync, copyFileSync, readdirSync, statSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -34,6 +34,15 @@ for (const f of rootFiles) {
   const src = join(root, f);
   if (existsSync(src)) {
     copyFileSync(src, join(dest, f));
+  }
+}
+
+// Repo-root *.html (e.g. m.html, rain.html) for Worker pretty URLs `/m`, `/rain` → `*.html`.
+for (const name of readdirSync(root)) {
+  if (!name.endsWith('.html') || name === 'index.html') continue;
+  const src = join(root, name);
+  if (existsSync(src) && statSync(src).isFile()) {
+    copyFileSync(src, join(dest, name));
   }
 }
 

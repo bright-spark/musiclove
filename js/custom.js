@@ -373,13 +373,14 @@ function handleWebradioStorageBridge(event) {
   var data = event.data;
   if (!data || typeof data !== 'object') return;
   var type = data.type;
-  if (type !== 'WEBRADIO_SET' && type !== 'WEBRADIO_GET_REQUEST') return;
+  if (type !== 'WEBRADIO_SET' && type !== 'WEBRADIO_GET_REQUEST' && type !== 'WEBRADIO_REMOVE') return;
 
   var allowedWebradioOrigins = new Set([
     'https://play.theradio.fm',
     'https://browser.theradio.fm',
     'https://podcasts.theradio.fm',
     'https://tubeflix.theradio.fm',
+    'https://www.theradio.fm',
   ]);
   if (!allowedWebradioOrigins.has(event.origin)) return;
 
@@ -390,6 +391,16 @@ function handleWebradioStorageBridge(event) {
     }
     try {
       localStorage.setItem(data.key, val);
+    } catch (e) {}
+    return;
+  }
+
+  if (type === 'WEBRADIO_REMOVE' && data.key != null) {
+    if (typeof TheradioSharedKV !== 'undefined' && TheradioSharedKV.removeItem) {
+      TheradioSharedKV.removeItem(data.key);
+    }
+    try {
+      localStorage.removeItem(data.key);
     } catch (e) {}
     return;
   }

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Red Matrix Radio Phone</title>
+  <meta name="description" content="A red Matrix-style digital rain background with a mobile phone iframe showing theradio.fm/app." />
+  <style>
+    :root {
+      --red: #ff1010;
+      --deep-red: #760000;
+      --black: #030000;
+      --phone-w: min(390px, 86vw);
+      --phone-h: min(812px, 88vh);
+      --screen-radius: 42px;
+      --screen-zoom: 1.13;
+      /* Matches .phone::before top + height so iframe clears the island */
+      --island-shelf-h: calc(10px + 34px);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      overflow: hidden;
+      background: #000;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      isolation: isolate;
+    }
+
+    .scene {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(255, 20, 20, 0.14), transparent 30%),
+        radial-gradient(circle at 50% 100%, rgba(210, 0, 0, 0.24), transparent 42%),
+        linear-gradient(180deg, #060000 0%, #000 46%, #050000 100%);
+    }
+
+    canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .vignette {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 5;
+      background:
+        radial-gradient(circle at center, transparent 0 44%, rgba(0,0,0,0.15) 58%, rgba(0,0,0,0.86) 100%),
+        linear-gradient(90deg, rgba(0,0,0,0.74), transparent 20% 80%, rgba(0,0,0,0.74));
+      mix-blend-mode: multiply;
+    }
+
+    .phone-wrap {
+      position: relative;
+      width: var(--phone-w);
+      height: var(--phone-h);
+      z-index: 3;
+      transform: translateZ(0);
+      filter: drop-shadow(0 0 32px rgba(255, 0, 0, 0.45)) drop-shadow(0 30px 70px rgba(0, 0, 0, 0.95));
+    }
+
+    .code-spill {
+      position: absolute;
+      top: -12vh;
+      bottom: -12vh;
+      width: clamp(54px, 14vw, 170px);
+      z-index: 2;
+      overflow: hidden;
+      opacity: 0.96;
+      pointer-events: none;
+      mask-image: linear-gradient(180deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+      -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+    }
+
+    .code-spill.left {
+      right: calc(100% - 18px);
+      transform: skewY(-1deg);
+    }
+
+    .code-spill.right {
+      left: calc(100% - 18px);
+      transform: skewY(1deg);
+    }
+
+    .spill-track {
+      position: absolute;
+      inset: -100% 0 0;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 7px;
+      animation: spillFall 5.4s linear infinite;
+      text-shadow: 0 0 5px #ff0000, 0 0 16px #ff0000, 0 0 30px #a60000;
+    }
+
+    .spill-track:nth-child(2) {
+      animation-duration: 7.8s;
+      animation-delay: -2.8s;
+      opacity: 0.7;
+      filter: blur(0.4px);
+    }
+
+    .spill-column {
+      color: #ff1a1a;
+      font-family: "Courier New", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-weight: 700;
+      font-size: clamp(14px, 2.6vw, 26px);
+      line-height: 1.15;
+      letter-spacing: 0.08em;
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+      white-space: nowrap;
+      opacity: 0.95;
+    }
+
+    @keyframes spillFall {
+      from { transform: translateY(-22%); }
+      to { transform: translateY(52%); }
+    }
+
+    .phone {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      overflow: hidden;
+      border-radius: 54px;
+      padding: 13px;
+      background:
+        linear-gradient(145deg, #2c2c2f, #050505 32%, #1c1c1f 52%, #555 72%, #080808),
+        #111;
+      box-shadow:
+        inset 0 0 0 2px rgba(255,255,255,0.08),
+        inset 0 0 0 6px rgba(0,0,0,0.85),
+        0 0 0 1px rgba(255, 42, 42, 0.32),
+        0 0 80px rgba(255,0,0,0.34);
+    }
+
+    .phone::before {
+      content: "";
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      width: 42%;
+      height: 34px;
+      transform: translateX(-50%);
+      background: #050505;
+      border-radius: 0 0 22px 22px;
+      z-index: 5;
+      box-shadow: inset 0 -1px 0 rgba(255,255,255,0.06);
+    }
+
+    .phone::after {
+      content: "";
+      position: absolute;
+      top: 22px;
+      left: 50%;
+      width: 54px;
+      height: 5px;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: linear-gradient(90deg, #111, #2d2d2d, #101010);
+      z-index: 6;
+      opacity: 0.9;
+    }
+
+    .screen {
+      position: relative;
+      z-index: 0;
+      isolation: isolate;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: var(--screen-radius);
+      transform: translateZ(0);
+      background: #050505;
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.08),
+        inset 0 0 35px rgba(0,0,0,0.9);
+    }
+
+    .island-shelf {
+      flex: 0 0 var(--island-shelf-h);
+      width: 100%;
+      background: linear-gradient(180deg, #080808 0%, #050505 55%, #040404 100%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      pointer-events: none;
+    }
+
+    .screen-body {
+      flex: 1 1 auto;
+      min-height: 0;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .iframe-zoom {
+      flex: 1 1 auto;
+      min-height: 0;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 0 0 var(--screen-radius) var(--screen-radius);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background: #000;
+    }
+
+    iframe {
+      position: relative;
+      z-index: 1;
+      width: calc(100% / var(--screen-zoom));
+      height: calc(100% / var(--screen-zoom));
+      min-height: 0;
+      border: 0;
+      flex-shrink: 0;
+      transform: translateZ(0) scale(var(--screen-zoom));
+      transform-origin: top center;
+      background: #000;
+    }
+
+    .screen-glass {
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      border-radius: inherit;
+      background:
+        linear-gradient(115deg, rgba(255,255,255,0.12), transparent 20%, transparent 54%, rgba(255,255,255,0.045) 55%, transparent 70%),
+        radial-gradient(circle at 50% -10%, rgba(255,255,255,0.18), transparent 28%);
+      mix-blend-mode: screen;
+      opacity: 0.28;
+    }
+
+    .edge-glow {
+      position: absolute;
+      inset: -12px;
+      border-radius: 66px;
+      pointer-events: none;
+      background: linear-gradient(90deg, rgba(255,0,0,0.65), transparent 18% 82%, rgba(255,0,0,0.65));
+      filter: blur(16px);
+      opacity: 0.72;
+      z-index: -1;
+      animation: pulse 2.6s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.48; transform: scale(0.985); }
+      50% { opacity: 0.88; transform: scale(1.01); }
+    }
+
+    .fallback-note {
+      position: absolute;
+      left: 50%;
+      bottom: 20px;
+      z-index: 1;
+      transform: translateX(-50%);
+      width: min(560px, calc(100vw - 32px));
+      color: rgba(255,255,255,0.72);
+      text-align: center;
+      font-size: 12px;
+      letter-spacing: 0.02em;
+      text-shadow: 0 0 12px rgba(255,0,0,0.8);
+      pointer-events: none;
+    }
+
+    @media (max-width: 480px) {
+      :root {
+        --phone-w: 88vw;
+        --phone-h: 82vh;
+        --screen-radius: 33px;
+        --island-shelf-h: calc(12px + 27px);
+      }
+
+      .phone {
+        border-radius: 42px;
+        padding: 10px;
+      }
+
+      .phone::before {
+        height: 27px;
+        border-radius: 0 0 17px 17px;
+      }
+
+      .code-spill {
+        width: 82px;
+      }
+
+      .fallback-note {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="scene" aria-label="Red Matrix rain background with a mobile phone website preview">
+    <canvas id="matrix" aria-hidden="true"></canvas>
+  </main>
+
+  <section class="phone-wrap" aria-label="Mobile phone frame containing The Radio app">
+    <div class="code-spill left" aria-hidden="true">
+      <div class="spill-track">
+        <span class="spill-column">10110ラジオ0110THEFM001101010110</span>
+        <span class="spill-column">赤雨0101音波1010STREAM11001</span>
+        <span class="spill-column">010011RADIO111000101010</span>
+        <span class="spill-column">信号1010FM0110110音楽</span>
+        <span class="spill-column">00110101011101001010</span>
+      </div>
+      <div class="spill-track">
+        <span class="spill-column">11001010APP001101赤赤赤</span>
+        <span class="spill-column">波形0101011010RADIO</span>
+        <span class="spill-column">1011010100110010110</span>
+        <span class="spill-column">THERADIOFM101001</span>
+        <span class="spill-column">010101音音001101011</span>
+      </div>
+    </div>
+
+    <div class="code-spill right" aria-hidden="true">
+      <div class="spill-track">
+        <span class="spill-column">010101THERADIO101010</span>
+        <span class="spill-column">赤色雨011001101010</span>
+        <span class="spill-column">STREAM110010101101</span>
+        <span class="spill-column">音楽1010SIGNAL01010</span>
+        <span class="spill-column">00101101010100110</span>
+      </div>
+      <div class="spill-track">
+        <span class="spill-column">RADIOFM00110101010</span>
+        <span class="spill-column">011001赤011010波</span>
+        <span class="spill-column">101010APP01011010</span>
+        <span class="spill-column">00110101011100010</span>
+        <span class="spill-column">FMFM1010011010</span>
+      </div>
+    </div>
+
+    <div class="edge-glow" aria-hidden="true"></div>
+    <div class="phone">
+      <div class="screen">
+        <div class="island-shelf" aria-hidden="true"></div>
+        <div class="screen-body">
+          <div class="iframe-zoom">
+            <iframe
+              title="The Radio FM App"
+              src="https://theradio.fm/app"
+              allow="autoplay; encrypted-media; fullscreen; clipboard-read; clipboard-write"
+              referrerpolicy="strict-origin-when-cross-origin"
+              loading="eager">
+            </iframe>
+          </div>
+        </div>
+        <div class="screen-glass" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="vignette" aria-hidden="true"></div>
+  <!-- <p class="fallback-note">If the embedded app does not appear, the source website may block iframe embedding in some browsers.</p> -->
+
+  <script>
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d', { alpha: true });
+
+    const glyphs = 'アァカサタナハマヤャラワガザダバパ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZtheradiofm赤音波信号雨'.split('');
+    let width = 0;
+    let height = 0;
+    let columns = 0;
+    let drops = [];
+    let speeds = [];
+    let fontSize = 18;
+    let animationFrame;
+
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      fontSize = Math.max(14, Math.min(24, Math.floor(width / 72)));
+      columns = Math.ceil(width / fontSize);
+      drops = Array.from({ length: columns }, () => Math.random() * -height / fontSize);
+      speeds = Array.from({ length: columns }, () => 0.2 + Math.random() * 0.42);
+      ctx.font = `700 ${fontSize}px "Courier New", monospace`;
+    }
+
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.12)';
+      ctx.fillRect(0, 0, width, height);
+
+      ctx.font = `700 ${fontSize}px "Courier New", monospace`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+
+      const phoneLeft = (width - Math.min(390, width * 0.86)) / 2;
+      const phoneRight = width - phoneLeft;
+      const phoneW = Math.min(390, width * 0.86);
+      const phoneH = Math.min(812, height * 0.88);
+      const phoneTop = (height - phoneH) / 2;
+      const phoneBottom = phoneTop + phoneH;
+      const innerPadX = 28;
+      const compact = window.matchMedia('(max-width: 480px)').matches;
+      const phonePadTop = compact ? 10 : 13;
+      const shelfH = compact ? 12 + 27 : 12 + 34;
+      const innerPadBottom = 28;
+      const scrLeft = phoneLeft + innerPadX;
+      const scrRight = phoneLeft + phoneW - innerPadX;
+      const screenInnerTop = phoneTop + phonePadTop;
+      const shelfBottom = screenInnerTop + shelfH;
+      const scrTop = shelfBottom;
+      const scrBottom = phoneBottom - innerPadBottom;
+
+      for (let i = 0; i < columns; i++) {
+        const x = i * fontSize + fontSize / 2;
+        const y = drops[i] * fontSize;
+        const char = glyphs[Math.floor(Math.random() * glyphs.length)];
+        const nearPhone = x > phoneLeft - 95 && x < phoneRight + 95;
+        const corePhone = x > phoneLeft + 18 && x < phoneRight - 18;
+        const overShelf = x > scrLeft && x < scrRight && y > screenInnerTop - fontSize && y < shelfBottom + 1;
+        const overIframe = x > scrLeft && x < scrRight && y > scrTop - fontSize && y < scrBottom + fontSize;
+        if (overShelf || overIframe) {
+          drops[i] += speeds[i];
+          if (y > height + Math.random() * 600) {
+            drops[i] = Math.random() * -30;
+            speeds[i] = 0.2 + Math.random() * 0.42;
+          }
+          continue;
+        }
+        const intensity = corePhone ? 0.42 : nearPhone ? 0.92 : 0.72;
+
+        ctx.shadowBlur = corePhone ? 8 : 18;
+        ctx.shadowColor = '#ff0000';
+        ctx.fillStyle = `rgba(255, ${corePhone ? 20 : 0}, ${corePhone ? 20 : 0}, ${intensity})`;
+        ctx.fillText(char, x, y);
+
+        if (Math.random() > 0.965) {
+          ctx.fillStyle = 'rgba(255, 230, 230, 0.92)';
+          ctx.shadowBlur = 24;
+          ctx.fillText(char, x, y - fontSize);
+        }
+
+        drops[i] += speeds[i];
+        if (y > height + Math.random() * 600) {
+          drops[i] = Math.random() * -30;
+          speeds[i] = 0.2 + Math.random() * 0.42;
+        }
+      }
+
+      animationFrame = requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', () => {
+      cancelAnimationFrame(animationFrame);
+      resize();
+      draw();
+    }, { passive: true });
+
+    resize();
+    draw();
+  </script>
+  <script>
+    function loadTargetURL() {
+        const currentURL = window.location.href;
+        const parts = currentURL.split('?');
+        const targetURL = parts.length > 1 ? parts[1] : null;
+        if (targetURL) {
+            document.getElementById("view").src = targetURL;
+        }
+    }
+    document.addEventListener("DOMContentLoaded", loadTargetURL);
+</script>
+</body>
+</html>

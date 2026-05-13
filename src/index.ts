@@ -93,6 +93,39 @@ function isRootDocumentPath(pathname: string): boolean {
   return pathname === '/' || pathname === '/index.html';
 }
 
+/**
+ * Pretty URLs for repo-root HTML: `/rain` and `/rain/` serve `rain.html` from static assets.
+ * Single path segment, no dots (paths like `/pages/foo` stay on normal asset routing).
+ */
+function getPrettyRootHtmlSlug(pathname: string): string | null {
+  const m = pathname.match(/^\/([^/.]+)\/?$/);
+  if (!m) return null;
+  const slug = m[1];
+  if (!slug) return null;
+  return slug;
+}
+
+async function tryPrettyRootHtmlResponse(
+  request: Request,
+  env: MusicloveEnv,
+  pathname: string,
+): Promise<Response | null> {
+  if (request.method !== 'GET' && request.method !== 'HEAD') return null;
+
+  const slug = getPrettyRootHtmlSlug(pathname);
+  if (!slug) return null;
+
+  const assetUrl = new URL(request.url);
+  assetUrl.pathname = `/${slug}.html`;
+  const assetRequest = new Request(assetUrl.toString(), request);
+  const assetResponse = await env.ASSETS.fetch(assetRequest);
+
+  if (assetResponse.status === 200) {
+    return assetResponse;
+  }
+  return null;
+}
+
 function buildProxyRequest(request: Request): Request {
   const incomingUrl = new URL(request.url);
   const proxyUrl = new URL(incomingUrl.pathname + incomingUrl.search, 'https://play.theradio.fm');
@@ -183,6 +216,11 @@ export default {
             'cache-control': 'public, max-age=300, s-maxage=600',
           },
         });
+      }
+
+      const prettyHtml = await tryPrettyRootHtmlResponse(request, env, url.pathname);
+      if (prettyHtml) {
+        return prettyHtml;
       }
 
       if (!isCrawlerRequest(request)) {

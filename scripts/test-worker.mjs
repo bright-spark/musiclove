@@ -156,11 +156,41 @@ async function main() {
       throw new Error(`GET /app: expected html content-type, got ${appCt}`);
     }
     const appBody = await appRes.text();
-    if (!appBody.includes('<title>Music Love</title>')) {
+    if (!appBody.includes('<title>theradio.fm</title>')) {
       throw new Error('GET /app: body missing index.html title');
     }
     if (!appBody.includes('<base href=')) {
       throw new Error('GET /app: expected injected <base> for Framework7 asset resolution');
+    }
+
+    const rainRes = await fetch(`${base}/rain`, {
+      method: 'GET',
+      headers: { 'user-agent': BROWSER_UA },
+      redirect: 'manual',
+    });
+    if (rainRes.status !== 200) {
+      throw new Error(`GET /rain: expected 200 (pretty URL → rain.html), got ${rainRes.status}`);
+    }
+    const rainCt = rainRes.headers.get('content-type') || '';
+    if (!rainCt.includes('text/html')) {
+      throw new Error(`GET /rain: expected html content-type, got ${rainCt}`);
+    }
+    const rainBody = await rainRes.text();
+    if (!rainBody.includes('Red Matrix Radio Phone')) {
+      throw new Error('GET /rain: body missing expected rain.html title');
+    }
+
+    const mRes = await fetch(`${base}/m`, {
+      method: 'GET',
+      headers: { 'user-agent': BROWSER_UA },
+      redirect: 'manual',
+    });
+    if (mRes.status !== 200) {
+      throw new Error(`GET /m: expected 200 (pretty URL → m.html), got ${mRes.status}`);
+    }
+    const mBody = await mRes.text();
+    if (!mBody.includes('Music Love Quest')) {
+      throw new Error('GET /m: body missing expected m.html marker');
     }
 
     console.log('test-worker: ok');
@@ -168,6 +198,8 @@ async function main() {
     console.log(`  crawler HEAD / -> ${headRes.status} (no x-og-proxy from worker)`);
     console.log(`  browser GET / -> ${browserRoot.status}, content-type: ${rootCt}`);
     console.log(`  browser GET /app -> ${appRes.status}, content-type: ${appCt}`);
+    console.log(`  browser GET /rain -> ${rainRes.status}, content-type: ${rainCt}`);
+    console.log(`  browser GET /m -> ${mRes.status}`);
   } finally {
     shutdown(proc);
     await sleep(600);
