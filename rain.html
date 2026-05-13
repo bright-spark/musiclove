@@ -359,11 +359,12 @@
         <div class="island-shelf" aria-hidden="true"></div>
         <div class="screen-body">
           <div class="iframe-zoom">
+            <!-- Query/hash URL override: see applyIframeSrcFromQuery() — e.g. ?https://tubeflix.theradio.fm/watch/VIDEO_ID -->
             <iframe
               id="app-frame"
               title="The Radio FM App"
               src="https://theradio.fm/app"
-              allow="autoplay; encrypted-media; fullscreen; clipboard-read; clipboard-write"
+              allow="accelerometer; autoplay; clipboard-read; clipboard-write; encrypted-media; fullscreen; gyroscope; microphone; picture-in-picture; display-capture; web-share"
               referrerpolicy="strict-origin-when-cross-origin"
               loading="eager">
             </iframe>
@@ -512,16 +513,5 @@
     resize();
     draw();
   </script>
-  <script>
-    function loadTargetURL() {
-        const currentURL = window.location.href;
-        const parts = currentURL.split('?');
-        const targetURL = parts.length > 1 ? parts[1] : null;
-        if (targetURL) {
-            document.getElementById("view").src = targetURL;
-        }
-    }
-    document.addEventListener("DOMContentLoaded", loadTargetURL);
-</script>
 </body>
 </html>
