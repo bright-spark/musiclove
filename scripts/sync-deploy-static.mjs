@@ -29,6 +29,8 @@ const rootFiles = [
   'service-worker.js',
   'offline.html',
   'OneSignalSDKWorker.js',
+  'robots.txt',
+  'sitemap.xml',
 ];
 for (const f of rootFiles) {
   const src = join(root, f);

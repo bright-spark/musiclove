@@ -1,6 +1,6 @@
 {
   "short_name": "theradio.fm",
-  "name": "theradio.fm",
+  "name": "theradio.fm — Live Radio, Podcasts & Videos",
   "start_url": "https://theradio.fm/app",
   "display": "standalone",
   "orientation": "portrait",
@@ -44,7 +44,7 @@
       "type": "image/png"
     }
   ],
-  "description": "theradio.fm — live radio, playlists, podcasts, and TubeFlix in one app. Free, no login.",
+  "description": "Listen to live radio, browse stations worldwide, play podcasts, and watch music videos. Free, no login.",
   "dir": "ltr",
   "lang": "en",
   "display_override": ["window-controls-overlay"],

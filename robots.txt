@@ -1,6 +1,14 @@
 User-agent: *
+Allow: /
+Allow: /app
+Allow: /pages/privacy
+Allow: /pages/cover
+Allow: /icons/
+Allow: /screenshots/
 Disallow: /db/
 Disallow: /font-awesome/
 Disallow: /fonts/
 Disallow: /js/
-Disallow: /pages/
+Disallow: /css/
+
+Sitemap: https://theradio.fm/sitemap.xml

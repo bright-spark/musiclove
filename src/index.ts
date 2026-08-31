@@ -1,67 +1,20 @@
 /// <reference path="./worker-modules.d.ts" />
 
 import indexHtmlSource from './index-html-embed.txt';
+import { ROBOTS_TXT, SITEMAP_XML, rootLandingHtml } from './landing-html';
 
 interface MusicloveEnv {
   ASSETS: Fetcher;
 }
 
-const THERADIOFM_WEBRADIO = 'https://theradiofm.webradiosite.com';
-
-/** Minimal iframe shell for `/` — must include OG + PWA tags so Safari share / Add to Dock show icons (same origin as request for www vs apex). */
-function rootEmbedShellHtml(origin: string): string {
-  const icon512 = `${origin}/icons/apple-touch-icon-512x512.png`;
-  const descEsc = 'Live radio, playlists, podcasts &amp; TubeFlix — free, no login.';
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>theradio.fm</title>
-  <meta name="theme-color" content="#131313" />
-  <meta name="application-name" content="theradio.fm" />
-  <meta name="description" content="${descEsc}" />
-  <link rel="canonical" href="${origin}/" />
-  <meta property="og:url" content="${origin}/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="theradio.fm" />
-  <meta property="og:description" content="${descEsc}" />
-  <meta property="og:image" content="${icon512}" />
-  <meta property="og:image:secure_url" content="${icon512}" />
-  <meta property="og:image:type" content="image/png" />
-  <meta property="og:image:width" content="512" />
-  <meta property="og:image:height" content="512" />
-  <meta property="og:image:alt" content="theradio.fm" />
-  <meta property="og:site_name" content="theradio.fm" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="theradio.fm" />
-  <meta name="twitter:description" content="${descEsc}" />
-  <meta name="twitter:image" content="${icon512}" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-title" content="theradio.fm" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  <link rel="icon" href="${origin}/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="192x192" href="${origin}/icons/apple-touch-icon-192x192.png" />
-  <link rel="icon" type="image/png" sizes="512x512" href="${icon512}" />
-  <link rel="apple-touch-icon" sizes="180x180" href="${origin}/icons/apple-touch-icon-180x180.png" />
-  <link rel="apple-touch-icon" href="${origin}/icons/apple-touch-icon.png" />
-  <link rel="manifest" href="${origin}/manifest.json" />
-  <style>
-    html, body { margin: 0; height: 100%; overflow: hidden; background: #000; }
-    iframe { display: block; width: 100%; height: 100%; border: 0; }
-  </style>
-</head>
-<body>
-  <iframe
-    src="${THERADIOFM_WEBRADIO}/"
-    title="theradio.fm"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-    loading="eager"
-    referrerpolicy="strict-origin-when-cross-origin"
-  ></iframe>
-</body>
-</html>
-`;
+function textResponse(body: string | null, contentType: string, cacheControl: string): Response {
+  return new Response(body, {
+    status: 200,
+    headers: {
+      'content-type': contentType,
+      'cache-control': cacheControl,
+    },
+  });
 }
 
 const CRAWLER_USER_AGENT_PATTERN =
@@ -204,6 +157,22 @@ export default {
     try {
       const url = new URL(request.url);
 
+      if (url.pathname === '/robots.txt' && (request.method === 'GET' || request.method === 'HEAD')) {
+        return textResponse(
+          request.method === 'HEAD' ? null : ROBOTS_TXT,
+          'text/plain; charset=utf-8',
+          'public, max-age=3600, s-maxage=86400',
+        );
+      }
+
+      if (url.pathname === '/sitemap.xml' && (request.method === 'GET' || request.method === 'HEAD')) {
+        return textResponse(
+          request.method === 'HEAD' ? null : SITEMAP_XML,
+          'application/xml; charset=utf-8',
+          'public, max-age=3600, s-maxage=86400',
+        );
+      }
+
       if (isAppPagePath(url.pathname)) {
         if (request.method !== 'GET' && request.method !== 'HEAD') {
           return new Response('Method Not Allowed', { status: 405 });
@@ -223,18 +192,20 @@ export default {
         return prettyHtml;
       }
 
+      // Humans and crawlers both get the first-party landing on `/` so Lighthouse
+      // and Google see a visible H1, offer title, and crawlable copy.
+      if ((request.method === 'GET' || request.method === 'HEAD') && isRootDocumentPath(url.pathname)) {
+        return new Response(request.method === 'HEAD' ? null : rootLandingHtml(url.origin), {
+          status: 200,
+          headers: {
+            'content-type': 'text/html; charset=utf-8',
+            'cache-control': 'public, max-age=120, s-maxage=300',
+            'content-security-policy': 'frame-src https://theradiofm.webradiosite.com',
+          },
+        });
+      }
+
       if (!isCrawlerRequest(request)) {
-        if (request.method === 'GET' && isRootDocumentPath(url.pathname)) {
-          return new Response(rootEmbedShellHtml(url.origin), {
-            status: 200,
-            headers: {
-              'content-type': 'text/html; charset=utf-8',
-              'cache-control': 'public, max-age=120, s-maxage=300',
-              // Allow embedding the webradiosite origin inside our iframe (browser enforces child frame policy).
-              'content-security-policy': 'frame-src https://theradiofm.webradiosite.com',
-            },
-          });
-        }
         return env.ASSETS.fetch(request);
       }
 

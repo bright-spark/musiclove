@@ -23,8 +23,9 @@ export default async function middleware(request) {
   const url = new URL(request.url);
   const userAgent = request.headers.get('user-agent') || '';
 
-  // Skip if static asset, API route, or not a crawler
-  if (isStaticAssetPath(url.pathname) || !CRAWLER_USER_AGENT_PATTERN.test(userAgent)) {
+  // Homepage is first-party landing copy — do not replace it with the player OG proxy.
+  const isRoot = url.pathname === '/' || url.pathname === '/index.html';
+  if (isRoot || isStaticAssetPath(url.pathname) || !CRAWLER_USER_AGENT_PATTERN.test(userAgent)) {
     return NextResponse.next();
   }
 

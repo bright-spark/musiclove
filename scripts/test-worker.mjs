@@ -104,13 +104,19 @@ async function main() {
       throw new Error(`crawler GET /: expected status 200, got ${crawlRes.status}`);
     }
 
-    const ogProxy = crawlRes.headers.get('x-og-proxy');
-    if (!ogProxy) {
-      throw new Error('crawler GET /: missing x-og-proxy header');
+    const crawlBody = await crawlRes.text();
+    if (!crawlBody.includes('<h1') || !crawlBody.includes('Listen to live radio')) {
+      throw new Error('crawler GET /: expected visible landing H1 about the offer');
+    }
+    if (!crawlBody.includes('Free Live Radio, Playlists, Podcasts')) {
+      throw new Error('crawler GET /: expected offer title');
+    }
+    if (crawlRes.headers.get('x-og-proxy')) {
+      throw new Error('crawler GET /: homepage should serve first-party landing, not OG proxy');
     }
 
     const cc = crawlRes.headers.get('cache-control') || '';
-    if (!/\bmax-age=300\b/.test(cc) || !/\bs-maxage=300\b/.test(cc)) {
+    if (!/\bmax-age=120\b/.test(cc) || !/\bs-maxage=300\b/.test(cc)) {
       throw new Error(`crawler GET /: unexpected cache-control: ${cc}`);
     }
 
@@ -141,7 +147,31 @@ async function main() {
       throw new Error('browser GET /: expected iframe embed URL for webradiosite');
     }
     if (!/<iframe[\s\S]*?<\/iframe>/i.test(rootBody)) {
-      throw new Error('browser GET /: expected an iframe in embed shell');
+      throw new Error('browser GET /: expected an iframe in landing');
+    }
+    if (!rootBody.includes('<h1') || !rootBody.includes('Listen to live radio')) {
+      throw new Error('browser GET /: expected visible landing H1');
+    }
+    if (!rootBody.includes('<title>Free Live Radio, Playlists, Podcasts')) {
+      throw new Error('browser GET /: expected offer title');
+    }
+
+    const robotsRes = await fetch(`${base}/robots.txt`, {
+      method: 'GET',
+      headers: { 'user-agent': BROWSER_UA },
+    });
+    const robotsBody = await robotsRes.text();
+    if (robotsRes.status !== 200 || !robotsBody.includes('Sitemap: https://theradio.fm/sitemap.xml')) {
+      throw new Error('GET /robots.txt: expected sitemap directive');
+    }
+
+    const sitemapRes = await fetch(`${base}/sitemap.xml`, {
+      method: 'GET',
+      headers: { 'user-agent': BROWSER_UA },
+    });
+    const sitemapBody = await sitemapRes.text();
+    if (sitemapRes.status !== 200 || !sitemapBody.includes('https://theradio.fm/</loc>')) {
+      throw new Error('GET /sitemap.xml: expected homepage URL');
     }
 
     const appRes = await fetch(`${base}/app`, {
@@ -156,8 +186,8 @@ async function main() {
       throw new Error(`GET /app: expected html content-type, got ${appCt}`);
     }
     const appBody = await appRes.text();
-    if (!appBody.includes('<title>theradio.fm</title>')) {
-      throw new Error('GET /app: body missing index.html title');
+    if (!appBody.includes('<title>Free Live Radio, Playlists, Podcasts')) {
+      throw new Error('GET /app: body missing offer title from index.html');
     }
     if (!appBody.includes('<base href=')) {
       throw new Error('GET /app: expected injected <base> for Framework7 asset resolution');
@@ -194,9 +224,11 @@ async function main() {
     }
 
     console.log('test-worker: ok');
-    console.log(`  crawler GET / -> ${crawlRes.status}, x-og-proxy: ${ogProxy}`);
+    console.log(`  crawler GET / -> ${crawlRes.status} (first-party landing)`);
     console.log(`  crawler HEAD / -> ${headRes.status} (no x-og-proxy from worker)`);
     console.log(`  browser GET / -> ${browserRoot.status}, content-type: ${rootCt}`);
+    console.log(`  browser GET /robots.txt -> ${robotsRes.status}`);
+    console.log(`  browser GET /sitemap.xml -> ${sitemapRes.status}`);
     console.log(`  browser GET /app -> ${appRes.status}, content-type: ${appCt}`);
     console.log(`  browser GET /rain -> ${rainRes.status}, content-type: ${rainCt}`);
     console.log(`  browser GET /m -> ${mRes.status}`);
