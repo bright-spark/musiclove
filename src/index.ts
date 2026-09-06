@@ -189,13 +189,14 @@ async function fetchWithRedirects(
   throw new Error(`Too many redirects: ${redirectHistory.join(', ')}`);
 }
 
-/** Repo-root `index.html` (Framework7 shell) for `/app`, with `<base>` so `css/`, `js/`, `pages/` resolve from this origin. */
+/** Repo-root `index.html` (Framework7 shell) for `/app`, with `<base>` so `css/`, `js/`, `pages/` resolve from origin root (not `/app/...`). */
 function framework7AppShellHtml(request: Request): string {
-  if (/\b<base\b/i.test(indexHtmlSource)) {
-    return indexHtmlSource;
-  }
   const origin = new URL(request.url).origin;
-  return indexHtmlSource.replace(/<head([^>]*)>/i, `<head$1>\n  <base href="${origin}/" />`);
+  const baseTag = `<base href="${origin}/" />`;
+  if (/\b<base\b/i.test(indexHtmlSource)) {
+    return indexHtmlSource.replace(/<base\b[^>]*>/i, baseTag);
+  }
+  return indexHtmlSource.replace(/<head([^>]*)>/i, `<head$1>\n  ${baseTag}`);
 }
 
 export default {
@@ -276,7 +277,8 @@ export default {
             'content-type': 'text/html; charset=utf-8',
             'cache-control': 'public, max-age=120, s-maxage=300',
             vary: 'Cookie',
-            'content-security-policy': 'frame-src https://theradiofm.webradiosite.com',
+            'content-security-policy':
+              "frame-src 'self' https://www.theradio.fm https://theradio.fm https://play.theradio.fm https://browser.theradio.fm https://podcasts.theradio.fm https://tubeflix.theradio.fm https://theradiofm.webradiosite.com https://f0eb2b1419dc4d1fbb4702185aa6a46a.elf.site",
           },
         });
       }

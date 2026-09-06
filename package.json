@@ -15,11 +15,12 @@
     "update:og:preview": "node scripts/update-og-in-index.mjs --dry-run",
     "test:og": "node scripts/test-og-data.mjs",
     "test:worker": "node scripts/test-worker.mjs",
-    "compile": "tsc && node scripts/sync-worker-embeds.mjs && node scripts/sync-deploy-static.mjs && cp index.html app.html",
-    "build": "tsc && node scripts/sync-worker-embeds.mjs && node scripts/sync-deploy-static.mjs && cp index.html app.html",
+    "compile": "tsc && node scripts/sync-worker-embeds.mjs && node scripts/sync-deploy-static.mjs && cp index.html app.html && node scripts/sync-vercel-landing.mjs",
+    "build": "tsc && node scripts/sync-worker-embeds.mjs && node scripts/sync-deploy-static.mjs && cp index.html app.html && node scripts/sync-vercel-landing.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@vercel/edge": "^1.3.3",
     "framework7": "^8.3.4",
     "framework7-icons": "^5.0.5",
     "typescript": "^5.9.3"

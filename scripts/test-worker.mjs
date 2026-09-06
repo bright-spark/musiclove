@@ -143,8 +143,8 @@ async function main() {
       throw new Error(`browser GET /: expected html content-type, got ${rootCt}`);
     }
     const rootBody = await browserRoot.text();
-    if (!rootBody.includes('https://theradiofm.webradiosite.com')) {
-      throw new Error('browser GET /: expected iframe embed URL for webradiosite');
+    if (!rootBody.includes('https://theradio.fm/app')) {
+      throw new Error('browser GET /: expected iframe embed URL for /app');
     }
     if (!/<iframe[\s\S]*?<\/iframe>/i.test(rootBody)) {
       throw new Error('browser GET /: expected an iframe in landing');
@@ -176,8 +176,8 @@ async function main() {
     if (/play\.theradio\.fm|browser\.theradio\.fm|podcasts\.theradio\.fm|tubeflix\.theradio\.fm/.test(sitemapBody)) {
       throw new Error('GET /sitemap.xml: must only list theradio.fm URLs');
     }
-    if (!rootBody.includes('How to start listening') || !rootBody.includes('min-height: 640px')) {
-      throw new Error('browser GET /: expected how-to copy and 640px iframe');
+    if (!rootBody.includes('How to start listening') || !rootBody.includes('min-height: 672px')) {
+      throw new Error('browser GET /: expected how-to copy and 672px iframe');
     }
 
     const appRes = await fetch(`${base}/app`, {

@@ -66,8 +66,9 @@ pnpm run deploy:vercel
 Notes:
 
 * Deploy **from this `musiclove` directory** — do not link another repo (for example `play`) to the musiclove Vercel project.
-* The build runs `pnpm run build`, which compiles TypeScript, syncs Worker embeds, and copies `index.html` → `app.html` so `/app` works with Vercel `cleanUrls`.
-* Cookie-based `/` → `/app` redirects and the first-party landing HTML are Cloudflare Worker features (`src/index.ts`). On Vercel, `/` serves the Framework7 shell (`index.html`).
+* The build runs `pnpm run build`, which compiles TypeScript, syncs Worker embeds, copies `index.html` → `app.html`, and generates `landing.html`. On Vercel, `landing.html` is copied over `index.html` so `/` is the marketing landing and `/app` is the Framework7 shell.
+* Edge Middleware (`middleware.js`) sets the prefer-app cookie on `/app`, redirects `/` → `/app` when that cookie is present, and clears it on `/reset` (same behavior as the Cloudflare Worker).
+* Cookie-based `/` → `/app` redirects and the first-party landing also run on Cloudflare Workers (`src/index.ts`) when traffic is proxied there.
 
 ### Takedowns
 Any takedown requests will always be considered, and should be addressed to: studio@theradio.fm — see [SUPPORT.md](SUPPORT.md) for the preferred format. You may also first make direct contact with Martin Myburgh on [+27847801119](tel:+27847801119).
