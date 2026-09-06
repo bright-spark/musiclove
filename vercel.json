@@ -1,22 +1,7 @@
 {
-  "version": 2,
-  "name": "musiclove",
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ],
+  "installCommand": "pnpm install",
+  "buildCommand": "pnpm run build",
+  "cleanUrls": true,
   "headers": [
     {
       "source": "/(.*)",

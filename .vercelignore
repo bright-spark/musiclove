@@ -1,0 +1,7 @@
+.env
+.env.*
+!.env.example
+.vercel
+node_modules
+deploy-static
+src/index-html-embed.txt

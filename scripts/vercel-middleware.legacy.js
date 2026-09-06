@@ -1,8 +1,10 @@
 /**
- * Vercel Edge Middleware
- * 
- * Intercepts requests and proxies crawler/OG requests to play.theradio.fm
- * This runs on Vercel's edge network before hitting the static files
+ * LEGACY — not used by Vercel or Cloudflare production.
+ * Kept for reference only. Prefer src/index.ts (Cloudflare Worker) for routing,
+ * OG proxy, prefer-app cookie, and /reset. Root middleware.js was removed because
+ * Vercel auto-detected it and failed deploy (imports next/server without Next.js).
+ *
+ * Original: Vercel Edge Middleware that proxied crawler/OG requests to play.theradio.fm
  */
 
 import { NextResponse } from 'next/server';

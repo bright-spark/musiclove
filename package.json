@@ -15,8 +15,8 @@
     "update:og:preview": "node scripts/update-og-in-index.mjs --dry-run",
     "test:og": "node scripts/test-og-data.mjs",
     "test:worker": "node scripts/test-worker.mjs",
-    "compile": "tsc && node scripts/sync-worker-embeds.mjs && node scripts/sync-deploy-static.mjs",
-    "build": "tsc && node scripts/sync-worker-embeds.mjs && node scripts/sync-deploy-static.mjs",
+    "compile": "tsc && node scripts/sync-worker-embeds.mjs && node scripts/sync-deploy-static.mjs && cp index.html app.html",
+    "build": "tsc && node scripts/sync-worker-embeds.mjs && node scripts/sync-deploy-static.mjs && cp index.html app.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
