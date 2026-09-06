@@ -23,8 +23,16 @@ const STATIC_ASSET_PATH_PATTERN =
   /^\/(?:assets|css|font-awesome|icons|js|pages|screenshots|img|fonts)\//i;
 const FILE_EXTENSION_PATTERN = /\.[a-z0-9]{2,8}$/i;
 
+/** Remember that the visitor prefers `/app` after they land there. */
+const PREFER_APP_COOKIE = 'tr_prefer_app';
+const PREFER_APP_MAX_AGE_SEC = 400 * 24 * 60 * 60;
+
 function isStaticAssetPath(pathname: string): boolean {
   return STATIC_ASSET_PATH_PATTERN.test(pathname) || FILE_EXTENSION_PATTERN.test(pathname);
+}
+
+function isCrawlerUserAgent(userAgent: string): boolean {
+  return CRAWLER_USER_AGENT_PATTERN.test(userAgent);
 }
 
 function isCrawlerRequest(request: Request): boolean {
@@ -34,7 +42,7 @@ function isCrawlerRequest(request: Request): boolean {
   return (
     request.method === 'GET' &&
     !isStaticAssetPath(url.pathname) &&
-    CRAWLER_USER_AGENT_PATTERN.test(userAgent)
+    isCrawlerUserAgent(userAgent)
   );
 }
 
@@ -42,8 +50,46 @@ function isAppPagePath(pathname: string): boolean {
   return pathname === '/app' || pathname === '/app/';
 }
 
+function isResetPath(pathname: string): boolean {
+  return pathname === '/reset' || pathname === '/reset/';
+}
+
 function isRootDocumentPath(pathname: string): boolean {
   return pathname === '/' || pathname === '/index.html';
+}
+
+function hasPreferAppCookie(request: Request): boolean {
+  const cookie = request.headers.get('cookie') || '';
+  return new RegExp(`(?:^|;\\s*)${PREFER_APP_COOKIE}=1(?:;|$)`).test(cookie);
+}
+
+function cookieDomainAttrs(request: Request): { secure: string; domain: string; isProdTheradio: boolean } {
+  const url = new URL(request.url);
+  const host = url.hostname;
+  const isProdTheradio = host === 'theradio.fm' || /\.theradio\.fm$/i.test(host);
+  return {
+    secure: url.protocol === 'https:' ? '; Secure' : '',
+    domain: isProdTheradio ? '; Domain=.theradio.fm' : '',
+    isProdTheradio,
+  };
+}
+
+function preferAppSetCookieHeader(request: Request): string {
+  const { secure, domain } = cookieDomainAttrs(request);
+  return `${PREFER_APP_COOKIE}=1; Path=/; Max-Age=${PREFER_APP_MAX_AGE_SEC}; SameSite=Lax${domain}${secure}`;
+}
+
+/** Clear prefer-app so `/` serves the landing page again. */
+function preferAppClearCookieHeaders(request: Request): string[] {
+  const { secure, isProdTheradio } = cookieDomainAttrs(request);
+  const headers = [`${PREFER_APP_COOKIE}=; Path=/; Max-Age=0; SameSite=Lax${secure}`];
+  // Also clear the Domain=.theradio.fm variant used in production.
+  if (isProdTheradio) {
+    headers.push(
+      `${PREFER_APP_COOKIE}=; Path=/; Max-Age=0; Domain=.theradio.fm; SameSite=Lax${secure}`,
+    );
+  }
+  return headers;
 }
 
 /**
@@ -54,7 +100,7 @@ function getPrettyRootHtmlSlug(pathname: string): string | null {
   const m = pathname.match(/^\/([^/.]+)\/?$/);
   if (!m) return null;
   const slug = m[1];
-  if (!slug) return null;
+  if (!slug || slug === 'app' || slug === 'reset') return null;
   return slug;
 }
 
@@ -183,8 +229,24 @@ export default {
           headers: {
             'content-type': 'text/html; charset=utf-8',
             'cache-control': 'public, max-age=300, s-maxage=600',
+            'set-cookie': preferAppSetCookieHeader(request),
           },
         });
+      }
+
+      // Clear prefer-app cookie and send the visitor back to the landing page.
+      if (isResetPath(url.pathname)) {
+        if (request.method !== 'GET' && request.method !== 'HEAD') {
+          return new Response('Method Not Allowed', { status: 405 });
+        }
+        const headers = new Headers({
+          location: '/',
+          'cache-control': 'private, no-store',
+        });
+        for (const cookie of preferAppClearCookieHeaders(request)) {
+          headers.append('set-cookie', cookie);
+        }
+        return new Response(null, { status: 302, headers });
       }
 
       const prettyHtml = await tryPrettyRootHtmlResponse(request, env, url.pathname);
@@ -194,12 +256,26 @@ export default {
 
       // Humans and crawlers both get the first-party landing on `/` so Lighthouse
       // and Google see a visible H1, offer title, and crawlable copy.
+      // Returning visitors who already opened `/app` are sent straight back there.
       if ((request.method === 'GET' || request.method === 'HEAD') && isRootDocumentPath(url.pathname)) {
+        const userAgent = request.headers.get('user-agent') || '';
+        if (!isCrawlerUserAgent(userAgent) && hasPreferAppCookie(request)) {
+          const appUrl = new URL('/app', url.origin);
+          return new Response(null, {
+            status: 302,
+            headers: {
+              location: appUrl.pathname,
+              'cache-control': 'private, no-store',
+            },
+          });
+        }
+
         return new Response(request.method === 'HEAD' ? null : rootLandingHtml(url.origin), {
           status: 200,
           headers: {
             'content-type': 'text/html; charset=utf-8',
             'cache-control': 'public, max-age=120, s-maxage=300',
+            vary: 'Cookie',
             'content-security-policy': 'frame-src https://theradiofm.webradiosite.com',
           },
         });

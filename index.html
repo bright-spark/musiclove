@@ -126,6 +126,19 @@
 </head>
 
 <body class="theme-dark color-theme-red">
+    <script>
+      (function () {
+        try {
+          var maxAge = 400 * 24 * 60 * 60;
+          var secure = location.protocol === 'https:' ? '; Secure' : '';
+          var host = location.hostname;
+          var domain =
+            host === 'theradio.fm' || /\.theradio\.fm$/i.test(host) ? '; Domain=.theradio.fm' : '';
+          document.cookie =
+            'tr_prefer_app=1; Path=/; Max-Age=' + maxAge + '; SameSite=Lax' + domain + secure;
+        } catch (e) {}
+      })();
+    </script>
 
     <div class="hidden-focus-element"></div>
 

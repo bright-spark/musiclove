@@ -43,30 +43,6 @@ export const SITEMAP_XML = `<?xml version="1.0" encoding="UTF-8"?>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-  <url>
-    <loc>https://play.theradio.fm/</loc>
-    <lastmod>2026-08-31</lastmod>
-    <changefreq>hourly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://browser.theradio.fm/</loc>
-    <lastmod>2026-08-31</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://podcasts.theradio.fm/</loc>
-    <lastmod>2026-08-31</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://tubeflix.theradio.fm/</loc>
-    <lastmod>2026-08-31</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
 </urlset>
 `;
 
@@ -79,9 +55,15 @@ function jsonLdScript(): string {
         '@id': 'https://theradio.fm/#website',
         url: CANONICAL,
         name: 'theradio.fm',
+        alternateName: ['the radio', 'the radio fm', 'theradio'],
         description: SITE_DESCRIPTION,
         inLanguage: 'en',
         publisher: { '@id': 'https://theradio.fm/#organization' },
+        potentialAction: {
+          '@type': 'ListenAction',
+          target: 'https://theradio.fm/#listen',
+          name: 'Listen to live radio',
+        },
       },
       {
         '@type': ['Organization', 'RadioStation'],
@@ -98,7 +80,7 @@ function jsonLdScript(): string {
       },
       {
         '@type': 'WebApplication',
-        '@id': 'https://theradio.fm/#app',
+        '@id': 'https://theradio.fm/app',
         name: 'theradio.fm',
         url: CANONICAL,
         applicationCategory: 'MultimediaApplication',
@@ -138,7 +120,7 @@ function jsonLdScript(): string {
             name: 'Is theradio.fm free?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'Yes. Live radio, station browsing, podcasts, and music videos are free. No subscription and no login required.',
+              text: 'Yes 100% free. Live radio, station browsing, podcasts, and music videos are free. No subscription and no login required.',
             },
           },
           {
@@ -146,7 +128,7 @@ function jsonLdScript(): string {
             name: 'Do I need an account to listen?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'No. Open theradio.fm and press play. You can listen live, tune world stations, play podcasts, or watch videos without creating an account.',
+              text: 'No account needed at all. Open theradio.fm and press play. You can listen live, tune world stations, play podcasts, or watch videos without creating an account.',
             },
           },
           {
@@ -156,6 +138,96 @@ function jsonLdScript(): string {
               '@type': 'Answer',
               text: 'Listen live at play.theradio.fm, browse world stations at browser.theradio.fm, play podcasts at podcasts.theradio.fm, and watch music videos at tubeflix.theradio.fm. The full app is also at theradio.fm/app.',
             },
+          },
+          {
+            '@type': 'Question',
+            name: 'Does theradio.fm work on phones and tablets?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Yes. theradio.fm is a free web app. Open it in any modern browser on phone, tablet, or desktop. No app store download is required.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Is theradio.fm safe to use?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Yes 100% safe. theradio.fm is a free web app. No ads, no tracking, no cookies, no data collection. Just pure radio and videos.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Is theradio.fm ad-free?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Yes 100% ad-free. theradio.fm is a free web app. No ads, no tracking, no cookies, no data collection. Just pure radio and videos.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Can I listen to radio stations from other countries?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Yes from all countries. The world stations browser at browser.theradio.fm lists live internet radio by country and genre so you can tune in instantly.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Is there a mobile app?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Yes there is a mobile app. The theradio.fm app is available for download on the Google Play Store. No ads, no tracking, no cookies, no data collection. Just pure radio and videos.',
+            },
+          },
+        ],
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': 'https://theradio.fm/#breadcrumbs',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: CANONICAL,
+          },
+        ],
+      },
+      {
+        '@type': 'ItemList',
+        '@id': 'https://theradio.fm/#offers',
+        name: 'What you can do on theradio.fm',
+        numberOfItems: 4,
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 0,
+            name: 'Switch to theradio.fm app mode',
+            url: 'https://theradio.fm/app',
+          },
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Listen to the unique theradio.fm station live',
+            url: 'https://play.theradio.fm/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Browse thousands of radio stations worldwide',
+            url: 'https://browser.theradio.fm/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: 'Play and follow all of your favorite podcasts',
+            url: 'https://podcasts.theradio.fm/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 4,
+            name: 'Watch any of your quality-checked free music videos in true Netflix style',
+            url: 'https://tubeflix.theradio.fm/',
           },
         ],
       },
@@ -186,6 +258,8 @@ export function rootLandingHtml(origin: string): string {
   <meta name="color-scheme" content="dark" />
   <link rel="canonical" href="${CANONICAL}" />
   <link rel="sitemap" type="application/xml" href="https://theradio.fm/sitemap.xml" />
+  <link rel="preconnect" href="https://theradiofm.webradiosite.com" />
+  <link rel="dns-prefetch" href="https://theradiofm.webradiosite.com" />
   <link rel="manifest" href="${origin}/manifest.json" />
   <link rel="icon" href="${origin}/favicon.ico" />
   <link rel="icon" type="image/png" sizes="192x192" href="${icon192}" />
@@ -204,6 +278,7 @@ export function rootLandingHtml(origin: string): string {
   <meta property="og:image:width" content="512" />
   <meta property="og:image:height" content="512" />
   <meta property="og:image:alt" content="theradio.fm — free live radio, podcasts and music videos" />
+  <meta property="og:updated_time" content="2026-08-31T00:00:00Z" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="${SITE_TITLE}" />
   <meta name="twitter:description" content="${SITE_DESCRIPTION}" />
@@ -280,6 +355,14 @@ export function rootLandingHtml(origin: string): string {
     }
     nav.primary a:hover { color: var(--text); }
     .hero { padding: 20px 0 28px; }
+    .hero .kicker {
+      margin: 0 0 10px;
+      color: #fda4af;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
     .hero h1 {
       margin: 0 0 14px;
       font-size: clamp(1.85rem, 5vw, 3rem);
@@ -303,18 +386,23 @@ export function rootLandingHtml(origin: string): string {
       margin: 0;
       list-style: none;
     }
-    .actions a {
+    .actions a,
+    .actions button {
       display: flex;
       align-items: center;
       justify-content: center;
+      width: 100%;
       min-height: 48px;
       padding: 12px 16px;
       border-radius: 12px;
       background: var(--panel);
       border: 1px solid var(--line);
+      color: var(--text);
       text-decoration: none;
+      font: inherit;
       font-weight: 700;
       text-align: center;
+      cursor: pointer;
     }
     .actions a.primary {
       background: var(--accent);
@@ -322,8 +410,31 @@ export function rootLandingHtml(origin: string): string {
       color: #fff;
     }
     .actions a.primary:hover { background: var(--accent-press); }
+    .actions button:hover { color: #fda4af; border-color: #fda4af; }
+    .actions button[hidden] { display: none; }
+    .install-hint {
+      display: none;
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .install-hint.is-visible { display: block; }
+    nav.primary button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 48px;
+      padding: 0 12px;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    nav.primary button:hover { color: var(--text); }
+    nav.primary button[hidden] { display: none; }
     .offers { padding: 8px 0 28px; }
-    .offers h2, .listen h2, .faq h2 {
+    .offers h2, .listen h2, .faq h2, .how h2 {
       margin: 0 0 14px;
       font-size: 1.25rem;
       letter-spacing: -0.03em;
@@ -343,19 +454,55 @@ export function rootLandingHtml(origin: string): string {
     .cards h3 a { text-decoration: none; }
     .cards h3 a:hover { color: #fda4af; }
     .cards p { margin: 0; color: var(--muted); }
+    .how { padding: 0 0 28px; }
+    .how ol {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: step;
+    }
+    .how li {
+      counter-increment: step;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px 16px 16px 56px;
+      position: relative;
+      color: var(--muted);
+    }
+    .how li::before {
+      content: counter(step);
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .how strong { color: var(--text); }
     .listen { padding: 0 0 28px; }
     .player {
       border: 1px solid var(--line);
       border-radius: 16px;
       overflow: hidden;
       background: #000;
-      min-height: 70vh;
+      min-height: calc(77vh + 30px);
     }
     .player iframe {
       display: block;
       width: 100%;
-      height: 70vh;
-      min-height: 560px;
+      height: calc(77vh + 30px);
+      min-height: 640px;
       border: 0;
     }
     .faq { padding: 0 0 36px; }
@@ -382,16 +529,24 @@ export function rootLandingHtml(origin: string): string {
       gap: 8px 16px;
       margin-bottom: 10px;
     }
-    footer.site a {
+    footer.site a,
+    footer.site button {
       display: inline-flex;
       align-items: center;
       min-height: 48px;
       text-decoration: underline;
       text-underline-offset: 3px;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+      padding: 0;
     }
     @media (min-width: 720px) {
       .actions { grid-template-columns: repeat(4, 1fr); }
       .cards { grid-template-columns: 1fr 1fr; }
+      .how ol { grid-template-columns: repeat(3, 1fr); }
     }
   </style>
 </head>
@@ -404,23 +559,34 @@ export function rootLandingHtml(origin: string): string {
         <span>theradio.fm</span>
       </a>
       <nav class="primary" aria-label="theradio.fm apps">
+        <a href="https://theradio.fm/app">App mode</a>
+        <a href="https://theradio.fm/pages/frontpage">Blog</a>
         <a href="https://play.theradio.fm/">Live radio</a>
         <a href="https://browser.theradio.fm/">World stations</a>
         <a href="https://podcasts.theradio.fm/">Podcasts</a>
         <a href="https://tubeflix.theradio.fm/">Music videos</a>
+        <a href="https://theradio.fm/pages/privacy">Privacy policy</a>
+        <a href="https://play.google.com/store/apps/details?id=fm.theradio.play">Android app</a>
+        <button type="button" class="pwa-install" data-pwa-install>Install</button>
       </nav>
     </header>
 
     <main>
       <section class="hero" aria-labelledby="hero-heading">
+        <p class="kicker">Free internet radio &amp; music</p>
         <h1 id="hero-heading">Listen to live radio, playlists, podcasts and music videos</h1>
-        <p class="lead">Tune in to theradio.fm live, browse thousands of stations from every country, play podcasts, or watch music videos on TubeFlix. Free streaming in your browser — no account and no paywall.</p>
+        <p class="lead">Tune in to theradio.fm live, browse thousands of internet radio stations from every country, play podcasts, or watch music videos on TubeFlix. Free streaming in your browser — no account and no paywall.</p>
         <ul class="actions">
           <li><a class="primary" href="#listen">Listen live</a></li>
+          <li><a href="https://theradio.fm/app">App mode</a></li>
+          <li><a href="https://theradio.fm/pages/frontpage">Blog</a></li>
           <li><a href="https://browser.theradio.fm/">Browse stations</a></li>
           <li><a href="https://podcasts.theradio.fm/">Play podcasts</a></li>
           <li><a href="https://tubeflix.theradio.fm/">Watch music videos</a></li>
+          <li><a href="https://play.google.com/store/apps/details?id=fm.theradio.play">Android app</a></li>
+          <li><button type="button" class="pwa-install" data-pwa-install>Install</button></li>
         </ul>
+        <p class="install-hint" data-pwa-install-hint role="status" aria-live="polite"></p>
       </section>
 
       <section class="offers" aria-labelledby="offers-heading">
@@ -445,16 +611,23 @@ export function rootLandingHtml(origin: string): string {
         </div>
       </section>
 
+      <section class="how" aria-labelledby="how-heading">
+        <h2 id="how-heading">How to start listening</h2>
+        <ol>
+          <li><strong>Choose what to play.</strong> Live radio, world stations, podcasts, or TubeFlix music videos — pick one from the links above.</li>
+          <li><strong>Press play in your browser.</strong> Streams and videos start on the page. You do not need an app store download.</li>
+          <li><strong>Stay for free.</strong> No login, no subscription, and no paywall. Open theradio.fm whenever you want to listen or watch.</li>
+        </ol>
+      </section>
+
       <section class="listen" id="listen" aria-labelledby="listen-heading">
         <h2 id="listen-heading">On air and in the journal</h2>
         <div class="player">
-          <iframe
-            src="https://theradiofm.webradiosite.com/"
+          <iframe name="theradio-fm-player"
+            src="https://theradiofm.webradiosite.com"
             title="theradio.fm live radio and stories"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-            loading="eager"
-            referrerpolicy="strict-origin-when-cross-origin"
-          ></iframe>
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; microphone; fullscreen"
+            allowfullscreen></iframe>
         </div>
       </section>
 
@@ -474,7 +647,15 @@ export function rootLandingHtml(origin: string): string {
         </details>
         <details>
           <summary>How do I open the full theradio.fm app?</summary>
-          <p>Use <a href="https://theradio.fm/app">the theradio.fm app</a> for the tabbed player, or jump straight to <a href="https://play.theradio.fm/">live radio</a>, <a href="https://browser.theradio.fm/">world stations</a>, <a href="https://podcasts.theradio.fm/">podcasts</a>, or <a href="https://tubeflix.theradio.fm/">music videos</a>.</p>
+          <p>Use <a href="https://theradio.fm/app">theradio.fm</a> app mode for the tabbed player, or jump straight to <a href="https://play.theradio.fm/">live radio</a>, <a href="https://browser.theradio.fm/">world stations</a>, <a href="https://podcasts.theradio.fm/">podcasts</a>, or <a href="https://tubeflix.theradio.fm/">music videos</a>.</p>
+        </details>
+        <details>
+          <summary>Does theradio.fm work on phones and tablets?</summary>
+          <p>Yes. Open theradio.fm in any modern browser on a phone, tablet, or desktop. It is a free web app — no app store install is required.</p>
+        </details>
+        <details>
+          <summary>Can I listen to radio stations from other countries?</summary>
+          <p>Yes. Use the <a href="https://browser.theradio.fm/">world stations browser</a> to find live internet radio by country and genre, then tap a station to tune in.</p>
         </details>
       </section>
     </main>
@@ -482,16 +663,107 @@ export function rootLandingHtml(origin: string): string {
     <footer class="site">
       <nav aria-label="Footer">
         <a href="${CANONICAL}">Home</a>
-        <a href="https://theradio.fm/app">Open the app</a>
+        <a href="https://theradio.fm/app">App mode</a>
+        <a href="https://theradio.fm/pages/frontpage">Blog</a>
         <a href="https://play.theradio.fm/">Live radio</a>
         <a href="https://browser.theradio.fm/">World stations</a>
         <a href="https://podcasts.theradio.fm/">Podcasts</a>
         <a href="https://tubeflix.theradio.fm/">Music videos</a>
-        <a href="https://theradio.fm/pages/privacy">Privacy policy</a>
+        <a href="https://play.google.com/store/apps/details?id=fm.theradio.play">Android app</a>
+        <button type="button" class="pwa-install" data-pwa-install>Install</button>
       </nav>
       <p>theradio.fm offers free live radio, playlists, podcasts and music videos. No login required.</p>
     </footer>
   </div>
+  <script>
+    (function () {
+      var APP_URL = ${JSON.stringify(`${origin}/app`)};
+
+      // Client fallback if a stale SW served landing HTML despite prefer-app cookie.
+      if (/(?:^|;\\s*)tr_prefer_app=1(?:;|$)/.test(document.cookie || '')) {
+        location.replace(APP_URL);
+        return;
+      }
+
+      var buttons = Array.prototype.slice.call(document.querySelectorAll('[data-pwa-install]'));
+      var hint = document.querySelector('[data-pwa-install-hint]');
+      var deferredPrompt = null;
+      var installed =
+        window.matchMedia('(display-mode: standalone)').matches ||
+        window.navigator.standalone === true;
+
+      function setHint(text) {
+        if (!hint) return;
+        hint.textContent = text || '';
+        hint.classList.toggle('is-visible', Boolean(text));
+      }
+
+      function openApp() {
+        window.location.assign(APP_URL);
+      }
+
+      function setLabels(label) {
+        buttons.forEach(function (btn) {
+          btn.textContent = label;
+          btn.setAttribute('aria-label', label === 'Open app' ? 'Open theradio.fm app' : 'Install theradio.fm app');
+        });
+      }
+
+      if (installed) {
+        setLabels('Open app');
+      }
+
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js', { scope: '/' }).then(function (reg) {
+          if (reg && typeof reg.update === 'function') reg.update();
+        }).catch(function () {});
+      }
+
+      window.addEventListener('beforeinstallprompt', function (event) {
+        event.preventDefault();
+        deferredPrompt = event;
+        if (!installed) setLabels('Install');
+        setHint('');
+      });
+
+      window.addEventListener('appinstalled', function () {
+        deferredPrompt = null;
+        installed = true;
+        setLabels('Open app');
+        setHint('');
+        openApp();
+      });
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', async function () {
+          if (installed) {
+            openApp();
+            return;
+          }
+
+          if (deferredPrompt) {
+            deferredPrompt.prompt();
+            var choice = await deferredPrompt.userChoice;
+            deferredPrompt = null;
+            if (choice && choice.outcome === 'accepted') {
+              installed = true;
+              setLabels('Open app');
+              openApp();
+            }
+            return;
+          }
+
+          var isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
+          if (isIos) {
+            setHint('On iPhone or iPad: tap Share, then Add to Home Screen.');
+            return;
+          }
+
+          openApp();
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
 `;

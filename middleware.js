@@ -10,9 +10,37 @@ import { NextResponse } from 'next/server';
 const CRAWLER_USER_AGENT_PATTERN = /bot|crawler|spider|facebookexternalhit|facebot|twitterbot|linkedinbot|slackbot|discordbot|whatsapp|telegrambot|pinterest|embedly|quora link preview|outbrain|vkshare|skypeuripreview|ia_archiver/i;
 const STATIC_ASSET_PATH_PATTERN = /^\/(?:assets|css|font-awesome|icons|js|pages|screenshots|api)\//i;
 const FILE_EXTENSION_PATTERN = /\.[a-z0-9]{2,8}$/i;
+const PREFER_APP_COOKIE = 'tr_prefer_app';
+const PREFER_APP_MAX_AGE_SEC = 400 * 24 * 60 * 60;
 
 function isStaticAssetPath(pathname) {
   return STATIC_ASSET_PATH_PATTERN.test(pathname) || FILE_EXTENSION_PATTERN.test(pathname);
+}
+
+function hasPreferAppCookie(request) {
+  const cookie = request.headers.get('cookie') || '';
+  return new RegExp(`(?:^|;\\s*)${PREFER_APP_COOKIE}=1(?:;|$)`).test(cookie);
+}
+
+function preferAppSetCookie(request) {
+  const url = new URL(request.url);
+  const host = url.hostname;
+  const isProdTheradio = host === 'theradio.fm' || /\.theradio\.fm$/i.test(host);
+  const domain = isProdTheradio ? '; Domain=.theradio.fm' : '';
+  const secure = url.protocol === 'https:' ? '; Secure' : '';
+  return `${PREFER_APP_COOKIE}=1; Path=/; Max-Age=${PREFER_APP_MAX_AGE_SEC}; SameSite=Lax${domain}${secure}`;
+}
+
+function preferAppClearCookies(request) {
+  const url = new URL(request.url);
+  const host = url.hostname;
+  const isProdTheradio = host === 'theradio.fm' || /\.theradio\.fm$/i.test(host);
+  const secure = url.protocol === 'https:' ? '; Secure' : '';
+  const cookies = [`${PREFER_APP_COOKIE}=; Path=/; Max-Age=0; SameSite=Lax${secure}`];
+  if (isProdTheradio) {
+    cookies.push(`${PREFER_APP_COOKIE}=; Path=/; Max-Age=0; Domain=.theradio.fm; SameSite=Lax${secure}`);
+  }
+  return cookies;
 }
 
 export const config = {
@@ -22,9 +50,39 @@ export const config = {
 export default async function middleware(request) {
   const url = new URL(request.url);
   const userAgent = request.headers.get('user-agent') || '';
+  const isRoot = url.pathname === '/' || url.pathname === '/index.html';
+  const isApp = url.pathname === '/app' || url.pathname === '/app/';
+  const isReset = url.pathname === '/reset' || url.pathname === '/reset/';
+
+  // Clear prefer-app and return to the landing page.
+  if (isReset && (request.method === 'GET' || request.method === 'HEAD')) {
+    const redirect = NextResponse.redirect(new URL('/', url.origin), 302);
+    redirect.headers.set('cache-control', 'private, no-store');
+    for (const cookie of preferAppClearCookies(request)) {
+      redirect.headers.append('set-cookie', cookie);
+    }
+    return redirect;
+  }
+
+  // Remember /app visits, then send returning humans there from `/`.
+  if (isApp && (request.method === 'GET' || request.method === 'HEAD')) {
+    const response = NextResponse.next();
+    response.headers.set('set-cookie', preferAppSetCookie(request));
+    return response;
+  }
+
+  if (
+    isRoot &&
+    (request.method === 'GET' || request.method === 'HEAD') &&
+    !CRAWLER_USER_AGENT_PATTERN.test(userAgent) &&
+    hasPreferAppCookie(request)
+  ) {
+    const redirect = NextResponse.redirect(new URL('/app', url.origin), 302);
+    redirect.headers.set('cache-control', 'private, no-store');
+    return redirect;
+  }
 
   // Homepage is first-party landing copy — do not replace it with the player OG proxy.
-  const isRoot = url.pathname === '/' || url.pathname === '/index.html';
   if (isRoot || isStaticAssetPath(url.pathname) || !CRAWLER_USER_AGENT_PATTERN.test(userAgent)) {
     return NextResponse.next();
   }
