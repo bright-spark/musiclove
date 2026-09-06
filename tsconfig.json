@@ -7,7 +7,7 @@
     "rootDir": "./src",
     "strict": true,
     "skipLibCheck": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "noEmitOnError": true
   },
   "include": ["src/site/**/*.ts", "src/globals.d.ts"]

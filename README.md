@@ -7,6 +7,16 @@ theradio.fm is mobile first and easy to use. It runs on all desktop and mobile d
 
 Inspired by my love for music, radio and people! Dedicated to my dad who never stopped supporting me or my research.
 
+### Community & docs
+
+| Document | Purpose |
+|----------|---------|
+| [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | Expected behavior in the community |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | How to develop and submit changes |
+| [SECURITY.md](SECURITY.md) | How to report vulnerabilities |
+| [SUPPORT.md](SUPPORT.md) | Help, contact, and content takedowns |
+| [LICENSE](LICENSE) | MIT License |
+
 ### Tooling
 [Framework7](https://framework7.io) and [Thorium Builder](https://thoriumbuilder.com) used for framework, scaffolding and design. Github for source control, automation and static hosting.  Not to mention stacks of trial and error including extreme determination! 
 
@@ -28,4 +38,4 @@ Images:       Pintrest, Canva, Adobe Express
 Audio/Video:  Shazam, YouTube, Selected South African and Namibian Radio Stations
 
 ### Takedowns
-Any takedowns requests will always be considered, and should be addresed to: studio@theradio.fm and please always first make direct contact with me Martin Myburgh on [+27847801119](tel:+27847801119)
+Any takedown requests will always be considered, and should be addressed to: studio@theradio.fm — see [SUPPORT.md](SUPPORT.md) for the preferred format. You may also first make direct contact with Martin Myburgh on [+27847801119](tel:+27847801119).
