@@ -164,6 +164,21 @@ async function main() {
     if (robotsRes.status !== 200 || !robotsBody.includes('Sitemap: https://theradio.fm/sitemap.xml')) {
       throw new Error('GET /robots.txt: expected sitemap directive');
     }
+    if (!robotsBody.includes('Allow: /llms.txt')) {
+      throw new Error('GET /robots.txt: expected Allow: /llms.txt');
+    }
+
+    const llmsRes = await fetch(`${base}/llms.txt`, {
+      method: 'GET',
+      headers: { 'user-agent': BROWSER_UA },
+    });
+    const llmsBody = await llmsRes.text();
+    if (llmsRes.status !== 200 || !llmsBody.startsWith('# theradio.fm')) {
+      throw new Error('GET /llms.txt: expected markdown H1 for theradio.fm');
+    }
+    if (!llmsBody.includes('https://play.theradio.fm/') || !llmsBody.includes('https://theradio.fm/app')) {
+      throw new Error('GET /llms.txt: expected primary product links');
+    }
 
     const sitemapRes = await fetch(`${base}/sitemap.xml`, {
       method: 'GET',
@@ -280,6 +295,7 @@ async function main() {
     console.log(`  crawler HEAD / -> ${headRes.status} (no x-og-proxy from worker)`);
     console.log(`  browser GET / -> ${browserRoot.status}, content-type: ${rootCt}`);
     console.log(`  browser GET /robots.txt -> ${robotsRes.status}`);
+    console.log(`  browser GET /llms.txt -> ${llmsRes.status}`);
     console.log(`  browser GET /sitemap.xml -> ${sitemapRes.status}`);
     console.log(`  browser GET /app -> ${appRes.status}, set-cookie tr_prefer_app`);
     console.log(`  browser GET / + cookie -> ${preferRoot.status} -> ${preferLoc}`);

@@ -98,7 +98,7 @@ export default function middleware(request) {
     response.headers.set('cache-control', 'public, max-age=120, s-maxage=300');
     response.headers.set(
       'content-security-policy',
-      "frame-src 'self' https://www.theradio.fm https://theradio.fm https://play.theradio.fm https://browser.theradio.fm https://podcasts.theradio.fm https://tubeflix.theradio.fm https://theradiofm.webradiosite.com https://f0eb2b1419dc4d1fbb4702185aa6a46a.elf.site",
+      "frame-src 'self' https://www.theradio.fm https://theradio.fm https://theradio.fm/pages/privacy https://play.theradio.fm https://browser.theradio.fm https://podcasts.theradio.fm https://tubeflix.theradio.fm https://theradiofm.webradiosite.com https://f0eb2b1419dc4d1fbb4702185aa6a46a.elf.site",
     );
     return response;
   }

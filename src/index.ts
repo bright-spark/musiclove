@@ -1,7 +1,7 @@
 /// <reference path="./worker-modules.d.ts" />
 
 import indexHtmlSource from './index-html-embed.txt';
-import { ROBOTS_TXT, SITEMAP_XML, rootLandingHtml } from './landing-html';
+import { FRAME_SRC_CSP, LLMS_TXT, ROBOTS_TXT, SITEMAP_XML, rootLandingHtml } from './landing-html';
 
 interface MusicloveEnv {
   ASSETS: Fetcher;
@@ -212,6 +212,14 @@ export default {
         );
       }
 
+      if (url.pathname === '/llms.txt' && (request.method === 'GET' || request.method === 'HEAD')) {
+        return textResponse(
+          request.method === 'HEAD' ? null : LLMS_TXT,
+          'text/plain; charset=utf-8',
+          'public, max-age=3600, s-maxage=86400',
+        );
+      }
+
       if (url.pathname === '/sitemap.xml' && (request.method === 'GET' || request.method === 'HEAD')) {
         return textResponse(
           request.method === 'HEAD' ? null : SITEMAP_XML,
@@ -277,8 +285,7 @@ export default {
             'content-type': 'text/html; charset=utf-8',
             'cache-control': 'public, max-age=120, s-maxage=300',
             vary: 'Cookie',
-            'content-security-policy':
-              "frame-src 'self' https://www.theradio.fm https://theradio.fm https://play.theradio.fm https://browser.theradio.fm https://podcasts.theradio.fm https://tubeflix.theradio.fm https://theradiofm.webradiosite.com https://f0eb2b1419dc4d1fbb4702185aa6a46a.elf.site",
+            'content-security-policy': FRAME_SRC_CSP,
           },
         });
       }

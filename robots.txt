@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Allow: /app
+Allow: /llms.txt
 Allow: /pages/privacy
 Allow: /pages/cover
 Allow: /icons/

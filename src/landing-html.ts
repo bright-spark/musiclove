@@ -9,11 +9,12 @@ export const SITE_DESCRIPTION =
 
 /** Allowed iframe embed hosts for landing + app shell (meta CSP and response headers). */
 export const FRAME_SRC_CSP =
-  "frame-src 'self' https://www.theradio.fm https://theradio.fm https://play.theradio.fm https://browser.theradio.fm https://podcasts.theradio.fm https://tubeflix.theradio.fm https://theradiofm.webradiosite.com https://f0eb2b1419dc4d1fbb4702185aa6a46a.elf.site";
+  "frame-src 'self' https://www.theradio.fm https://theradio.fm https://theradio.fm/pages/privacy https://play.theradio.fm https://browser.theradio.fm https://podcasts.theradio.fm https://tubeflix.theradio.fm https://theradiofm.webradiosite.com https://f0eb2b1419dc4d1fbb4702185aa6a46a.elf.site";
 
 export const ROBOTS_TXT = `User-agent: *
 Allow: /
 Allow: /app
+Allow: /llms.txt
 Allow: /pages/privacy
 Allow: /pages/cover
 Allow: /icons/
@@ -25,6 +26,35 @@ Disallow: /js/
 Disallow: /css/
 
 Sitemap: https://theradio.fm/sitemap.xml
+`;
+
+export const LLMS_TXT = `# theradio.fm
+
+> Free live radio, world stations, podcasts, and music videos in the browser — no login, no subscription.
+
+theradio.fm (also known as Music Love / the radio) is a free streaming web app and PWA. Listen to the theradio.fm live station, browse internet radio by country, play podcasts, and watch curated music videos on TubeFlix. Contact: studio@theradio.fm
+
+## Primary
+
+- [Home](https://theradio.fm/): Landing page with overview, install options, and embedded app player
+- [App](https://theradio.fm/app): Full tabbed theradio.fm progressive web app
+- [Live radio](https://play.theradio.fm/): Live theradio.fm stream player with now-playing track art
+- [World stations](https://browser.theradio.fm/): Browse and tune internet radio stations by country
+- [Podcasts](https://podcasts.theradio.fm/): Find and play podcasts
+- [TubeFlix](https://tubeflix.theradio.fm/): Free music videos in a Netflix-style interface
+
+## Docs
+
+- [Privacy policy](https://theradio.fm/pages/privacy): How theradio.fm collects and uses information (GDPR-oriented)
+- [Sitemap](https://theradio.fm/sitemap.xml): Canonical URL list for crawlers
+- [Robots](https://theradio.fm/robots.txt): Crawler allow and disallow rules
+
+## Optional
+
+- [Cover](https://theradio.fm/pages/cover/): Brand cover / about page
+- [Frontpage](https://theradio.fm/pages/frontpage): Embedded Music Love journal
+- [Android app](https://play.google.com/store/apps/details?id=fm.theradio.play): theradio.fm on Google Play
+- [Reset prefer-app](https://theradio.fm/reset): Clear the prefer-app cookie and return to the landing page
 `;
 
 export const SITEMAP_XML = `<?xml version="1.0" encoding="UTF-8"?>
@@ -263,6 +293,7 @@ export function rootLandingHtml(origin: string): string {
   <meta http-equiv="Content-Security-Policy" content="${FRAME_SRC_CSP}" />
   <link rel="canonical" href="${CANONICAL}" />
   <link rel="sitemap" type="application/xml" href="https://theradio.fm/sitemap.xml" />
+  <link rel="describedby" href="https://theradio.fm/llms.txt" type="text/plain" title="llms.txt" />
   <link rel="preconnect" href="https://f0eb2b1419dc4d1fbb4702185aa6a46a.elf.site" />
   <link rel="dns-prefetch" href="https://f0eb2b1419dc4d1fbb4702185aa6a46a.elf.site" />
   <link rel="preconnect" href="https://theradiofm.webradiosite.com" />

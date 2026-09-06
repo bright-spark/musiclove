@@ -30,6 +30,7 @@ const rootFiles = [
   'offline.html',
   'OneSignalSDKWorker.js',
   'robots.txt',
+  'llms.txt',
   'sitemap.xml',
 ];
 for (const f of rootFiles) {
