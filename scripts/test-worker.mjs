@@ -104,13 +104,19 @@ async function main() {
       throw new Error(`crawler GET /: expected status 200, got ${crawlRes.status}`);
     }
 
-    const ogProxy = crawlRes.headers.get('x-og-proxy');
-    if (!ogProxy) {
-      throw new Error('crawler GET /: missing x-og-proxy header');
+    const crawlBody = await crawlRes.text();
+    if (!crawlBody.includes('<h1') || !crawlBody.includes('Listen to live radio')) {
+      throw new Error('crawler GET /: expected visible landing H1 about the offer');
+    }
+    if (!crawlBody.includes('Free Live Radio, Playlists, Podcasts')) {
+      throw new Error('crawler GET /: expected offer title');
+    }
+    if (crawlRes.headers.get('x-og-proxy')) {
+      throw new Error('crawler GET /: homepage should serve first-party landing, not OG proxy');
     }
 
     const cc = crawlRes.headers.get('cache-control') || '';
-    if (!/\bmax-age=300\b/.test(cc) || !/\bs-maxage=300\b/.test(cc)) {
+    if (!/\bmax-age=120\b/.test(cc) || !/\bs-maxage=300\b/.test(cc)) {
       throw new Error(`crawler GET /: unexpected cache-control: ${cc}`);
     }
 
@@ -141,7 +147,37 @@ async function main() {
       throw new Error('browser GET /: expected iframe embed URL for webradiosite');
     }
     if (!/<iframe[\s\S]*?<\/iframe>/i.test(rootBody)) {
-      throw new Error('browser GET /: expected an iframe in embed shell');
+      throw new Error('browser GET /: expected an iframe in landing');
+    }
+    if (!rootBody.includes('<h1') || !rootBody.includes('Listen to live radio')) {
+      throw new Error('browser GET /: expected visible landing H1');
+    }
+    if (!rootBody.includes('<title>Free Live Radio, Playlists, Podcasts')) {
+      throw new Error('browser GET /: expected offer title');
+    }
+
+    const robotsRes = await fetch(`${base}/robots.txt`, {
+      method: 'GET',
+      headers: { 'user-agent': BROWSER_UA },
+    });
+    const robotsBody = await robotsRes.text();
+    if (robotsRes.status !== 200 || !robotsBody.includes('Sitemap: https://theradio.fm/sitemap.xml')) {
+      throw new Error('GET /robots.txt: expected sitemap directive');
+    }
+
+    const sitemapRes = await fetch(`${base}/sitemap.xml`, {
+      method: 'GET',
+      headers: { 'user-agent': BROWSER_UA },
+    });
+    const sitemapBody = await sitemapRes.text();
+    if (sitemapRes.status !== 200 || !sitemapBody.includes('https://theradio.fm/</loc>')) {
+      throw new Error('GET /sitemap.xml: expected homepage URL');
+    }
+    if (/play\.theradio\.fm|browser\.theradio\.fm|podcasts\.theradio\.fm|tubeflix\.theradio\.fm/.test(sitemapBody)) {
+      throw new Error('GET /sitemap.xml: must only list theradio.fm URLs');
+    }
+    if (!rootBody.includes('How to start listening') || !rootBody.includes('min-height: 640px')) {
+      throw new Error('browser GET /: expected how-to copy and 640px iframe');
     }
 
     const appRes = await fetch(`${base}/app`, {
@@ -155,12 +191,58 @@ async function main() {
     if (!appCt.includes('text/html')) {
       throw new Error(`GET /app: expected html content-type, got ${appCt}`);
     }
+    const appSetCookie = appRes.headers.get('set-cookie') || '';
+    if (!/tr_prefer_app=1/.test(appSetCookie)) {
+      throw new Error(`GET /app: expected tr_prefer_app cookie, got ${appSetCookie || '(none)'}`);
+    }
     const appBody = await appRes.text();
-    if (!appBody.includes('<title>theradio.fm</title>')) {
-      throw new Error('GET /app: body missing index.html title');
+    if (!appBody.includes('<title>Free Live Radio, Playlists, Podcasts')) {
+      throw new Error('GET /app: body missing offer title from index.html');
     }
     if (!appBody.includes('<base href=')) {
       throw new Error('GET /app: expected injected <base> for Framework7 asset resolution');
+    }
+
+    const preferRoot = await fetch(`${base}/`, {
+      method: 'GET',
+      headers: { 'user-agent': BROWSER_UA, cookie: 'tr_prefer_app=1' },
+      redirect: 'manual',
+    });
+    if (preferRoot.status !== 302) {
+      throw new Error(`browser GET / with prefer-app cookie: expected 302, got ${preferRoot.status}`);
+    }
+    const preferLoc = preferRoot.headers.get('location') || '';
+    if (!preferLoc.endsWith('/app') && preferLoc !== '/app') {
+      throw new Error(`browser GET / with prefer-app cookie: expected Location /app, got ${preferLoc}`);
+    }
+
+    const crawlerPrefer = await fetch(`${base}/`, {
+      method: 'GET',
+      headers: { 'user-agent': CRAWLER_UA, cookie: 'tr_prefer_app=1' },
+      redirect: 'manual',
+    });
+    if (crawlerPrefer.status !== 200) {
+      throw new Error(`crawler GET / with prefer-app cookie: expected 200 landing, got ${crawlerPrefer.status}`);
+    }
+
+    const resetRes = await fetch(`${base}/reset`, {
+      method: 'GET',
+      headers: { 'user-agent': BROWSER_UA, cookie: 'tr_prefer_app=1' },
+      redirect: 'manual',
+    });
+    if (resetRes.status !== 302) {
+      throw new Error(`GET /reset: expected 302, got ${resetRes.status}`);
+    }
+    const resetLoc = resetRes.headers.get('location') || '';
+    const resetPath = new URL(resetLoc, base).pathname;
+    if (resetPath !== '/') {
+      throw new Error(`GET /reset: expected Location /, got ${resetLoc}`);
+    }
+    const resetCookies = resetRes.headers.getSetCookie
+      ? resetRes.headers.getSetCookie()
+      : [resetRes.headers.get('set-cookie')].filter(Boolean);
+    if (!resetCookies.some((c) => /tr_prefer_app=/.test(c) && /Max-Age=0/i.test(c))) {
+      throw new Error(`GET /reset: expected Set-Cookie clearing tr_prefer_app, got ${JSON.stringify(resetCookies)}`);
     }
 
     const rainRes = await fetch(`${base}/rain`, {
@@ -194,10 +276,15 @@ async function main() {
     }
 
     console.log('test-worker: ok');
-    console.log(`  crawler GET / -> ${crawlRes.status}, x-og-proxy: ${ogProxy}`);
+    console.log(`  crawler GET / -> ${crawlRes.status} (first-party landing)`);
     console.log(`  crawler HEAD / -> ${headRes.status} (no x-og-proxy from worker)`);
     console.log(`  browser GET / -> ${browserRoot.status}, content-type: ${rootCt}`);
-    console.log(`  browser GET /app -> ${appRes.status}, content-type: ${appCt}`);
+    console.log(`  browser GET /robots.txt -> ${robotsRes.status}`);
+    console.log(`  browser GET /sitemap.xml -> ${sitemapRes.status}`);
+    console.log(`  browser GET /app -> ${appRes.status}, set-cookie tr_prefer_app`);
+    console.log(`  browser GET / + cookie -> ${preferRoot.status} -> ${preferLoc}`);
+    console.log(`  crawler GET / + cookie -> ${crawlerPrefer.status} (no redirect)`);
+    console.log(`  browser GET /reset -> ${resetRes.status} -> ${resetLoc} (clear prefer-app)`);
     console.log(`  browser GET /rain -> ${rainRes.status}, content-type: ${rainCt}`);
     console.log(`  browser GET /m -> ${mRes.status}`);
   } finally {

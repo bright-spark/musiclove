@@ -9,9 +9,8 @@
 
 importScripts("https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js");
 
-const CACHE_NAME = 'musiclove-cache-v44';
+const CACHE_NAME = 'musiclove-cache-v46';
 const APP_SHELL = [
-  './',
   './offline.html',
   './manifest.json',
   './favicon.ico',
@@ -36,6 +35,42 @@ const APP_SHELL = [
 
 function isSameOriginRequest(request) {
   return new URL(request.url).origin === self.location.origin;
+}
+
+/** Safari errors on Response.redirected / opaqueredirect from a service worker. */
+function safariSafeResponse(response) {
+  if (!response) return response;
+  if (response.type === 'opaqueredirect') {
+    return Response.error();
+  }
+  if (response.status >= 300 && response.status < 400) {
+    return Response.error();
+  }
+  if (!response.redirected) return response;
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers: response.headers,
+  });
+}
+
+async function networkFetch(request) {
+  // Prefer following redirects, then unwrap so Safari does not see redirected=true.
+  try {
+    const response = await fetch(request.url, {
+      method: request.method,
+      headers: request.headers,
+      credentials: request.credentials === 'include' ? 'include' : 'same-origin',
+      cache: request.cache,
+      redirect: 'follow',
+      mode: request.mode === 'navigate' ? 'same-origin' : request.mode,
+    });
+    return safariSafeResponse(response);
+  } catch (error) {
+    // Fallback for opaque/cors edge cases.
+    const response = await fetch(request);
+    return safariSafeResponse(response);
+  }
 }
 
 // Function to get current cache name
@@ -79,7 +114,11 @@ async function clearOldCache() {
   const currentCacheName = await getCurrentCacheName();
   await Promise.all(
     cacheNames.map(cacheName => {
-      if (cacheName.startsWith(CACHE_NAME) && cacheName !== currentCacheName) {
+      // Drop prior musiclove caches (including pre-v46 root HTML caches).
+      if (
+        (cacheName.startsWith('musiclove-cache-') || cacheName.startsWith(CACHE_NAME)) &&
+        cacheName !== currentCacheName
+      ) {
         return caches.delete(cacheName);
       }
     })
@@ -128,6 +167,13 @@ self.addEventListener('fetch', event => {
   if (event.request.url.includes('firestore.googleapis.com')) return;
   if (event.request.url.includes('.php')) return;
 
+  // Never intercept document navigations:
+  // - Safari rejects SW-served redirects (prefer-app /reset)
+  // - Set-Cookie from /app is ignored when the SW answers the navigation
+  if (event.request.mode === 'navigate') {
+    return;
+  }
+
   event.respondWith(
     (async () => {
       const cacheName = await getCurrentCacheName();
@@ -141,8 +187,8 @@ self.addEventListener('fetch', event => {
             try {
               const needsUpdate = await checkForUpdates();
               if (needsUpdate) {
-                const networkResponse = await fetch(event.request);
-                if (networkResponse.ok) {
+                const networkResponse = await networkFetch(event.request);
+                if (networkResponse && networkResponse.ok) {
                   const newCache = await caches.open(await getCurrentCacheName());
                   await newCache.put(event.request, networkResponse.clone());
                 }
@@ -152,14 +198,14 @@ self.addEventListener('fetch', event => {
             }
           })()
         );
-        return cachedResponse;
+        return safariSafeResponse(cachedResponse);
       }
 
       // If not in cache, try network
       try {
-        const networkResponse = await fetch(event.request);
-        // Cache successful responses
-        if (networkResponse.ok) {
+        const networkResponse = await networkFetch(event.request);
+        // Cache successful responses (never redirects)
+        if (networkResponse && networkResponse.ok) {
           await cache.put(event.request, networkResponse.clone());
         }
         return networkResponse;

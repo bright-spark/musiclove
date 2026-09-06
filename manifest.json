@@ -1,12 +1,12 @@
 {
   "short_name": "theradio.fm",
-  "name": "theradio.fm",
-  "start_url": "https://theradio.fm/app",
+  "name": "theradio.fm — Live Radio, Podcasts & Videos",
+  "start_url": "https://theradio.fm/",
   "display": "standalone",
   "orientation": "portrait",
   "theme_color": "#131313",
   "background_color": "#121212",
-  "scope": "https://theradio.fm/app",
+  "scope": "https://theradio.fm/",
   "icons": [
     {
       "src": "/icons/apple-touch-icon-192x192.png",
@@ -44,7 +44,7 @@
       "type": "image/png"
     }
   ],
-  "description": "theradio.fm — live radio, playlists, podcasts, and TubeFlix in one app. Free, no login.",
+  "description": "Listen to live radio, browse stations worldwide, play podcasts, and watch music videos. Free, no login.",
   "dir": "ltr",
   "lang": "en",
   "display_override": ["window-controls-overlay"],

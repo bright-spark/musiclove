@@ -20,9 +20,12 @@
     </script>
     <!-- End OneSignal Notifications -->
     <link rel="canonical" href="https://theradio.fm/" />
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"WebApplication","name":"theradio.fm","url":"https://theradio.fm/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Listen to live radio, browse stations worldwide, play podcasts, and watch music videos on theradio.fm. Free streaming, no login required."}
+    </script>
     <!-- Open Graph / share preview — absolute icon URL so WhatsApp, iMessage, X show the logo -->
-    <meta property="og:title" content="theradio.fm" />
-    <meta property="og:description" content="Live radio, playlists, podcasts &amp; TubeFlix — free, no login." />
+    <meta property="og:title" content="Free Live Radio, Playlists, Podcasts &amp; Music Videos | theradio.fm" />
+    <meta property="og:description" content="Listen to live radio, browse stations worldwide, play podcasts, and watch music videos on theradio.fm. Free streaming, no login required." />
     <meta property="og:url" content="https://theradio.fm/" />
     <meta property="og:site_name" content="theradio.fm" />
     <meta property="og:image" content="https://theradio.fm/icons/apple-touch-icon-512x512.png" />
@@ -30,11 +33,11 @@
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="512" />
     <meta property="og:image:height" content="512" />
-    <meta property="og:image:alt" content="theradio.fm" />
+    <meta property="og:image:alt" content="theradio.fm — free live radio, podcasts and music videos" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="theradio.fm" />
-    <meta name="twitter:description" content="Live radio, playlists, podcasts &amp; TubeFlix — free, no login." />
+    <meta name="twitter:title" content="Free Live Radio, Playlists, Podcasts &amp; Music Videos | theradio.fm" />
+    <meta name="twitter:description" content="Listen to live radio, browse stations worldwide, play podcasts, and watch music videos on theradio.fm. Free streaming, no login required." />
     <meta name="twitter:image" content="https://theradio.fm/icons/apple-touch-icon-512x512.png" />
     <!-- End OG Meta Tags -->
     <!-- GoSquared -->
@@ -51,7 +54,7 @@
     
     <meta charset="utf-8" />
     <meta name="application-name" content="theradio.fm" />
-    <title>theradio.fm</title>
+    <title>Free Live Radio, Playlists, Podcasts &amp; Music Videos | theradio.fm</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no, viewport-fit=cover" />
     <meta name="mobile-web-app-capable" content="yes" />
@@ -65,7 +68,9 @@
         content="Audio, Music, Video, Playlist, Streaming, Online, Best, Popular, Deezer, Spotify, YouTubeMusic, YouTube, Playlist, Free, PWA, Apple, Android, iOS, Windows, Podcast, Vibescout, Event, Social" />
     <meta name="subject" content="theradio.fm" />
     <meta name="description"
-        content="theradio.fm — live radio, playlists, podcasts &amp; TubeFlix. Free, no login." /><link rel="icon" href="/favicon.ico" />
+        content="Listen to live radio, browse stations worldwide, play podcasts, and watch music videos on theradio.fm. Free streaming, no login required." />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="sitemap" type="application/xml" href="https://theradio.fm/sitemap.xml" /><link rel="icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="192x192" href="/icons/apple-touch-icon-192x192.png" />
     <link rel="icon" type="image/png" sizes="512x512" href="/icons/apple-touch-icon-512x512.png" />
 
@@ -121,6 +126,19 @@
 </head>
 
 <body class="theme-dark color-theme-red">
+    <script>
+      (function () {
+        try {
+          var maxAge = 400 * 24 * 60 * 60;
+          var secure = location.protocol === 'https:' ? '; Secure' : '';
+          var host = location.hostname;
+          var domain =
+            host === 'theradio.fm' || /\.theradio\.fm$/i.test(host) ? '; Domain=.theradio.fm' : '';
+          document.cookie =
+            'tr_prefer_app=1; Path=/; Max-Age=' + maxAge + '; SameSite=Lax' + domain + secure;
+        } catch (e) {}
+      })();
+    </script>
 
     <div class="hidden-focus-element"></div>
 
