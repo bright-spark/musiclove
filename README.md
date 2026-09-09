@@ -31,11 +31,11 @@ Only open social media or public facing websites are browsed or aggregated in th
 
 ### Design & Architecture:
 
-Hosting:      Namecheap, Cloudflare
+Hosting:      Namecheap, Vercel, Cloudflare
 DevOps:       Github, Netlify, Cloudflare, Vercel
 Social:       Twitter, Facebook, Instagram, Whatsapp, Gooogle, Apple, Microsoft
 Images:       Pintrest, Canva, Adobe Express
-Audio/Video:  Shazam, YouTube, Selected South African and Namibian Radio Stations
+Audio/Video:  Shazam, YouTube, Selected South African and Namibian + 3000 World Radio Stations
 
 ### Takedowns
 Any takedown requests will always be considered, and should be addressed to: studio@theradio.fm — see [SUPPORT.md](SUPPORT.md) for the preferred format. You may also first make direct contact with Martin Myburgh on [+27847801119](tel:+27847801119).
