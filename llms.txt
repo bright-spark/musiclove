@@ -1,0 +1,27 @@
+# theradio.fm
+
+> Free live radio, world stations, podcasts, and music videos in the browser — no login, no subscription.
+
+theradio.fm (also known as Music Love / the radio) is a free streaming web app and PWA. Listen to the theradio.fm live station, browse internet radio by country, play podcasts, and watch curated music videos on TubeFlix. Contact: studio@theradio.fm
+
+## Primary
+
+- [Home](https://theradio.fm/): Landing page with overview, install options, and embedded app player
+- [App](https://theradio.fm/app): Full tabbed theradio.fm progressive web app
+- [Live radio](https://play.theradio.fm/): Live theradio.fm stream player with now-playing track art
+- [World stations](https://browser.theradio.fm/): Browse and tune internet radio stations by country
+- [Podcasts](https://podcasts.theradio.fm/): Find and play podcasts
+- [TubeFlix](https://tubeflix.theradio.fm/): Free music videos in a Netflix-style interface
+
+## Docs
+
+- [Privacy policy](https://theradio.fm/pages/privacy): How theradio.fm collects and uses information (GDPR-oriented)
+- [Sitemap](https://theradio.fm/sitemap.xml): Canonical URL list for crawlers
+- [Robots](https://theradio.fm/robots.txt): Crawler allow and disallow rules
+
+## Optional
+
+- [Cover](https://theradio.fm/pages/cover/): Brand cover / about page
+- [Frontpage](https://theradio.fm/pages/frontpage): Embedded Music Love journal
+- [Android app](https://play.google.com/store/apps/details?id=fm.theradio.play): theradio.fm on Google Play
+- [Reset prefer-app](https://theradio.fm/reset): Clear the prefer-app cookie and return to the landing page

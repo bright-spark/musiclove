@@ -1,22 +1,7 @@
 {
-  "version": 2,
-  "name": "musiclove",
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ],
+  "installCommand": "pnpm install",
+  "buildCommand": "pnpm run build && cp landing.html index.html",
+  "cleanUrls": true,
   "headers": [
     {
       "source": "/(.*)",
@@ -26,8 +11,34 @@
           "value": "nosniff"
         },
         {
-          "key": "X-Frame-Options",
-          "value": "SAMEORIGIN"
+          "key": "Content-Security-Policy",
+          "value": "frame-ancestors 'self' https://theradio.fm https://theradio.fm/pages/privacy https://www.theradio.fm https://play.theradio.fm https://browser.theradio.fm https://podcasts.theradio.fm https://tubeflix.theradio.fm"
+        }
+      ]
+    },
+    {
+      "source": "/",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "frame-src 'self' https://www.theradio.fm https://theradio.fm https://theradio.fm/pages/privacy https://play.theradio.fm https://browser.theradio.fm https://podcasts.theradio.fm https://tubeflix.theradio.fm https://theradiofm.webradiosite.com https://f0eb2b1419dc4d1fbb4702185aa6a46a.elf.site; frame-ancestors 'self' https://theradio.fm https://theradio.fm/pages/privacy https://www.theradio.fm https://play.theradio.fm https://browser.theradio.fm https://podcasts.theradio.fm https://tubeflix.theradio.fm"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=120, s-maxage=300"
+        },
+        {
+          "key": "Vary",
+          "value": "Cookie"
+        }
+      ]
+    },
+    {
+      "source": "/app",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "frame-src 'self' https://www.theradio.fm https://theradio.fm https://theradio.fm/pages/privacy https://play.theradio.fm https://browser.theradio.fm https://podcasts.theradio.fm https://tubeflix.theradio.fm https://theradiofm.webradiosite.com https://f0eb2b1419dc4d1fbb4702185aa6a46a.elf.site; frame-ancestors 'self' https://theradio.fm https://theradio.fm/pages/privacy https://www.theradio.fm https://play.theradio.fm https://browser.theradio.fm https://podcasts.theradio.fm https://tubeflix.theradio.fm"
         }
       ]
     },

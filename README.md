@@ -37,5 +37,38 @@ Social:       Twitter, Facebook, Instagram, Whatsapp, Gooogle, Apple, Microsoft
 Images:       Pintrest, Canva, Adobe Express
 Audio/Video:  Shazam, YouTube, Selected South African and Namibian + 3000 World Radio Stations
 
+### Deploy to Vercel
+
+Thanks to Vercel for their support of open-source software.
+
+Production for [theradio.fm](https://theradio.fm) is primarily on Cloudflare Workers. Vercel is a supported static hosting path for the PWA shell and assets (see `vercel.json`).
+
+**Requirements:** Node.js 24+, [pnpm](https://pnpm.io) 10+, and a [Vercel](https://vercel.com) account.
+
+```bash
+git clone https://github.com/bright-spark/musiclove.git
+cd musiclove
+pnpm install
+
+# First time: log in, then link this repo to your Vercel project
+npx vercel login
+npx vercel link
+
+# Preview deployment
+pnpm run deploy:vercel:preview
+# or: npx vercel
+
+# Production deployment
+pnpm run deploy:vercel
+# or: npx vercel --prod
+```
+
+Notes:
+
+* Deploy **from this `musiclove` directory** — do not link another repo (for example `play`) to the musiclove Vercel project.
+* The build runs `pnpm run build`, which compiles TypeScript, syncs Worker embeds, copies `index.html` → `app.html`, and generates `landing.html`. On Vercel, `landing.html` is copied over `index.html` so `/` is the marketing landing and `/app` is the Framework7 shell.
+* Edge Middleware (`middleware.js`) sets the prefer-app cookie on `/app`, redirects `/` → `/app` when that cookie is present, and clears it on `/reset` (same behavior as the Cloudflare Worker).
+* Cookie-based `/` → `/app` redirects and the first-party landing also run on Cloudflare Workers (`src/index.ts`) when traffic is proxied there.
+
 ### Takedowns
 Any takedown requests will always be considered, and should be addressed to: studio@theradio.fm — see [SUPPORT.md](SUPPORT.md) for the preferred format. You may also first make direct contact with Martin Myburgh on [+27847801119](tel:+27847801119).

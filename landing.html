@@ -1,288 +1,10 @@
-const CANONICAL = 'https://theradio.fm/';
-const ICON_512 = 'https://theradio.fm/icons/apple-touch-icon-512x512.png';
-
-export const SITE_TITLE =
-  'Free Live Radio, Playlists, Podcasts & Music Videos | theradio.fm';
-
-export const SITE_DESCRIPTION =
-  'Listen to live radio, browse stations worldwide, play podcasts, and watch music videos on theradio.fm. Free streaming, no login required.';
-
-/** Allowed iframe embed hosts for landing + app shell (meta CSP and response headers). */
-export const FRAME_SRC_CSP =
-  "frame-src 'self' https://www.theradio.fm https://theradio.fm https://theradio.fm/pages/privacy https://play.theradio.fm https://browser.theradio.fm https://podcasts.theradio.fm https://tubeflix.theradio.fm https://theradiofm.webradiosite.com https://f0eb2b1419dc4d1fbb4702185aa6a46a.elf.site";
-
-export const ROBOTS_TXT = `User-agent: *
-Allow: /
-Allow: /app
-Allow: /llms.txt
-Allow: /pages/privacy
-Allow: /pages/cover
-Allow: /icons/
-Allow: /screenshots/
-Disallow: /db/
-Disallow: /font-awesome/
-Disallow: /fonts/
-Disallow: /js/
-Disallow: /css/
-
-Sitemap: https://theradio.fm/sitemap.xml
-`;
-
-export const LLMS_TXT = `# theradio.fm
-
-> Free live radio, world stations, podcasts, and music videos in the browser — no login, no subscription.
-
-theradio.fm (also known as Music Love / the radio) is a free streaming web app and PWA. Listen to the theradio.fm live station, browse internet radio by country, play podcasts, and watch curated music videos on TubeFlix. Contact: studio@theradio.fm
-
-## Primary
-
-- [Home](https://theradio.fm/): Landing page with overview, install options, and embedded app player
-- [App](https://theradio.fm/app): Full tabbed theradio.fm progressive web app
-- [Live radio](https://play.theradio.fm/): Live theradio.fm stream player with now-playing track art
-- [World stations](https://browser.theradio.fm/): Browse and tune internet radio stations by country
-- [Podcasts](https://podcasts.theradio.fm/): Find and play podcasts
-- [TubeFlix](https://tubeflix.theradio.fm/): Free music videos in a Netflix-style interface
-
-## Docs
-
-- [Privacy policy](https://theradio.fm/pages/privacy): How theradio.fm collects and uses information (GDPR-oriented)
-- [Sitemap](https://theradio.fm/sitemap.xml): Canonical URL list for crawlers
-- [Robots](https://theradio.fm/robots.txt): Crawler allow and disallow rules
-
-## Optional
-
-- [Cover](https://theradio.fm/pages/cover/): Brand cover / about page
-- [Frontpage](https://theradio.fm/pages/frontpage): Embedded Music Love journal
-- [Android app](https://play.google.com/store/apps/details?id=fm.theradio.play): theradio.fm on Google Play
-- [Reset prefer-app](https://theradio.fm/reset): Clear the prefer-app cookie and return to the landing page
-`;
-
-export const SITEMAP_XML = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://theradio.fm/</loc>
-    <lastmod>2026-08-31</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://theradio.fm/app</loc>
-    <lastmod>2026-08-31</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://theradio.fm/pages/privacy</loc>
-    <lastmod>2026-08-31</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-</urlset>
-`;
-
-function jsonLdScript(): string {
-  const graph = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'WebSite',
-        '@id': 'https://theradio.fm/#website',
-        url: CANONICAL,
-        name: 'theradio.fm',
-        alternateName: ['the radio', 'the radio fm', 'theradio', 'theradio.fm'],
-        description: SITE_DESCRIPTION,
-        inLanguage: 'en',
-        publisher: { '@id': 'https://theradio.fm/#organization' },
-        potentialAction: {
-          '@type': 'ListenAction',
-          target: 'https://theradio.fm/#listen',
-          name: 'Listen to live radio',
-        },
-      },
-      {
-        '@type': ['Organization', 'RadioStation'],
-        '@id': 'https://theradio.fm/#organization',
-        name: 'theradio.fm',
-        url: CANONICAL,
-        logo: {
-          '@type': 'ImageObject',
-          url: ICON_512,
-          width: 512,
-          height: 512,
-        },
-        image: ICON_512,
-      },
-      {
-        '@type': 'WebApplication',
-        '@id': 'https://theradio.fm/app',
-        name: 'theradio.fm',
-        url: CANONICAL,
-        applicationCategory: 'MultimediaApplication',
-        operatingSystem: 'Any',
-        offers: {
-          '@type': 'Offer',
-          price: '0',
-          priceCurrency: 'USD',
-        },
-        description: SITE_DESCRIPTION,
-      },
-      {
-        '@type': 'WebPage',
-        '@id': 'https://theradio.fm/#webpage',
-        url: CANONICAL,
-        name: SITE_TITLE,
-        description: SITE_DESCRIPTION,
-        isPartOf: { '@id': 'https://theradio.fm/#website' },
-        about: { '@id': 'https://theradio.fm/#organization' },
-        inLanguage: 'en',
-        primaryImageOfPage: ICON_512,
-      },
-      {
-        '@type': 'FAQPage',
-        '@id': 'https://theradio.fm/#faq',
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: 'What can I do on theradio.fm?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'You can listen to theradio.fm live, browse thousands of internet radio stations by country, play podcasts, and watch music videos on TubeFlix. Everything is free and works in the browser.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: 'Is theradio.fm free?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Yes 100% free. Live radio, station browsing, podcasts, and music videos are free. No subscription and no login required.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: 'Do I need an account to listen?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'No account needed at all. Open theradio.fm and press play. You can listen live, tune world stations, play podcasts, or watch videos without creating an account.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: 'Where do I listen live or watch videos?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Listen live at play.theradio.fm, browse world stations at browser.theradio.fm, play podcasts at podcasts.theradio.fm, and watch music videos at tubeflix.theradio.fm. The full app is also at theradio.fm/app.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: 'Does theradio.fm work on phones and tablets?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Yes. theradio.fm is a free web app. Open it in any modern browser on phone, tablet, or desktop. No app store download is required.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: 'Is theradio.fm safe to use?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Yes 100% safe. theradio.fm is a free web app. No ads, no tracking, no cookies, no data collection. Just pure radio and videos.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: 'Is theradio.fm ad-free?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Yes 100% ad-free. theradio.fm is a free web app. No ads, no tracking, no cookies, no data collection. Just pure radio and videos.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: 'Can I listen to radio stations from other countries?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Yes from all countries. The world stations browser at browser.theradio.fm lists live internet radio by country and genre so you can tune in instantly.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: 'Is there a mobile app?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Yes there is a mobile app. The theradio.fm app is available for download on the Google Play Store. No ads, no tracking, no cookies, no data collection. Just pure radio and videos.',
-            },
-          },
-        ],
-      },
-      {
-        '@type': 'BreadcrumbList',
-        '@id': 'https://theradio.fm/#breadcrumbs',
-        itemListElement: [
-          {
-            '@type': 'ListItem',
-            position: 1,
-            name: 'Home',
-            item: CANONICAL,
-          },
-        ],
-      },
-      {
-        '@type': 'ItemList',
-        '@id': 'https://theradio.fm/#offers',
-        name: 'What you can do on theradio.fm',
-        numberOfItems: 5,
-        itemListElement: [
-          {
-            '@type': 'ListItem',
-            position: 0,
-            name: 'Switch to theradio.fm app mode',
-            url: 'https://theradio.fm/app',
-          },
-          {
-            '@type': 'ListItem',
-            position: 1,
-            name: 'Listen to the unique theradio.fm station live',
-            url: 'https://play.theradio.fm/',
-          },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: 'Browse thousands of radio stations worldwide',
-            url: 'https://browser.theradio.fm/',
-          },
-          {
-            '@type': 'ListItem',
-            position: 3,
-            name: 'Play and follow all of your favorite podcasts',
-            url: 'https://podcasts.theradio.fm/',
-          },
-          {
-            '@type': 'ListItem',
-            position: 4,
-            name: 'Watch any of your quality-checked free music videos in true Netflix style',
-            url: 'https://tubeflix.theradio.fm/',
-          },
-        ],
-      },
-    ],
-  };
-
-  return `<script type="application/ld+json">${JSON.stringify(graph)}</script>`;
-}
-
-/** First-party landing for `/` — visible H1, offer title, crawlable copy, live embed. */
-export function rootLandingHtml(origin: string): string {
-  const icon192 = `${origin}/icons/apple-touch-icon-192x192.png`;
-  const icon512 = `${origin}/icons/apple-touch-icon-512x512.png`;
-
-  return `<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>${SITE_TITLE}</title>
-  <meta name="description" content="${SITE_DESCRIPTION}" />
+  <title>Free Live Radio, Playlists, Podcasts & Music Videos | theradio.fm</title>
+  <meta name="description" content="Listen to live radio, browse stations worldwide, play podcasts, and watch music videos on theradio.fm. Free streaming, no login required." />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="googlebot" content="index, follow" />
   <meta name="keywords" content="free live radio, internet radio, online radio stations, podcasts, music videos, TubeFlix, playlists, theradio.fm" />
@@ -290,43 +12,43 @@ export function rootLandingHtml(origin: string): string {
   <meta name="theme-color" content="#0a0a0a" />
   <meta name="application-name" content="theradio.fm" />
   <meta name="color-scheme" content="dark" />
-  <meta http-equiv="Content-Security-Policy" content="${FRAME_SRC_CSP}" />
-  <link rel="canonical" href="${CANONICAL}" />
+  <meta http-equiv="Content-Security-Policy" content="frame-src 'self' https://www.theradio.fm https://theradio.fm https://theradio.fm/pages/privacy https://play.theradio.fm https://browser.theradio.fm https://podcasts.theradio.fm https://tubeflix.theradio.fm https://theradiofm.webradiosite.com https://f0eb2b1419dc4d1fbb4702185aa6a46a.elf.site" />
+  <link rel="canonical" href="https://theradio.fm/" />
   <link rel="sitemap" type="application/xml" href="https://theradio.fm/sitemap.xml" />
   <link rel="describedby" href="https://theradio.fm/llms.txt" type="text/plain" title="llms.txt" />
   <link rel="preconnect" href="https://f0eb2b1419dc4d1fbb4702185aa6a46a.elf.site" />
   <link rel="dns-prefetch" href="https://f0eb2b1419dc4d1fbb4702185aa6a46a.elf.site" />
   <link rel="preconnect" href="https://theradiofm.webradiosite.com" />
   <link rel="dns-prefetch" href="https://theradiofm.webradiosite.com" />
-  <link rel="manifest" href="${origin}/manifest.json" />
-  <link rel="icon" href="${origin}/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="192x192" href="${icon192}" />
-  <link rel="icon" type="image/png" sizes="512x512" href="${icon512}" />
-  <link rel="apple-touch-icon" sizes="180x180" href="${origin}/icons/apple-touch-icon-180x180.png" />
-  <link rel="apple-touch-icon" href="${origin}/icons/apple-touch-icon.png" />
+  <link rel="manifest" href="https://theradio.fm/manifest.json" />
+  <link rel="icon" href="https://theradio.fm/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="192x192" href="https://theradio.fm/icons/apple-touch-icon-192x192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="https://theradio.fm/icons/apple-touch-icon-512x512.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="https://theradio.fm/icons/apple-touch-icon-180x180.png" />
+  <link rel="apple-touch-icon" href="https://theradio.fm/icons/apple-touch-icon.png" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:site_name" content="theradio.fm" />
-  <meta property="og:url" content="${CANONICAL}" />
-  <meta property="og:title" content="${SITE_TITLE}" />
-  <meta property="og:description" content="${SITE_DESCRIPTION}" />
-  <meta property="og:image" content="${ICON_512}" />
-  <meta property="og:image:secure_url" content="${ICON_512}" />
+  <meta property="og:url" content="https://theradio.fm/" />
+  <meta property="og:title" content="Free Live Radio, Playlists, Podcasts & Music Videos | theradio.fm" />
+  <meta property="og:description" content="Listen to live radio, browse stations worldwide, play podcasts, and watch music videos on theradio.fm. Free streaming, no login required." />
+  <meta property="og:image" content="https://theradio.fm/icons/apple-touch-icon-512x512.png" />
+  <meta property="og:image:secure_url" content="https://theradio.fm/icons/apple-touch-icon-512x512.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="512" />
   <meta property="og:image:height" content="512" />
   <meta property="og:image:alt" content="theradio.fm — free live radio, podcasts and music videos" />
   <meta property="og:updated_time" content="2026-08-31T00:00:00Z" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="${SITE_TITLE}" />
-  <meta name="twitter:description" content="${SITE_DESCRIPTION}" />
-  <meta name="twitter:image" content="${ICON_512}" />
+  <meta name="twitter:title" content="Free Live Radio, Playlists, Podcasts & Music Videos | theradio.fm" />
+  <meta name="twitter:description" content="Listen to live radio, browse stations worldwide, play podcasts, and watch music videos on theradio.fm. Free streaming, no login required." />
+  <meta name="twitter:image" content="https://theradio.fm/icons/apple-touch-icon-512x512.png" />
   <meta name="twitter:image:alt" content="theradio.fm — free live radio, podcasts and music videos" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-title" content="theradio.fm" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <meta name="mobile-web-app-capable" content="yes" />
-  ${jsonLdScript()}
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://theradio.fm/#website","url":"https://theradio.fm/","name":"theradio.fm","alternateName":["the radio","the radio fm","theradio","theradio.fm"],"description":"Listen to live radio, browse stations worldwide, play podcasts, and watch music videos on theradio.fm. Free streaming, no login required.","inLanguage":"en","publisher":{"@id":"https://theradio.fm/#organization"},"potentialAction":{"@type":"ListenAction","target":"https://theradio.fm/#listen","name":"Listen to live radio"}},{"@type":["Organization","RadioStation"],"@id":"https://theradio.fm/#organization","name":"theradio.fm","url":"https://theradio.fm/","logo":{"@type":"ImageObject","url":"https://theradio.fm/icons/apple-touch-icon-512x512.png","width":512,"height":512},"image":"https://theradio.fm/icons/apple-touch-icon-512x512.png"},{"@type":"WebApplication","@id":"https://theradio.fm/app","name":"theradio.fm","url":"https://theradio.fm/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Listen to live radio, browse stations worldwide, play podcasts, and watch music videos on theradio.fm. Free streaming, no login required."},{"@type":"WebPage","@id":"https://theradio.fm/#webpage","url":"https://theradio.fm/","name":"Free Live Radio, Playlists, Podcasts & Music Videos | theradio.fm","description":"Listen to live radio, browse stations worldwide, play podcasts, and watch music videos on theradio.fm. Free streaming, no login required.","isPartOf":{"@id":"https://theradio.fm/#website"},"about":{"@id":"https://theradio.fm/#organization"},"inLanguage":"en","primaryImageOfPage":"https://theradio.fm/icons/apple-touch-icon-512x512.png"},{"@type":"FAQPage","@id":"https://theradio.fm/#faq","mainEntity":[{"@type":"Question","name":"What can I do on theradio.fm?","acceptedAnswer":{"@type":"Answer","text":"You can listen to theradio.fm live, browse thousands of internet radio stations by country, play podcasts, and watch music videos on TubeFlix. Everything is free and works in the browser."}},{"@type":"Question","name":"Is theradio.fm free?","acceptedAnswer":{"@type":"Answer","text":"Yes 100% free. Live radio, station browsing, podcasts, and music videos are free. No subscription and no login required."}},{"@type":"Question","name":"Do I need an account to listen?","acceptedAnswer":{"@type":"Answer","text":"No account needed at all. Open theradio.fm and press play. You can listen live, tune world stations, play podcasts, or watch videos without creating an account."}},{"@type":"Question","name":"Where do I listen live or watch videos?","acceptedAnswer":{"@type":"Answer","text":"Listen live at play.theradio.fm, browse world stations at browser.theradio.fm, play podcasts at podcasts.theradio.fm, and watch music videos at tubeflix.theradio.fm. The full app is also at theradio.fm/app."}},{"@type":"Question","name":"Does theradio.fm work on phones and tablets?","acceptedAnswer":{"@type":"Answer","text":"Yes. theradio.fm is a free web app. Open it in any modern browser on phone, tablet, or desktop. No app store download is required."}},{"@type":"Question","name":"Is theradio.fm safe to use?","acceptedAnswer":{"@type":"Answer","text":"Yes 100% safe. theradio.fm is a free web app. No ads, no tracking, no cookies, no data collection. Just pure radio and videos."}},{"@type":"Question","name":"Is theradio.fm ad-free?","acceptedAnswer":{"@type":"Answer","text":"Yes 100% ad-free. theradio.fm is a free web app. No ads, no tracking, no cookies, no data collection. Just pure radio and videos."}},{"@type":"Question","name":"Can I listen to radio stations from other countries?","acceptedAnswer":{"@type":"Answer","text":"Yes from all countries. The world stations browser at browser.theradio.fm lists live internet radio by country and genre so you can tune in instantly."}},{"@type":"Question","name":"Is there a mobile app?","acceptedAnswer":{"@type":"Answer","text":"Yes there is a mobile app. The theradio.fm app is available for download on the Google Play Store. No ads, no tracking, no cookies, no data collection. Just pure radio and videos."}}]},{"@type":"BreadcrumbList","@id":"https://theradio.fm/#breadcrumbs","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://theradio.fm/"}]},{"@type":"ItemList","@id":"https://theradio.fm/#offers","name":"What you can do on theradio.fm","numberOfItems":5,"itemListElement":[{"@type":"ListItem","position":0,"name":"Switch to theradio.fm app mode","url":"https://theradio.fm/app"},{"@type":"ListItem","position":1,"name":"Listen to the unique theradio.fm station live","url":"https://play.theradio.fm/"},{"@type":"ListItem","position":2,"name":"Browse thousands of radio stations worldwide","url":"https://browser.theradio.fm/"},{"@type":"ListItem","position":3,"name":"Play and follow all of your favorite podcasts","url":"https://podcasts.theradio.fm/"},{"@type":"ListItem","position":4,"name":"Watch any of your quality-checked free music videos in true Netflix style","url":"https://tubeflix.theradio.fm/"}]}]}</script>
   <style>
     :root {
       --bg: #0a0a0a;
@@ -843,8 +565,8 @@ export function rootLandingHtml(origin: string): string {
   <a class="skip" href="#listen">Skip to live radio</a>
   <header class="site">
     <div class="wrap header-bar">
-      <a class="brand" href="${CANONICAL}">
-        <img src="${icon512}" width="40" height="40" alt="theradio.fm logo" />
+      <a class="brand" href="https://theradio.fm/">
+        <img src="https://theradio.fm/icons/apple-touch-icon-512x512.png" width="40" height="40" alt="theradio.fm logo" />
         <span>theradio.fm</span>
       </a>
       <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
@@ -962,7 +684,7 @@ export function rootLandingHtml(origin: string): string {
 
     <footer class="site">
       <nav aria-label="Footer">
-        <a href="${CANONICAL}">Home</a>
+        <a href="https://theradio.fm/">Home</a>
         <a href="https://theradio.fm/app">App mode</a>
         <a href="https://theradio.fm/pages/frontpage">Blog</a>
         <a href="https://play.theradio.fm/">Live radio</a>
@@ -1043,10 +765,10 @@ export function rootLandingHtml(origin: string): string {
   </script>
   <script>
     (function () {
-      var APP_URL = ${JSON.stringify(`${origin}/app`)};
+      var APP_URL = "https://theradio.fm/app";
 
       // Client fallback if a stale SW served landing HTML despite prefer-app cookie.
-      if (/(?:^|;\\s*)tr_prefer_app=1(?:;|$)/.test(document.cookie || '')) {
+      if (/(?:^|;\s*)tr_prefer_app=1(?:;|$)/.test(document.cookie || '')) {
         location.replace(APP_URL);
         return;
       }
@@ -1132,5 +854,3 @@ export function rootLandingHtml(origin: string): string {
   </script>
 </body>
 </html>
-`;
-}

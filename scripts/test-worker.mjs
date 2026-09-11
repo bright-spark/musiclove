@@ -143,8 +143,8 @@ async function main() {
       throw new Error(`browser GET /: expected html content-type, got ${rootCt}`);
     }
     const rootBody = await browserRoot.text();
-    if (!rootBody.includes('https://theradiofm.webradiosite.com')) {
-      throw new Error('browser GET /: expected iframe embed URL for webradiosite');
+    if (!rootBody.includes('https://theradio.fm/app')) {
+      throw new Error('browser GET /: expected iframe embed URL for /app');
     }
     if (!/<iframe[\s\S]*?<\/iframe>/i.test(rootBody)) {
       throw new Error('browser GET /: expected an iframe in landing');
@@ -164,6 +164,21 @@ async function main() {
     if (robotsRes.status !== 200 || !robotsBody.includes('Sitemap: https://theradio.fm/sitemap.xml')) {
       throw new Error('GET /robots.txt: expected sitemap directive');
     }
+    if (!robotsBody.includes('Allow: /llms.txt')) {
+      throw new Error('GET /robots.txt: expected Allow: /llms.txt');
+    }
+
+    const llmsRes = await fetch(`${base}/llms.txt`, {
+      method: 'GET',
+      headers: { 'user-agent': BROWSER_UA },
+    });
+    const llmsBody = await llmsRes.text();
+    if (llmsRes.status !== 200 || !llmsBody.startsWith('# theradio.fm')) {
+      throw new Error('GET /llms.txt: expected markdown H1 for theradio.fm');
+    }
+    if (!llmsBody.includes('https://play.theradio.fm/') || !llmsBody.includes('https://theradio.fm/app')) {
+      throw new Error('GET /llms.txt: expected primary product links');
+    }
 
     const sitemapRes = await fetch(`${base}/sitemap.xml`, {
       method: 'GET',
@@ -176,8 +191,8 @@ async function main() {
     if (/play\.theradio\.fm|browser\.theradio\.fm|podcasts\.theradio\.fm|tubeflix\.theradio\.fm/.test(sitemapBody)) {
       throw new Error('GET /sitemap.xml: must only list theradio.fm URLs');
     }
-    if (!rootBody.includes('How to start listening') || !rootBody.includes('min-height: 640px')) {
-      throw new Error('browser GET /: expected how-to copy and 640px iframe');
+    if (!rootBody.includes('How to start listening') || !rootBody.includes('min-height: 672px')) {
+      throw new Error('browser GET /: expected how-to copy and 672px iframe');
     }
 
     const appRes = await fetch(`${base}/app`, {
@@ -280,6 +295,7 @@ async function main() {
     console.log(`  crawler HEAD / -> ${headRes.status} (no x-og-proxy from worker)`);
     console.log(`  browser GET / -> ${browserRoot.status}, content-type: ${rootCt}`);
     console.log(`  browser GET /robots.txt -> ${robotsRes.status}`);
+    console.log(`  browser GET /llms.txt -> ${llmsRes.status}`);
     console.log(`  browser GET /sitemap.xml -> ${sitemapRes.status}`);
     console.log(`  browser GET /app -> ${appRes.status}, set-cookie tr_prefer_app`);
     console.log(`  browser GET / + cookie -> ${preferRoot.status} -> ${preferLoc}`);
